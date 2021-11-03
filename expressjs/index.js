@@ -7,19 +7,13 @@ const app = express()
 
 // Set Axios defaults
 axios.defaults.timeout = 2500
+axios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
+axios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
 
 // ExpressJS setup
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-
-// Functions
-function generatePath (path) {
-  // Check the API key and paths as they can change during use
-  const generatedPath = `${process.env.BALENA_SUPERVISOR_ADDRESS}/` +
-    `${path}?apikey=${process.env.BALENA_SUPERVISOR_API_KEY}`
-  return generatedPath
-}
 
 // Routes
 app.post('/api', function (req, res) {
@@ -27,14 +21,11 @@ app.post('/api', function (req, res) {
   const path = req.body.path
   const type = req.body.type
 
-  // Generate the path
-  const apiPath = generatePath(path)
-
   // Construct the payload
   const payload = {
     method: type,
     data: params,
-    url: apiPath
+    url: path
   }
 
   // Sned the request
