@@ -4,7 +4,13 @@ import api from 'axios'
 const apiPath = '/api' as string
 
 export const supervisorRequests = {
-
+  host_config (newHostname: string) {
+    return api.post(apiPath, {
+      type: 'PATCH',
+      path: 'v1/device/host-config',
+      params: { network: { hostname: newHostname } }
+    })
+  },
   ping () {
     return api.post(apiPath, {
       type: 'GET', // Can be 'GET', 'POST' or 'PATCH

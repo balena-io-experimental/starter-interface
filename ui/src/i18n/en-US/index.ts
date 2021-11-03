@@ -12,5 +12,7 @@ export default {
   Settings: 'Settings',
   settings: 'Settings',
   Update: 'Update',
-  control_panel: 'Control Panel'
+  control_panel: 'Control Panel',
+  change_hostname: 'Change hostname',
+  Response: 'Response'
 }
