@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  balena-cli-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template
+    restart: always
+    ports:
+      - "80:3000"
+    labels:
+      io.balena.features.supervisor-api: '1'

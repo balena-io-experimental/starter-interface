@@ -1,0 +1,41 @@
+# Balena reads .dockerignore from the root directory, not 
+# the context directory like Docker does. It also requires
+# the '**/' prefix to ignore throughout all directories (including
+# root) not just the filename like seen in .gitignore files.
+# Many of these ignores relate specifically to Quasar Framework.
+
+# Defaults
+**/.thumbs.db
+**/.DS_Store
+**/node_modules
+**/.quasar
+**/.gitkeep
+**/.gitignore
+
+# Cordova related directories and files
+**/src-cordova/node_modules
+**/src-cordova/platforms
+**/src-cordova/plugins
+**/src-cordova/www
+
+# Capacitor related directories and files
+**/src-capacitor/www
+**/src-capacitor/node_modules
+
+# BEX related directories and files
+**/src-bex/www
+**/src-bex/js/core
+
+# Log files
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Editor directories and files
+**/.vscode
+**/.idea
+**/*.suo
+**/*.ntvs*
+**/*.njsproj
+**/*.sln
+**/*.sw?
