@@ -15,6 +15,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
+// Functions
+function removeApiKeys (obj) {
+  // Remove headers so the API key never leaves the device or enters logs
+  if (obj.config?.headers?.Authorization) { delete obj.config.headers.Authorization }
+  if (obj.request?._header) { delete obj.request._header }
+  return obj
+}
+
 // Routes
 app.post('/api', function (req, res) {
   const params = req.body.params
@@ -33,17 +41,23 @@ app.post('/api', function (req, res) {
     .then((response) => {
       // Return the same http code as Axios request
       res.status(response.status)
-      // Return the Axios request
+      // Return only the data recieved from Axios (no headers)
       res.json(response.data)
     })
-    // On error, return Axios error
     .catch(function (error) {
-      if (error.response) {
-        res.status(error.response.status)
+      // Remove all API keys before handling the response
+      const err = removeApiKeys(error)
+
+      // Mirror the Axios status code
+      if (err.response) {
+        res.status(err.response.status)
       } else {
         res.status(500)
       }
-      res.json(error)
+
+      // Log to the console and return the error to the UI
+      console.log(err)
+      res.json(err)
     })
 })
 
