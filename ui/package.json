@@ -1,8 +1,9 @@
 {
-  "name": "ui",
+  "name": "balena-device-ui-frontend",
   "version": "0.0.1",
   "description": "A UI for displaying and using Balena Supervisor API",
-  "productName": "ui",
+  "productName": "balena-device-ui-frontend",
+  "license": "MIT",
   "author": "maggie0002",
   "private": true,
   "scripts": {
