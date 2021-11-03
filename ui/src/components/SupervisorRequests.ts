@@ -16,7 +16,7 @@ export const supervisorRequests = {
     return api.post(apiPath, {
       type: 'GET',
       path: 'v1/update',
-      params: force
+      params: { force: force }
     })
   },
   v1_blink () {

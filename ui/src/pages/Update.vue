@@ -9,7 +9,8 @@
           :label="$t('update_device')"
           @click="update()"
         />
-        <div>{{ $t('update') }} <q-checkbox v-model="checkBox" /></div>
+        <div>Will not work when device is in development mode</div>
+        <div>{{ $t('force') }} <q-checkbox v-model="checkBox" /></div>
       </div>
       <div v-if="response">
         {{ response.data }}
