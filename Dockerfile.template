@@ -19,6 +19,8 @@ RUN yarn build
 ## Compile container
 FROM node:16.13.0-alpine3.14
 
+ENV NODE_ENV=production
+
 WORKDIR /usr/src/app
 
 COPY --from=node-build-step /build-context/dist/spa ./public
