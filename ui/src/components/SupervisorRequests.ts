@@ -19,7 +19,7 @@ export const supervisorRequests = {
   },
   ping () {
     return api.post(apiPath, {
-      type: get, // Can be 'GET', 'POST' or 'PATCH
+      type: get,
       path: 'ping',
       params: false
     })
