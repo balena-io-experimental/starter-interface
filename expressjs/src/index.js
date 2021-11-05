@@ -19,7 +19,10 @@ app.use(express.static('public'))
 function removeApiKeys (obj) {
   // Remove headers so the API key never leaves the device or enters logs
   if (obj.config?.headers?.Authorization) { delete obj.config.headers.Authorization }
+  if (obj.response?.request?._header) { delete obj.response.request._header }
   if (obj.request?._header) { delete obj.request._header }
+  if (obj.request?._currentRequest) { delete obj.request._currentRequest }
+
   return obj
 }
 
