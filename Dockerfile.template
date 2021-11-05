@@ -1,19 +1,31 @@
-## Build interface
-FROM node:16.13.0-alpine3.14 AS node-build-step
+## Build user interface
+FROM node:16.13.0-alpine3.14 AS ui-build-step
 
 WORKDIR /build-context
 
 COPY ui/package.json .
 COPY ui/yarn.lock .
 
-# The network timeout prevents build timeouts on devices with slow SD cards when developing
+# The network timeout prevents build timeouts when building on devices with slow SD cards
 RUN yarn install --network-timeout 600000 --frozen-lockfile
 
-COPY ui/ .
-
-RUN yarn run lint
+COPY ui .
 
 RUN yarn build
+
+
+## Build expressjs
+FROM node:16.13.0-alpine3.14 AS expressjs-build-step
+
+ENV NODE_ENV=production
+
+WORKDIR /build-context
+
+COPY expressjs/package.json .
+COPY expressjs/yarn.lock .
+
+# The network timeout prevents build timeouts when building on devices with slow SD cards
+RUN yarn install --network-timeout 600000 --frozen-lockfile
 
 
 ## Compile container
@@ -23,10 +35,13 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY --from=node-build-step /build-context/dist/spa ./public
+# Copy UI in to container 
+COPY --from=ui-build-step /build-context/dist/spa ./public
 
-COPY expressjs .
+# Copy node_modules in to container
+COPY --from=expressjs-build-step /build-context .
 
-RUN yarn install --network-timeout 600000 --frozen-lockfile
+# Copy expressjs files in to container
+COPY expressjs/src src
 
 CMD ["node", "src/index.js"]
