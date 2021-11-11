@@ -14,5 +14,6 @@ export default {
   Update: 'Update',
   control_panel: 'Control Panel',
   change_hostname: 'Change hostname',
-  Response: 'Response'
+  Response: 'Response',
+  title: 'Balena Device UI'
 }

@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import api from 'axios'
 
 // Default API path
-const apiPath = '/api' as string
+const apiPath = '/supervisor' as string
 
 // Axios modes
 const get = 'GET' as string
-// eslint-disable-next-line no-unused-vars
 const post = 'POST' as string
 const patch = 'PATCH' as string
 

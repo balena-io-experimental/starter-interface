@@ -1,43 +1,18 @@
 <template>
-  <q-page class="row text-center items-center justify-evenly">
-    <div>
-      <div>
-        <q-btn
-          outline
-          rounded
-          color="secondary"
-          :label="$t('update_device')"
-          @click="update()"
-        />
-        <div>Will not work when device is in development mode</div>
-        <div>{{ $t('force') }} <q-checkbox v-model="checkBox" /></div>
-      </div>
-      <div v-if="response">
-        {{ response.data }}
-      </div>
-    </div>
+  <q-page class="row items-center justify-evenly">
+    <update-device />
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { supervisorRequests } from '../components/SupervisorRequests'
+import UpdateDevice from 'src/components/UpdateDevice.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'PageIndex',
+  name: 'Update',
+  components: { UpdateDevice },
   setup () {
-    const checkBox = ref<boolean>(false)
-    const response = ref<any>()
-
-    async function update () {
-      response.value = await supervisorRequests.update(checkBox.value)
-    }
-
-    return {
-      checkBox,
-      response,
-      update
-    }
+    return {}
   }
 })
 </script>

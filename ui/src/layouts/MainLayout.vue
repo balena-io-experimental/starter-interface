@@ -14,7 +14,7 @@
         />
 
         <q-toolbar-title>
-          Balena Device UI
+          {{ $t('title') }}
         </q-toolbar-title>
 
         <div>
@@ -33,37 +33,16 @@
       show-if-above
       bordered
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          {{ $t('control_panel') }}
-        </q-item-label>
-        <q-list>
-          <template
-            v-for="(menuItem, index) in menuList"
-            :key="index"
-          >
-            <q-item
-              v-ripple
-              clickable
-              :active="index === activeMenuItem"
-              @click="activeMenuItem = index; $router.replace({ name: menuItem.path })"
-            >
-              <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.label }}
-              </q-item-section>
-            </q-item>
-            <q-separator
-              v-if="menuItem.separator"
-              :key="'sep' + index"
-            />
-          </template>
-        </q-list>
-      </q-list>
+      <q-item-label
+        header
+      >
+        {{ $t('control_panel') }}
+      </q-item-label>
+      <MenuItems
+        v-for="link in menuItems"
+        :key="link.label"
+        v-bind="link"
+      />
     </q-drawer>
 
     <q-page-container>
@@ -76,9 +55,15 @@
 
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import MenuItems from 'components/MenuItems.vue'
 
 export default defineComponent({
   name: 'MainLayout',
+
+  components: {
+    MenuItems
+  },
+
   setup () {
     const leftDrawerOpen = ref(false)
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -88,26 +73,22 @@ export default defineComponent({
       {
         icon: 'home',
         label: t('Home'),
-        path: 'home',
-        separator: false
+        path: 'home'
       },
       {
         icon: 'book',
         label: t('Documentation'),
-        path: 'documentation',
-        separator: false
+        path: 'documentation'
       },
       {
         icon: 'update',
         label: t('Update'),
-        path: 'update',
-        separator: true
+        path: 'update'
       },
       {
         icon: 'settings',
         label: t('Settings'),
-        path: 'settings',
-        separator: false
+        path: 'settings'
       }
     ]
 
@@ -117,9 +98,8 @@ export default defineComponent({
     }
 
     return {
-      activeMenuItem: ref<number>(0),
+      menuItems: menuList,
       leftDrawerOpen,
-      menuList,
       redirect,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
