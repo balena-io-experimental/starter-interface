@@ -18,16 +18,15 @@
 import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
-const checkBox = ref<boolean>(false)
-const response = ref<any>()
-
-async function update () {
-  response.value = await supervisorRequests.update(checkBox.value)
-}
-
 export default defineComponent({
   name: 'UpdateDeviceComponent',
   setup () {
+    const checkBox = ref<boolean>(false)
+    const response = ref<any>()
+
+    async function update () {
+      response.value = await supervisorRequests.update(checkBox.value)
+    }
     return { checkBox, response, update }
   }
 })

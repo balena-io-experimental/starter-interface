@@ -10,3 +10,25 @@ services:
       - "80:3000"
     labels:
       io.balena.features.supervisor-api: '1'
+
+## Optional Wi-Fi controller: 
+## https://github.com/maggie0002/balena-py-wifi-connect
+  py-wifi-connect:
+    environment:
+      ## Listening IP and port ##
+      PWC_HOST: "0.0.0.0"
+      PWC_PORT: 9090
+
+      ## Hotspot details ##
+      PWC_HOTSPOT_SSID: "Py Wi-Fi Connect"
+
+      ## Required system variables ##
+      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+    image: ghcr.io/maggie0002/py-wifi-connect:latest
+    network_mode: "host"
+    restart: always
+    labels:
+      io.balena.features.dbus: '1'
+    cap_add:
+      - NET_ADMIN
+    privileged: true # This can be removed if you do not need the LED indicator.

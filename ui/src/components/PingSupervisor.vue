@@ -14,15 +14,14 @@
 import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
-const response = ref<any>()
-
-async function ping () {
-  response.value = await supervisorRequests.ping()
-}
-
 export default defineComponent({
-  name: 'UpdateDeviceComponent',
+  name: 'PingComponent',
   setup () {
+    const response = ref<any>()
+
+    async function ping () {
+      response.value = await supervisorRequests.ping()
+    }
     return {
       ping,
       response

@@ -8,11 +8,13 @@ router.get('/exampleroute_get', function (_req, res) {
 })
 
 // Define your custom post route
-router.get('/exampleroute_post', function (req, res) {
+router.post('/exampleroute_post', function (req, res) {
   // Store the value of 'path' submitted as JSON to this endpoint as 'pathVariable'
   const pathVariable = req.body.path
-  // Return the pathVariable to the user requesting the page
-  res.send(pathVariable)
+  // Log the message to the console
+  console.log(pathVariable)
+  // Return a message to the caller
+  res.send('done')
 })
 
 export default router

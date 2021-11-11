@@ -25,6 +25,20 @@ export const supervisorRequests = {
       params: false
     })
   },
+  reboot (force: boolean) {
+    return api.post(apiPath, {
+      type: post,
+      path: 'v1/reboot',
+      params: { force: force }
+    })
+  },
+  shutdown (force: boolean) {
+    return api.post(apiPath, {
+      type: post,
+      path: '/v1/shutdown',
+      params: { force: force }
+    })
+  },
   update (force: boolean) { // This route will return a 404 in development mode as it won't exist
     return api.post(apiPath, {
       type: get,

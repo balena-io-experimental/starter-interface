@@ -15,5 +15,21 @@ export default {
   control_panel: 'Control Panel',
   change_hostname: 'Change hostname',
   Response: 'Response',
-  title: 'Balena Device UI'
+  title: 'Balena Device UI',
+  restarting: 'Your device is restarting...',
+  shutting_down: 'Shutting device down...',
+  ok: 'ok',
+  cancel: 'cancel',
+  are_you_sure: 'Are you sure?',
+  Networking: 'Networking',
+  select_ssid: 'Select an SSID',
+  refresh_not_compatible: 'Your device requires a restart to refresh the list.',
+  password: 'password',
+  connect: 'Connect',
+  network_fetch_fail: 'Failed to fetch the available networks.',
+  network_connect_fail: 'Failed to send the connect request.',
+  close: 'Close',
+  no_networks: 'No available networks',
+  searching_networks: 'Search for networks',
+  connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.'
 }

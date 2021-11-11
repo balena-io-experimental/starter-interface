@@ -25,15 +25,14 @@
 import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
-const response = ref<any>()
-
-async function changeHostname (newHostname: string) {
-  response.value = await supervisorRequests.host_config(newHostname)
-}
-
 export default defineComponent({
-  name: 'UpdateDeviceComponent',
+  name: 'ChangeHostnameComponent',
   setup () {
+    const response = ref<any>()
+
+    async function changeHostname (newHostname: string) {
+      response.value = await supervisorRequests.host_config(newHostname)
+    }
     return {
       changeHostname,
       newHostname: ref<string>(''),

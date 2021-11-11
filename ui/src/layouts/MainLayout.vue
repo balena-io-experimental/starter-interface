@@ -18,12 +18,11 @@
         </q-toolbar-title>
 
         <div>
-          <q-btn
-            icon="code"
-            flat
-            size="sm"
-            @click="redirect('https://github.com/maggie0002/balena-device-ui')"
-          />
+          <Restart />
+        </div>
+
+        <div>
+          <Shutdown />
         </div>
       </q-toolbar>
     </q-header>
@@ -56,12 +55,16 @@
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import MenuItems from 'components/MenuItems.vue'
+import Restart from 'src/components/Reboot.vue'
+import Shutdown from 'src/components/Shutdown.vue'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    MenuItems
+    MenuItems,
+    Restart,
+    Shutdown
   },
 
   setup () {
@@ -79,6 +82,11 @@ export default defineComponent({
         icon: 'book',
         label: t('Documentation'),
         path: 'documentation'
+      },
+      {
+        icon: 'router',
+        label: t('Networking'),
+        path: 'networking'
       },
       {
         icon: 'update',

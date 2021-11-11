@@ -27,7 +27,7 @@ export default defineComponent({
     },
     path: {
       type: String,
-      default: '#'
+      default: ''
     },
     icon: {
       type: String,
