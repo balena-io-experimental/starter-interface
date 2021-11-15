@@ -2,6 +2,7 @@
   <div>
     <div>
       <q-btn
+        v-bind="btnConfig"
         :label="$t('update_device')"
         @click="update()"
       />
@@ -15,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import btnConfig from '../components/qBtn'
 import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
@@ -27,7 +29,12 @@ export default defineComponent({
     async function update () {
       response.value = await supervisorRequests.update(checkBox.value)
     }
-    return { checkBox, response, update }
+    return {
+      btnConfig,
+      checkBox,
+      response,
+      update
+    }
   }
 })
 </script>
