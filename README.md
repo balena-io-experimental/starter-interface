@@ -23,7 +23,7 @@ The Wi-Fi component is maintained on a different repository: https://github.com/
 
 <img width="569" alt="Screenshot 2021-11-15 at 10 03 50" src="https://user-images.githubusercontent.com/64841595/141763447-534ddcd6-5939-4f14-970e-ccf8b7a106c6.png">
 
-To use it, simply insert the component where you want it on your interface: `<wifi-connect />`
+To use it, simply insert the component where you want it on your interface: `<wifi-connect />`. There is an example included in this project: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/pages/Networking.vue
 
 # Menu items
 Changes to the menu items can be made through the `menuList` variable here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/layouts/MainLayout.vue.
