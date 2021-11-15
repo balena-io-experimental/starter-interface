@@ -24,12 +24,14 @@ export default {
   Networking: 'Networking',
   select_ssid: 'Select an SSID',
   refresh_not_compatible: 'Your device requires a restart to refresh the list.',
-  password: 'password',
+  password: 'Password',
   connect: 'Connect',
   network_fetch_fail: 'Failed to fetch the available networks.',
   network_connect_fail: 'Failed to send the connect request.',
   close: 'Close',
   no_networks: 'No available networks',
-  searching_networks: 'Search for networks',
-  connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.'
+  searching_networks: 'Searching for networks',
+  connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.',
+  disconnect_request_sent: 'Disconnect request sent.',
+  invalid_password_length: 'Password must be 8 characters or more.'
 }
