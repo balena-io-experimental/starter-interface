@@ -28,6 +28,11 @@ To use it, simply insert the component where you want it on your interface: `<wi
 # Menu items
 Changes to the menu items can be made through the `menuList` variable here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/layouts/MainLayout.vue.
 
+# i18n
+Multiple  language support is added, and language strings are set here: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/i18n
+
+To insert additional languages and a language selector see the Quasar docs: https://quasar.dev/options/app-internationalization#how-to-use
+
 # Final thoughts
 
 Apologies the documentation here is not better for beginner users. Community contributions to improving these would be very welcome. 
