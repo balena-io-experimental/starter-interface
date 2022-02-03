@@ -33,5 +33,11 @@ export default {
   searching_networks: 'Searching for networks',
   connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.',
   disconnect_request_sent: 'Disconnect request sent.',
-  invalid_password_length: 'Password must be 8 characters or more.'
+  invalid_password_length: 'Password must be 8 characters or more.',
+  online: 'Online',
+  offline: 'Offline',
+  undervolted: 'Undervolted',
+  not_undervolted: 'Normal Power',
+  memory: 'Memory',
+  storage: 'Storage'
 }

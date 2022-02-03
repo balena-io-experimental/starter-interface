@@ -16,9 +16,9 @@
         />
       </template>
     </q-input>
-  </div>
-  <div v-if="response">
-    {{ $t('Response') }} {{ response.data }}
+    <div v-if="response">
+      {{ $t('Response') }} {{ response.data }}
+    </div>
   </div>
 </template>
 

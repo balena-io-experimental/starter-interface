@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  balena-cli-ui:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile.template
@@ -9,7 +9,8 @@ services:
     ports:
       - "80:3000"
     labels:
-      io.balena.features.supervisor-api: '1'
+      io.balena.features.supervisor-api: 1
+      io.balena.features.balena-api: 1
 
 ## Optional Wi-Fi controller: 
 ## https://github.com/maggie0002/balena-py-wifi-connect

@@ -1,5 +1,5 @@
 ## Build user interface
-FROM node:16.13.0-alpine3.14 AS ui-build-step
+FROM node:16.13.2-alpine3.14 AS ui-build-step
 
 WORKDIR /build-context
 
@@ -15,7 +15,7 @@ RUN yarn build
 
 
 ## Build expressjs
-FROM node:16.13.0-alpine3.14 AS expressjs-build-step
+FROM node:16.13.2-alpine3.14 AS expressjs-build-step
 
 ENV NODE_ENV=production
 
@@ -29,9 +29,7 @@ RUN yarn install --network-timeout 600000 --frozen-lockfile
 
 
 ## Compile container
-FROM node:16.13.0-alpine3.14
-
-ENV NODE_ENV=production
+FROM node:16.13.2-alpine3.14
 
 WORKDIR /usr/src/app
 
@@ -45,3 +43,5 @@ COPY --from=expressjs-build-step /build-context .
 COPY expressjs/src src
 
 CMD ["node", "src/index.js"]
+
+ENV NODE_ENV=production
