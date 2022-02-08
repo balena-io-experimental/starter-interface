@@ -111,7 +111,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: 'WifiConnectComponent',
+  name: 'IntWifiConnectComponent',
   setup () {
     // Import required features
     const $q = useQuasar()

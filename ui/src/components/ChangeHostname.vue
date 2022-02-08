@@ -28,7 +28,7 @@ import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
 export default defineComponent({
-  name: 'ChangeHostnameComponent',
+  name: 'IntChangeHostnameComponent',
   setup () {
     const response = ref<any>()
 

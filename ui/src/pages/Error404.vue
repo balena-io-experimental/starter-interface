@@ -31,7 +31,7 @@ import btnConfig from '../components/qBtn'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Error404',
+  name: 'IntError404',
   setup () {
     return { btnConfig }
   }

@@ -13,7 +13,7 @@ import ChangeHostname from 'src/components/ChangeHostname.vue'
 import PingSupervisor from 'src/components/PingSupervisor.vue'
 
 export default defineComponent({
-  name: 'PageIndex',
+  name: 'IntPageIndex',
   components: { ChangeHostname, PingSupervisor },
   setup () {
     return {}

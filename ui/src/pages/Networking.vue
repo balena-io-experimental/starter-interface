@@ -9,7 +9,7 @@ import { defineComponent } from 'vue'
 import WifiConnect from 'src/components/WifiConnect.vue'
 
 export default defineComponent({
-  name: 'PageIndex',
+  name: 'IntPageIndex',
   components: { WifiConnect },
   setup () {
     return {}

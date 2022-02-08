@@ -47,7 +47,7 @@ import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
 
 export default defineComponent({
-  name: 'ShutdownComponent',
+  name: 'IntShutdownComponent',
   setup () {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()

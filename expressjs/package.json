@@ -13,14 +13,14 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "express": "^4.17.1"
+    "axios": "^0.25.0",
+    "express": "^4.17.2"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.8.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.1"
+    "eslint-plugin-promise": "^6.0.0"
   }
 }

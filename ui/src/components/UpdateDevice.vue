@@ -21,7 +21,7 @@ import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 
 export default defineComponent({
-  name: 'UpdateDeviceComponent',
+  name: 'IntUpdateDeviceComponent',
   setup () {
     const checkBox = ref<boolean>(false)
     const response = ref<any>()

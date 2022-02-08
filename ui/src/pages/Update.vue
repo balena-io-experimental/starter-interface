@@ -9,7 +9,7 @@ import UpdateDevice from 'src/components/UpdateDevice.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Update',
+  name: 'IntUpdate',
   components: { UpdateDevice },
   setup () {
     return {}
