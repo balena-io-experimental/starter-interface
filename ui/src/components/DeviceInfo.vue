@@ -22,18 +22,28 @@
           <b class="q-mr-xs">{{ $t('memory') }}</b>
           <span> - </span>
           <span>{{ response.data.memory_usage }}MB / {{ response.data.memory_total }}MB</span>
-          <q-linear-progress color="secondary" rounded :value="response.data.memory_usage / response.data.memory_total" class="q-mt-md" />
+          <q-linear-progress
+            color="secondary"
+            rounded
+            :value="response.data.memory_usage / response.data.memory_total"
+            class="q-mt-md"
+          />
         </q-card-section>
         <q-card-section>
           <b class="q-mr-xs">{{ $t('storage') }}</b>
           <span>({{ response.data.storage_block_device }})</span>
           <span> - </span>
           <span>{{ (response.data.storage_usage / 1000).toFixed(2) }}GB / {{ (response.data.storage_total / 1000).toFixed(2) }}GB</span>
-          <q-linear-progress color="secondary" rounded :value="response.data.storage_usage / response.data.storage_total" class="q-mt-md" />
+          <q-linear-progress
+            color="secondary"
+            rounded
+            :value="response.data.storage_usage / response.data.storage_total"
+            class="q-mt-md"
+          />
         </q-card-section>
       </q-card>
     </div>
-    <hr class="q-mt-xl q-mb-lg" />
+    <hr class="q-mt-xl q-mb-lg">
     <q-expansion-item
       expand-separator
       icon="code"
