@@ -9,7 +9,7 @@ const router = express.Router()
 const uuid = process.env.BALENA_DEVICE_UUID
 const apiKey = process.env.BALENA_API_KEY
 
-let sdk = balena.getSdk()
+const sdk = balena.getSdk()
 
 async function init () {
   try {
@@ -51,28 +51,27 @@ router.get('/sdk/envVars', async (req, res, next) => {
 router.delete('/sdk/envVars', async (req, res, next) => {
   lock(async function (err) {
     // a non-null err probably means the supervisor is about to kill us
-    if (err != null) { 
+    if (err != null) {
       err.message = '/sdk/setEnvVars: Could not acquire lock'
       return next(err)
     }
 
     try {
       const removeAll = []
-  
+
       _.each(_.compact(_.keys(req.body)), value => {
         removeAll.push(
           sdk.models.device.envVar.remove(uuid, value)
         )
       })
-  
+
       Promise.all(removeAll).then(() => {
         unlock()
         res.sendStatus(200)
-      }).catch (err => {
+      }).catch(err => {
         unlock()
         next(err)
       })
-  
     } catch (err) {
       unlock()
       next(err)
@@ -83,14 +82,14 @@ router.delete('/sdk/envVars', async (req, res, next) => {
 router.post('/sdk/envVars', (req, res, next) => {
   lock(async function (err) {
     // a non-null err probably means the supervisor is about to kill us
-    if (err != null) { 
+    if (err != null) {
       err.message = '/sdk/setEnvVars: Could not acquire lock'
       return next(err)
     }
     try {
       const allSetCalls = []
       for (const [key, val] of Object.entries(req.body)) {
-        if (key && !_.isNull(key)){
+        if (key && !_.isNull(key)) {
           allSetCalls.push(sdk.models.device.envVar.set(uuid, key, val))
         }
       }
@@ -101,12 +100,10 @@ router.post('/sdk/envVars', (req, res, next) => {
         unlock()
         next(err)
       })
-
     } catch (err) {
       unlock()
       next('env err', err)
     }
-    
   })
 })
 
