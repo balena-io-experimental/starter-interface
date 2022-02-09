@@ -31,6 +31,8 @@ RUN yarn install --network-timeout 600000 --frozen-lockfile
 ## Compile container
 FROM node:16.13.2-alpine3.14
 
+ENV NODE_ENV=production
+
 WORKDIR /usr/src/app
 
 # Copy UI in to container 
@@ -43,5 +45,3 @@ COPY --from=expressjs-build-step /build-context .
 COPY expressjs/src src
 
 CMD ["node", "src/index.js"]
-
-ENV NODE_ENV=production

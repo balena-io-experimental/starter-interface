@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  backend:
+  server:
     build:
       context: .
       dockerfile: Dockerfile.template

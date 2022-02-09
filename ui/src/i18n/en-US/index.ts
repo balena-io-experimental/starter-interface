@@ -39,5 +39,7 @@ export default {
   undervolted: 'Undervolted',
   not_undervolted: 'Normal Power',
   memory: 'Memory',
-  storage: 'Storage'
+  storage: 'Storage',
+  raw_json: 'Raw JSON',
+  response_details: 'Response Details'
 }

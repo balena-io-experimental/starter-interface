@@ -47,8 +47,8 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      label="Response Details"
-      caption="Raw JSON"
+      :label="$t('response_details')"
+      :caption="$t('raw_json')"
     >
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
