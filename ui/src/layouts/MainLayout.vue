@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header
       elevated
     >
@@ -30,13 +30,14 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
+      :width="225"
       bordered
     >
-      <q-item-label
+      <!-- <q-item-label
         header
       >
         {{ $t('control_panel') }}
-      </q-item-label>
+      </q-item-label> -->
       <MenuItems
         v-for="link in menuItems"
         :key="link.label"
@@ -74,8 +75,8 @@ export default defineComponent({
 
     const menuList = [
       {
-        icon: 'home',
-        label: t('Home'),
+        icon: 'visibility',
+        label: t('Device Info'),
         path: 'home'
       },
       {

@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import Axios from 'axios'
+import wifiApi from 'axios'
 import btnConfig from '../components/qBtn'
 import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -117,8 +117,6 @@ export default defineComponent({
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
-    // Override the default Axios instance as the error handling is not needed here
-    const wifiApi = Axios.create()
 
     // Env vars
     const hostname = ref<string>(window.location.hostname)
