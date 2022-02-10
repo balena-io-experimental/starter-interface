@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import api from 'axios'
 
-const apiPath = 'http://localhost:3000/sdk' as string
+const apiPath = '/sdk' as string
 
 export const sdkRequests = {
   device () {
