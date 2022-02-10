@@ -1,3 +1,33 @@
+## Build ExpressJS node_modules
+## Done here to stop yarn leaving cache and other litter in the final container
+FROM node:16.13.2-alpine3.14 AS ejs-node-build
+
+ENV NODE_ENV=production
+
+WORKDIR /build-context
+
+COPY expressjs/package.json .
+COPY expressjs/yarn.lock .
+
+# The network timeout prevents build timeouts when building on devices with slow SD cards
+RUN yarn install --network-timeout 600000 --frozen-lockfile
+
+
+## Build ExpressJS UI
+## Uses ejs-node-build container to benefit from already installed packages and cache
+FROM ejs-node-build AS ejs-ui-build
+
+# Switch to development context to install required packages for build
+ENV NODE_ENV=development
+
+# The network timeout prevents build timeouts when building on devices with slow SD cards
+RUN yarn install --network-timeout 600000 --frozen-lockfile
+
+COPY expressjs .
+
+RUN yarn build
+
+
 ## Build user interface
 FROM node:16.13.2-alpine3.14 AS ui-build-step
 
@@ -14,20 +44,6 @@ COPY ui .
 RUN yarn build
 
 
-## Build expressjs
-FROM node:16.13.2-alpine3.14 AS expressjs-build-step
-
-ENV NODE_ENV=production
-
-WORKDIR /build-context
-
-COPY expressjs/package.json .
-COPY expressjs/yarn.lock .
-
-# The network timeout prevents build timeouts when building on devices with slow SD cards
-RUN yarn install --network-timeout 600000 --frozen-lockfile
-
-
 ## Compile container
 FROM node:16.13.2-alpine3.14
 
@@ -35,13 +51,13 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
+# Copy ExpressJS node_modules in to container
+COPY --from=ejs-node-build /build-context/node_modules ./node_modules
+
+# Copy ExpressJS build in to container
+COPY --from=ejs-ui-build /build-context/dist .
+
 # Copy UI in to container 
 COPY --from=ui-build-step /build-context/dist/spa ./public
 
-# Copy node_modules in to container
-COPY --from=expressjs-build-step /build-context .
-
-# Copy expressjs files in to container
-COPY expressjs/src src
-
-CMD ["node", "src/index.js"]
+CMD ["node", "index.js"]

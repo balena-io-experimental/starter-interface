@@ -1,11 +1,8 @@
 {
-  "name": "balena-device-ui-frontend",
-  "version": "0.0.1",
-  "description": "A UI for displaying and using Balena Supervisor API",
-  "productName": "balena-device-ui-frontend",
+  "name": "ui",
   "license": "MIT",
   "author": "maggie0002",
-  "private": true,
+  "repository": "https://github.com/maggie0002/balena-device-ui",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",

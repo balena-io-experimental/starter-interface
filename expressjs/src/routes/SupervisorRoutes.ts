@@ -1,6 +1,7 @@
 import axios from 'axios'
 import express from 'express'
 import process from 'process'
+import type { varRemoval } from '../common/types'
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ axios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
 axios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
 
 // Functions
-function removeApiKeys (obj) {
+function removeApiKeys (obj: varRemoval) {
   // Remove headers so the API key never leaves the device or enters logs
   if (obj.config?.headers?.Authorization) { delete obj.config.headers.Authorization }
   if (obj.response?.request?._header) { delete obj.response.request._header }

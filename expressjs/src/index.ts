@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import CustomRoutes from './routes/CustomRoutes.js'
-import SupervisorRoutes from './routes/SupervisorRoutes.js'
-import BalenaSDKRoutes from './routes/BalenaSDKRoutes.js'
+import CustomRoutes from './routes/CustomRoutes'
+import SupervisorRoutes from './routes/SupervisorRoutes'
+import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 
 const port = process.env.BACKEND_PORT || 3000
 

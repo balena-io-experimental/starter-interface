@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  server:
+  balena-device-ui:
     build:
       context: .
       dockerfile: Dockerfile.template
