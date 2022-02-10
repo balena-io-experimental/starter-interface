@@ -20,9 +20,9 @@ async function init () {
   }
 }
 
-router.get('/sdk/uuid', (req, res) => res.json(uuid))
+router.get('/sdk/uuid', (_req, res) => res.json(uuid))
 
-router.get('/sdk/device', async (req, res, next) => {
+router.get('/sdk/device', async (_req, res, next) => {
   try {
     res.json(
       await sdk.models.device.get(uuid)
@@ -36,7 +36,7 @@ router.get('/sdk/device', async (req, res, next) => {
 // environment variables
 //
 
-router.get('/sdk/envVars', async (req, res, next) => {
+router.get('/sdk/envVars', async (_req, res, next) => {
   try {
     const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
     _.each(envVars, (value, key) => {
@@ -93,7 +93,7 @@ router.post('/sdk/envVars', (req, res, next) => {
           allSetCalls.push(sdk.models.device.envVar.set(uuid, key, val))
         }
       }
-      Promise.all(allSetCalls).then(results => {
+      Promise.all(allSetCalls).then(_results => {
         unlock()
         res.sendStatus(200)
       }).catch(err => {
