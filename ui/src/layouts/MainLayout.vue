@@ -76,7 +76,7 @@ export default defineComponent({
     const menuList = [
       {
         icon: 'visibility',
-        label: t('Device Info'),
+        label: t('Device_Info'),
         path: 'home'
       },
       {

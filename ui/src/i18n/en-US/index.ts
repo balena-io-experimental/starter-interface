@@ -6,6 +6,7 @@ export default {
   connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.',
   connect: 'Connect',
   control_panel: 'Control Panel',
+  Device_Info: 'Device Info',
   disconnect_request_sent: 'Disconnect request sent.',
   Documentation: 'Documentation',
   error: 'Error:',
