@@ -1,12 +1,12 @@
-import api from 'axios'
+import expressApi from 'axios'
 
 const apiPath = '/sdk' as string
 
 export const sdkRequests = {
   device () {
-    return api.get(`${apiPath}/device`)
+    return expressApi.get(`${apiPath}/device`)
   },
   uuid () {
-    return api.get(`${apiPath}/uuid`)
+    return expressApi.get(`${apiPath}/uuid`)
   }
 }
