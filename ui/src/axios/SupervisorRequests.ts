@@ -1,3 +1,4 @@
+// Documentation: https://www.balena.io/docs/reference/supervisor/supervisor-api/
 import expressApi from 'axios'
 
 // Default API path
