@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import qBtnStyle from '../components/styles/qBtnStyle'
+import { qBtnStyle } from '../components/styles/qStyles'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

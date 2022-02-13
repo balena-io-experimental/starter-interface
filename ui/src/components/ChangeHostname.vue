@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { supervisorRequests } from '../axios/SupervisorRequests'
-import qBtnStyle from './styles/qBtnStyle'
+import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({

@@ -44,7 +44,7 @@
 <script lang="ts">
 import { supervisorRequests } from '../axios/SupervisorRequests'
 import { useQuasar } from 'quasar'
-import qBtnStyle from './styles/qBtnStyle'
+import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
