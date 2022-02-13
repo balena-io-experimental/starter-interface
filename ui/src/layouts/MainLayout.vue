@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh Lpr lFf">
     <q-header
-      v-bind="qHeader.header"
+      v-bind="qHeaderStyle.header"
     >
       <q-toolbar>
         <q-btn
@@ -15,15 +15,15 @@
         />
 
         <router-link
-          v-if="qHeader.logo"
+          v-if="qHeaderStyle.logo"
           to="/"
         >
           <q-avatar>
-            <img :src="qHeader.logo">
+            <img :src="qHeaderStyle.logo">
           </q-avatar>
         </router-link>
 
-        <q-toolbar-title v-bind="qHeader.title">
+        <q-toolbar-title v-bind="qHeaderStyle.title">
           {{ $t('title') }}
         </q-toolbar-title>
 
@@ -82,7 +82,7 @@
 
 import MenuItems from 'components/MenuItems.vue'
 import menuList from '../components/styles/menuList'
-import { qHeader } from '../components/styles/qStyles'
+import { qHeaderStyle } from '../components/styles/qStyles'
 import { useQuasar } from 'quasar'
 import Reboot from 'src/components/Reboot.vue'
 import Shutdown from 'src/components/Shutdown.vue'
@@ -129,7 +129,7 @@ export default defineComponent({
         { value: 'de', label: 'German' }
       ],
       menuItems: menuList,
-      qHeader,
+      qHeaderStyle,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }

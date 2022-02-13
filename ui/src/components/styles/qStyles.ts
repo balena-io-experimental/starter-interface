@@ -4,7 +4,7 @@ export const qBtnStyle = {
   rounded: true
 }
 
-export const qHeader = {
+export const qHeaderStyle = {
   header: {
     class: 'bg-white',
     bordered: true,
