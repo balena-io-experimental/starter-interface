@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import WifiConnect from 'src/components/WifiConnect.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',

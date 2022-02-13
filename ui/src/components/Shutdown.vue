@@ -41,10 +41,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
-import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'IntShutdownComponent',

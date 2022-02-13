@@ -1,7 +1,7 @@
-const qBtnConfig = {
+const qBtnStyle = {
   color: 'secondary',
   outline: true,
   rounded: true
 }
 
-export default qBtnConfig
+export default qBtnStyle

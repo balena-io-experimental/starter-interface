@@ -10,7 +10,7 @@
       {{ newHostname }}
       <template #after>
         <q-btn
-          v-bind="qBtnConfig"
+          v-bind="qBtnStyle"
           icon="send"
           @click="changeHostname(newHostname)"
         />
@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts">
-import qBtnConfig from '../components/styles/qBtnConfig'
-import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
+import qBtnStyle from './styles/qBtnStyle'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntChangeHostnameComponent',
@@ -36,9 +36,9 @@ export default defineComponent({
       response.value = await supervisorRequests.host_config(newHostname)
     }
     return {
-      qBtnConfig,
       changeHostname,
       newHostname: ref<string>(''),
+      qBtnStyle,
       response
     }
   }

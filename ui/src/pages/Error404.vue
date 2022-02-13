@@ -13,7 +13,7 @@
       </div>
 
       <q-btn
-        v-bind="qBtnConfig"
+        v-bind="qBtnStyle"
         class="q-mt-xl"
         color="white"
         text-color="blue"
@@ -27,13 +27,13 @@
 </template>
 
 <script lang="ts">
-import qBtnConfig from '../components/styles/qBtnConfig'
+import qBtnStyle from '../components/styles/qBtnStyle'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntError404',
   setup () {
-    return { qBtnConfig }
+    return { qBtnStyle }
   }
 })
 </script>

@@ -56,8 +56,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
 import { sdkRequests } from '../axios/SdkRequests'
+import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',

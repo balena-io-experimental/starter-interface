@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import ChangeHostname from 'src/components/ChangeHostname.vue'
 import PingSupervisor from 'src/components/PingSupervisor.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',

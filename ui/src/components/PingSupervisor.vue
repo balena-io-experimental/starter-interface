@@ -1,7 +1,7 @@
 <template>
   <div class="q-mt-md">
     <q-btn
-      v-bind="qBtnConfig"
+      v-bind="qBtnStyle"
       :label="$t('ping_supervisor')"
       @click="ping()"
     />
@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import qBtnConfig from '../components/styles/qBtnConfig'
-import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
+import qBtnStyle from './styles/qBtnStyle'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntPingComponent',
@@ -25,8 +25,8 @@ export default defineComponent({
       response.value = await supervisorRequests.ping()
     }
     return {
-      qBtnConfig,
       ping,
+      qBtnStyle,
       response
     }
   }
