@@ -1,10 +1,13 @@
 <template>
   <q-layout view="hHh Lpr lFf">
     <q-header
+      class="bg-white"
+      bordered
       elevated
     >
       <q-toolbar>
         <q-btn
+          color="secondary"
           flat
           dense
           round
@@ -13,7 +16,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title class="text-secondary">
           {{ $t('title') }}
         </q-toolbar-title>
 
