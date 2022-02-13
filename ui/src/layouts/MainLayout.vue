@@ -115,7 +115,7 @@ export default defineComponent({
         'quasar/lang/' + val
       ).then(lang => {
         $q.lang.set(lang.default as QuasarLanguage)
-      }).catch(() => { console.log('Error setting language') })
+      }).catch(() => { console.log("User's browser language is not installed. Reverting to en-US.") })
     })
 
     // Set language to users browser language when possible

@@ -93,6 +93,7 @@
         <q-btn
           v-else
           v-bind="qBtnStyle"
+          :disable="noWifiConnect"
           :label="$t('disconnect')"
           class="q-ml-md"
           :loading="submitting"
@@ -120,6 +121,7 @@ export default defineComponent({
 
     // Env vars
     const hostname = ref<string>(window.location.hostname)
+    const noWifiConnect = ref<boolean>(false)
     const password = ref<string>('')
     const refreshCompatible = ref<boolean>(true)
     const ssids = ref<any>([])
@@ -138,10 +140,15 @@ export default defineComponent({
           wifiStatus.value = false
           await fetchNetworks()
         }
+      }).catch(function (error) {
+        if (error.response) {
+          notify('negative', t('network_request_fail'))
+        } else {
+          notify('negative', t('no_wifi_api'))
+        }
+
+        noWifiConnect.value = true
       })
-        .catch(function () {
-          notify('negative', t('network_fetch_fail'))
-        })
       $q.loading.hide()
     }
 
@@ -159,11 +166,10 @@ export default defineComponent({
           notify('positive', t('connection_request'))
           submitting.value = false
         }, 2000)
+      }).catch(function () {
+        notify('negative', t('network_connect_fail'))
+        submitting.value = false
       })
-        .catch(function () {
-          notify('negative', t('network_connect_fail'))
-          submitting.value = false
-        })
       wifiSsid.value = ''
       password.value = ''
     }
@@ -176,11 +182,9 @@ export default defineComponent({
         if (ssids.value.length === 0) {
           notify('warning', t('no_networks'))
         }
+      }).catch(function () {
+        notify('negative', t('network_fetch_fail'))
       })
-        .catch(function (error) {
-          console.log(error)
-          notify('negative', t('network_fetch_fail'))
-        })
       submitting.value = false
       $q.loading.hide()
     }
@@ -196,11 +200,10 @@ export default defineComponent({
           notify('positive', t('disconnect_request_sent'))
           submitting.value = false
         }, 2000)
+      }).catch(function () {
+        notify('negative', t('network_forget_fail'))
+        submitting.value = false
       })
-        .catch(function () {
-          notify('negative', t('network_connect_fail'))
-          submitting.value = false
-        })
     }
 
     function notify (type: string, message: string) {
@@ -223,6 +226,7 @@ export default defineComponent({
       connect,
       fetchNetworks,
       forget,
+      noWifiConnect,
       password,
       qBtnStyle,
       refreshCompatible,
