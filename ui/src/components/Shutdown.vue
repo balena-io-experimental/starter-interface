@@ -2,6 +2,7 @@
   <q-btn
     flat
     dense
+    round
     icon="power_settings_new"
     color="secondary"
     @click="confirm = true"

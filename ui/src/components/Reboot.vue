@@ -2,6 +2,7 @@
   <q-btn
     flat
     dense
+    round
     icon="restart_alt"
     color="secondary"
     @click="confirm = true"

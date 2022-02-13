@@ -13,6 +13,7 @@ export default {
   force: 'Force?',
   Home: 'Home',
   invalid_password_length: 'Password must be 8 characters or more.',
+  Language: 'Language',
   memory: 'Memory',
   Networking: 'Networking',
   network_connect_fail: 'Failed to send the connect request.',
