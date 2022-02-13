@@ -23,14 +23,14 @@
       <q-card-actions align="right">
         <q-btn
           v-close-popup
-          v-bind="btnConfig"
+          v-bind="qBtnConfig"
           flat
           :label="$t('cancel')"
           color="primary"
         />
         <q-btn
           v-close-popup
-          v-bind="btnConfig"
+          v-bind="qBtnConfig"
           flat
           :label="$t('ok')"
           color="primary"
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import btnConfig from '../components/qBtn'
+import qBtnConfig from '../components/styles/qBtnConfig'
 import { defineComponent, ref } from 'vue'
 import { supervisorRequests } from '../axios/SupervisorRequests'
 import { useI18n } from 'vue-i18n'
@@ -63,7 +63,7 @@ export default defineComponent({
       })
     }
     return {
-      btnConfig,
+      qBtnConfig,
       confirm: ref(false),
       reboot
     }

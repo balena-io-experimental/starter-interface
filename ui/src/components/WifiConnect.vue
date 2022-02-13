@@ -84,7 +84,7 @@
       <div class="q-mt-md text-center">
         <q-btn
           v-if="!wifiStatus"
-          v-bind="btnConfig"
+          v-bind="qBtnConfig"
           :label="$t('connect')"
           class="q-ml-md"
           :loading="submitting"
@@ -92,7 +92,7 @@
         />
         <q-btn
           v-else
-          v-bind="btnConfig"
+          v-bind="qBtnConfig"
           :label="$t('disconnect')"
           class="q-ml-md"
           :loading="submitting"
@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import wifiApi from 'axios'
-import btnConfig from '../components/qBtn'
+import qBtnConfig from '../components/styles/qBtnConfig'
 import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -220,7 +220,7 @@ export default defineComponent({
     }
 
     return {
-      btnConfig,
+      qBtnConfig,
       connect,
       fetchNetworks,
       forget,
