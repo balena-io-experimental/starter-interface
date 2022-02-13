@@ -14,6 +14,15 @@
           @click="toggleLeftDrawer"
         />
 
+        <router-link
+          v-if="qHeader.logo"
+          to="/"
+        >
+          <q-avatar>
+            <img :src="qHeader.logo">
+          </q-avatar>
+        </router-link>
+
         <q-toolbar-title v-bind="qHeader.title">
           {{ $t('title') }}
         </q-toolbar-title>

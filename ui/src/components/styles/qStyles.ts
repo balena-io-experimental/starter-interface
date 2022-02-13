@@ -10,5 +10,6 @@ export const qHeader = {
     bordered: true,
     elevated: true
   },
+  logo: '/logo.png',
   title: { class: 'text-secondary' }
 }
