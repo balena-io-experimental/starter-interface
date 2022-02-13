@@ -32,7 +32,9 @@ export default defineComponent({
     const response = ref<AxiosResponse>()
 
     async function changeHostname(newHostname: string) {
-      response.value = await supervisorRequests.host_config(newHostname)
+      response.value = await supervisorRequests.device_host_config_patch({
+        network: { hostname: newHostname }
+      })
     }
     return {
       changeHostname,
