@@ -4,13 +4,13 @@
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
         :color="response.data.is_online ? 'green' : 'red'"
-        text-color="white"
+        text-color="accent"
       >
         {{ response.data.is_online ? $t('online') : $t('offline') }}
       </q-chip>
       <q-chip
         :color="response.data.is_undervolted ? 'red' : 'green'"
-        text-color="white"
+        text-color="accent"
       >
         {{ response.data.is_undervolted ? $t('undervolted') : $t('not_undervolted') }}
       </q-chip>

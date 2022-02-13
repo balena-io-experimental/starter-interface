@@ -1,7 +1,9 @@
 <template>
   <q-btn
     flat
+    dense
     icon="restart_alt"
+    color="secondary"
     @click="confirm = true"
   />
   <q-dialog
@@ -16,7 +18,7 @@
         <q-avatar
           icon="power_settings_new"
           color="primary"
-          text-color="white"
+          text-color="accent"
         />
         <span class="q-ml-md">{{ $t('are_you_sure') }}</span>
       </q-card-section>

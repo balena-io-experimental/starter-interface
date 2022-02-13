@@ -5,7 +5,7 @@
     >
       <q-toolbar>
         <q-btn
-          color="black"
+          color="secondary"
           flat
           dense
           round
