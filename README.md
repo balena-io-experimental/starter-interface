@@ -9,7 +9,7 @@ This project contains an ExpressJS web framework which provides a Quasar (Vue) i
 It is modular allowing contributions from the community and easier tracking of changes in your own projects. See the sections below for customising the interface.
 
 # Adding components to your page
-Pre-built components for adding to a page where contributions are encouraged: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/components
+Pre-built components for adding to a page: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/components
 
 To add a component, import the component and add `<component-name />` where you require the component. An example insert of a hostname and ping component can be found here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/pages/Settings.vue
 
@@ -31,8 +31,8 @@ Changes to the menu items can be made through: https://github.com/maggie0002/bal
 # i18n
 Multiple  language support is added, and language strings are set here: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/i18n
 
-To insert additional languages and a language selector see the Quasar docs: https://quasar.dev/options/app-internationalization#how-to-use
+To insert additional languages see the Quasar docs: https://quasar.dev/options/app-internationalization#add-new-language
 
 # Final thoughts
 
-Apologies the documentation here is not better for beginner users. Community contributions to improving these would be very welcome. 
+Apologies the documentation here is not better for beginner users. Community contributions to improving these would be very welcome. This is undergoing development and the docs will be updated soon.
