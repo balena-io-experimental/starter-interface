@@ -112,14 +112,14 @@ router.post('/sdk/envVars', (req, res, next) => {
 // since we can't batch update env vars, we need to create a lockfile to stop the supervisor from restarting our services before all of them are set
 function lock(cb?: any) {
   if (process.env.NODE_ENV !== 'production') {
-    return
+    return _.isFunction(cb) ? cb() : null
   }
   return lockFile.lock('/tmp/balena/updates.lock', cb)
 }
 
 function unlock(cb?: any) {
   if (process.env.NODE_ENV !== 'production') {
-    return
+    return _.isFunction(cb) ? cb() : null
   }
   return lockFile.unlock('/tmp/balena/updates.lock', cb)
 }
