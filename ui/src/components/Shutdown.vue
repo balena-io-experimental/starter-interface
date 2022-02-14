@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests'
+import { supervisorRequests } from '../api/SupervisorRequests'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'

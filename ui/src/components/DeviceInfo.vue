@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from '../axios/SdkRequests'
+import { sdkRequests } from '../api/SdkRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
