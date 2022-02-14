@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { supervisorRequests } from '../api/SupervisorRequests'
+import { AxiosResponse } from 'axios'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 
@@ -24,7 +25,7 @@ export default defineComponent({
   name: 'IntUpdateDeviceComponent',
   setup() {
     const checkBox = ref<boolean>(false)
-    const response = ref<any>()
+    const response = ref<AxiosResponse>()
 
     async function update() {
       response.value = await supervisorRequests.update(checkBox.value)

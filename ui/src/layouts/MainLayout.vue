@@ -91,10 +91,10 @@ export default defineComponent({
         // Set which Quasar language packs to import below:
         // https://quasar.dev/options/quasar-language-packs#dynamical-non-ssr-
         /* webpackInclude: /(de|en-US)\.js$/ */
-        'quasar/lang/' + val
+        `quasar/lang/${val}`
       )
-        .then((lang) => {
-          $q.lang.set(lang.default as QuasarLanguage)
+        .then((lang: { default: QuasarLanguage }) => {
+          $q.lang.set(lang.default)
           $q.localStorage.set('lang', lang.default.isoName)
         })
         .catch(() => {

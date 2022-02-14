@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { route } from 'quasar/wrappers'
 import {
   createMemoryHistory,
@@ -42,29 +42,31 @@ export default route(function (/* { store, ssrContext } */) {
     function (response) {
       return response
     },
-    function (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log('Axios returned status code outside of the 2xx range.')
-        console.log(error.response.data)
-        console.log(error.response.status)
-        console.log(error.response.headers)
-      } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log('Axios received no response.')
-        console.log(error.request)
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Unknown Axios error.')
-        console.log('Error', error.message)
-      }
-      console.log(error.config)
+    function (error: Error | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log('Axios returned status code outside of the 2xx range.')
+          console.log(error.response.data)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log('Axios received no response.')
+          console.log(error.request)
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Unknown Axios error.')
+          console.log('Error', error.message)
+        }
+        console.log(error.config)
 
-      // Reject with UI Axios error
-      return Promise.reject(error)
+        // Reject with UI Axios error
+        return Promise.reject(error)
+      }
     }
   )
   return Router

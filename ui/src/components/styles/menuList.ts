@@ -28,4 +28,4 @@ export default computed(() => [
     label: i18n.global.t('Settings'),
     path: 'settings'
   }
-]) as any
+])

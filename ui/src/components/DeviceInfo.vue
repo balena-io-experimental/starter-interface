@@ -67,12 +67,13 @@
 
 <script lang="ts">
 import { sdkRequests } from '../api/SdkRequests'
+import { AxiosResponse } from 'axios'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',
   setup() {
-    const response = ref<any>()
+    const response = ref<AxiosResponse>()
 
     async function getDeviceInfo() {
       response.value = await sdkRequests.device()

@@ -105,11 +105,25 @@
 </template>
 
 <script lang="ts">
-import wifiApi from 'axios'
+import wifiApi, { AxiosError } from 'axios'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import axios from 'axios'
+
+interface connectionData {
+  conn_type: string
+  ssid: Array<string>
+}
+
+interface networksData {
+  iw_compatible: boolean
+  ssids: Array<string>
+}
+interface wifiStatus {
+  wifi: boolean
+}
 
 export default defineComponent({
   name: 'IntWifiConnectComponent',
@@ -124,9 +138,9 @@ export default defineComponent({
     const noWifiConnect = ref<boolean>(false)
     const password = ref<string>('')
     const refreshCompatible = ref<boolean>(true)
-    const ssids = ref<any>([])
+    const ssids = ref<Array<string>>()
     const submitting = ref<boolean>(false)
-    const wifiSsid = ref<any>('')
+    const wifiSsid = ref<connectionData>()
     const wifiStatus = ref<boolean>(true)
 
     onMounted(async () => {
@@ -136,18 +150,20 @@ export default defineComponent({
     async function checkWifiStatus() {
       $q.loading.show()
       await wifiApi
-        .get(`http://${hostname.value}:9090/v1/connection_status`)
+        .get<wifiStatus>(`http://${hostname.value}:9090/v1/connection_status`)
         .then(async (response) => {
           if (!response.data.wifi) {
             wifiStatus.value = false
             await fetchNetworks()
           }
         })
-        .catch(function (error) {
-          if (error.response) {
-            notify('negative', t('network_request_fail'))
-          } else {
-            notify('warning', t('no_wifi_api'))
+        .catch(function (error: Error | AxiosError) {
+          if (axios.isAxiosError(error)) {
+            if (error.response) {
+              notify('negative', t('network_request_fail'))
+            } else {
+              notify('warning', t('no_wifi_api'))
+            }
           }
 
           noWifiConnect.value = true
@@ -160,8 +176,8 @@ export default defineComponent({
       submitting.value = true
       await wifiApi
         .post(`http://${hostname.value}:9090/v1/connect`, {
-          ssid: wifiSsid.value.ssid,
-          conn_type: wifiSsid.value.conn_type,
+          ssid: wifiSsid?.value?.ssid,
+          conn_type: wifiSsid?.value?.conn_type,
           password: password.value
         })
         .then(() => {
@@ -176,14 +192,16 @@ export default defineComponent({
           notify('negative', t('network_connect_fail'))
           submitting.value = false
         })
-      wifiSsid.value = ''
       password.value = ''
+      wifiSsid.value = <connectionData>{}
     }
 
     async function fetchNetworks() {
       $q.loading.show({ message: t('searching_networks') })
       await wifiApi
-        .get(`http://${hostname.value}:9090/v1/list_access_points`)
+        .get<networksData>(
+          `http://${hostname.value}:9090/v1/list_access_points`
+        )
         .then((response) => {
           refreshCompatible.value = response.data.iw_compatible
           ssids.value = response.data.ssids
