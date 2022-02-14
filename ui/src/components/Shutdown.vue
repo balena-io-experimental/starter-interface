@@ -27,12 +27,14 @@
       <q-card-actions align="right">
         <q-btn
           v-close-popup
+          v-bind="qBtnStyle"
           flat
           :label="$t('cancel')"
           color="primary"
         />
         <q-btn
           v-close-popup
+          v-bind="qBtnStyle"
           flat
           :label="$t('ok')"
           color="primary"
@@ -46,6 +48,7 @@
 <script lang="ts">
 import { supervisorRequests } from '../axios/SupervisorRequests'
 import { useQuasar } from 'quasar'
+import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -64,6 +67,7 @@ export default defineComponent({
     }
     return {
       confirm: ref(false),
+      qBtnStyle,
       shutdown
 
     }
