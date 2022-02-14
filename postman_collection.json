@@ -1,119 +1,99 @@
 {
-	"info": {
-		"_postman_id": "8963d1ec-1c7f-49f2-a926-86c66e556b9b",
-		"name": "Balena Device UI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "set env vars",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "TEST1",
-							"value": "ok",
-							"type": "text"
-						},
-						{
-							"key": "TEST2",
-							"value": "totally_ok",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3000/sdk/envVars",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"sdk",
-						"envVars"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete env vars",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "TEST1",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "TEST2",
-							"value": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3000/sdk/envVars",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"sdk",
-						"envVars"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get env vars",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/sdk/envVars",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"sdk",
-						"envVars"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get device info",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/sdk/device",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"sdk",
-						"device"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "8963d1ec-1c7f-49f2-a926-86c66e556b9b",
+    "name": "Balena Device UI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "set env vars",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "TEST1",
+              "value": "ok",
+              "type": "text"
+            },
+            {
+              "key": "TEST2",
+              "value": "totally_ok",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/sdk/envVars",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["sdk", "envVars"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete env vars",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "TEST1",
+              "value": "",
+              "type": "text"
+            },
+            {
+              "key": "TEST2",
+              "value": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/sdk/envVars",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["sdk", "envVars"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get env vars",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sdk/envVars",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["sdk", "envVars"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get device info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sdk/device",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["sdk", "device"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
