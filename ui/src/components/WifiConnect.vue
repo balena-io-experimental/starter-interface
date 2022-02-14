@@ -144,7 +144,7 @@ export default defineComponent({
         if (error.response) {
           notify('negative', t('network_request_fail'))
         } else {
-          notify('negative', t('no_wifi_api'))
+          notify('warning', t('no_wifi_api'))
         }
 
         noWifiConnect.value = true
