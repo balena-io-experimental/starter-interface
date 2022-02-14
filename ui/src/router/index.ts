@@ -66,6 +66,9 @@ export default route(function (/* { store, ssrContext } */) {
 
         // Reject with UI Axios error
         return Promise.reject(error)
+      } else {
+        console.log(error)
+        return Promise.reject(error)
       }
     }
   )

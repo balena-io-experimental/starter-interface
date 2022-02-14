@@ -121,6 +121,7 @@ interface networksData {
   iw_compatible: boolean
   ssids: Array<string>
 }
+
 interface wifiStatus {
   wifi: boolean
 }
@@ -164,6 +165,8 @@ export default defineComponent({
             } else {
               notify('warning', t('no_wifi_api'))
             }
+          } else {
+            console.log(error)
           }
 
           noWifiConnect.value = true
