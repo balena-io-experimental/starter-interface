@@ -115,11 +115,16 @@ export default defineComponent({
         'quasar/lang/' + val
       ).then(lang => {
         $q.lang.set(lang.default as QuasarLanguage)
+        $q.localStorage.set('lang', lang.default.isoName)
       }).catch(() => { console.log("User's browser language is not installed. Reverting to en-US.") })
     })
 
-    // Set language to users browser language when possible
-    locale.value = $q.lang.getLocale() as string
+    // Set language to previously chosen, otherwise use browser default
+    if (localStorage.getItem('lang')) {
+      locale.value = $q.localStorage.getItem('lang') as string
+    } else {
+      locale.value = $q.lang.getLocale() as string
+    }
 
     return {
       leftDrawerOpen,
