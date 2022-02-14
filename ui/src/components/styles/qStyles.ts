@@ -10,6 +10,6 @@ export const qHeaderStyle = {
     bordered: true,
     elevated: true
   },
-  logo: '/logo.png',
+  logo: '/logo.png', // Remove this line to have no logo
   title: { class: 'text-secondary' }
 }
