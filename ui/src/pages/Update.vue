@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'IntUpdate',
   components: { UpdateDevice },
-  setup () {
+  setup() {
     return {}
   }
 })

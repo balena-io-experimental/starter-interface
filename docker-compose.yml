@@ -1,7 +1,7 @@
-version: '2.1'
+version: "2.1"
 
 services:
-  server:
+  balena-device-ui:
     build:
       context: .
       dockerfile: Dockerfile.template
@@ -12,8 +12,8 @@ services:
       io.balena.features.supervisor-api: 1
       io.balena.features.balena-api: 1
 
-## Optional Wi-Fi controller: 
-## https://github.com/maggie0002/balena-py-wifi-connect
+  ## Optional Wi-Fi controller:
+  ## https://github.com/maggie0002/balena-py-wifi-connect
   py-wifi-connect:
     environment:
       ## Listening IP and port ##
@@ -29,7 +29,7 @@ services:
     network_mode: "host"
     restart: always
     labels:
-      io.balena.features.dbus: '1'
+      io.balena.features.dbus: "1"
     cap_add:
       - NET_ADMIN
     privileged: true # This can be removed if you do not need the LED indicator.

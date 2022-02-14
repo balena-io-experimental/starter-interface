@@ -4,15 +4,19 @@
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
         :color="response.data.is_online ? 'green' : 'red'"
-        text-color="white"
+        text-color="accent"
       >
         {{ response.data.is_online ? $t('online') : $t('offline') }}
       </q-chip>
       <q-chip
         :color="response.data.is_undervolted ? 'red' : 'green'"
-        text-color="white"
+        text-color="accent"
       >
-        {{ response.data.is_undervolted ? $t('undervolted') : $t('not_undervolted') }}
+        {{
+          response.data.is_undervolted
+            ? $t('undervolted')
+            : $t('not_undervolted')
+        }}
       </q-chip>
     </h4>
 
@@ -21,7 +25,10 @@
         <q-card-section>
           <b class="q-mr-xs">{{ $t('memory') }}</b>
           <span> - </span>
-          <span>{{ response.data.memory_usage }}MB / {{ response.data.memory_total }}MB</span>
+          <span
+            >{{ response.data.memory_usage }}MB /
+            {{ response.data.memory_total }}MB</span
+          >
           <q-linear-progress
             color="secondary"
             rounded
@@ -33,7 +40,10 @@
           <b class="q-mr-xs">{{ $t('storage') }}</b>
           <span>({{ response.data.storage_block_device }})</span>
           <span> - </span>
-          <span>{{ (response.data.storage_usage / 1000).toFixed(2) }}GB / {{ (response.data.storage_total / 1000).toFixed(2) }}GB</span>
+          <span
+            >{{ (response.data.storage_usage / 1000).toFixed(2) }}GB /
+            {{ (response.data.storage_total / 1000).toFixed(2) }}GB</span
+          >
           <q-linear-progress
             color="secondary"
             rounded
@@ -43,7 +53,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <hr class="q-mt-xl q-mb-lg">
+    <hr class="q-mt-xl q-mb-lg" />
     <q-expansion-item
       expand-separator
       icon="code"
@@ -56,15 +66,16 @@
 </template>
 
 <script lang="ts">
+import { sdkRequests } from '../api/SdkRequests'
+import { AxiosResponse } from 'axios'
 import { defineComponent, ref, onMounted } from 'vue'
-import { sdkRequests } from '../axios/SdkRequests'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',
-  setup () {
-    const response = ref<any>()
+  setup() {
+    const response = ref<AxiosResponse>()
 
-    async function getDeviceInfo () {
+    async function getDeviceInfo() {
       response.value = await sdkRequests.device()
     }
 

@@ -1,12 +1,13 @@
+// Documentation: https://www.balena.io/docs/reference/sdk/node-sdk/
 import expressApi from 'axios'
 
 const apiPath = '/sdk' as string
 
 export const sdkRequests = {
-  device () {
+  device() {
     return expressApi.get(`${apiPath}/device`)
   },
-  uuid () {
+  uuid() {
     return expressApi.get(`${apiPath}/uuid`)
   }
 }

@@ -1,12 +1,6 @@
 <template>
-  <q-item
-    clickable
-    @click="$router.replace({ name: path })"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
+  <q-item clickable @click="$router.replace({ name: path })">
+    <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
     <q-item-section>

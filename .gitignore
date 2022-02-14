@@ -2,6 +2,7 @@
 .thumbs.db
 node_modules
 .vscode
+dist
 
 # Quasar core related directories
 .quasar

@@ -1,21 +1,30 @@
 import axios from 'axios'
 import express from 'express'
 import process from 'process'
+import type { varRemoval } from '../common/types'
 
 const router = express.Router()
 
 // Set Axios defaults
-axios.defaults.timeout = 2500
 axios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
 axios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
+axios.defaults.timeout = 2500
 
 // Functions
-function removeApiKeys (obj) {
+function removeApiKeys(obj: varRemoval) {
   // Remove headers so the API key never leaves the device or enters logs
-  if (obj.config?.headers?.Authorization) { delete obj.config.headers.Authorization }
-  if (obj.response?.request?._header) { delete obj.response.request._header }
-  if (obj.request?._header) { delete obj.request._header }
-  if (obj.request?._currentRequest) { delete obj.request._currentRequest }
+  if (obj.config?.headers?.Authorization) {
+    delete obj.config.headers.Authorization
+  }
+  if (obj.request?._currentRequest) {
+    delete obj.request._currentRequest
+  }
+  if (obj.request?._header) {
+    delete obj.request._header
+  }
+  if (obj.response?.request?._header) {
+    delete obj.response.request._header
+  }
 
   return obj
 }
@@ -28,8 +37,8 @@ router.post('/supervisor', function (req, res) {
 
   // Construct the payload
   const payload = {
-    method: type,
     data: params,
+    method: type,
     url: path
   }
 

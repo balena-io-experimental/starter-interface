@@ -1,6 +1,4 @@
-import axios from 'axios'
-import { i18n } from '../boot/i18n'
-import { Notify } from 'quasar'
+import axios, { AxiosError } from 'axios'
 import { route } from 'quasar/wrappers'
 import {
   createMemoryHistory,
@@ -22,7 +20,9 @@ import routes from './routes'
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
+    : process.env.VUE_ROUTER_MODE === 'history'
+    ? createWebHistory
+    : createWebHashHistory
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -38,19 +38,39 @@ export default route(function (/* { store, ssrContext } */) {
   })
 
   // Axios interceptor
-  axios.interceptors.response.use(function (response) {
-    return response
-  }, function (error) {
-    // Display the Backend Axios error
-    console.log(error.response.data)
+  axios.interceptors.response.use(
+    function (response) {
+      return response
+    },
+    function (error: Error | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log('Axios returned status code outside of the 2xx range.')
+          console.log(error.response.data)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log('Axios received no response.')
+          console.log(error.request)
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Unknown Axios error.')
+          console.log('Error', error.message)
+        }
+        console.log(error.config)
 
-    // Display an error message
-    Notify.create({
-      type: 'negative',
-      message: `${i18n.global.t('error')} ${error.message as string}`
-    })
-    // Reject with UI axios error
-    return Promise.reject(error)
-  })
+        // Reject with UI Axios error
+        return Promise.reject(error)
+      } else {
+        console.log(error)
+        return Promise.reject(error)
+      }
+    }
+  )
   return Router
 })

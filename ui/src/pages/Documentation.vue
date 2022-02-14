@@ -9,7 +9,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',
-  setup () {
+  setup() {
     const docs = ref<string>('Documentation')
     return { docs }
   }

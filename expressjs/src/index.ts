@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import CustomRoutes from './routes/CustomRoutes.js'
-import SupervisorRoutes from './routes/SupervisorRoutes.js'
-import BalenaSDKRoutes from './routes/BalenaSDKRoutes.js'
+import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
+import CustomRoutes from './routes/CustomRoutes'
+import SupervisorRoutes from './routes/SupervisorRoutes'
 
 const port = process.env.BACKEND_PORT || 3000
 
@@ -16,9 +16,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 // Routes
+app.use(BalenaSDKRoutes)
 app.use(CustomRoutes)
 app.use(SupervisorRoutes)
-app.use(BalenaSDKRoutes)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
