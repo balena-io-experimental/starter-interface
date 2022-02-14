@@ -193,7 +193,6 @@ export default defineComponent({
           submitting.value = false
         })
       password.value = ''
-      wifiSsid.value = <connectionData>{}
     }
 
     async function fetchNetworks() {
