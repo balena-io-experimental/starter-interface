@@ -10,23 +10,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntMenuItems',
   props: {
     label: {
       type: String,
-      required: true,
+      required: true
     },
     path: {
       type: String,
-      default: '',
+      default: ''
     },
     icon: {
       type: String,
-      default: '',
-    },
-  },
-});
+      default: ''
+    }
+  }
+})
 </script>

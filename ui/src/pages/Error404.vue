@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import { qBtnStyle } from '../components/styles/qStyles';
-import { defineComponent } from 'vue';
+import { qBtnStyle } from '../components/styles/qStyles'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntError404',
   setup() {
-    return { qBtnStyle };
-  },
-});
+    return { qBtnStyle }
+  }
+})
 </script>

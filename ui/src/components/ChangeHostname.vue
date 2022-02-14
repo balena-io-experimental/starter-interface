@@ -21,24 +21,24 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, ref } from 'vue';
+import { supervisorRequests } from '../axios/SupervisorRequests'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntChangeHostnameComponent',
   setup() {
-    const response = ref<any>();
+    const response = ref<any>()
 
     async function changeHostname(newHostname: string) {
-      response.value = await supervisorRequests.host_config(newHostname);
+      response.value = await supervisorRequests.host_config(newHostname)
     }
     return {
       changeHostname,
       newHostname: ref<string>(''),
       qBtnStyle,
-      response,
-    };
-  },
-});
+      response
+    }
+  }
+})
 </script>

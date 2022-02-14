@@ -42,31 +42,31 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests';
-import { useQuasar } from 'quasar';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { supervisorRequests } from '../axios/SupervisorRequests'
+import { useQuasar } from 'quasar'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'IntRebootComponent',
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t } = useI18n();
-    const $q = useQuasar();
+    const { t } = useI18n()
+    const $q = useQuasar()
 
-    const checkBox = ref<boolean>(false);
+    const checkBox = ref<boolean>(false)
 
     async function reboot() {
       await supervisorRequests.reboot(checkBox.value).then(() => {
-        $q.notify({ type: 'positive', message: t('restarting') });
-      });
+        $q.notify({ type: 'positive', message: t('restarting') })
+      })
     }
     return {
       confirm: ref(false),
       qBtnStyle,
-      reboot,
-    };
-  },
-});
+      reboot
+    }
+  }
+})
 </script>

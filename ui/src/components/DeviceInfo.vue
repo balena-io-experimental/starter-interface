@@ -66,25 +66,25 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from '../axios/SdkRequests';
-import { defineComponent, ref, onMounted } from 'vue';
+import { sdkRequests } from '../axios/SdkRequests'
+import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',
   setup() {
-    const response = ref<any>();
+    const response = ref<any>()
 
     async function getDeviceInfo() {
-      response.value = await sdkRequests.device();
+      response.value = await sdkRequests.device()
     }
 
     onMounted(async () => {
-      await getDeviceInfo();
-    });
+      await getDeviceInfo()
+    })
 
     return {
-      response,
-    };
-  },
-});
+      response
+    }
+  }
+})
 </script>

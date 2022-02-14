@@ -43,30 +43,30 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests';
-import { useQuasar } from 'quasar';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { supervisorRequests } from '../axios/SupervisorRequests'
+import { useQuasar } from 'quasar'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'IntShutdownComponent',
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t } = useI18n();
-    const $q = useQuasar();
-    const checkBox = ref<boolean>(false);
+    const { t } = useI18n()
+    const $q = useQuasar()
+    const checkBox = ref<boolean>(false)
 
     async function shutdown() {
       await supervisorRequests.shutdown(checkBox.value).then(() => {
-        $q.notify({ type: 'positive', message: t('shutting_down') });
-      });
+        $q.notify({ type: 'positive', message: t('shutting_down') })
+      })
     }
     return {
       confirm: ref(false),
       qBtnStyle,
-      shutdown,
-    };
-  },
-});
+      shutdown
+    }
+  }
+})
 </script>

@@ -16,25 +16,25 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, ref } from 'vue';
+import { supervisorRequests } from '../axios/SupervisorRequests'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntUpdateDeviceComponent',
   setup() {
-    const checkBox = ref<boolean>(false);
-    const response = ref<any>();
+    const checkBox = ref<boolean>(false)
+    const response = ref<any>()
 
     async function update() {
-      response.value = await supervisorRequests.update(checkBox.value);
+      response.value = await supervisorRequests.update(checkBox.value)
     }
     return {
       checkBox,
       qBtnStyle,
       response,
-      update,
-    };
-  },
-});
+      update
+    }
+  }
+})
 </script>

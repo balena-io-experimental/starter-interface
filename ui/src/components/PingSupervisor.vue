@@ -6,23 +6,23 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../axios/SupervisorRequests';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, ref } from 'vue';
+import { supervisorRequests } from '../axios/SupervisorRequests'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'IntPingComponent',
   setup() {
-    const response = ref<any>();
+    const response = ref<any>()
 
     async function ping() {
-      response.value = await supervisorRequests.ping();
+      response.value = await supervisorRequests.ping()
     }
     return {
       ping,
       qBtnStyle,
-      response,
-    };
-  },
-});
+      response
+    }
+  }
+})
 </script>

@@ -105,117 +105,117 @@
 </template>
 
 <script lang="ts">
-import wifiApi from 'axios';
-import { useQuasar } from 'quasar';
-import { qBtnStyle } from './styles/qStyles';
-import { defineComponent, onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import wifiApi from 'axios'
+import { useQuasar } from 'quasar'
+import { qBtnStyle } from './styles/qStyles'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'IntWifiConnectComponent',
   setup() {
     // Import required features
-    const $q = useQuasar();
+    const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { t } = useI18n();
+    const { t } = useI18n()
 
     // Env vars
-    const hostname = ref<string>(window.location.hostname);
-    const noWifiConnect = ref<boolean>(false);
-    const password = ref<string>('');
-    const refreshCompatible = ref<boolean>(true);
-    const ssids = ref<any>([]);
-    const submitting = ref<boolean>(false);
-    const wifiSsid = ref<any>('');
-    const wifiStatus = ref<boolean>(true);
+    const hostname = ref<string>(window.location.hostname)
+    const noWifiConnect = ref<boolean>(false)
+    const password = ref<string>('')
+    const refreshCompatible = ref<boolean>(true)
+    const ssids = ref<any>([])
+    const submitting = ref<boolean>(false)
+    const wifiSsid = ref<any>('')
+    const wifiStatus = ref<boolean>(true)
 
     onMounted(async () => {
-      await checkWifiStatus();
-    });
+      await checkWifiStatus()
+    })
 
     async function checkWifiStatus() {
-      $q.loading.show();
+      $q.loading.show()
       await wifiApi
         .get(`http://${hostname.value}:9090/v1/connection_status`)
         .then(async (response) => {
           if (!response.data.wifi) {
-            wifiStatus.value = false;
-            await fetchNetworks();
+            wifiStatus.value = false
+            await fetchNetworks()
           }
         })
         .catch(function (error) {
           if (error.response) {
-            notify('negative', t('network_request_fail'));
+            notify('negative', t('network_request_fail'))
           } else {
-            notify('warning', t('no_wifi_api'));
+            notify('warning', t('no_wifi_api'))
           }
 
-          noWifiConnect.value = true;
-        });
-      $q.loading.hide();
+          noWifiConnect.value = true
+        })
+      $q.loading.hide()
     }
 
     // Send connect request
     async function connect() {
-      submitting.value = true;
+      submitting.value = true
       await wifiApi
         .post(`http://${hostname.value}:9090/v1/connect`, {
           ssid: wifiSsid.value.ssid,
           conn_type: wifiSsid.value.conn_type,
-          password: password.value,
+          password: password.value
         })
         .then(() => {
-          wifiStatus.value = true;
+          wifiStatus.value = true
           // Delay to improve interface interaction
           setTimeout(() => {
-            notify('positive', t('connection_request'));
-            submitting.value = false;
-          }, 2000);
+            notify('positive', t('connection_request'))
+            submitting.value = false
+          }, 2000)
         })
         .catch(function () {
-          notify('negative', t('network_connect_fail'));
-          submitting.value = false;
-        });
-      wifiSsid.value = '';
-      password.value = '';
+          notify('negative', t('network_connect_fail'))
+          submitting.value = false
+        })
+      wifiSsid.value = ''
+      password.value = ''
     }
 
     async function fetchNetworks() {
-      $q.loading.show({ message: t('searching_networks') });
+      $q.loading.show({ message: t('searching_networks') })
       await wifiApi
         .get(`http://${hostname.value}:9090/v1/list_access_points`)
         .then((response) => {
-          refreshCompatible.value = response.data.iw_compatible;
-          ssids.value = response.data.ssids;
+          refreshCompatible.value = response.data.iw_compatible
+          ssids.value = response.data.ssids
           if (ssids.value.length === 0) {
-            notify('warning', t('no_networks'));
+            notify('warning', t('no_networks'))
           }
         })
         .catch(function () {
-          notify('negative', t('network_fetch_fail'));
-        });
-      submitting.value = false;
-      $q.loading.hide();
+          notify('negative', t('network_fetch_fail'))
+        })
+      submitting.value = false
+      $q.loading.hide()
     }
 
     function forget() {
-      submitting.value = true;
+      submitting.value = true
       wifiApi
         .post(`http://${hostname.value}:9090/v1/forget`, {
-          all_networks: false,
+          all_networks: false
         })
         .then(() => {
-          wifiStatus.value = false;
+          wifiStatus.value = false
           // Delay to improve interface interaction
           setTimeout(() => {
-            notify('positive', t('disconnect_request_sent'));
-            submitting.value = false;
-          }, 2000);
+            notify('positive', t('disconnect_request_sent'))
+            submitting.value = false
+          }, 2000)
         })
         .catch(function () {
-          notify('negative', t('network_forget_fail'));
-          submitting.value = false;
-        });
+          notify('negative', t('network_forget_fail'))
+          submitting.value = false
+        })
     }
 
     function notify(type: string, message: string) {
@@ -229,11 +229,11 @@ export default defineComponent({
             color: 'white',
             handler: () => {
               /* ... */
-            },
-          },
+            }
+          }
         ],
-        message: message,
-      });
+        message: message
+      })
     }
 
     return {
@@ -247,10 +247,10 @@ export default defineComponent({
       ssids,
       submitting,
       wifiSsid,
-      wifiStatus,
-    };
-  },
-});
+      wifiStatus
+    }
+  }
+})
 </script>
 
 <style scoped></style>

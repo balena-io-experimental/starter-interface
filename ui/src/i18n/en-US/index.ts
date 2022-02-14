@@ -43,5 +43,5 @@ export default {
   title: 'Balena Device UI',
   undervolted: 'Undervolted',
   Update: 'Update',
-  update_device: 'Update device',
-};
+  update_device: 'Update device'
+}

@@ -59,15 +59,15 @@
 </template>
 
 <script lang="ts">
-import MenuItems from 'components/MenuItems.vue';
-import menuList from '../components/styles/menuList';
-import { qHeaderStyle } from '../components/styles/qStyles';
-import { useQuasar } from 'quasar';
-import Reboot from 'src/components/Reboot.vue';
-import Shutdown from 'src/components/Shutdown.vue';
-import { defineComponent, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import type { QuasarLanguage } from 'quasar';
+import MenuItems from 'components/MenuItems.vue'
+import menuList from '../components/styles/menuList'
+import { qHeaderStyle } from '../components/styles/qStyles'
+import { useQuasar } from 'quasar'
+import Reboot from 'src/components/Reboot.vue'
+import Shutdown from 'src/components/Shutdown.vue'
+import { defineComponent, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { QuasarLanguage } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -75,14 +75,14 @@ export default defineComponent({
   components: {
     MenuItems,
     Reboot,
-    Shutdown,
+    Shutdown
   },
 
   setup() {
-    const $q = useQuasar();
+    const $q = useQuasar()
 
-    const leftDrawerOpen = ref(false);
-    const { locale } = useI18n({ useScope: 'global' });
+    const leftDrawerOpen = ref(false)
+    const { locale } = useI18n({ useScope: 'global' })
 
     // Quasar requires the Quasar language pack to be set seperate from Vue i18n
     watch(locale, (val) => {
@@ -94,21 +94,21 @@ export default defineComponent({
         'quasar/lang/' + val
       )
         .then((lang) => {
-          $q.lang.set(lang.default as QuasarLanguage);
-          $q.localStorage.set('lang', lang.default.isoName);
+          $q.lang.set(lang.default as QuasarLanguage)
+          $q.localStorage.set('lang', lang.default.isoName)
         })
         .catch(() => {
           console.log(
             "User's browser language is not installed. Reverting to en-US."
-          );
-        });
-    });
+          )
+        })
+    })
 
     // Set language to previously chosen, otherwise use browser default
     if (localStorage.getItem('lang')) {
-      locale.value = $q.localStorage.getItem('lang') as string;
+      locale.value = $q.localStorage.getItem('lang') as string
     } else {
-      locale.value = $q.lang.getLocale() as string;
+      locale.value = $q.lang.getLocale() as string
     }
 
     return {
@@ -116,14 +116,14 @@ export default defineComponent({
       locale,
       localeOptions: [
         { value: 'en-US', label: 'English' },
-        { value: 'de', label: 'German' },
+        { value: 'de', label: 'German' }
       ],
       menuItems: menuList,
       qHeaderStyle,
       toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
-});
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  }
+})
 </script>
