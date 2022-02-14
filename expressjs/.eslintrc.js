@@ -1,12 +1,11 @@
 module.exports = {
   root: true,
-  ignorePatterns: [".eslintrc.js"],
+  ignorePatterns: ['.eslintrc.js'],
   parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint'
-  ],
+  plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
-  ]
-}
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
+};
