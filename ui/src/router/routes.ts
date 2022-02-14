@@ -1,25 +1,40 @@
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
-
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Home.vue'), name: 'home' },
-      { path: 'documentation', component: () => import('pages/Documentation.vue'), name: 'documentation' },
-      { path: 'networking', component: () => import('pages/Networking.vue'), name: 'networking' },
-      { path: 'settings', component: () => import('pages/Settings.vue'), name: 'settings' },
-      { path: 'update', component: () => import('pages/Update.vue'), name: 'update' }
-    ]
+      {
+        path: 'documentation',
+        component: () => import('pages/Documentation.vue'),
+        name: 'documentation',
+      },
+      {
+        path: 'networking',
+        component: () => import('pages/Networking.vue'),
+        name: 'networking',
+      },
+      {
+        path: 'settings',
+        component: () => import('pages/Settings.vue'),
+        name: 'settings',
+      },
+      {
+        path: 'update',
+        component: () => import('pages/Update.vue'),
+        name: 'update',
+      },
+    ],
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue')
-  }
-]
+    component: () => import('pages/Error404.vue'),
+  },
+];
 
-export default routes
+export default routes;

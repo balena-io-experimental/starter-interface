@@ -1,3 +1,3 @@
 export default {
-  Device_Info: 'Geräteinformationen'
-}
+  Device_Info: 'Geräteinformationen',
+};

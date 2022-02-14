@@ -3,7 +3,8 @@ export default {
   cancel: 'cancel',
   change_hostname: 'Change hostname',
   close: 'Close',
-  connection_request: 'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.',
+  connection_request:
+    'Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.',
   connect: 'Connect',
   control_panel: 'Control Panel',
   Device_Info: 'Device Info',
@@ -22,7 +23,8 @@ export default {
   network_request_fail: 'Failed to communicate with Balena Py Wi-Fi Connect.',
   not_undervolted: 'Normal Power',
   no_networks: 'No available networks',
-  no_wifi_api: 'Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?',
+  no_wifi_api:
+    'Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?',
   offline: 'Offline',
   ok: 'ok',
   online: 'Online',
@@ -41,5 +43,5 @@ export default {
   title: 'Balena Device UI',
   undervolted: 'Undervolted',
   Update: 'Update',
-  update_device: 'Update device'
-}
+  update_device: 'Update device',
+};

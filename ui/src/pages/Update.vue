@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import UpdateDevice from 'src/components/UpdateDevice.vue'
-import { defineComponent } from 'vue'
+import UpdateDevice from 'src/components/UpdateDevice.vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'IntUpdate',
   components: { UpdateDevice },
-  setup () {
-    return {}
-  }
-})
+  setup() {
+    return {};
+  },
+});
 </script>

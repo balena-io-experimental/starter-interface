@@ -1,16 +1,11 @@
 <template>
-  <div class="fullscreen bg-secondary text-accent text-center q-pa-md flex flex-center">
+  <div
+    class="fullscreen bg-secondary text-accent text-center q-pa-md flex flex-center"
+  >
     <div>
-      <div style="font-size: 30vh">
-        404
-      </div>
+      <div style="font-size: 30vh">404</div>
 
-      <div
-        class="text-h2"
-        style="opacity:.4"
-      >
-        Oops. Nothing here...
-      </div>
+      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
 
       <q-btn
         v-bind="qBtnStyle"
@@ -26,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import { qBtnStyle } from '../components/styles/qStyles'
-import { defineComponent } from 'vue'
+import { qBtnStyle } from '../components/styles/qStyles';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'IntError404',
-  setup () {
-    return { qBtnStyle }
-  }
-})
+  setup() {
+    return { qBtnStyle };
+  },
+});
 </script>
