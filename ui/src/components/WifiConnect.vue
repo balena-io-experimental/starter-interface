@@ -151,7 +151,9 @@ export default defineComponent({
     async function checkWifiStatus() {
       $q.loading.show()
       await wifiApi
-        .get<wifiStatus>(`http://${hostname.value}:9090/v1/connection_status`)
+        .get<wifiStatus>(
+          `${window.location.protocol}${hostname.value}:9090/v1/connection_status`
+        )
         .then(async (response) => {
           if (!response.data.wifi) {
             wifiStatus.value = false
@@ -178,7 +180,7 @@ export default defineComponent({
     async function connect() {
       submitting.value = true
       await wifiApi
-        .post(`http://${hostname.value}:9090/v1/connect`, {
+        .post(`${window.location.protocol}${hostname.value}:9090/v1/connect`, {
           ssid: wifiSsid?.value?.ssid,
           conn_type: wifiSsid?.value?.conn_type,
           password: password.value
@@ -202,7 +204,7 @@ export default defineComponent({
       $q.loading.show({ message: t('searching_networks') })
       await wifiApi
         .get<networksData>(
-          `http://${hostname.value}:9090/v1/list_access_points`
+          `${window.location.protocol}${hostname.value}:9090/v1/list_access_points`
         )
         .then((response) => {
           refreshCompatible.value = response.data.iw_compatible
@@ -221,7 +223,7 @@ export default defineComponent({
     function forget() {
       submitting.value = true
       wifiApi
-        .post(`http://${hostname.value}:9090/v1/forget`, {
+        .post(`${window.location.protocol}${hostname.value}:9090/v1/forget`, {
           all_networks: false
         })
         .then(() => {
