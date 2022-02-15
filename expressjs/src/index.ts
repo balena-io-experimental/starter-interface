@@ -4,7 +4,7 @@ import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
 
-const port = process.env.BACKEND_PORT || 3000
+const port = process.env.BACKEND_PORT || 80
 
 // Initiate ExpressJS
 const app = express()
