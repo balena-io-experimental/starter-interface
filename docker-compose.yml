@@ -17,7 +17,7 @@ services:
   py-wifi-connect:
     environment:
       ## Listening IP and port ##
-      PWC_HOST: "0.0.0.0"
+      PWC_HOST: "172.17.0.1"
       PWC_PORT: 9090
 
       ## Hotspot details ##

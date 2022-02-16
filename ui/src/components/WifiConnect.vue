@@ -105,7 +105,7 @@
 </template>
 
 <script lang="ts">
-import wifiApi, { AxiosError } from 'axios'
+import expressApi, { AxiosError } from 'axios'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -135,7 +135,6 @@ export default defineComponent({
     const { t } = useI18n()
 
     // Env vars
-    const hostname = ref<string>(window.location.hostname)
     const noWifiConnect = ref<boolean>(false)
     const password = ref<string>('')
     const refreshCompatible = ref<boolean>(true)
@@ -150,10 +149,12 @@ export default defineComponent({
 
     async function checkWifiStatus() {
       $q.loading.show()
-      await wifiApi
-        .get<wifiStatus>(
-          `${window.location.protocol}${hostname.value}:9090/v1/connection_status`
-        )
+
+      await expressApi
+        .post<wifiStatus>('/wifi', {
+          type: 'GET',
+          path: 'v1/connection_status'
+        })
         .then(async (response) => {
           if (!response.data.wifi) {
             wifiStatus.value = false
@@ -179,11 +180,17 @@ export default defineComponent({
     // Send connect request
     async function connect() {
       submitting.value = true
-      await wifiApi
-        .post(`${window.location.protocol}${hostname.value}:9090/v1/connect`, {
-          ssid: wifiSsid?.value?.ssid,
-          conn_type: wifiSsid?.value?.conn_type,
-          password: password.value
+      await expressApi
+        .post('/wifi', {
+          type: 'POST',
+          path: 'v1/connect',
+          params: {
+            network: {
+              ssid: wifiSsid?.value?.ssid,
+              conn_type: wifiSsid?.value?.conn_type,
+              password: password.value
+            }
+          }
         })
         .then(() => {
           wifiStatus.value = true
@@ -202,10 +209,11 @@ export default defineComponent({
 
     async function fetchNetworks() {
       $q.loading.show({ message: t('searching_networks') })
-      await wifiApi
-        .get<networksData>(
-          `${window.location.protocol}${hostname.value}:9090/v1/list_access_points`
-        )
+      await expressApi
+        .post<networksData>('/wifi', {
+          type: 'GET',
+          path: 'v1/list_access_points'
+        })
         .then((response) => {
           refreshCompatible.value = response.data.iw_compatible
           ssids.value = response.data.ssids
@@ -222,9 +230,13 @@ export default defineComponent({
 
     function forget() {
       submitting.value = true
-      wifiApi
-        .post(`${window.location.protocol}${hostname.value}:9090/v1/forget`, {
-          all_networks: false
+      expressApi
+        .post('/wifi', {
+          type: 'POST',
+          path: 'v1/connect',
+          params: {
+            all_networks: false
+          }
         })
         .then(() => {
           wifiStatus.value = false
