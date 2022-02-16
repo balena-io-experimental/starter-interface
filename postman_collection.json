@@ -26,10 +26,10 @@
           ]
         },
         "url": {
-          "raw": "http://localhost:3000/sdk/envVars",
+          "raw": "http://localhost:80/sdk/envVars",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "3000",
+          "port": "80",
           "path": ["sdk", "envVars"]
         }
       },
@@ -56,10 +56,10 @@
           ]
         },
         "url": {
-          "raw": "http://localhost:3000/sdk/envVars",
+          "raw": "http://localhost:80/sdk/envVars",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "3000",
+          "port": "80",
           "path": ["sdk", "envVars"]
         }
       },
@@ -71,10 +71,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/sdk/envVars",
+          "raw": "http://localhost:80/sdk/envVars",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "3000",
+          "port": "80",
           "path": ["sdk", "envVars"]
         }
       },
@@ -86,10 +86,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/sdk/device",
+          "raw": "http://localhost:80/sdk/device",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "3000",
+          "port": "80",
           "path": ["sdk", "device"]
         }
       },

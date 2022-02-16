@@ -6,9 +6,9 @@ import type { varRemoval } from '../common/types'
 const router = express.Router()
 
 // Set Axios defaults
-axios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
-axios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
-axios.defaults.timeout = 2500
+const supervisorAxios = axios.create({ timeout: 10000 })
+supervisorAxios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
+supervisorAxios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
 
 // Functions
 function removeApiKeys(obj: varRemoval) {
@@ -43,7 +43,7 @@ router.post('/supervisor', function (req, res) {
   }
 
   // Sned the request
-  axios(payload)
+  supervisorAxios(payload)
     .then((response) => {
       // Return the same http code as Axios request
       res.status(response.status)

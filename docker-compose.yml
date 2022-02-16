@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.template
     restart: always
     ports:
-      - "80:3000"
+      - "80:80"
     labels:
       io.balena.features.supervisor-api: 1
       io.balena.features.balena-api: 1
@@ -26,8 +26,9 @@ services:
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
     image: ghcr.io/maggie0002/py-wifi-connect:latest
-    network_mode: "host"
     restart: always
+    ports:
+      - "9090:9090"
     labels:
       io.balena.features.dbus: "1"
     cap_add:
