@@ -3,8 +3,9 @@ import cors from 'cors'
 import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
+import WifiRoutes from './routes/WifiConnect'
 
-const port = process.env.BACKEND_PORT || 3000
+const port = process.env.BACKEND_PORT || 80
 
 // Initiate ExpressJS
 const app = express()
@@ -19,6 +20,7 @@ app.use(express.static('public'))
 app.use(BalenaSDKRoutes)
 app.use(CustomRoutes)
 app.use(SupervisorRoutes)
+app.use(WifiRoutes)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

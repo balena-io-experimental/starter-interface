@@ -7,7 +7,6 @@ declare module '@vue/runtime-core' {
 }
 
 const expressApi = axios.create({ timeout: 1500 })
-const wifiApi = axios.create({ timeout: 1500 })
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -28,4 +27,4 @@ const wifiApi = axios.create({ timeout: 1500 })
 //   //       so you can easily perform requests against your app's API
 // })
 
-export { expressApi, wifiApi }
+export { expressApi }
