@@ -6,7 +6,7 @@ const router = express.Router()
 
 // Set Axios defaults
 const wifiAxios = axios.create({ timeout: 15000 })
-wifiAxios.defaults.baseURL = 'http://172.17.0.1:9090/'
+wifiAxios.defaults.baseURL = 'http://py-wifi-connect:9090/'
 
 router.get('/internet_check', function (_req, res) {
   dns.lookup('google.com', function (err) {

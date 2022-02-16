@@ -17,7 +17,7 @@ services:
   py-wifi-connect:
     environment:
       ## Listening IP and port ##
-      PWC_HOST: "172.17.0.1"
+      PWC_HOST: "0.0.0.0"
       PWC_PORT: 9090
 
       ## Hotspot details ##
@@ -26,8 +26,9 @@ services:
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
     image: ghcr.io/maggie0002/py-wifi-connect:latest
-    network_mode: "host"
     restart: always
+    ports:
+      - "9090:9090"
     labels:
       io.balena.features.dbus: "1"
     cap_add:
