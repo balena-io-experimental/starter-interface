@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-pa-lg">
-    <h5 class="q-mt-none q-mb-lg">{{ $t('environment_variables') }}</h5>
     <env-config />
     <h5>{{ $t('supervisor_config') }}</h5>
     <change-hostname />
