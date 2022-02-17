@@ -27,5 +27,5 @@ export default computed(() => [
     icon: 'book',
     label: i18n.global.t('Documentation'),
     path: 'documentation'
-  },
+  }
 ])

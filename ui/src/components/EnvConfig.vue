@@ -18,7 +18,7 @@ import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'EnvConfigComponent',
-  
+
   setup() {
     const getEnvResponse = ref<AxiosResponse>()
 

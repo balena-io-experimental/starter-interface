@@ -21,7 +21,6 @@
     </h4>
 
     <div class="row items-start">
-
       <q-card flat bordered class="">
         <q-card-section horizontal>
           <!-- info -->
@@ -41,8 +40,12 @@
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('supervisor_version') }}</q-item-label>
-                  <q-item-label>{{ response.data.supervisor_version }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('supervisor_version')
+                  }}</q-item-label>
+                  <q-item-label>{{
+                    response.data.supervisor_version
+                  }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
@@ -54,13 +57,19 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{ $t('mac_address') }}</q-item-label>
-                  <q-item-label v-for="mac in response.data.mac_address.split(' ')" :key="mac">{{ mac }}</q-item-label>
+                  <q-item-label
+                    v-for="mac in response.data.mac_address.split(' ')"
+                    :key="mac"
+                    >{{ mac }}</q-item-label
+                  >
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{ $t('public_ip') }}</q-item-label>
-                  <q-item-label>{{ response.data.public_address }}</q-item-label>
+                  <q-item-label>{{
+                    response.data.public_address
+                  }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -94,7 +103,9 @@
               <q-linear-progress
                 color="secondary"
                 rounded
-                :value="response.data.storage_usage / response.data.storage_total"
+                :value="
+                  response.data.storage_usage / response.data.storage_total
+                "
                 class="q-mt-md"
               />
             </q-card-section>
