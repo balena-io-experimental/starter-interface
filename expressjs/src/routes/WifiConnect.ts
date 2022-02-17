@@ -1,6 +1,7 @@
 import axios from 'axios'
 import express from 'express'
 import dns = require('dns')
+import Logger from '../common/logger'
 
 const router = express.Router()
 
@@ -9,6 +10,7 @@ const wifiAxios = axios.create({ timeout: 15000 })
 wifiAxios.defaults.baseURL = 'http://py-wifi-connect:9090/'
 
 router.get('/internet_check', function (_req, res) {
+  Logger.debug('Running internet connectivity check.')
   dns.lookup('google.com', function (err) {
     if (err && err.code == 'ENOTFOUND') {
       res.json({ internet: false })
@@ -34,6 +36,7 @@ router.post('/wifi', function (req, res) {
   // Sned the request
   wifiAxios(payload)
     .then((response) => {
+      Logger.debug('Returning wifi-connect request.')
       // Return the same http code as Axios request
       res.status(response.status)
       // Return only the data recieved from Axios (no headers)
@@ -48,7 +51,7 @@ router.post('/wifi', function (req, res) {
       }
 
       // Log to the console and return the error to the UI
-      console.log(error)
+      Logger.error(error)
       res.json(error)
     })
 })

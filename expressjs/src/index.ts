@@ -1,5 +1,5 @@
-import express from 'express'
 import cors from 'cors'
+import express from 'express'
 import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
