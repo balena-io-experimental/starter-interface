@@ -11,6 +11,7 @@ wifiAxios.defaults.baseURL =
   process.env.WIFI_CONNECT_BASEURL ||
   `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
 
+// -- Routes -- //
 router.get('/internet_check', function (_req, res) {
   Logger.debug('Running internet connectivity check.')
   dns.lookup('google.com', function (err) {
@@ -22,7 +23,6 @@ router.get('/internet_check', function (_req, res) {
   })
 })
 
-// Routes
 router.post('/wifi', function (req, res) {
   const params = req.body.params
   const path = req.body.path

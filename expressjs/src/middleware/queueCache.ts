@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import Logger from '../common/logger'
 
 interface requestData {
   queueName?: string
@@ -54,6 +55,7 @@ const response = (req: Request, res: Response, next: NextFunction) => {
     }
     if (cachedItemList[0].queueName) {
       // Got this far, and cache exists so it must be older than set time, starting new request.
+      Logger.debug('Making request and updating cache.')
 
       // Return response to user
       res.sendResponse = res.json
@@ -71,6 +73,7 @@ const response = (req: Request, res: Response, next: NextFunction) => {
       }
     } else {
       // There was no cache
+      Logger.debug('Making request and adding new item to cache.')
 
       // Return the response to the caller
       res.sendResponse = res.json
@@ -80,11 +83,13 @@ const response = (req: Request, res: Response, next: NextFunction) => {
         if (req.body.type === 'GET' || req.method === 'GET') {
           // Check if it is already in cache to avoid duplicates
           // Overcomes an error: https://github.com/expressjs/express/issues/4826
+          Logger.debug('GET item detected.')
           const arrayIndex = requestCache?.findIndex(
             (itm) => itm.queueName === req.url
           )
 
           if (arrayIndex === -1) {
+            Logger.debug('Pushing new item to cache.')
             requestCache.push({
               cachedData: body, // Add the new item to the permanent cache
               queueName: req.url, // Add the request URL to the item for later reference
@@ -107,7 +112,8 @@ function checkCache(req: Request, res: Response) {
 
   // Set the cache timeout for this request based on passed params
   let cacheTimeout = 3000 // Last resort default in case there is no defaults anywhere else
-  // Checks whether is greater than -1 other 0 is seen as falsy
+
+  // Checks whether param is greater than -1 because 0 is seen as falsy
   if (req.body.cacheTimeout > -1) {
     // If a cache timeout is provided from the UI then use it
     cacheTimeout = req.body.cacheTimeout
@@ -118,6 +124,7 @@ function checkCache(req: Request, res: Response) {
     // If none of the above defaults exist then use no cache
     cacheTimeout = 0
   }
+  Logger.debug(`Cache timeout = ${cacheTimeout}`)
 
   // If the current request is within X seconds of the last successful requesst, return the cached version
   if (
@@ -125,6 +132,7 @@ function checkCache(req: Request, res: Response) {
     new Date().getTime() - cachedItemList[0].runtime < cacheTimeout
   ) {
     // Return the cached item to the user
+    Logger.debug('Returning cached item.')
     res.json(cachedItemList[0].cachedData)
     return true
   } else {
