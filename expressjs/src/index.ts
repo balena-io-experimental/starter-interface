@@ -11,6 +11,7 @@ const port = process.env.BACKEND_PORT || 80
 const app = express()
 
 // ExpressJS setup
+app.locals.defaultCacheTimeout = 0 // Default cache timeout used when none is provided in payload. 0 is disabled.
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

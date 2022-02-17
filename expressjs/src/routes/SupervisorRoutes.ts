@@ -1,5 +1,6 @@
 import axios from 'axios'
 import express from 'express'
+import queueCache from '../middleware/queueCache'
 import process from 'process'
 import Logger from '../common/logger'
 import type { varRemoval } from '../common/types'
@@ -33,7 +34,7 @@ function removeApiKeys(obj: varRemoval) {
 }
 
 // Routes
-router.post('/supervisor', function (req, res) {
+router.post('/supervisor', queueCache, function (req, res) {
   const params = req.body.params
   const path = req.body.path
   const type = req.body.type
