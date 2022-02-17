@@ -2,8 +2,9 @@
   <div v-if="getEnvResponse">
     <div class="q-mt-none q-mb-lg">
       <q-table
-        flat bordered
-        separator='cell'
+        flat
+        bordered
+        separator="cell"
         :title="$t('environment_variables')"
         :rows="getEnvResponse.data"
         :columns="columns"
@@ -31,8 +32,21 @@ export default defineComponent({
 
   setup() {
     const columns = [
-      { name: 'name', style: 'width: 200px', align: 'left', label: 'Name', field: 'name', sortable: true },
-      { name: 'value', align: 'left', label: 'Value', field: 'value', sortable: true }
+      {
+        name: 'name',
+        style: 'width: 200px',
+        align: 'left',
+        label: 'Name',
+        field: 'name',
+        sortable: true
+      },
+      {
+        name: 'value',
+        align: 'left',
+        label: 'Value',
+        field: 'value',
+        sortable: true
+      }
     ]
 
     const rows = ref()
