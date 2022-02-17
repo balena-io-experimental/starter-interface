@@ -9,9 +9,9 @@ export default computed(() => [
     path: 'home'
   },
   {
-    icon: 'book',
-    label: i18n.global.t('Documentation'),
-    path: 'documentation'
+    icon: 'settings',
+    label: i18n.global.t('Configuration'),
+    path: 'configuration'
   },
   {
     icon: 'router',
@@ -24,8 +24,8 @@ export default computed(() => [
     path: 'update'
   },
   {
-    icon: 'settings',
-    label: i18n.global.t('Settings'),
-    path: 'settings'
-  }
+    icon: 'book',
+    label: i18n.global.t('Documentation'),
+    path: 'documentation'
+  },
 ])

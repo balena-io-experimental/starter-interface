@@ -8,6 +8,7 @@ export default {
   connect: 'Connect',
   control_panel: 'Control Panel',
   Device_Info: 'Device Info',
+  Configuration: 'Configuration',
   disconnect_request_sent: 'Disconnect request sent.',
   Documentation: 'Documentation',
   Error: 'Error',
@@ -43,5 +44,13 @@ export default {
   title: 'Balena Device UI',
   undervolted: 'Undervolted',
   Update: 'Update',
-  update_device: 'Update device'
+  update_device: 'Update device',
+  location: 'Location',
+  os_version: 'OS Version',
+  ip_address: 'IP Address',
+  mac_address: 'MAC Address',
+  public_ip: 'Public IP',
+  supervisor_version: 'Supervisor Version',
+  environment_variables: 'Environment Variables',
+  supervisor_config: 'Supervisor Config'
 }

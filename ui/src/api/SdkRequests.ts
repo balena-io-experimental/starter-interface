@@ -9,5 +9,8 @@ export const sdkRequests = {
   },
   uuid() {
     return expressApi.get(`${apiPath}/uuid`)
+  },
+  getEnv() {
+    return expressApi.get(`${apiPath}/envVars`)
   }
 }
