@@ -1,4 +1,4 @@
-// Documentation: https://www.balena.io/docs/reference/sdk/node-sdk/
+// Balena SDK Documentation: https://www.balena.io/docs/reference/sdk/node-sdk/
 import expressApi from 'axios'
 
 const apiPath = '/sdk' as string
