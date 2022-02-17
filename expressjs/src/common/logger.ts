@@ -17,7 +17,9 @@ const levels = {
 // if it was run in production, show only warn and error messages.
 const level = () => {
   const env = process.env.NODE_ENV || 'development'
-  const isDevelopment = env === 'development'
+  const isDevelopment =
+    env === 'development' ||
+    process.env.BALENA_APP_NAME === 'balena-device-ui-testing'
   return isDevelopment ? 'debug' : 'warn'
 }
 
