@@ -58,10 +58,8 @@ const response = (req: Request, res: Response, next: NextFunction) => {
       Logger.debug('Making request and updating cache.')
 
       // Return response to user
-      // @ts-expect-error expressJS does not include the required sendResponse typings
       res.sendResponse = res.json
       res.json = (body) => {
-        // @ts-expect-error expressJS does not include the required sendResponse typings
         res.sendResponse(body)
         // Find the current item in the request cache
         const arrayIndex = requestCache?.findIndex(
@@ -79,10 +77,8 @@ const response = (req: Request, res: Response, next: NextFunction) => {
       Logger.debug('Making request.')
 
       // Return the response to the caller
-      // @ts-expect-error expressJS does not include the required sendResponse typings
       res.sendResponse = res.json
       res.json = (body) => {
-        // @ts-expect-error expressJS does not include the required sendResponse typings
         res.sendResponse(body)
         // Only use cache on GET requests. When not GET, this middleware only acts as a queue.
         if (req.body.type === 'GET' || req.method === 'GET') {
