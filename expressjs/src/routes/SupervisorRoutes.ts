@@ -1,6 +1,7 @@
 import axios from 'axios'
 import express from 'express'
 import process from 'process'
+import Logger from '../common/logger'
 import type { varRemoval } from '../common/types'
 
 const router = express.Router()
@@ -26,6 +27,8 @@ function removeApiKeys(obj: varRemoval) {
     delete obj.response.request._header
   }
 
+  Logger.debug('Removed API keys from Axios config data before returning')
+
   return obj
 }
 
@@ -49,6 +52,7 @@ router.post('/supervisor', function (req, res) {
       res.status(response.status)
       // Return only the data recieved from Axios (no headers)
       res.json(response.data)
+      Logger.debug('Returned Supervisor data.')
     })
     .catch(function (error) {
       // Remove all API keys before handling the response
@@ -62,7 +66,7 @@ router.post('/supervisor', function (req, res) {
       }
 
       // Log to the console and return the error to the UI
-      console.log(err)
+      Logger.error(err)
       res.json(err)
     })
 })

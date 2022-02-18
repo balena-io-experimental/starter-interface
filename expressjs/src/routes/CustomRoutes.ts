@@ -1,4 +1,5 @@
 import express from 'express'
+import Logger from '../common/logger'
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.post('/exampleroute_post', function (req, res) {
   // Store the value of 'path' submitted as JSON to this endpoint as 'pathVariable'
   const pathVariable = req.body.path
   // Log the message to the console
-  console.log(pathVariable)
+  Logger.info(pathVariable)
   // Return a message to the caller
   res.send('done')
 })
