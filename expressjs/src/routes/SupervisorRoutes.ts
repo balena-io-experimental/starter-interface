@@ -3,7 +3,7 @@ import express from 'express'
 import queueCache from '../middleware/queueCache'
 import process from 'process'
 import Logger from '../common/logger'
-import type { varRemoval } from '../common/types'
+import type { varRemoval } from '../typings/supervisor'
 
 const router = express.Router()
 
