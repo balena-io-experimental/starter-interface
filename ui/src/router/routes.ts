@@ -7,9 +7,9 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', component: () => import('pages/Home.vue'), name: 'home' },
       {
-        path: 'documentation',
-        component: () => import('pages/Documentation.vue'),
-        name: 'documentation'
+        path: 'configuration',
+        component: () => import('pages/Configuration.vue'),
+        name: 'configuration'
       },
       {
         path: 'networking',
@@ -17,14 +17,14 @@ const routes: RouteRecordRaw[] = [
         name: 'networking'
       },
       {
-        path: 'settings',
-        component: () => import('pages/Settings.vue'),
-        name: 'settings'
-      },
-      {
         path: 'update',
         component: () => import('pages/Update.vue'),
         name: 'update'
+      },
+      {
+        path: 'documentation',
+        component: () => import('pages/Documentation.vue'),
+        name: 'documentation'
       }
     ]
   },
