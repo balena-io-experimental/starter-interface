@@ -17,11 +17,11 @@ services:
   py-wifi-connect:
     environment:
       ## Listening IP and port ##
-      PWC_HOST: "172.17.0.1"
+      PWC_HOST: bridge
       PWC_PORT: 9090
 
       ## Hotspot details ##
-      PWC_HOTSPOT_SSID: "Py Wi-Fi Connect"
+      PWC_HOTSPOT_SSID: "Balena Device UI"
 
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"

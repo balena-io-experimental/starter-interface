@@ -8,7 +8,8 @@ const router = express.Router()
 // Set Axios defaults
 const wifiAxios = axios.create({ timeout: 15000 })
 wifiAxios.defaults.baseURL =
-  process.env.WIFI_CONNECT_BASEURL || 'http://172.17.0.1:9090/'
+  process.env.WIFI_CONNECT_BASEURL ||
+  `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
 
 router.get('/internet_check', function (_req, res) {
   Logger.debug('Running internet connectivity check.')
