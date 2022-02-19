@@ -60,4 +60,8 @@ COPY --from=ejs-ui-build /build-context/dist .
 # Copy UI in to container 
 COPY --from=ui-build-step /build-context/dist/spa ./public
 
-CMD ["node", "index.js"]
+# Copy startup scripts
+COPY scripts .
+
+# Run the start script
+CMD ["sh", "start.sh"]
