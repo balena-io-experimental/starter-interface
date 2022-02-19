@@ -3,7 +3,7 @@ import express from 'express'
 import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
-import WifiRoutes from './routes/WifiConnect'
+import WifiRoutes from './routes/WifiConnectRoutes'
 
 const port = process.env.BACKEND_PORT || 80
 
