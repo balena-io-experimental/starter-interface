@@ -12,6 +12,11 @@ const routes: RouteRecordRaw[] = [
         name: 'configuration'
       },
       {
+        path: 'filemanager',
+        component: () => import('pages/Filemanager.vue'),
+        name: 'filemanager'
+      },
+      {
         path: 'networking',
         component: () => import('pages/Networking.vue'),
         name: 'networking'

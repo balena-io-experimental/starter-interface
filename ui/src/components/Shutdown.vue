@@ -18,7 +18,7 @@
           color="primary"
           text-color="accent"
         />
-        <span class="q-ml-md">{{ $t('are_you_sure') }}</span>
+        <span class="q-ml-md">{{ $t('general.are_you_sure') }}</span>
       </q-card-section>
 
       <q-card-actions align="right">
@@ -26,14 +26,14 @@
           v-close-popup
           v-bind="qBtnStyle"
           flat
-          :label="$t('cancel')"
+          :label="$t('general.cancel')"
           color="primary"
         />
         <q-btn
           v-close-popup
           v-bind="qBtnStyle"
           flat
-          :label="$t('ok')"
+          :label="$t('general.ok')"
           color="primary"
           @click="shutdown()"
         />
@@ -59,7 +59,7 @@ export default defineComponent({
 
     async function shutdown() {
       await supervisorRequests.shutdown(checkBox.value).then(() => {
-        $q.notify({ type: 'positive', message: t('shutting_down') })
+        $q.notify({ type: 'positive', message: t('system.shutting_down') })
       })
     }
     return {

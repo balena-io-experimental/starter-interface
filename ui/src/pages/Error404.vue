@@ -3,9 +3,12 @@
     class="fullscreen bg-secondary text-accent text-center q-pa-md flex flex-center"
   >
     <div>
+      <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
       <div style="font-size: 30vh">404</div>
 
-      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
+      <div class="text-h2" style="opacity: 0.4">
+        {{ $t('general.Wrong_way') }}
+      </div>
 
       <q-btn
         v-bind="qBtnStyle"

@@ -1,3 +1,4 @@
+<!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
   <div v-if="response">
     <h4 class="row items-end q-mt-none q-mb-lg">
@@ -6,7 +7,7 @@
         :color="response.data.is_online ? 'green' : 'red'"
         text-color="white"
       >
-        {{ response.data.is_online ? $t('online') : $t('offline') }}
+        {{ response.data.is_online ? $t('wifi.online') : $t('wifi.offline') }}
       </q-chip>
       <q-chip
         :color="response.data.is_undervolted ? 'red' : 'green'"
@@ -14,8 +15,8 @@
       >
         {{
           response.data.is_undervolted
-            ? $t('undervolted')
-            : $t('not_undervolted')
+            ? $t('deviceInfo.undervolted')
+            : $t('deviceInfo.not_undervolted')
         }}
       </q-chip>
     </h4>
@@ -28,20 +29,24 @@
             <q-list>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('location') }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('deviceInfo.location')
+                  }}</q-item-label>
                   <q-item-label>{{ response.data.location }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('os_version') }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('deviceInfo.os_version')
+                  }}</q-item-label>
                   <q-item-label>{{ response.data.os_version }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('supervisor_version')
+                    $t('deviceInfo.supervisor_version')
                   }}</q-item-label>
                   <q-item-label>{{
                     response.data.supervisor_version
@@ -50,13 +55,17 @@
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('ip_address') }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('deviceInfo.ip_address')
+                  }}</q-item-label>
                   <q-item-label>{{ response.data.ip_address }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('mac_address') }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('deviceInfo.mac_address')
+                  }}</q-item-label>
                   <q-item-label
                     v-for="mac in response.data.mac_address.split(' ')"
                     :key="mac"
@@ -66,7 +75,9 @@
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{ $t('public_ip') }}</q-item-label>
+                  <q-item-label caption>{{
+                    $t('deviceInfo.public_ip')
+                  }}</q-item-label>
                   <q-item-label>{{
                     response.data.public_address
                   }}</q-item-label>
@@ -79,7 +90,7 @@
           <!-- bars -->
           <q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('memory') }}</b>
+              <b class="q-mr-xs">{{ $t('deviceInfo.memory') }}</b>
               <span> - </span>
               <span
                 >{{ response.data.memory_usage }}MB /
@@ -93,7 +104,7 @@
               />
             </q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('storage') }}</b>
+              <b class="q-mr-xs">{{ $t('deviceInfo.storage') }}</b>
               <span>({{ response.data.storage_block_device }})</span>
               <span> - </span>
               <span
@@ -118,8 +129,8 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      :label="$t('response_details')"
-      :caption="$t('raw_json')"
+      :label="$t('deviceInfo.response_details')"
+      :caption="$t('deviceInfo.raw_json')"
     >
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
