@@ -6,7 +6,7 @@ import Logger from '../common/logger'
 const router = express.Router()
 
 // Set Axios defaults
-const wifiAxios = axios.create({ timeout: 15000 })
+const wifiAxios = axios.create({ timeout: 5000 })
 wifiAxios.defaults.baseURL =
   process.env.WIFI_CONNECT_BASEURL ||
   `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
