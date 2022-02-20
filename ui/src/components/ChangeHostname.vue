@@ -3,7 +3,7 @@
     <q-input
       v-model="newHostname"
       bottom-slots
-      :label="$t('change_hostname')"
+      :label="$t('system.change_hostname')"
       counter
       maxlength="32"
     >

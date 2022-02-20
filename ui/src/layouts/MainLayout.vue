@@ -19,7 +19,7 @@
         </router-link>
 
         <q-toolbar-title v-bind="qHeaderStyle.title">
-          {{ $t('title') }}
+          {{ $t('titles.title') }}
         </q-toolbar-title>
 
         <q-btn icon="translate" color="secondary" round flat dense>

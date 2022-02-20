@@ -2,6 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
+import FileManagerRoutes from './routes/FileManagerRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
 import TestRoutes from './routes/TestRoutes'
 import WifiRoutes from './routes/WifiConnectRoutes'
@@ -16,11 +17,12 @@ app.locals.defaultCacheTimeout = 0 // Default cache timeout used when none is pr
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static('public'))
+app.use(express.static('public', { dotfiles: 'allow' }))
 
 // Routes
 app.use(BalenaSDKRoutes)
 app.use(CustomRoutes)
+app.use(FileManagerRoutes)
 app.use(SupervisorRoutes)
 app.use(WifiRoutes)
 

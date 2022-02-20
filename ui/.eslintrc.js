@@ -29,6 +29,9 @@ module.exports = {
     // Base ESLint recommended rules
     'eslint:recommended',
 
+    // Recommended i18n
+    'plugin:@intlify/vue-i18n/recommended',
+
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
     'plugin:@typescript-eslint/recommended',
@@ -75,6 +78,27 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    // Optional.
+    '@intlify/vue-i18n/no-missing-keys': 'error',
+    '@intlify/vue-i18n/no-dynamic-keys': 'error',
+    '@intlify/vue-i18n/no-unused-keys': [
+      'error',
+      {
+        src: './src',
+        extensions: ['.js', '.vue', '.ts'],
+        ignores: [],
+        enableFix: false
+      }
+    ],
+    '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',
+    '@intlify/vue-i18n/key-format-style': [
+      'error',
+      'snake_case',
+      {
+        allowArray: true,
+        splitByDots: true
+      }
+    ],
     'prefer-promise-reject-errors': 'off',
 
     // TypeScript
@@ -83,5 +107,14 @@ module.exports = {
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  },
+  settings: {
+    'vue-i18n': {
+      localeDir: './src/i18n/en-US/*.{json,json5,yaml,yml}', // extension is glob formatting!
+
+      // Specify the version of `vue-i18n` you are using.
+      // If not specified, the message will be parsed twice.
+      messageSyntaxVersion: '^9.0.0'
+    }
   }
 }

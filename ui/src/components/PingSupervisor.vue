@@ -1,6 +1,10 @@
 <template>
   <div class="q-mt-md">
-    <q-btn v-bind="qBtnStyle" :label="$t('ping_supervisor')" @click="ping()" />
+    <q-btn
+      v-bind="qBtnStyle"
+      :label="$t('system.ping_supervisor')"
+      @click="ping()"
+    />
   </div>
   <div v-if="response">{{ $t('Response') }} {{ response.data }}</div>
 </template>

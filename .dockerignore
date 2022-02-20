@@ -39,3 +39,6 @@
 **/*.njsproj
 **/*.sln
 **/*.sw?
+
+# Development components
+expressjs/src/storage
