@@ -13,7 +13,7 @@
     "build": "yarn tsc -p ."
   },
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "balena-sdk": "^16.13.4",
     "cors": "^2.8.5",
     "express": "^4.17.2",
