@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'filemanager',
-        component: () => import('pages/Filemanager.vue'),
+        component: () => import('pages/FileManager.vue'),
         name: 'filemanager'
       },
       {

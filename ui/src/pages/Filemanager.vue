@@ -1,16 +1,16 @@
 <template>
   <q-page class="q-pa-lg">
-    <filemanager />
+    <FileManager />
   </q-page>
 </template>
 
 <script lang="ts">
-import Filemanager from 'src/components/Filemanager.vue'
+import FileManager from 'src/components/FileManager.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',
-  components: { Filemanager },
+  components: { FileManager },
   setup() {
     return {}
   }
