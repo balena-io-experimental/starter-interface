@@ -11,10 +11,11 @@ const router = express.Router()
 // `path.join` sterilizes paths to prevent manipulation of root dir
 const rootDir = path.join(__dirname + '/../storage/')
 
-// Prevent Directory Traversal
+// Prevent Directory Traversal and Null Bytes
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#preventing-directory-traversal
+// https://nodejs.org/en/knowledge/file-system/security/introduction/#poison-null-bytes
 function validatePath(path: string) {
-  if (path.indexOf(rootDir) !== 0) {
+  if (path.indexOf(rootDir) !== 0 || path.indexOf('\0') !== -1) {
     Logger.warn('User attempting to reach out of the root dir?')
     throw new Error('User attempting to reach out of the root dir?')
   }
