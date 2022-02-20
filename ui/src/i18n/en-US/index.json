@@ -22,7 +22,7 @@
     "enter_name": "Enter a name",
     "filter": "Filter",
     "full_screen": "Full Screen",
-    "invalid_upload_string": "entries contain an invalid name and will not be uploaded. The following characters are not compatible: '/', '\\0'",
+    "invalid_upload_string": "Entries contain an invalid name and will not be uploaded. The following characters are not compatible: '/', '\\0'",
     "invalid_filemanager_string": "You entered an invalid name. The following characters are not compatible: '/', '\\0'",
     "item_already_exists": "Item already exists",
     "Mb": "Mb",
