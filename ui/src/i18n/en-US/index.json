@@ -31,8 +31,7 @@
     "no_results_found": "No results found",
     "size_colon": "Size:",
     "upload": "Upload",
-    "upload_files_exist": "Some of the files you added already exist. These files will be overwritten.",
-    "VolumeManager": "Volume Manager"
+    "upload_files_exist": "Some of the files you added already exist. These files will be overwritten."
   },
   "general": {
     "are_you_sure": "Are you sure?",
@@ -60,7 +59,8 @@
     "Networking": "Networking",
     "Settings": "Settings",
     "title": "Balena Device UI",
-    "Update": "Update"
+    "Update": "Update",
+    "VolumeManager": "Volume Manager"
   },
   "update_device": "Update device",
   "wifi": {
