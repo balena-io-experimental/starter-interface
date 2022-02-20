@@ -2,7 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
 import CustomRoutes from './routes/CustomRoutes'
-import FilemanagerRoutes from './routes/FilemanagerRoutes'
+import FileManagerRoutes from './routes/FileManagerRoutes'
 import SupervisorRoutes from './routes/SupervisorRoutes'
 import TestRoutes from './routes/TestRoutes'
 import WifiRoutes from './routes/WifiConnectRoutes'
@@ -22,7 +22,7 @@ app.use(express.static('public', { dotfiles: 'allow' }))
 // Routes
 app.use(BalenaSDKRoutes)
 app.use(CustomRoutes)
-app.use(FilemanagerRoutes)
+app.use(FileManagerRoutes)
 app.use(SupervisorRoutes)
 app.use(WifiRoutes)
 
