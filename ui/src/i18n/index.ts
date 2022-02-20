@@ -1,5 +1,5 @@
-import de from './de'
-import enUS from './en-US'
+import de from './de/index.json'
+import enUS from './en-US/index.json'
 
 export default {
   de: de,

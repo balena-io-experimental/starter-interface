@@ -5,27 +5,32 @@ import { computed } from 'vue'
 export default computed(() => [
   {
     icon: 'visibility',
-    label: i18n.global.t('Device_Info'),
+    label: i18n.global.t('titles.Device_Info'),
     path: 'home'
   },
   {
     icon: 'settings',
-    label: i18n.global.t('Configuration'),
+    label: i18n.global.t('titles.Configuration'),
     path: 'configuration'
   },
   {
+    icon: 'folder',
+    label: i18n.global.t('fileManager.VolumeManager'),
+    path: 'filemanager'
+  },
+  {
     icon: 'router',
-    label: i18n.global.t('Networking'),
+    label: i18n.global.t('titles.Networking'),
     path: 'networking'
   },
   {
     icon: 'update',
-    label: i18n.global.t('Update'),
+    label: i18n.global.t('titles.Update'),
     path: 'update'
   },
   {
     icon: 'book',
-    label: i18n.global.t('Documentation'),
+    label: i18n.global.t('titles.Documentation'),
     path: 'documentation'
   }
 ])

@@ -9,7 +9,7 @@
         <q-select
           v-model="wifiSsid"
           class="mb-3"
-          :label="$t('select_ssid')"
+          :label="$t('wifi.select_ssid')"
           :options="ssids"
           option-label="ssid"
           :disable="wifiStatus"
@@ -62,7 +62,7 @@
               :offset="[20, 20]"
               :disable="!refreshCompatible"
             >
-              {{ $t('refresh_not_compatible') }}
+              {{ $t('wifi.refresh_not_compatible') }}
             </q-tooltip>
           </template>
         </q-select>
@@ -75,8 +75,8 @@
           hide-bottom-space
           :rules="[(val: string) =>
             val.length > 7
-            || $t('invalid_password_length')]"
-          :label="$t('password')"
+            || $t('wifi.invalid_password_length')]"
+          :label="$t('general.password')"
           type="password"
           :disable="wifiStatus"
         />
@@ -85,7 +85,7 @@
         <q-btn
           v-if="!wifiStatus"
           v-bind="qBtnStyle"
-          :label="$t('connect')"
+          :label="$t('wifi.Connect')"
           class="q-ml-md"
           :loading="submitting"
           type="submit"
@@ -94,7 +94,7 @@
           v-else
           v-bind="qBtnStyle"
           :disable="noWifiConnect"
-          :label="$t('disconnect')"
+          :label="$t('wifi.Disconnect')"
           class="q-ml-md"
           :loading="submitting"
           @click="forget()"
@@ -164,9 +164,9 @@ export default defineComponent({
         .catch(function (error: Error | AxiosError) {
           if (axios.isAxiosError(error)) {
             if (error.response) {
-              notify('negative', t('network_request_fail'))
+              notify('negative', t('wifi.network_request_fail'))
             } else {
-              notify('warning', t('no_wifi_api'))
+              notify('warning', t('wifi.no_wifi_api'))
             }
           } else {
             console.log(error)
@@ -196,19 +196,19 @@ export default defineComponent({
           wifiStatus.value = true
           // Delay to improve interface interaction
           setTimeout(() => {
-            notify('positive', t('connection_request'))
+            notify('positive', t('wifi.connection_request'))
             submitting.value = false
           }, 2000)
         })
         .catch(function () {
-          notify('negative', t('network_connect_fail'))
+          notify('negative', t('wifi.network_connect_fail'))
           submitting.value = false
         })
       password.value = ''
     }
 
     async function fetchNetworks() {
-      $q.loading.show({ message: t('searching_networks') })
+      $q.loading.show({ message: t('wifi.searching_networks') })
       await expressApi
         .post<networksData>('/wifi', {
           type: 'GET',
@@ -218,11 +218,11 @@ export default defineComponent({
           refreshCompatible.value = response.data.iw_compatible
           ssids.value = response.data.ssids
           if (ssids.value.length === 0) {
-            notify('warning', t('no_networks'))
+            notify('warning', t('wifi.no_networks'))
           }
         })
         .catch(function () {
-          notify('negative', t('network_fetch_fail'))
+          notify('negative', t('wifi.network_fetch_fail'))
         })
       submitting.value = false
       $q.loading.hide()
@@ -242,12 +242,12 @@ export default defineComponent({
           wifiStatus.value = false
           // Delay to improve interface interaction
           setTimeout(() => {
-            notify('positive', t('disconnect_request_sent'))
+            notify('positive', t('wifi.disconnect_request_sent'))
             submitting.value = false
           }, 2000)
         })
         .catch(function () {
-          notify('negative', t('network_forget_fail'))
+          notify('negative', t('wifi.network_forget_fail'))
           submitting.value = false
         })
     }
@@ -259,7 +259,7 @@ export default defineComponent({
         timeout: 0,
         actions: [
           {
-            label: t('close'),
+            label: t('general.close'),
             color: 'white',
             handler: () => {
               /* ... */

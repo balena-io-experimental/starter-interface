@@ -8,6 +8,14 @@ services:
     restart: always
     ports:
       - "80:80"
+    volumes:
+      - "storage:/app/storage"
+
+    # If using the Volume Manager to access volumes on other containers, ensure this container `depends_on` your
+    # other container using the below:
+    # depends_on:
+    #  - "your-other-container-name"
+
     labels:
       io.balena.features.supervisor-api: 1
       io.balena.features.balena-api: 1
@@ -33,3 +41,6 @@ services:
     cap_add:
       - NET_ADMIN
     privileged: true # This can be removed if you do not need the LED indicator.
+
+volumes:
+  storage:

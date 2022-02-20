@@ -6,8 +6,9 @@
         :label="$t('update_device')"
         @click="update()"
       />
+      <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
       <div>Will not work when device is in development mode</div>
-      <div>{{ $t('force') }} <q-checkbox v-model="checkBox" /></div>
+      <div>{{ $t('titles.force') }} <q-checkbox v-model="checkBox" /></div>
     </div>
     <div v-if="response">
       {{ response.data }}

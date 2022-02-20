@@ -5,7 +5,7 @@
         flat
         bordered
         separator="cell"
-        :title="$t('environment_variables')"
+        :title="$t('deviceInfo.environment_variables')"
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
@@ -14,8 +14,8 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      :label="$t('response_details')"
-      :caption="$t('raw_json')"
+      :label="$t('deviceInfo.response_details')"
+      :caption="$t('deviceInfo.raw_json')"
     >
       <pre>{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
