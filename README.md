@@ -2,7 +2,7 @@
 
 A community-built starter user interface for using Balena devices.
 
-<img width="1392" alt="Screenshot 2021-11-15 at 10 06 02" src="https://user-images.githubusercontent.com/64841595/141763422-a395ca10-c86b-44b9-9723-e5114fb8d563.png">
+<img width="1288" alt="ui" src="https://user-images.githubusercontent.com/64841595/154854103-2e37d96a-81ab-4fc4-aa28-faefff4d5188.png">
 
 # Description
 
