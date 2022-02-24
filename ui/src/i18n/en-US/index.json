@@ -41,6 +41,7 @@
     "Home": "Home",
     "ok": "ok",
     "password": "Password",
+    "request_error": "Request error",
     "Wrong_way": "Wrong way..."
   },
   "supervisor_config": "Supervisor Config",
