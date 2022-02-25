@@ -1,4 +1,6 @@
 import axios, { AxiosError } from 'axios'
+import { i18n } from '../boot/i18n'
+import { Notify } from 'quasar'
 import { route } from 'quasar/wrappers'
 import {
   createMemoryHistory,
@@ -47,9 +49,10 @@ export default route(function (/* { store, ssrContext } */) {
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          console.log('Axios returned status code outside of the 2xx range.')
+          console.log(
+            `Error. Axios returned status code: ${error.response.status}`
+          )
           console.log(error.response.data)
-          console.log(error.response.status)
           console.log(error.response.headers)
         } else if (error.request) {
           // The request was made but no response was received
@@ -57,17 +60,30 @@ export default route(function (/* { store, ssrContext } */) {
           // http.ClientRequest in node.js
           console.log('Axios received no response.')
           console.log(error.request)
+          // Display an error message
+          Notify.create({
+            type: 'negative',
+            message: i18n.global.t('general.request_error')
+          })
         } else {
           // Something happened in setting up the request that triggered an Error
           console.log('Unknown Axios error.')
-          console.log('Error', error.message)
+          console.log(error.message)
+          // Display an error message
+          Notify.create({
+            type: 'negative',
+            message: `${i18n.global.t('general.Error')}: ${error.message}`
+          })
         }
-        console.log(error.config)
-
         // Reject with UI Axios error
         return Promise.reject(error)
       } else {
         console.log(error)
+        // Display an error message
+        Notify.create({
+          type: 'negative',
+          message: i18n.global.t('general.Error')
+        })
         return Promise.reject(error)
       }
     }
