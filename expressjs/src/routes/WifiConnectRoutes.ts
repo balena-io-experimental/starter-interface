@@ -13,12 +13,14 @@ wifiAxios.defaults.baseURL =
 
 // -- Routes -- //
 router.get('/internet_check', function (_req, res) {
-  Logger.debug('Running internet connectivity check.')
-  dns.lookup('google.com', function (err) {
-    if (err && err.code == 'ENOTFOUND') {
+  dns.lookupService('8.8.8.8', 53, function (err) {
+    if (err === null) {
+      res.json({ internet: true })
+    } else if (err && err.code == 'ENOTFOUND') {
       res.json({ internet: false })
     } else {
-      res.json({ internet: true })
+      Logger.error(err)
+      throw new Error('Error checking internet connectivity.')
     }
   })
 })
