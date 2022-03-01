@@ -22,9 +22,9 @@ async function init() {
   }
 }
 
-router.get('/sdk/uuid', (_req, res) => res.json(uuid))
+router.get('/v1/sdk/uuid', (_req, res) => res.json(uuid))
 
-router.get('/sdk/device', async (_req, res, next) => {
+router.get('/v1/sdk/device', async (_req, res, next) => {
   try {
     res.json(await sdk.models.device.get(uuid))
   } catch (err) {
@@ -36,7 +36,7 @@ router.get('/sdk/device', async (_req, res, next) => {
 // environment variables
 //
 
-router.get('/sdk/envVars', async (_req, res, next) => {
+router.get('/v1/sdk/envVars', async (_req, res, next) => {
   try {
     const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
     const omittedEnvVars = _.map(envVars, (value) =>
@@ -48,11 +48,11 @@ router.get('/sdk/envVars', async (_req, res, next) => {
   }
 })
 
-router.delete('/sdk/envVars', async (req, res, next) => {
+router.delete('/v1/sdk/envVars', async (req, res, next) => {
   lock(async function (err: Error) {
     // a non-null err probably means the supervisor is about to kill us
     if (err != null) {
-      err.message = '/sdk/setEnvVars: Could not acquire lock'
+      err.message = '/v1/sdk/setEnvVars: Could not acquire lock'
       return next(err)
     }
 
@@ -79,11 +79,11 @@ router.delete('/sdk/envVars', async (req, res, next) => {
   })
 })
 
-router.post('/sdk/envVars', (req, res, next) => {
+router.post('/v1/sdk/envVars', (req, res, next) => {
   lock(async function (err: Error) {
     // a non-null err probably means the supervisor is about to kill us
     if (err != null) {
-      err.message = '/sdk/setEnvVars: Could not acquire lock'
+      err.message = '/v1/sdk/setEnvVars: Could not acquire lock'
       return next(err)
     }
     try {

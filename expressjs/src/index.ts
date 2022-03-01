@@ -1,12 +1,13 @@
 import cors from 'cors'
 import express from 'express'
 import slowDown from 'express-slow-down'
-import BalenaSDKRoutes from './routes/BalenaSDKRoutes'
-import CustomRoutes from './routes/CustomRoutes'
-import FileManagerRoutes from './routes/FileManagerRoutes'
-import SupervisorRoutes from './routes/SupervisorRoutes'
-import TestRoutes from './routes/TestRoutes'
-import WifiRoutes from './routes/WifiConnectRoutes'
+import BalenaSDKRoutes from './routes/v1/BalenaSDKRoutes'
+import CustomRoutes from './routes/v1/CustomRoutes'
+import FileManagerRoutes from './routes/v1/FileManagerRoutes'
+import SupervisorRoutes from './routes/v1/SupervisorRoutes'
+import SystemRoutes from './routes/v1/SystemRoutes'
+import TestRoutes from './routes/v1/TestRoutes'
+import WifiRoutes from './routes/v1/WifiConnectRoutes'
 
 const port = process.env.BACKEND_PORT || 80
 
@@ -33,6 +34,7 @@ app.use(BalenaSDKRoutes)
 app.use(CustomRoutes)
 app.use(FileManagerRoutes)
 app.use(SupervisorRoutes)
+app.use(SystemRoutes)
 app.use(WifiRoutes)
 
 // Add test routes outside of production environment

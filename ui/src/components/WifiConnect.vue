@@ -151,7 +151,7 @@ export default defineComponent({
       $q.loading.show()
 
       await expressApi
-        .post<wifiStatus>('/wifi', {
+        .post<wifiStatus>('/v1/wifi', {
           type: 'GET',
           path: 'v1/connection_status'
         })
@@ -181,7 +181,7 @@ export default defineComponent({
     async function connect() {
       submitting.value = true
       await expressApi
-        .post('/wifi', {
+        .post('/v1/wifi', {
           type: 'POST',
           path: 'v1/connect',
           params: {
@@ -210,7 +210,7 @@ export default defineComponent({
     async function fetchNetworks() {
       $q.loading.show({ message: t('wifi.searching_networks') })
       await expressApi
-        .post<networksData>('/wifi', {
+        .post<networksData>('/v1/wifi', {
           type: 'GET',
           path: 'v1/list_access_points'
         })
@@ -231,7 +231,7 @@ export default defineComponent({
     function forget() {
       submitting.value = true
       expressApi
-        .post('/wifi', {
+        .post('/v1/wifi', {
           type: 'POST',
           path: 'v1/connect',
           params: {

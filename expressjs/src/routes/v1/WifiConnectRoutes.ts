@@ -1,7 +1,6 @@
 import axios from 'axios'
 import express from 'express'
-import dns = require('dns')
-import Logger from '../common/logger'
+import Logger from '../../common/logger'
 
 const router = express.Router()
 
@@ -12,20 +11,7 @@ wifiAxios.defaults.baseURL =
   `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
 
 // -- Routes -- //
-router.get('/internet_check', function (_req, res) {
-  dns.lookupService('8.8.8.8', 53, function (err) {
-    if (err === null) {
-      res.json({ internet: true })
-    } else if (err && err.code == 'ENOTFOUND') {
-      res.json({ internet: false })
-    } else {
-      Logger.error(err)
-      throw new Error('Error checking internet connectivity.')
-    }
-  })
-})
-
-router.post('/wifi', function (req, res) {
+router.post('/v1/wifi', function (req, res) {
   const params = req.body.params
   const path = req.body.path
   const type = req.body.type

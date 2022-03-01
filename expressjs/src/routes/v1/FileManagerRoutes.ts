@@ -1,4 +1,4 @@
-import Logger from '../common/logger'
+import Logger from '../../common/logger'
 import express from 'express'
 import formidable from 'formidable'
 import fse from 'fs-extra'
@@ -9,7 +9,7 @@ const router = express.Router()
 
 // Root directory files
 // `path.join` sterilizes paths to prevent manipulation of root dir
-const rootDir = path.join(__dirname + '/../storage/')
+const rootDir = path.join(__dirname + '/../../storage/')
 
 // Prevent Directory Traversal and Null Bytes
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#preventing-directory-traversal
@@ -61,22 +61,22 @@ function fetchList(currentPath: Array<string>) {
 
 // Routes //
 
-router.post('/filemanager/delete', function (req, res) {
+router.post('/v1/filemanager/delete', function (req, res) {
   fse.remove(validatePath(path.join(req.body.currentPath))).catch((err) => {
     Logger.error(err)
   })
   res.json({ message: 'success' })
 })
 
-router.get('/filemanager/download', function (req, res) {
+router.get('/v1/filemanager/download', function (req, res) {
   res.download(validatePath(path.join(req.query.currentPath as string)))
 })
 
-router.post('/filemanager/list', function (req, res) {
+router.post('/v1/filemanager/list', function (req, res) {
   res.json(fetchList(req.body.currentPath))
 })
 
-router.post('/filemanager/newfolder', function (req, res) {
+router.post('/v1/filemanager/newfolder', function (req, res) {
   const newFolder = validatePath(
     path.join(rootDir, req.body.currentPath.join('/'), req.body.newFolderName)
   )
@@ -86,7 +86,7 @@ router.post('/filemanager/newfolder', function (req, res) {
   res.json({ message: 'success' })
 })
 
-router.post('/filemanager/upload', function (req, res) {
+router.post('/v1/filemanager/upload', function (req, res) {
   const form = new formidable.IncomingForm({
     maxFileSize: 5000 * 1024 * 1024
   })

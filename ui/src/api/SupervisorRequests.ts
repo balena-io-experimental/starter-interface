@@ -2,12 +2,12 @@
 import expressApi from 'axios'
 
 // Default API path
-const apiPath = '/supervisor' as string
+const apiPathV1 = '/v1/supervisor' as string
 const defaultCacheTimeout = 0 as number
 
 export const supervisorRequests = {
   applications_state() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/applications/state',
       params: false,
@@ -15,7 +15,7 @@ export const supervisorRequests = {
     })
   },
   blink() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/blink',
       params: false,
@@ -23,7 +23,7 @@ export const supervisorRequests = {
     })
   },
   cleanup_volumes() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/cleanup-volumes',
       params: false,
@@ -31,7 +31,7 @@ export const supervisorRequests = {
     })
   },
   containerId() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/containerId',
       params: false,
@@ -39,7 +39,7 @@ export const supervisorRequests = {
     })
   },
   device() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/device',
       params: false,
@@ -47,7 +47,7 @@ export const supervisorRequests = {
     })
   },
   device_host_config_get() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/device/host-config',
       params: false,
@@ -55,7 +55,7 @@ export const supervisorRequests = {
     })
   },
   device_host_config_patch(data: unknown) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'PATCH',
       path: 'v1/device/host-config',
       params: data,
@@ -63,7 +63,7 @@ export const supervisorRequests = {
     })
   },
   device_name() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/device/name',
       params: false,
@@ -71,7 +71,7 @@ export const supervisorRequests = {
     })
   },
   device_tags() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/device/tags',
       params: false,
@@ -79,7 +79,7 @@ export const supervisorRequests = {
     })
   },
   device_vpn() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/device/vpn',
       params: false,
@@ -87,7 +87,7 @@ export const supervisorRequests = {
     })
   },
   healthy() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/healthy',
       params: false,
@@ -95,7 +95,7 @@ export const supervisorRequests = {
     })
   },
   journald_logs() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v2/local/logs',
       params: { follow: false, all: true },
@@ -103,7 +103,7 @@ export const supervisorRequests = {
     })
   },
   local_device_info() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/local/device-info',
       params: false,
@@ -111,7 +111,7 @@ export const supervisorRequests = {
     })
   },
   local_logs() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/local/logs',
       params: false,
@@ -119,7 +119,7 @@ export const supervisorRequests = {
     })
   },
   local_target_state_get() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/local/target-state',
       params: false,
@@ -127,7 +127,7 @@ export const supervisorRequests = {
     })
   },
   local_target_state_post(targetState: unknown) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v2/local/target-state',
       params: targetState,
@@ -135,7 +135,7 @@ export const supervisorRequests = {
     })
   },
   ping() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'ping',
       params: false,
@@ -143,7 +143,7 @@ export const supervisorRequests = {
     })
   },
   purge(appId: number) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/purge',
       params: { appId: appId },
@@ -151,7 +151,7 @@ export const supervisorRequests = {
     })
   },
   reboot(force: boolean) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/reboot',
       params: { force: force },
@@ -159,14 +159,14 @@ export const supervisorRequests = {
     })
   },
   regenerate_api_key() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/regenerate-api-key',
       cacheTimeout: defaultCacheTimeout
     })
   },
   restart(appId: number) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/restart',
       params: { appId: appId },
@@ -174,7 +174,7 @@ export const supervisorRequests = {
     })
   },
   shutdown(force: boolean) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/shutdown',
       params: { force: force },
@@ -182,7 +182,7 @@ export const supervisorRequests = {
     })
   },
   state_status() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/state/status',
       params: false,
@@ -190,7 +190,7 @@ export const supervisorRequests = {
     })
   },
   update(force: boolean) {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/update',
       params: { force: force },
@@ -198,7 +198,7 @@ export const supervisorRequests = {
     })
   },
   v1_blink() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v1/blink',
       params: false,
@@ -206,7 +206,7 @@ export const supervisorRequests = {
     })
   },
   version() {
-    return expressApi.post(apiPath, {
+    return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/version',
       params: false,

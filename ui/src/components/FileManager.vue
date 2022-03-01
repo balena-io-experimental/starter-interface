@@ -342,7 +342,7 @@ export default defineComponent({
 
     async function deleteCall(path: string) {
       await expressApi
-        .post('/filemanager/delete', {
+        .post('/v1/filemanager/delete', {
           currentPath: path
         })
         .catch(function (error) {
@@ -372,7 +372,7 @@ export default defineComponent({
     async function download(row: Rows) {
       loading.value = true
       await expressApi
-        .get<Rows>('/filemanager/download', {
+        .get<Rows>('/v1/filemanager/download', {
           responseType: 'blob',
           params: {
             currentPath: row.path
@@ -414,7 +414,7 @@ export default defineComponent({
             })
           } else {
             expressApi
-              .post('/filemanager/newfolder', {
+              .post('/v1/filemanager/newfolder', {
                 currentPath: objPath.value,
                 newFolderName: newName
               })
@@ -451,7 +451,7 @@ export default defineComponent({
     async function updateRows() {
       loading.value = true
       await expressApi
-        .post<Rows>('/filemanager/list', {
+        .post<Rows>('/v1/filemanager/list', {
           currentPath: objPath.value
         })
         .then((response) => {
