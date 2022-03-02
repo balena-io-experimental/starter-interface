@@ -47,6 +47,7 @@
   "supervisor_config": "Supervisor Config",
   "system": {
     "change_hostname": "Change hostname",
+    "internet_required": "Internet connectivity is required to use this feature.",
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting...",
     "Services": "Services",
@@ -60,7 +61,6 @@
     "Networking": "Networking",
     "Settings": "Settings",
     "title": "Balena Device UI",
-    "Update": "Update",
     "VolumeManager": "Volume Manager"
   },
   "update_device": "Update device",

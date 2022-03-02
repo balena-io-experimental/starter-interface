@@ -1,6 +1,10 @@
 <!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
-  <div v-if="response">
+  <div
+    v-if="
+      !loading && response && internetConnectivity.status && !process.env.DEV
+    "
+  >
     <h4 class="row items-end q-mt-none q-mb-lg">
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
@@ -135,17 +139,22 @@
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
+  <div v-if="!loading && !internetConnectivity.status">
+    {{ $t('system.internet_required') }}
+  </div>
 </template>
 
 <script lang="ts">
 import { sdkRequests } from '../api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
+import { internetConnectivity } from '../api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',
   setup() {
+    const loading = ref<boolean>(true)
     const $q = useQuasar()
     const response = ref<AxiosResponse>()
 
@@ -162,11 +171,16 @@ export default defineComponent({
 
     onMounted(async () => {
       $q.loading.show()
-      await getDeviceInfo()
+      if (internetConnectivity.status) {
+        await getDeviceInfo()
+      }
+      loading.value = false
       $q.loading.hide()
     })
 
     return {
+      internetConnectivity,
+      loading,
       response
     }
   }
