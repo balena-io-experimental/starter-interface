@@ -191,7 +191,7 @@ export const supervisorRequests = {
   },
   update(force: boolean) {
     return expressApi.post(apiPathV1, {
-      type: 'GET',
+      type: 'POST',
       path: 'v1/update',
       params: { force: force },
       cacheTimeout: defaultCacheTimeout
