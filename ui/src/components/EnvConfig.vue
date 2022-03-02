@@ -20,11 +20,14 @@
       <pre>{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
   </div>
+  <div v-if="loading">
+    <q-spinner color="primary" size="3em" />
+  </div>
 </template>
 
 <script lang="ts">
 import { sdkRequests } from '../api/SdkRequests'
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
 
@@ -50,6 +53,7 @@ export default defineComponent({
       }
     ]
 
+    const loading = ref<boolean>(true)
     const rows = ref()
     const getEnvResponse = ref<AxiosResponse>()
 
@@ -59,10 +63,14 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await getEnv()
+      await getEnv().catch(function (error: Error | AxiosError) {
+        console.log(error)
+      })
+      loading.value = false
     })
 
     return {
+      loading,
       getEnvResponse,
       columns
     }
