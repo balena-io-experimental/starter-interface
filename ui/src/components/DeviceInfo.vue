@@ -1,10 +1,6 @@
 <!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
-  <div
-    v-if="
-      !loading && response && internetConnectivity.status && !process.env.DEV
-    "
-  >
+  <div v-if="response && internetConnectivity.status">
     <h4 class="row items-end q-mt-none q-mb-lg">
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
