@@ -25,13 +25,14 @@
 <script lang="ts">
 import { sdkRequests } from '../api/SdkRequests'
 import { AxiosResponse } from 'axios'
+import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'EnvConfigComponent',
 
   setup() {
-    const columns = [
+    const columns: QTableProps['columns'] = [
       {
         name: 'name',
         style: 'width: 200px',
