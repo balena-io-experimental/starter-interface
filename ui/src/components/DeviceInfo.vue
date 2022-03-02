@@ -139,20 +139,31 @@
 
 <script lang="ts">
 import { sdkRequests } from '../api/SdkRequests'
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
+import { useQuasar } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'DeviceInfoComponent',
   setup() {
+    const $q = useQuasar()
     const response = ref<AxiosResponse>()
 
     async function getDeviceInfo() {
-      response.value = await sdkRequests.device()
+      await sdkRequests
+        .device()
+        .then((res: AxiosResponse) => {
+          response.value = res
+        })
+        .catch(function (error: Error | AxiosError) {
+          console.log(error)
+        })
     }
 
     onMounted(async () => {
+      $q.loading.show()
       await getDeviceInfo()
+      $q.loading.hide()
     })
 
     return {
