@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import expressApi from 'axios'
 import { i18n } from '../boot/i18n'
 import { Notify } from 'quasar'
 import { route } from 'quasar/wrappers'
@@ -38,6 +39,11 @@ export default route(function (/* { store, ssrContext } */) {
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     )
   })
+
+  // Set Axios express default url for development environment
+  expressApi.defaults.baseURL = process.env.DEV
+    ? 'http://localhost/'
+    : undefined
 
   // Axios interceptor
   axios.interceptors.response.use(
