@@ -6,7 +6,9 @@ declare module '@vue/runtime-core' {
   }
 }
 
-const expressApi = axios.create({ timeout: 10000 })
+const expressApi = axios.create({
+  timeout: 10000
+})
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;

@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-lg">
     <env-config />
-    <div class="text-h5 q-mb-lg">{{ $t('supervisor_config') }}</div>
+    <div class="text-h5 q-mb-lg q-mt-lg">{{ $t('supervisor_config') }}</div>
     <change-hostname />
 
     <q-list bordered class="rounded-borders q-mt-md">
