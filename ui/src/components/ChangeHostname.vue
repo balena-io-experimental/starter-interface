@@ -16,13 +16,13 @@
         />
       </template>
     </q-input>
-    <div v-if="response">{{ $t('Response') }} {{ response.data }}</div>
   </div>
 </template>
 
 <script lang="ts">
 import { supervisorRequests } from '../api/SupervisorRequests'
 import { AxiosResponse } from 'axios'
+import { useQuasar } from 'quasar'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 
@@ -30,10 +30,15 @@ export default defineComponent({
   name: 'IntChangeHostnameComponent',
   setup() {
     const response = ref<AxiosResponse>()
+    const $q = useQuasar()
 
     async function changeHostname(newHostname: string) {
       response.value = await supervisorRequests.device_host_config_patch({
         network: { hostname: newHostname }
+      })
+      $q.notify({
+        type: 'positive',
+        message: response.value.data as string
       })
     }
     return {

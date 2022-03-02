@@ -1,24 +1,17 @@
 <template>
-  <div>
-    <div>
-      <q-btn
-        v-bind="qBtnStyle"
-        :label="$t('update_device')"
-        @click="update()"
-      />
-      <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
-      <div>Will not work when device is in development mode</div>
-      <div>{{ $t('titles.force') }} <q-checkbox v-model="checkBox" /></div>
-    </div>
-    <div v-if="response">
-      {{ response.data }}
-    </div>
-  </div>
+  <q-btn v-bind="qBtnStyle" :label="$t('update_device')" @click="update()" />
+  <q-checkbox
+    v-model="checkBox"
+    class="q-ml-md"
+    size="xs"
+    :label="$t('titles.force_update')"
+  />
 </template>
 
 <script lang="ts">
 import { supervisorRequests } from '../api/SupervisorRequests'
 import { AxiosResponse } from 'axios'
+import { useQuasar } from 'quasar'
 import { qBtnStyle } from './styles/qStyles'
 import { defineComponent, ref } from 'vue'
 
@@ -27,14 +20,19 @@ export default defineComponent({
   setup() {
     const checkBox = ref<boolean>(false)
     const response = ref<AxiosResponse>()
+    const $q = useQuasar()
 
     async function update() {
       response.value = await supervisorRequests.update(checkBox.value)
+      $q.notify({
+        type: 'positive',
+        message: response.value.data as string
+      })
     }
+
     return {
       checkBox,
       qBtnStyle,
-      response,
       update
     }
   }
