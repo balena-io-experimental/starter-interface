@@ -54,6 +54,13 @@ export default route(function (/* { store, ssrContext } */) {
           )
           console.log(error.response.data)
           console.log(error.response.headers)
+          // Notify of 404 errors, resulting from endpoints not being available
+          if (error.response.status === 404) {
+            Notify.create({
+              type: 'negative',
+              message: '404'
+            })
+          }
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
