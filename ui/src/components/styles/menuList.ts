@@ -9,11 +9,6 @@ export default computed(() => [
     path: 'home'
   },
   {
-    icon: 'settings',
-    label: i18n.global.t('titles.Configuration'),
-    path: 'configuration'
-  },
-  {
     icon: 'folder',
     label: i18n.global.t('titles.VolumeManager'),
     path: 'filemanager'
@@ -24,8 +19,8 @@ export default computed(() => [
     path: 'networking'
   },
   {
-    icon: 'update',
-    label: i18n.global.t('titles.Update'),
-    path: 'update'
+    icon: 'settings',
+    label: i18n.global.t('titles.Configuration'),
+    path: 'configuration'
   }
 ])

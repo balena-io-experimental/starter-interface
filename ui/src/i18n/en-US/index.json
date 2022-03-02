@@ -49,13 +49,14 @@
     "change_hostname": "Change hostname",
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting...",
+    "Services": "Services",
     "shutting_down": "Shutting device down..."
   },
   "titles": {
     "Configuration": "Configuration",
     "control_panel": "Control Panel",
     "Device_Info": "Device Info",
-    "force": "Force?",
+    "force_update": "Force update?",
     "Networking": "Networking",
     "Settings": "Settings",
     "title": "Balena Device UI",
