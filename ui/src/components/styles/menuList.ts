@@ -27,10 +27,5 @@ export default computed(() => [
     icon: 'update',
     label: i18n.global.t('titles.Update'),
     path: 'update'
-  },
-  {
-    icon: 'book',
-    label: i18n.global.t('titles.Documentation'),
-    path: 'documentation'
   }
 ])
