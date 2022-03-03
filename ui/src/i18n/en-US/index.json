@@ -53,6 +53,9 @@
     "Services": "Services",
     "shutting_down": "Shutting device down..."
   },
+  "systeminfo": {
+    "select_request": "Select a request"
+  },
   "titles": {
     "Configuration": "Configuration",
     "control_panel": "Control Panel",

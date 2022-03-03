@@ -5,7 +5,7 @@
         v-model="model"
         filled
         :options="options"
-        label="Standard"
+        :label="$t('systeminfo.select_request')"
         @update:model-value="getSystemInfo(model)"
       />
     </div>
