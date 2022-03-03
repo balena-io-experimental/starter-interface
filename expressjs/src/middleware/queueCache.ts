@@ -7,7 +7,6 @@ interface requestData {
   runtime?: number
 }
 
-const cachedItemList = {} as Array<requestData>
 const queue = [] as Array<QueueUnique>
 const requestCache = [] as Array<requestData>
 
@@ -25,7 +24,7 @@ class QueueUnique {
 
   add(req: Request, res: Response, next: NextFunction) {
     // Check if the item is already cached
-    if (checkCache(req, res)) {
+    if (checkCache(req, res) === undefined) {
       return
     }
 
@@ -47,15 +46,18 @@ class QueueUnique {
 }
 
 const response = (req: Request, res: Response, next: NextFunction) => {
-  // Do another check to see if item just finished in queue created a useful cache
   return new Promise((resolve) => {
-    if (checkCache(req, res)) {
+    const qName = compileQueueName(req)
+
+    // Do another check to see if the request that just finished has created a useful cache
+    const cachedItemList = checkCache(req, res)
+    if (cachedItemList === undefined) {
       resolve(true)
       return
     }
     if (cachedItemList[0].queueName) {
       // Got this far, and cache exists so it must be older than set time, starting new request.
-      Logger.debug('Making request and updating cache.')
+      Logger.debug('Cache exists. Updating it.')
 
       // Return response to user
       res.sendResponse = res.json
@@ -63,18 +65,19 @@ const response = (req: Request, res: Response, next: NextFunction) => {
         res.sendResponse(body)
         // Find the current item in the request cache
         const arrayIndex = requestCache?.findIndex(
-          (itm) => itm.queueName === req.url
+          (itm) => itm.queueName === qName
         )
         // Set the time that the request was stored
         requestCache[arrayIndex].runtime = new Date().getTime()
         // Store the body of the response in the cache
         requestCache[arrayIndex].cachedData = body
-        Logger.debug(requestCache[0])
+        Logger.debug('Current cached content:')
+        Logger.debug(requestCache)
         return res
       }
     } else {
       // There was no cache
-      Logger.debug('Making request.')
+      Logger.debug('No existing cache. Making new request.')
 
       // Return the response to the caller
       res.sendResponse = res.json
@@ -84,21 +87,22 @@ const response = (req: Request, res: Response, next: NextFunction) => {
         if (req.body.type === 'GET' || req.method === 'GET') {
           // Check if it is already in cache to avoid duplicates
           // Overcomes an error: https://github.com/expressjs/express/issues/4826
-          Logger.debug('GET item detected. Adding new item to cache.')
+          Logger.debug('GET item detected.')
           const arrayIndex = requestCache?.findIndex(
-            (itm) => itm.queueName === req.url
+            (itm) => itm.queueName === qName
           )
 
           if (arrayIndex === -1) {
-            Logger.debug('Pushing new item to cache.')
+            Logger.debug('Creating new item in cache.')
             requestCache.push({
               cachedData: body, // Add the new item to the permanent cache
-              queueName: req.url, // Add the request URL to the item for later reference
+              queueName: qName, // Add the request URL to the item for later reference
               runtime: new Date().getTime() // Add the time the request was made
             })
           }
         }
-        Logger.debug(requestCache[0])
+        Logger.debug('Current cached content:')
+        Logger.debug(requestCache)
         return res
       }
     }
@@ -109,8 +113,9 @@ const response = (req: Request, res: Response, next: NextFunction) => {
 
 function checkCache(req: Request, res: Response) {
   // Fetch all cached items related to the current endpoint queue, which is named after the endpoint url
+  const cachedItemList = {} as Array<requestData>
   cachedItemList[0] =
-    requestCache.find((itm) => itm.queueName === req.url) || {}
+    requestCache.find((itm) => itm.queueName === compileQueueName(req)) || {}
 
   // Set the cache timeout for this request based on passed params
   let cacheTimeout = 3000 // Last resort default in case there is no defaults anywhere else
@@ -128,7 +133,7 @@ function checkCache(req: Request, res: Response) {
   }
   Logger.debug(`Cache timeout = ${cacheTimeout}`)
 
-  // If the current request is within X seconds of the last successful requesst, return the cached version
+  // If the current request is within X seconds of the last successful request, return the cached version
   if (
     cachedItemList[0].runtime &&
     new Date().getTime() - cachedItemList[0].runtime < cacheTimeout
@@ -136,19 +141,29 @@ function checkCache(req: Request, res: Response) {
     // Return the cached item to the user
     Logger.debug('Returning cached item.')
     res.json(cachedItemList[0].cachedData)
-    return true
+    return undefined
   } else {
-    return false
+    return cachedItemList
+  }
+}
+
+function compileQueueName(req: Request) {
+  // If a url path is passed then use it to set a custom queue name
+  if (req.body.path) {
+    return `${req.route.path}-${req.body.path}`
+  } else {
+    return req.route.path
   }
 }
 
 // Create multipule queues, one for each endpoint
 function sortQueues(req: Request, res: Response, next: NextFunction) {
-  if (!queue[req.route.path]) {
-    // Use the endpoint name to create a queue within the queues array
-    queue[req.route.path] = new QueueUnique(response)
+  // Use the queue name to create a queue within the queues array
+  const qName = compileQueueName(req)
+  if (!queue[qName]) {
+    queue[qName] = new QueueUnique(response)
   }
-  queue[req.route.path].add(req, res, next)
+  queue[qName].add(req, res, next)
 }
 
 export default sortQueues

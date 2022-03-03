@@ -37,15 +37,11 @@ function removeApiKeys(obj: varRemoval) {
 // Note that this route uses the queueCache middleware. Be aware of its implications
 // when doing development.
 router.post('/v1/supervisor', queueCache, function (req, res) {
-  const params = req.body.params
-  const path = req.body.path
-  const type = req.body.type
-
   // Construct the payload
   const payload = {
-    data: params,
-    method: type,
-    url: path
+    data: req.body.params,
+    method: req.body.type,
+    url: req.body.path
   }
 
   // Sned the request
