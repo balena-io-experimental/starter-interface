@@ -20,6 +20,11 @@ const routes: RouteRecordRaw[] = [
         path: 'networking',
         component: () => import('pages/Networking.vue'),
         name: 'networking'
+      },
+      {
+        path: 'systeminfo',
+        component: () => import('pages/SystemInfo.vue'),
+        name: 'systeminfo'
       }
     ]
   },
