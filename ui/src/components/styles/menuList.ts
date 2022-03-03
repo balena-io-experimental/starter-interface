@@ -22,5 +22,10 @@ export default computed(() => [
     icon: 'settings',
     label: i18n.global.t('titles.Configuration'),
     path: 'configuration'
+  },
+  {
+    icon: 'info',
+    label: i18n.global.t('titles.System_Info'),
+    path: 'systeminfo'
   }
 ])

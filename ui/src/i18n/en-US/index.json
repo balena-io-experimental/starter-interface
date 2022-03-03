@@ -60,6 +60,7 @@
     "force_update": "Force update?",
     "Networking": "Networking",
     "Settings": "Settings",
+    "System_Info": "System Info",
     "title": "Balena Device UI",
     "VolumeManager": "Volume Manager"
   },

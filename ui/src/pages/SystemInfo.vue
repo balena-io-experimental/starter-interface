@@ -1,16 +1,16 @@
 <template>
   <q-page class="q-pa-lg">
-    <device-info />
+    <system-info />
   </q-page>
 </template>
 
 <script lang="ts">
-import DeviceInfo from 'src/components/DeviceInfo.vue'
+import SystemInfo from 'src/components/SystemInfo.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',
-  components: { DeviceInfo },
+  components: { SystemInfo },
   setup() {
     return {}
   }
