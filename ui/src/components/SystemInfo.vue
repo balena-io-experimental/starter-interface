@@ -4,6 +4,7 @@
       <q-select
         v-model="model"
         filled
+        :loading="loadingRequest"
         :options="options"
         :label="$t('systeminfo.select_request')"
         @update:model-value="getSystemInfo(model)"
@@ -29,6 +30,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'DeviceInfoComponent',
   setup() {
+    const loadingRequest = ref<boolean>(false)
     const response = ref<AxiosResponse>()
 
     const options = [
@@ -87,19 +89,24 @@ export default defineComponent({
 
     async function getSystemInfo(model: { cmd: null | string } | null) {
       if (model != null) {
+        loadingRequest.value = true
         await expressApi
           .post('/v1/system/systeminfo', {
             cmd: model.cmd
           })
-          .then((res) => (response.value = res))
+          .then((res) => {
+            response.value = res
+          })
           .catch(function (error) {
             console.log(error)
           })
       }
+      loadingRequest.value = false
     }
 
     return {
       getSystemInfo,
+      loadingRequest,
       model: ref(null),
       options,
       response
