@@ -135,7 +135,7 @@
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="!loading && !internetConnectivity.status">
+  <div v-if="!loading && internetConnectivity.status === false">
     {{ $t('system.internet_required') }}
   </div>
 </template>
@@ -167,9 +167,7 @@ export default defineComponent({
 
     onMounted(async () => {
       $q.loading.show()
-      if (internetConnectivity.status) {
-        await getDeviceInfo()
-      }
+      await getDeviceInfo()
       loading.value = false
       $q.loading.hide()
     })
