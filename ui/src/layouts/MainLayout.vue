@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import MenuItems from 'components/MenuItems.vue'
+import MenuItems from 'src/components/layouts/MenuItems.vue'
 import menuList from '../components/styles/menuList'
 import { qHeaderStyle } from '../components/styles/qStyles'
 import { useQuasar } from 'quasar'
