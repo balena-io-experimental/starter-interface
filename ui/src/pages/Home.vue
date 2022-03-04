@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import DeviceInfo from 'src/components/DeviceInfo.vue'
+import DeviceInfo from 'src/components/system/DeviceInfo.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
