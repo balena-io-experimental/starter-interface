@@ -28,7 +28,7 @@ import { AxiosResponse } from 'axios'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'DeviceInfoComponent',
+  name: 'SystemInfo',
   setup() {
     const loadingRequest = ref<boolean>(false)
     const response = ref<AxiosResponse>()
