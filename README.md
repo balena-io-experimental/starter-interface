@@ -6,7 +6,7 @@ A community-built starter user interface for using Balena devices.
 
 # Description
 
-This project contains an ExpressJS web framework which provides a Quasar (Vue) interface to users. It also includes a Wi-Fi connect component allowing users to connect devices to nearby networks.
+This project contains an ExpressJS web application framework which provides a Quasar (Vue) interface to users. It also includes an optional Wi-Fi connect component allowing users to connect devices to nearby networks.
 
 It is modular allowing contributions from the community and easier tracking of changes in your own projects. See the sections below for customising the interface.
 
@@ -14,13 +14,13 @@ It is modular allowing contributions from the community and easier tracking of c
 
 Pre-built components for adding to a page: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/components
 
-To add a component, import the component and add `<component-name />` where you require the component. An example insert of a hostname and ping component can be found here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/pages/Settings.vue
+To add a component, import the component and add `<component-name />` where you require the component. An example insert of a system-info component can be found here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/pages/SystemInfo.vue
 
-Supervisor requests for interacting with the BalenaOS are stored here: https://github.com/maggie0002/balena-device-ui/blob/main/ui/src/axios/SupervisorRequests.ts. These are utilised in the components but can be used directly too.
+Supervisor and Balena SDK requests for interacting with the device are stored here: https://github.com/maggie0002/balena-device-ui/tree/main/ui/src/api. These are utilised in the components but can be used directly too.
 
 # Adding custom endpoints
 
-A backend for performing functions on the device is included. This is used to interact with the Balena supervisor. You can however, also add your own backend endpoints to interact with other peripherals or software here: https://github.com/maggie0002/balena-device-ui/blob/main/expressjs/src/routes/CustomRoutes.js
+A backend for performing functions on the device is included. This is used to interact with the Balena supervisor. You can however, also add your own backend endpoints to interact with other peripherals or software here: https://github.com/maggie0002/balena-device-ui/blob/main/expressjs/src/routes/v1/CustomRoutes.ts
 
 # Wi-Fi
 
