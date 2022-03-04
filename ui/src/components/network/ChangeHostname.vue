@@ -23,7 +23,7 @@
 import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/components/styles/qStyles'
+import { qBtnStyle } from 'components/styles/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({

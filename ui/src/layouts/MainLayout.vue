@@ -59,12 +59,12 @@
 </template>
 
 <script lang="ts">
-import MenuItems from 'src/components/layouts/MenuItems.vue'
-import menuList from 'src/components/styles/menuList'
-import { qHeaderStyle } from 'src/components/styles/qStyles'
+import MenuItems from 'components/layouts/MenuItems.vue'
+import menuList from 'components/styles/menuList'
+import { qHeaderStyle } from 'components/styles/qStyles'
 import { useQuasar } from 'quasar'
-import Reboot from 'src/components/system/Reboot.vue'
-import Shutdown from 'src/components/system/Shutdown.vue'
+import Reboot from 'components/system/Reboot.vue'
+import Shutdown from 'components/system/Shutdown.vue'
 import { defineComponent, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { QuasarLanguage } from 'quasar'

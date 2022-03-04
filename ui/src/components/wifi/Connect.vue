@@ -107,7 +107,7 @@
 <script lang="ts">
 import expressApi, { AxiosError } from 'axios'
 import { useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/components/styles/qStyles'
+import { qBtnStyle } from 'components/styles/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
