@@ -32,7 +32,7 @@ import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
-  name: 'EnvConfigComponent',
+  name: 'IntEnvConfigComponent',
 
   setup() {
     const columns: QTableProps['columns'] = [
