@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import Logger from '../common/logger'
+import Logger from '@/common/logger'
 
 interface requestData {
   queueName?: string

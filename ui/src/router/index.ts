@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import expressApi from 'axios'
-import { i18n } from '../boot/i18n'
+import { i18n } from 'boot/i18n'
 import { Notify } from 'quasar'
 import { route } from 'quasar/wrappers'
 import {

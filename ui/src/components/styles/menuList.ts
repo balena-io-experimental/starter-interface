@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { i18n } from '../../boot/i18n'
+import { i18n } from 'boot/i18n'
 import { computed } from 'vue'
 
 export default computed(() => [

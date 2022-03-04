@@ -1,14 +1,14 @@
 import axios from 'axios'
 import express from 'express'
-import queueCache from '../../middleware/queueCache'
+import queueCache from '@/middleware/queueCache'
 import process from 'process'
-import Logger from '../../common/logger'
-import type { varRemoval } from '../../typings/supervisor'
+import Logger from '@/common/logger'
+import type { varRemoval } from '@/typings/supervisor'
 
 const router = express.Router()
 
 // Set Axios defaults
-const supervisorAxios = axios.create({ timeout: 8000 })
+const supervisorAxios = axios.create({ timeout: 20000 })
 supervisorAxios.defaults.baseURL = process.env.BALENA_SUPERVISOR_ADDRESS
 supervisorAxios.defaults.headers.common.Authorization = `Bearer ${process.env.BALENA_SUPERVISOR_API_KEY}`
 

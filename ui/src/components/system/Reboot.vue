@@ -42,9 +42,9 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from '../api/SupervisorRequests'
+import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { useQuasar } from 'quasar'
-import { qBtnStyle } from './styles/qStyles'
+import { qBtnStyle } from 'components/styles/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

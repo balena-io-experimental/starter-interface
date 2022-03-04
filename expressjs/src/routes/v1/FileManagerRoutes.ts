@@ -1,4 +1,4 @@
-import Logger from '../../common/logger'
+import Logger from '@/common/logger'
 import express from 'express'
 import formidable from 'formidable'
 import fse from 'fs-extra'
@@ -9,7 +9,7 @@ const router = express.Router()
 
 // Root directory files
 // `path.join` sterilizes paths to prevent manipulation of root dir
-const rootDir = path.join(__dirname + '/../../storage/')
+const rootDir = '/app/storage/'
 
 // Prevent Directory Traversal and Null Bytes
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#preventing-directory-traversal

@@ -135,20 +135,20 @@
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="!loading && !internetConnectivity.status">
+  <div v-if="!loading && internetConnectivity.status === false">
     {{ $t('system.internet_required') }}
   </div>
 </template>
 
 <script lang="ts">
-import { sdkRequests } from '../api/SdkRequests'
+import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
-import { internetConnectivity } from '../api/SystemRequests'
+import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
-  name: 'DeviceInfoComponent',
+  name: 'IntDeviceInfoComponent',
   setup() {
     const loading = ref<boolean>(true)
     const $q = useQuasar()
@@ -167,9 +167,7 @@ export default defineComponent({
 
     onMounted(async () => {
       $q.loading.show()
-      if (internetConnectivity.status) {
-        await getDeviceInfo()
-      }
+      await getDeviceInfo()
       loading.value = false
       $q.loading.hide()
     })

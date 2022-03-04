@@ -30,14 +30,14 @@
 </template>
 
 <script lang="ts">
-import EnvConfig from 'src/components/EnvConfig.vue'
-import ChangeHostname from 'src/components/ChangeHostname.vue'
-import PingSupervisor from 'src/components/PingSupervisor.vue'
-import UpdateDevice from 'src/components/UpdateDevice.vue'
+import EnvConfig from 'components/system/EnvConfig.vue'
+import ChangeHostname from 'components/network/ChangeHostname.vue'
+import PingSupervisor from 'components/system/PingSupervisor.vue'
+import UpdateDevice from 'components/system/UpdateDevice.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntPageIndex',
+  name: 'IntConfiguration',
   components: { ChangeHostname, PingSupervisor, EnvConfig, UpdateDevice },
   setup() {
     return {}

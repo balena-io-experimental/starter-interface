@@ -1,4 +1,4 @@
-import Logger from '../../common/logger'
+import Logger from '@/common/logger'
 import dns = require('dns')
 import express from 'express'
 import si from 'systeminformation'
