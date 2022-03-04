@@ -9,7 +9,7 @@ import FileManager from 'src/components/tools/FileManager.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntPageIndex',
+  name: 'IntFileManager',
   components: { FileManager },
   setup() {
     return {}

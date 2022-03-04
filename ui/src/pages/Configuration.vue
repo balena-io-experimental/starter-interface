@@ -37,7 +37,7 @@ import UpdateDevice from 'src/components/system/UpdateDevice.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntPageIndex',
+  name: 'IntConfiguration',
   components: { ChangeHostname, PingSupervisor, EnvConfig, UpdateDevice },
   setup() {
     return {}

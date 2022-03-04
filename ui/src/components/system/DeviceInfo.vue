@@ -148,7 +148,7 @@ import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
-  name: 'DeviceInfoComponent',
+  name: 'IntDeviceInfoComponent',
   setup() {
     const loading = ref<boolean>(true)
     const $q = useQuasar()

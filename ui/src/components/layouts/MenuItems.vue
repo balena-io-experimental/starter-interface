@@ -13,7 +13,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntMenuItems',
+  name: 'IntMenuItemsComponent',
   props: {
     label: {
       type: String,

@@ -30,7 +30,7 @@ import WifiConnectConfigureSSID from 'src/components/wifi/ConfigureSSID.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntPageIndex',
+  name: 'IntNetworking',
   components: {
     WifiConnect,
     WifiConnectConfigurePassword,

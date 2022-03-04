@@ -9,7 +9,7 @@ import SystemInfo from 'src/components/tools/SystemInfo.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntPageIndex',
+  name: 'IntSystemInfo',
   components: { SystemInfo },
   setup() {
     return {}
