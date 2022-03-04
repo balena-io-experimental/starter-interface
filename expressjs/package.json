@@ -8,9 +8,9 @@
     "test": "echo \"No test specified\" && exit 0",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore --check",
-    "dev": "nodemon ./src/index.ts",
+    "dev": "nodemon -r tsconfig-paths/register ./src/index.ts",
     "start": "node ./dist/index.js",
-    "build": "yarn tsc -p ."
+    "build": "yarn tsc -p tsconfig.json && tsc-alias -p tsconfig.json"
   },
   "dependencies": {
     "axios": "^0.26.0",
@@ -46,6 +46,8 @@
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "ts-node": "^10.5.0",
+    "tsc-alias": "^1.6.3",
+    "tsconfig-paths": "^3.13.0",
     "typescript": "^4.5.5"
   }
 }

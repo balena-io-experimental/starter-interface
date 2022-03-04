@@ -1,9 +1,9 @@
 import axios from 'axios'
 import express from 'express'
-import queueCache from '../../middleware/queueCache'
+import queueCache from '@/middleware/queueCache'
 import process from 'process'
-import Logger from '../../common/logger'
-import type { varRemoval } from '../../typings/supervisor'
+import Logger from '@/common/logger'
+import type { varRemoval } from '@/typings/supervisor'
 
 const router = express.Router()
 

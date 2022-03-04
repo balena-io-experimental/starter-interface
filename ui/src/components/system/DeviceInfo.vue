@@ -141,10 +141,10 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from '../../api/SdkRequests'
+import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
-import { internetConnectivity } from '../../api/SystemRequests'
+import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({

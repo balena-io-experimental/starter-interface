@@ -52,13 +52,13 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy ExpressJS node_modules in to container
-COPY --from=ejs-node-build /build-context/node_modules ./node_modules
+COPY --from=ejs-node-build /build-context/node_modules node_modules
 
 # Copy ExpressJS build in to container
 COPY --from=ejs-ui-build /build-context/dist .
 
 # Copy UI in to container 
-COPY --from=ui-build-step /build-context/dist/spa ./public
+COPY --from=ui-build-step /build-context/dist/spa public
 
 # Copy startup scripts
 COPY scripts .

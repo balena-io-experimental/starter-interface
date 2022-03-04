@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from '../../api/SdkRequests'
+import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'

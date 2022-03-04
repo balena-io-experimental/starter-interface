@@ -63,7 +63,7 @@
 <script lang="ts">
 import expressApi from 'axios'
 import { QForm, useQuasar } from 'quasar'
-import { qBtnStyle } from '../styles/qStyles'
+import { qBtnStyle } from 'src/components/styles/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
