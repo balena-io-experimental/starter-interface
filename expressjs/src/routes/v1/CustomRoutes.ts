@@ -1,6 +1,5 @@
 import express from 'express'
-import Logger from '../../common/logger'
-
+import Logger from '@/common/logger'
 const router = express.Router()
 
 // Define your custom GET route path and actions

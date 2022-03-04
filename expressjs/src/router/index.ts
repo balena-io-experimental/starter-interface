@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import Logger from '../common/logger'
+import Logger from '@/common/logger'
 
 // Axios interceptor
 axios.interceptors.response.use(

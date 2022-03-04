@@ -60,8 +60,8 @@
 
 <script lang="ts">
 import MenuItems from 'src/components/layouts/MenuItems.vue'
-import menuList from '../components/styles/menuList'
-import { qHeaderStyle } from '../components/styles/qStyles'
+import menuList from 'src/components/styles/menuList'
+import { qHeaderStyle } from 'src/components/styles/qStyles'
 import { useQuasar } from 'quasar'
 import Reboot from 'src/components/system/Reboot.vue'
 import Shutdown from 'src/components/system/Shutdown.vue'
