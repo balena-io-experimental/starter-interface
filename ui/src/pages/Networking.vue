@@ -24,9 +24,9 @@
 </template>
 
 <script lang="ts">
-import WifiConnect from 'src/components/wifi/Connect.vue'
-import WifiConnectConfigurePassword from 'src/components/wifi/ConfigurePassword.vue'
-import WifiConnectConfigureSSID from 'src/components/wifi/ConfigureSSID.vue'
+import WifiConnect from 'components/wifi/Connect.vue'
+import WifiConnectConfigurePassword from 'components/wifi/ConfigurePassword.vue'
+import WifiConnectConfigureSSID from 'components/wifi/ConfigureSSID.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

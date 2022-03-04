@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import FileManager from 'src/components/tools/FileManager.vue'
+import FileManager from 'components/tools/FileManager.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

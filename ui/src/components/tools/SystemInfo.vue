@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { expressApi } from 'src/boot/axios'
+import { expressApi } from 'boot/axios'
 import { AxiosResponse } from 'axios'
 import { defineComponent, ref } from 'vue'
 
