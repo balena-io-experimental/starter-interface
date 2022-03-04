@@ -5,22 +5,18 @@ import Logger from '../../common/logger'
 const router = express.Router()
 
 // Set Axios defaults
-const wifiAxios = axios.create({ timeout: 5000 })
+const wifiAxios = axios.create({ timeout: 30000 })
 wifiAxios.defaults.baseURL =
   process.env.WIFI_CONNECT_BASEURL ||
   `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
 
 // -- Routes -- //
 router.post('/v1/wifi', function (req, res) {
-  const params = req.body.params
-  const path = req.body.path
-  const type = req.body.type
-
   // Construct the payload
   const payload = {
-    data: params,
-    method: type,
-    url: path
+    data: req.body.params,
+    method: req.body.type,
+    url: req.body.path
   }
 
   // Sned the request

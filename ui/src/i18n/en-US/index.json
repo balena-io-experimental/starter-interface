@@ -71,8 +71,10 @@
   "wifi": {
     "Connect": "Connect",
     "connection_request": "Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.",
+    "configure_hotspot": "Configure hotspot",
     "Disconnect": "Disconnect",
     "disconnect_request_sent": "Disconnect request sent.",
+    "invalid_name": "Invalid name",
     "invalid_password_length": "Password must be 8 characters or more.",
     "network_connect_fail": "Failed to execute the connect request.",
     "network_fetch_fail": "Failed to fetch the available networks.",
@@ -81,10 +83,13 @@
     "no_networks": "No available networks",
     "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?",
     "offline": "Offline",
-    "tetst123": "Offline",
     "online": "Online",
+    "password_set": "Password set. If you are running a hotspot, it will restart.",
     "refresh_not_compatible": "Your device requires a restart to refresh the list.",
     "searching_networks": "Searching for networks",
-    "select_ssid": "Select an SSID"
+    "select_ssid": "Select an SSID",
+    "set_new_hotspot_password": "Set a new hotspot password",
+    "set_new_hotspot_ssid": "Set a new hotspot SSID",
+    "ssid_set": "SSID set. If you are running a hotspot, it will restart."
   }
 }

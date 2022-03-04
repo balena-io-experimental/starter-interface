@@ -35,5 +35,5 @@ yarn-error.log*
 *.sln
 
 # Development components
-wifi/
+/wifi
 expressjs/src/storage
