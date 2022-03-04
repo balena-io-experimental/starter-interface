@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import SystemInfo from 'src/components/SystemInfo.vue'
+import SystemInfo from 'src/components/tools/SystemInfo.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

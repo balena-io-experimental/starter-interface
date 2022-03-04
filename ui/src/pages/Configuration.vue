@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts">
-import EnvConfig from 'src/components/EnvConfig.vue'
-import ChangeHostname from 'src/components/ChangeHostname.vue'
-import PingSupervisor from 'src/components/PingSupervisor.vue'
-import UpdateDevice from 'src/components/UpdateDevice.vue'
+import EnvConfig from 'src/components/system/EnvConfig.vue'
+import ChangeHostname from 'src/components/network/ChangeHostname.vue'
+import PingSupervisor from 'src/components/system/PingSupervisor.vue'
+import UpdateDevice from 'src/components/system/UpdateDevice.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

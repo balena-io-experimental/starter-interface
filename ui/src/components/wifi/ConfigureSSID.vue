@@ -122,11 +122,11 @@ export default defineComponent({
     }
 
     return {
-      ssidDialog: ref(false),
-      ssidText,
       qBtnStyle,
-      setHotspotSSID,
+      ssidDialog: ref(false),
       SSIDInput,
+      ssidText,
+      setHotspotSSID,
       submitting
     }
   }
