@@ -47,6 +47,7 @@
   "supervisor_config": "Supervisor Config",
   "system": {
     "change_hostname": "Change hostname",
+    "fetch_journald": "Fetch Journald Logs",
     "internet_required": "Internet connectivity is required to use this feature.",
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting...",
