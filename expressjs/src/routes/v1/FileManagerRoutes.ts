@@ -4,6 +4,7 @@ import formidable from 'formidable'
 import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
+import process from 'process'
 
 const router = express.Router()
 

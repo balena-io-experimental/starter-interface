@@ -1,5 +1,6 @@
 import cors from 'cors'
 import express from 'express'
+import process from 'process'
 import slowDown from 'express-slow-down'
 import BalenaSDKRoutes from '@/routes/v1/BalenaSDKRoutes'
 import CustomRoutes from '@/routes/v1/CustomRoutes'
