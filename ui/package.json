@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore --check",
+    "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build"
