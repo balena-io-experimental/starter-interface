@@ -97,7 +97,7 @@ export const supervisorRequests = {
   journald_logs() {
     return expressApi.post(apiPathV1, {
       type: 'POST',
-      path: 'v2/local/logs',
+      path: 'v2/journal-logs',
       params: { follow: false, all: true },
       cacheTimeout: defaultCacheTimeout
     })
