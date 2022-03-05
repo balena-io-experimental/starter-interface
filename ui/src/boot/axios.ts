@@ -7,7 +7,7 @@ declare module '@vue/runtime-core' {
 }
 
 const expressApi = axios.create({
-  timeout: 10000
+  timeout: 60000 // Sets a high timeout unlikely to be reached. More specifc timeouts are set in the ExpressJS backend.
 })
 
 // Be careful when using SSR for cross-request state pollution
