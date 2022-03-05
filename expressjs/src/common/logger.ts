@@ -1,3 +1,4 @@
+import process from 'process'
 import winston from 'winston'
 
 // Define your severity levels.
