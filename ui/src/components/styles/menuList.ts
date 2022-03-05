@@ -14,6 +14,11 @@ export default computed(() => [
     path: 'filemanager'
   },
   {
+    icon: 'all_inbox',
+    label: i18n.global.t('titles.container_manager'),
+    path: 'containermanager'
+  },
+  {
     icon: 'router',
     label: i18n.global.t('titles.Networking'),
     path: 'networking'

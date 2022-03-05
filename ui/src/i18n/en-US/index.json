@@ -1,5 +1,8 @@
 {
   "Response": "Response",
+  "containers": {
+    "Containers": "Containers"
+  },
   "deviceInfo": {
     "environment_variables": "Environment Variables",
     "ip_address": "IP Address",
@@ -39,9 +42,14 @@
     "close": "Close",
     "Error": "Error",
     "Home": "Home",
+    "Name": "Name",
     "ok": "ok",
     "password": "Password",
+    "Restart": "Restart",
     "request_error": "Request error",
+    "Status": "Status",
+    "Start": "Start",
+    "Stop": "Stop",
     "Wrong_way": "Wrong way..."
   },
   "supervisor_config": "Supervisor Config",
@@ -58,6 +66,7 @@
   },
   "titles": {
     "Configuration": "Configuration",
+    "container_manager": "Container Manager",
     "control_panel": "Control Panel",
     "Device_Info": "Device Info",
     "force_update": "Force update?",
