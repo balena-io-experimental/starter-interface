@@ -1,0 +1,14 @@
+name: Balena Device UI
+description: >-
+  A UI for interacting with Balena OS.
+version: 0.0.1
+type: sw.application
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: "https://github.com/maggie0002/balena-device-ui"
+  logo:
+    type: blob.asset
+    data:
+      url: "https://raw.githubusercontent.com/maggie0002/balena-device-ui/main/logo.png"
