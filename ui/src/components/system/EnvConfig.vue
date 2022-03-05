@@ -20,7 +20,7 @@
       <pre>{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="loading">
+  <div v-if="loading" class="text-center">
     <q-spinner color="primary" size="3em" />
   </div>
 </template>
