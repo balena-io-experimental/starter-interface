@@ -1,6 +1,6 @@
 name: Balena Device UI
 description: >-
-  A UI for interacting with Balena OS.
+  A UI for interacting with Balena OS and starter project for creating your own.
 version: 0.0.1
 type: sw.application
 assets:
