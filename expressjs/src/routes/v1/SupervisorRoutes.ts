@@ -49,7 +49,6 @@ router.post('/v1/supervisor', queueCache, function (req, res) {
   } else {
     url = req.body.path
   }
-  console.log(url)
 
   // Construct the payload
   const payload = {
