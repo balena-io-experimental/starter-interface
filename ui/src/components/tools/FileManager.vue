@@ -41,14 +41,14 @@
                 @click="objPath.splice(0, objPath.length), updateRows()"
               />
               <q-breadcrumbs-el
-                v-for="path in objPath"
-                :key="path"
+                v-for="item in objPath"
+                :key="item"
                 v-ripple
                 class="cursor-pointer"
                 clickable
-                :label="path"
+                :label="item"
                 @click="
-                  ;(objPath.length = objPath.indexOf(path) + 1), updateRows()
+                  ;(objPath.length = objPath.indexOf(item) + 1), updateRows()
                 "
               />
             </q-breadcrumbs>
@@ -102,15 +102,10 @@
                   no-thumbnails
                   :readonly="delayUpload"
                   :filter="checkCharacters"
-                  :url="'/v1/filemanager/upload'"
+                  url="/v1/filemanager/upload"
                   :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
                   @uploaded="updateRows()"
-                  @failed="
-                    $q.notify({
-                      type: 'negative',
-                      message: $t('general.Error')
-                    })
-                  "
+                  @failed="onUploaderFailed"
                   @rejected="
                     $q.notify({
                       type: 'negative',
@@ -248,11 +243,6 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import expressApi from 'axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
@@ -260,7 +250,7 @@ import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 interface Rows extends QTableProps {
-  name: any
+  name: string
   type: string
   path: string
 }
@@ -276,14 +266,14 @@ export default defineComponent({
     const delayUpload = ref<boolean>(false)
     const invalidCharacters = ref<Array<string>>(['/', '\\0'])
     const loading = ref<boolean>(true)
-    const rows = ref<any>()
-    const objPath = ref<any>([])
+    const rows = ref<Rows[]>()
+    const objPath = ref<Array<string>>([])
     const selected = ref<Array<{ path: string }>>([])
 
     const checkRowExistence = (nameParam: string) =>
-      rows.value?.some(({ path }: any) => path.split('/').pop() === nameParam)
+      rows.value?.some(({ path }) => path.split('/').pop() === nameParam)
 
-    const columns = computed(() => [
+    const columns = computed<QTableProps['columns']>(() => [
       {
         name: 'path',
         required: true,
@@ -292,9 +282,9 @@ export default defineComponent({
         field: (row: Rows) => row.path.split('/').pop(),
         format: (val: string) => `${val}`
       },
-      { name: 'delete', field: 'delete' },
-      { name: 'info', field: 'info' }
-    ]) as any
+      { name: 'delete', label: '', field: 'delete' },
+      { name: 'info', label: '', field: 'info' }
+    ])
 
     onMounted(async () => {
       $q.loading.show()
@@ -304,16 +294,18 @@ export default defineComponent({
       $q.loading.hide()
     })
 
-    function checkCharacters(files: any) {
-      return files?.filter(
-        (file: Rows) =>
-          !invalidCharacters.value.some((el) => file.name.includes(el))
+    function checkCharacters(files: Array<{ name: string }>) {
+      // Remove characters not permitted by Linux file systems
+      const filter: unknown = files.filter(
+        (file) => !invalidCharacters.value.some((el) => file.name.includes(el))
       )
+      return filter as QUploaderProps['filter']
     }
-    function checkUploadOverwrite(files: Array<QUploaderProps>) {
-      const itemCheck = files.filter((obj: any) => {
-        return rows.value.some(
-          ({ path }: any) => path.split('/').pop() === obj.name
+
+    function checkUploadOverwrite(files: Array<QUploaderProps['onAdded']>) {
+      const itemCheck = files.filter((obj) => {
+        return rows.value?.some(
+          ({ path }) => path.split('/').pop() === obj?.name
         )
       })
 
@@ -441,17 +433,25 @@ export default defineComponent({
 
     async function onRowClick(_evt: unknown, row: Rows) {
       if (row.type === 'folder') {
-        objPath.value.push(row.path.split('/').pop() as any)
+        objPath.value.push(row.path.split('/').pop() as never)
         await updateRows()
       } else {
         await download(row)
       }
     }
 
+    function onUploaderFailed(info: unknown) {
+      console.log(info)
+      $q.notify({
+        type: 'negative',
+        message: t('general.Error')
+      })
+    }
+
     async function updateRows() {
       loading.value = true
       await expressApi
-        .post<Rows>('/v1/filemanager/list', {
+        .post<Rows[]>('/v1/filemanager/list', {
           currentPath: objPath.value
         })
         .then((response) => {
@@ -471,11 +471,12 @@ export default defineComponent({
       delayUpload,
       deleteItem,
       deleteSelectedItems,
-      filter: ref<string>(),
+      filter: ref(),
       loading,
       newFolder,
       objPath,
       onRowClick,
+      onUploaderFailed,
       rows,
       selected,
       searchTable: ref<boolean>(false),
