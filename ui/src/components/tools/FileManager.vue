@@ -102,7 +102,7 @@
                   no-thumbnails
                   :readonly="delayUpload"
                   :filter="checkCharacters"
-                  :url="'/filemanager/upload'"
+                  :url="'/v1/filemanager/upload'"
                   :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
                   @uploaded="updateRows()"
                   @failed="
