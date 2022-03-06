@@ -3,6 +3,7 @@ import express from 'express'
 import process from 'process'
 import slowDown from 'express-slow-down'
 import BalenaSDKRoutes from '@/routes/v1/BalenaSDKRoutes'
+import CaptivePortal from '@/routes/v1/CaptivePortal'
 import CustomRoutes from '@/routes/v1/CustomRoutes'
 import FileManagerRoutes from '@/routes/v1/FileManagerRoutes'
 import SupervisorRoutes from '@/routes/v1/SupervisorRoutes'
@@ -32,6 +33,7 @@ app.use(express.static('public', { dotfiles: 'allow' }))
 
 // Routes
 app.use(BalenaSDKRoutes)
+app.use(CaptivePortal)
 app.use(CustomRoutes)
 app.use(FileManagerRoutes)
 app.use(SupervisorRoutes)
