@@ -101,7 +101,6 @@
                   flat
                   no-thumbnails
                   :readonly="delayUpload"
-                  :filter="checkCharacters"
                   url="/v1/filemanager/upload"
                   :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
                   @uploaded="updateRows()"
@@ -294,14 +293,6 @@ export default defineComponent({
       $q.loading.hide()
     })
 
-    function checkCharacters(files: Array<{ name: string }>) {
-      // Remove characters not permitted by Linux file systems
-      const filter: unknown = files.filter(
-        (file) => !invalidCharacters.value.some((el) => file.name.includes(el))
-      )
-      return filter as QUploaderProps['filter']
-    }
-
     function checkUploadOverwrite(files: Array<QUploaderProps['onAdded']>) {
       const itemCheck = files.filter((obj) => {
         return rows.value?.some(
@@ -465,7 +456,6 @@ export default defineComponent({
     }
 
     return {
-      checkCharacters,
       checkUploadOverwrite,
       columns,
       delayUpload,
