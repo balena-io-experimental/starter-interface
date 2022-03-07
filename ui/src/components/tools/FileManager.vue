@@ -423,6 +423,9 @@ export default defineComponent({
     }
 
     async function onRowClick(_evt: unknown, row: Rows) {
+      if (loading.value) {
+        return
+      }
       if (row.type === 'folder') {
         objPath.value.push(row.path.split('/').pop() as never)
         await updateRows()
