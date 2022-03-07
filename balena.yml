@@ -1,8 +1,9 @@
-name: Balena Device UI
+name: Device UI
 description: >-
-  A UI for interacting with Balena OS and starter project for creating your own.
+  A UI for interacting with the Balena OS and a starter project for creating your own.
+joinable: false
 version: 0.0.1
-type: sw.application
+type: sw.block
 assets:
   repository:
     type: blob.asset
@@ -12,3 +13,11 @@ assets:
     type: blob.asset
     data:
       url: "https://raw.githubusercontent.com/maggie0002/balena-device-ui/main/logo.png"
+data:
+  defaultDeviceType: raspberrypi4-64
+  supportedDeviceTypes:
+    - raspberry-pi
+    - raspberry-pi2
+    - raspberrypi3
+    - raspberrypi3-64
+    - raspberrypi4-64
