@@ -4,7 +4,7 @@
         "full_screen": "Plein écran",
         "empty_folder": "Dossier vide",
         "enter_name": "Entrez un nom",
-        "filter": "Filtrer",
+        "filter": "Filtre",
         "invalid_upload_string": "Les entrées contiennent un nom invalide et ne seront pas téléversées. Les caractères suivants ne sont pas compatibles : /, \\0",
         "size_colon": "Taille :",
         "upload": "Téléverser",
@@ -42,7 +42,12 @@
         "ok": "OK",
         "password": "Mot de passe",
         "request_error": "Erreur de demande",
-        "Wrong_way": "Fausse route…"
+        "Wrong_way": "Fausse route…",
+        "Status": "État",
+        "Start": "Démarrer",
+        "Name": "Nom",
+        "Restart": "Redémarrer",
+        "Stop": "Arrêter"
     },
     "supervisor_config": "Configuration du superviseur",
     "system": {
@@ -51,7 +56,8 @@
         "ping_supervisor": "Superviseur ping",
         "restarting": "Votre appareil est en train de redémarrer…",
         "Services": "Services",
-        "shutting_down": "L'appareil s'éteint…"
+        "shutting_down": "L'appareil s'éteint…",
+        "fetch_journald": "Récupérer les journaux"
     },
     "systeminfo": {
         "select_request": "Sélectionnez une demande"
@@ -62,10 +68,11 @@
         "title": "IU dispositif Balena",
         "VolumeManager": "Gestionnaire du volume",
         "force_update": "Forcer la mise à jour ?",
-        "Networking": "Réseautage",
+        "Networking": "Mise en réseau",
         "Device_Info": "Infos sur l'appareil",
         "Settings": "Paramètres",
-        "System_Info": "Infos système"
+        "System_Info": "Infos système",
+        "container_manager": "Gestionnaire de conteneurs"
     },
     "update_device": "Mettre à jour l'appareil",
     "wifi": {
@@ -91,5 +98,8 @@
         "Disconnect": "Déconnecter",
         "disconnect_request_sent": "Demande de déconnexion envoyée.",
         "network_forget_fail": "Échec de l'exécution de la demande d'oubli."
+    },
+    "containers": {
+        "Containers": "Conteneurs"
     }
 }
