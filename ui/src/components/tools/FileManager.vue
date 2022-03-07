@@ -355,7 +355,7 @@ export default defineComponent({
     async function download(row: Rows) {
       loading.value = true
       await expressApi
-        .get<Rows>('/v1/filemanager/download', {
+        .get('/v1/filemanager/download', {
           responseType: 'blob',
           params: {
             currentPath: row.path
@@ -363,8 +363,8 @@ export default defineComponent({
         })
         .then((response) =>
           FileDownload(
-            response.data as never,
-            row.path.split('/').pop() as never
+            response.data as string,
+            row.path.split('/').pop() as string
           )
         )
         .catch(function (error) {
@@ -421,20 +421,19 @@ export default defineComponent({
         timeout: 100
       })
     }
-
-    async function onRowClick(_evt: unknown, row: Rows) {
+    const onRowClick: QTableProps['onRowClick'] = (_evt, row: Rows) => {
       if (loading.value) {
         return
       }
       if (row.type === 'folder') {
-        objPath.value.push(row.path.split('/').pop() as never)
-        await updateRows()
+        objPath.value.push(row.path.split('/').pop() as string)
+        void updateRows()
       } else {
-        await download(row)
+        void download(row)
       }
     }
 
-    function onUploaderFailed(info: unknown) {
+    const onUploaderFailed: QUploaderProps['onFailed'] = (info) => {
       console.log(info)
       $q.notify({
         type: 'negative',
