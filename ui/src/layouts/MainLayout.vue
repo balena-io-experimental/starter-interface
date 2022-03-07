@@ -99,7 +99,7 @@ export default defineComponent({
       import(
         // Set which Quasar language packs to import below:
         // https://quasar.dev/options/quasar-language-packs#dynamical-non-ssr-
-        /* webpackInclude: /(en-US|de|fr|it|nb-NM)\.js$/ */
+        /* webpackInclude: /(en-US|de|fr|it|nb-NO)\.js$/ */
         `quasar/lang/${val}`
       )
         .then((lang: { default: QuasarLanguage }) => {
