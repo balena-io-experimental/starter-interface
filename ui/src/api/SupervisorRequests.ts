@@ -97,7 +97,7 @@ export const supervisorRequests = {
   journald_logs() {
     return expressApi.post(apiPathV1, {
       type: 'POST',
-      path: 'v2/local/logs',
+      path: 'v2/journal-logs',
       params: { follow: false, all: true },
       cacheTimeout: defaultCacheTimeout
     })
@@ -173,6 +173,15 @@ export const supervisorRequests = {
       cacheTimeout: defaultCacheTimeout
     })
   },
+  restart_service(serviceName: string) {
+    return expressApi.post(apiPathV1, {
+      type: 'POST',
+      path: 'v2/applications',
+      path2: 'restart-service',
+      params: { serviceName: serviceName },
+      cacheTimeout: defaultCacheTimeout
+    })
+  },
   shutdown(force: boolean) {
     return expressApi.post(apiPathV1, {
       type: 'POST',
@@ -181,11 +190,29 @@ export const supervisorRequests = {
       cacheTimeout: defaultCacheTimeout
     })
   },
+  start_service(serviceName: string) {
+    return expressApi.post(apiPathV1, {
+      type: 'POST',
+      path: 'v2/applications',
+      path2: 'start-service',
+      params: { serviceName: serviceName },
+      cacheTimeout: defaultCacheTimeout
+    })
+  },
   state_status() {
     return expressApi.post(apiPathV1, {
       type: 'GET',
       path: 'v2/state/status',
       params: false,
+      cacheTimeout: defaultCacheTimeout
+    })
+  },
+  stop_service(serviceName: string) {
+    return expressApi.post(apiPathV1, {
+      type: 'POST',
+      path: 'v2/applications',
+      path2: 'stop-service',
+      params: { serviceName: serviceName },
       cacheTimeout: defaultCacheTimeout
     })
   },

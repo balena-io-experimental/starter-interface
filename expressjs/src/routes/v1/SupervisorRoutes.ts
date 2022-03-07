@@ -1,8 +1,9 @@
 import axios from 'axios'
+import Logger from '@/common/logger'
 import express from 'express'
 import queueCache from '@/middleware/queueCache'
+import path from 'path'
 import process from 'process'
-import Logger from '@/common/logger'
 import type { varRemoval } from '@/typings/supervisor'
 
 const router = express.Router()
@@ -37,11 +38,23 @@ function removeApiKeys(obj: varRemoval) {
 // Note that this route uses the queueCache middleware. Be aware of its implications
 // when doing development.
 router.post('/v1/supervisor', queueCache, function (req, res) {
+  // If Balena App ID is required
+  let url
+  if (req.body.path2) {
+    url = path.join(
+      req.body.path,
+      process.env.BALENA_APP_ID as string,
+      req.body.path2
+    )
+  } else {
+    url = req.body.path
+  }
+
   // Construct the payload
   const payload = {
     data: req.body.params,
     method: req.body.type,
-    url: req.body.path
+    url: url
   }
 
   // Sned the request

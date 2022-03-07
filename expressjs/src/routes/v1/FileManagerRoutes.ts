@@ -4,12 +4,17 @@ import formidable from 'formidable'
 import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
+import process from 'process'
 
 const router = express.Router()
 
-// Root directory files
-// `path.join` sterilizes paths to prevent manipulation of root dir
-const rootDir = '/app/storage/'
+// Root directory for files
+let rootDir = '/app/storage/'
+
+// In dev mode, change local directory
+if (process.env.NODE_ENV !== 'production') {
+  rootDir = path.join(__dirname + '/dev-storage/')
+}
 
 // Prevent Directory Traversal and Null Bytes
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#preventing-directory-traversal
@@ -30,6 +35,11 @@ const filterFn = (item: Item) => {
 
 // Fetch files
 function fetchList(currentPath: Array<string>) {
+  // Check the storage directory exists
+  if (!fse.existsSync(rootDir)) {
+    fse.ensureDir(rootDir).catch((err) => Logger.error(err))
+  }
+
   const files = klawSync(
     validatePath(path.join(rootDir, currentPath.join('/'))),
     {
