@@ -90,7 +90,8 @@ export default defineComponent({
       { value: 'de', label: 'Deutsch' },
       { value: 'fr', label: 'Français' },
       { value: 'it', label: 'Italiano' },
-      { value: 'nb-NO', label: 'Norsk' }
+      { value: 'nb-NO', label: 'Norsk' },
+      { value: 'pt-BR', label: 'Português' }
     ]
 
     // Quasar requires the Quasar language pack to be set seperate from Vue i18n
@@ -99,7 +100,7 @@ export default defineComponent({
       import(
         // Set which Quasar language packs to import below:
         // https://quasar.dev/options/quasar-language-packs#dynamical-non-ssr-
-        /* webpackInclude: /(en-US|de|fr|it|nb-NO)\.js$/ */
+        /* webpackInclude: /(en-US|de|fr|it|nb-NO|pt-BR)\.js$/ */
         `quasar/lang/${val}`
       )
         .then((lang: { default: QuasarLanguage }) => {
