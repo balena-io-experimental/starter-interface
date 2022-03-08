@@ -244,7 +244,7 @@ export default defineComponent({
           setTimeout(() => {
             notify('positive', t('wifi.disconnect_request_sent'))
             submitting.value = false
-          }, 2000)
+          }, 1000)
         })
         .catch(function () {
           notify('negative', t('wifi.network_forget_fail'))

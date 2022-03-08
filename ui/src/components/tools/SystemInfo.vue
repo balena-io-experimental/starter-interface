@@ -87,7 +87,7 @@ export default defineComponent({
       { cmd: 'W', label: 'wifiInterfaces' }
     ]
 
-    async function getSystemInfo(model: { cmd: null | string } | null) {
+    async function getSystemInfo(model: { cmd: string } | null) {
       if (model != null) {
         loadingRequest.value = true
         await expressApi
