@@ -34,7 +34,6 @@ router.get('clients3.google.com', function (_req, res) {
 
 // iOS/OSX
 router.get('/success.html', function (req, res) {
-  console.log(req.get('User-Agent'))
   Logger.info('Redirecting to captive portal.')
   res.redirect(302, '/#/captiveportal')
 })
