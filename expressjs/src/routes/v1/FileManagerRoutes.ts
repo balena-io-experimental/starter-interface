@@ -6,6 +6,10 @@ import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
 import process from 'process'
 
+interface extendKlawItem extends klawSync.Item {
+  type: string
+}
+
 const router = express.Router()
 
 // Root directory for files
@@ -40,6 +44,7 @@ function fetchList(currentPath: Array<string>) {
     fse.ensureDir(rootDir).catch((err) => Logger.error(err))
   }
 
+  // Fetch list of files
   const files = klawSync(
     validatePath(path.join(rootDir, currentPath.join('/'))),
     {
@@ -48,11 +53,13 @@ function fetchList(currentPath: Array<string>) {
       filter: filterFn
     }
   )
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  files.forEach(function (file: any) {
-    file.type = 'file'
-  })
 
+  // Add 'file' tag to all files
+  for (const file of files as extendKlawItem[]) {
+    file.type = 'file'
+  }
+
+  // Fetch list of folders
   const folders = klawSync(
     validatePath(path.join(path.join(rootDir, currentPath.join('/')))),
     {
@@ -61,16 +68,17 @@ function fetchList(currentPath: Array<string>) {
       filter: filterFn
     }
   )
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  folders.forEach(function (folder: any) {
-    folder.type = 'folder'
-  })
 
+  // Add 'folder' tag to all folders
+  for (const folder of folders as extendKlawItem[]) {
+    folder.type = 'folder'
+  }
+
+  // Return the combined list of folders and files
   return folders.concat(files)
 }
 
 // Routes //
-
 router.post('/v1/filemanager/delete', function (req, res) {
   fse.remove(validatePath(path.join(req.body.currentPath))).catch((err) => {
     Logger.error(err)

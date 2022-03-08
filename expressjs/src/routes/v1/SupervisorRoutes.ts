@@ -1,10 +1,27 @@
-import axios from 'axios'
+import axios, { AxiosRequestHeaders } from 'axios'
 import Logger from '@/common/logger'
 import express from 'express'
 import queueCache from '@/middleware/queueCache'
 import path from 'path'
 import process from 'process'
-import type { varRemoval } from '@/typings/supervisor'
+
+interface varRemoval {
+  config: {
+    headers: {
+      Authorization?: AxiosRequestHeaders
+    }
+  }
+  response: {
+    request: {
+      _header?: AxiosRequestHeaders
+    }
+    status: number
+  }
+  request: {
+    _header?: AxiosRequestHeaders
+    _currentRequest?: AxiosRequestHeaders
+  }
+}
 
 const router = express.Router()
 
