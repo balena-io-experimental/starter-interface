@@ -1,6 +1,14 @@
 // Balena API Documentation: https://www.balena.io/docs/reference/supervisor/supervisor-api/
 import expressApi from 'axios'
 
+interface hostConfigHostname {
+  network: { hostname: string; proxy?: never }
+}
+
+interface hostConfigProxy {
+  network: { hostname?: never; proxy: string }
+}
+
 // Default API path
 const apiPathV1 = '/v1/supervisor' as string
 const defaultCacheTimeout = 0 as number
@@ -54,7 +62,7 @@ export const supervisorRequests = {
       cacheTimeout: defaultCacheTimeout
     })
   },
-  device_host_config_patch(data: unknown) {
+  device_host_config_patch(data: hostConfigHostname | hostConfigProxy) {
     return expressApi.post(apiPathV1, {
       type: 'PATCH',
       path: 'v1/device/host-config',

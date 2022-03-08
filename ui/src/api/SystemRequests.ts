@@ -8,7 +8,7 @@ interface internetConnection {
 const apiPathV1 = 'v1/system' as string
 
 export const internetConnectivity = reactive({
-  status: undefined as unknown
+  status: undefined as boolean | undefined
 })
 
 export const system = {
