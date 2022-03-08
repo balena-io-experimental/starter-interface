@@ -44,6 +44,17 @@ services:
       - NET_ADMIN
     privileged: true # This can be removed if you do not need the LED indicator.
 
+  mdns-advertise:
+    image: ghcr.io/nucleardreamer/mdns-advertise
+    restart: "always"
+    privileged: true
+    network_mode: host
+    labels:
+      io.balena.features.dbus: '1'
+    environment:
+      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
+      MDNS_TLD: 'balena.local'
+
 volumes:
   py_wifi_connect_db:
   storage:
