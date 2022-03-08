@@ -49,6 +49,10 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      // Set development path to ExpressJS. Undefined allows use of relative paths.
+      env: {
+        ExpressAPI: ctx.dev ? 'http://localhost/' : undefined
+      },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // transpile: false,

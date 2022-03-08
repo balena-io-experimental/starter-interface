@@ -61,7 +61,7 @@ function fetchList(currentPath: Array<string>) {
 
   // Fetch list of folders
   const folders = klawSync(
-    validatePath(path.join(path.join(rootDir, currentPath.join('/')))),
+    validatePath(path.join(rootDir, currentPath.join('/'))),
     {
       depthLimit: 0,
       nofile: true,
