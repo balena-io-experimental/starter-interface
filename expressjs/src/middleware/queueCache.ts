@@ -38,7 +38,7 @@ class QueueUnique {
       this.q = this.q
         .then(() => this.func(req, res, next))
         .catch((err) => {
-          console.log(err)
+          Logger.error(err)
         })
       return this.q
     }
@@ -85,9 +85,10 @@ const response = (req: Request, res: Response, next: NextFunction) => {
         res.sendResponse(body)
         // Only use cache on GET requests. When not GET, this middleware only acts as a queue.
         if (req.body.type === 'GET' || req.method === 'GET') {
+          Logger.debug('GET item detected.')
+
           // Check if it is already in cache to avoid duplicates
           // Overcomes an error: https://github.com/expressjs/express/issues/4826
-          Logger.debug('GET item detected.')
           const arrayIndex = requestCache?.findIndex(
             (itm) => itm.queueName === qName
           )
@@ -118,7 +119,7 @@ function checkCache(req: Request, res: Response) {
     requestCache.find((itm) => itm.queueName === compileQueueName(req)) || {}
 
   // Set the cache timeout for this request based on passed params
-  let cacheTimeout = 3000 // Last resort default in case there is no defaults anywhere else
+  let cacheTimeout = 0 // By default cache is disabled
 
   // Checks whether param is greater than -1 because 0 is seen as falsy
   if (req.body.cacheTimeout > -1) {
@@ -127,10 +128,8 @@ function checkCache(req: Request, res: Response) {
   } else if (req.app.locals.defaultCacheTimeout) {
     // else if there is a default cache set in expressJs, use that
     cacheTimeout = req.app.locals.defaultCacheTimeout
-  } else {
-    // If none of the above defaults exist then use no cache
-    cacheTimeout = 0
   }
+
   Logger.debug(`Cache timeout = ${cacheTimeout}`)
 
   // If the current request is within X seconds of the last successful request, return the cached version
