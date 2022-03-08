@@ -101,7 +101,7 @@
                   flat
                   no-thumbnails
                   :readonly="delayUpload"
-                  url="/v1/filemanager/upload"
+                  :url="uploaderAPIRoute"
                   :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
                   @uploaded="updateRows()"
                   @failed="onUploaderFailed"
@@ -265,9 +265,12 @@ export default defineComponent({
     const delayUpload = ref<boolean>(false)
     const invalidCharacters = ref<Array<string>>(['/', '\\0'])
     const loading = ref<boolean>(true)
-    const rows = ref<Rows[]>()
     const objPath = ref<Array<string>>([])
+    const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
+    const uploaderAPIRoute = process.env.ExpressAPI
+      ? `${process.env.ExpressAPI}v1/filemanager/upload`
+      : 'v1/filemanager/upload' // Used by the uploader, allowing for dev and production environments
 
     const checkRowExistence = (nameParam: string) =>
       rows.value?.some(({ path }) => path.split('/').pop() === nameParam)
@@ -473,6 +476,7 @@ export default defineComponent({
       selected,
       searchTable: ref<boolean>(false),
       updateRows,
+      uploaderAPIRoute,
       uploaderDialog: ref<boolean>(false)
     }
   }

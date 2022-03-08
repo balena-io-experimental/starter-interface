@@ -40,10 +40,8 @@ export default route(function (/* { store, ssrContext } */) {
     )
   })
 
-  // Set Axios express default url for development environment
-  expressApi.defaults.baseURL = process.env.DEV
-    ? 'http://localhost/'
-    : undefined
+  // Set Axios express default url based on quasar.conf.js
+  expressApi.defaults.baseURL = process.env.ExpressAPI
 
   // Axios interceptor
   axios.interceptors.response.use(
