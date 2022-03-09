@@ -1,11 +1,19 @@
 <template>
-  <apexchart :height="props.height" :options="chartOptions" :series="series" />
+  <div v-if="noData" class="text-center">
+    {{ $t('charts.cpu_stats.no_data') }}
+  </div>
+  <apexchart
+    v-else
+    :height="props.height"
+    :options="chartOptions"
+    :series="series"
+  />
 </template>
 
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
-import { getCssVar, useQuasar } from 'quasar'
+import { getCssVar } from 'quasar'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LoadingBar } from 'quasar'
@@ -40,11 +48,11 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     // Constants
+    const noData = ref<boolean>(false)
     const series = ref<series>([{ name: 'CPU', data: ['0'] }])
     const unMounted = ref<boolean>(false)
 
@@ -154,9 +162,9 @@ export default defineComponent({
           })
           .catch(function (err) {
             console.log(err)
-            $q.notify({ type: 'negative', message: t('general.Error') })
 
             // On error, stop the polling
+            noData.value = true
             unMounted.value = true
           })
         if (unMounted.value) {
@@ -167,6 +175,7 @@ export default defineComponent({
 
     return {
       chartOptions,
+      noData,
       props,
       series
     }
