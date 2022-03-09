@@ -1,9 +1,5 @@
 <template>
-  <apexchart
-    :height="props.height"
-    :options="chartOptions"
-    :series="series"
-  ></apexchart>
+  <apexchart :height="props.height" :options="chartOptions" :series="series" />
 </template>
 
 <script lang="ts">
@@ -33,6 +29,10 @@ export default defineComponent({
     height: {
       type: Number,
       default: 175
+    },
+    maxDataPoints: {
+      type: Number,
+      default: 20
     },
     pollInterval: {
       type: Number,
@@ -72,7 +72,6 @@ export default defineComponent({
       },
       stroke: {
         width: 2,
-        show: 'false',
         curve: 'smooth'
       },
       title: {
@@ -92,6 +91,9 @@ export default defineComponent({
         min: 0,
         max: 100,
         labels: {
+          formatter: function (val: number) {
+            return `${val}%`
+          },
           show: true
         }
       },
@@ -138,7 +140,7 @@ export default defineComponent({
           .then(async (res) => {
             // If there are more than 20 items in the object, remove one
             // to avoid it growing to big
-            if (series.value[0].data.length > 20) {
+            if (series.value[0].data.length > props.maxDataPoints) {
               series.value[0].data.shift()
             }
 
