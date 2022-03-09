@@ -20,7 +20,7 @@
         }}
       </q-chip>
     </h4>
-
+    <div><cpu-stats /></div>
     <div class="row items-start">
       <q-card flat bordered class="">
         <q-card-section horizontal>
@@ -143,12 +143,14 @@
 <script lang="ts">
 import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
+import CpuStats from 'components/charts/CpuStats.vue'
 import { useQuasar } from 'quasar'
 import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'IntDeviceInfoComponent',
+  components: { CpuStats },
   setup() {
     const loading = ref<boolean>(true)
     const $q = useQuasar()

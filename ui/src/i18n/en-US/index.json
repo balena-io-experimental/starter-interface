@@ -1,5 +1,10 @@
 {
   "Response": "Response",
+  "charts": {
+    "cpu_stats": {
+      "cpu_status": "CPU Status"
+    }
+  },
   "containers": {
     "Containers": "Containers"
   },
