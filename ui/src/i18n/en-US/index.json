@@ -2,7 +2,8 @@
   "Response": "Response",
   "charts": {
     "cpu_stats": {
-      "cpu_status": "CPU Status"
+      "cpu_status": "CPU Status",
+      "no_data": "Unable to fetch CPU data."
     }
   },
   "containers": {
