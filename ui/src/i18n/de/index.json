@@ -38,7 +38,8 @@
         "password": "Passwort",
         "are_you_sure": "Sind Sie sicher?",
         "close": "Schließen",
-        "Home": "Startseite"
+        "Home": "Startseite",
+        "Name": "Name"
     },
     "wifi": {
         "no_networks": "Keine Netzwerke verfügbar",
@@ -56,5 +57,13 @@
     },
     "system": {
         "Services": "Dienste"
+    },
+    "charts": {
+        "cpu_stats": {
+            "cpu_status": "Prozessor-Status",
+            "no_data": "Die Prozessor-Daten können nicht abgerufen werden.",
+            "show_cores": "Kerne anzeigen",
+            "pause": "Pause"
+        }
     }
 }
