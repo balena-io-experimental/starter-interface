@@ -140,7 +140,7 @@ export default defineComponent({
         show: false
       },
       noData: {
-        text: 'Loading',
+        text: t('general.Loading'),
         align: 'center',
         verticalAlign: 'middle'
       }
