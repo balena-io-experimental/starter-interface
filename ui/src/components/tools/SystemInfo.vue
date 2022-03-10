@@ -97,8 +97,8 @@ export default defineComponent({
           .then((res) => {
             response.value = res
           })
-          .catch(function (error) {
-            console.log(error)
+          .catch(function () {
+            loadingRequest.value = false
           })
       }
       loadingRequest.value = false
