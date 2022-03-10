@@ -3,7 +3,9 @@
   "charts": {
     "cpu_stats": {
       "cpu_status": "CPU Status",
-      "no_data": "Unable to fetch CPU data."
+      "no_data": "Unable to fetch CPU data.",
+      "pause": "Pause",
+      "show_cores": "Show Cores"
     }
   },
   "containers": {
