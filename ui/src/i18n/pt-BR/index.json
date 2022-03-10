@@ -101,5 +101,13 @@
     },
     "containers": {
         "Containers": "Contêineres"
+    },
+    "charts": {
+        "cpu_stats": {
+            "cpu_status": "Status da CPU",
+            "no_data": "Não foi possível buscar os dados da CPU.",
+            "show_cores": "Mostrar os núcleos",
+            "pause": "Pausa"
+        }
     }
 }
