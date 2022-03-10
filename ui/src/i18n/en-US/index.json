@@ -2,6 +2,8 @@
   "Response": "Response",
   "charts": {
     "cpu_stats": {
+      "Core": "Core",
+      "CPU": "CPU",
       "cpu_status": "CPU Status",
       "no_data": "Unable to fetch CPU data.",
       "pause": "Pause",
