@@ -188,7 +188,7 @@ export default defineComponent({
             if (!coresToggle.value) {
               if (!series.value[0]) {
                 series.value[0] = {
-                  name: 'CPU',
+                  name: t('charts.cpu_stats.CPU'),
                   data: [
                     [
                       new Date().getTime(),
@@ -215,7 +215,7 @@ export default defineComponent({
                 cpuStat.data.cpus.forEach(function (value) {
                   if (!series.value[i]) {
                     series.value[i] = {
-                      name: `CPU${i + 1}`,
+                      name: `${t('charts.cpu_stats.Core')} ${i + 1}`,
                       data: [
                         [new Date().getTime(), parseInt(value.load).toFixed(0)]
                       ]
