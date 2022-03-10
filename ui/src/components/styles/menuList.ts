@@ -9,14 +9,14 @@ export default computed(() => [
     path: 'home'
   },
   {
-    icon: 'folder',
-    label: i18n.global.t('titles.VolumeManager'),
-    path: 'filemanager'
-  },
-  {
     icon: 'all_inbox',
     label: i18n.global.t('titles.container_manager'),
     path: 'containermanager'
+  },
+  {
+    icon: 'folder',
+    label: i18n.global.t('titles.VolumeManager'),
+    path: 'filemanager'
   },
   {
     icon: 'router',
