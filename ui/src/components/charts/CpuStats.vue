@@ -239,9 +239,7 @@ export default defineComponent({
             // Delay before calling next fetch
             await delay(props.pollInterval)
           })
-          .catch(function (err) {
-            console.log(err)
-
+          .catch(function () {
             // On error, stop the polling
             noData.value = true
             unMounted.value = true

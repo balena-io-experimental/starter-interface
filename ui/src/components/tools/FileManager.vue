@@ -331,8 +331,7 @@ export default defineComponent({
         .post('/v1/filemanager/delete', {
           currentPath: path
         })
-        .catch(function (error) {
-          console.log(error)
+        .catch(function () {
           $q.notify({ type: 'negative', message: t('general.Error') })
         })
     }
@@ -370,8 +369,7 @@ export default defineComponent({
             row.path.split('/').pop() as string
           )
         )
-        .catch(function (error) {
-          console.log(error)
+        .catch(function () {
           $q.notify({ type: 'negative', message: t('general.Error') })
         })
       loading.value = false
@@ -408,8 +406,7 @@ export default defineComponent({
                 await updateRows()
                 notifyComplete()
               })
-              .catch(function (error) {
-                console.log(error)
+              .catch(function () {
                 $q.notify({ type: 'negative', message: t('general.Error') })
               })
           }
@@ -453,8 +450,7 @@ export default defineComponent({
         .then((response) => {
           rows.value = response.data
         })
-        .catch(function (error) {
-          console.log(error)
+        .catch(function () {
           $q.notify({ type: 'negative', message: t('general.Error') })
         })
       loading.value = false

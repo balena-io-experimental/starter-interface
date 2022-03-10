@@ -162,7 +162,6 @@ export default defineComponent({
           }
         })
         .catch(function (err: Error | AxiosError) {
-          console.log(err)
           if (axios.isAxiosError(err)) {
             if (err.response) {
               notify('negative', t('wifi.network_request_fail'))
@@ -199,8 +198,7 @@ export default defineComponent({
             submitting.value = false
           }, 2000)
         })
-        .catch(function (err) {
-          console.log(err)
+        .catch(function () {
           notify('negative', t('wifi.network_connect_fail'))
           submitting.value = false
         })
@@ -221,8 +219,7 @@ export default defineComponent({
             notify('warning', t('wifi.no_networks'))
           }
         })
-        .catch(function (err) {
-          console.log(err)
+        .catch(function () {
           notify('negative', t('wifi.network_fetch_fail'))
         })
       submitting.value = false
@@ -247,8 +244,7 @@ export default defineComponent({
             submitting.value = false
           }, 1000)
         })
-        .catch(function (err) {
-          console.log(err)
+        .catch(function () {
           notify('negative', t('wifi.network_forget_fail'))
           submitting.value = false
         })

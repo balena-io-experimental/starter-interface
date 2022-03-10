@@ -85,8 +85,7 @@ export default defineComponent({
             submitting.value = false
           }, 1000)
         })
-        .catch(function (err) {
-          console.log(err)
+        .catch(function () {
           $q.notify({ type: 'negative', message: t('general.Error') })
           submitting.value = false
         })

@@ -94,8 +94,7 @@ router.post('/v1/supervisor', queueCache, function (req, res) {
         res.status(500)
       }
 
-      // Log to the console and return the error to the UI
-      Logger.error(err)
+      // Return the error to the UI
       res.json(err)
     })
 })
