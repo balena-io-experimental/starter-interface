@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.template
+    environment:
+      NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
     restart: always
     ports:
       - "80:80"
@@ -50,10 +52,10 @@ services:
     privileged: true
     network_mode: host
     labels:
-      io.balena.features.dbus: '1'
+      io.balena.features.dbus: "1"
     environment:
-      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
-      MDNS_TLD: 'balena.local'
+      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+      MDNS_TLD: "balena.local"
 
 volumes:
   py_wifi_connect_db:

@@ -7,9 +7,14 @@ const router = express.Router()
 
 // Set Axios defaults
 const wifiAxios = axios.create({ timeout: 30000 })
-wifiAxios.defaults.baseURL =
-  process.env.WIFI_CONNECT_BASEURL ||
-  `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
+
+if (process.env.WIFI_CONNECT_BASEURL) {
+  wifiAxios.defaults.baseURL = process.env.WIFI_CONNECT_BASEURL
+} else if (process.env.NETWORK_MODE?.toLowerCase() === 'bridge') {
+  wifiAxios.defaults.baseURL = `http://${process.env.BRIDGE_NETWORK_IP}:9090/`
+} else {
+  wifiAxios.defaults.baseURL = `http://127.0.0.1:9090/`
+}
 
 // -- Routes -- //
 router.post('/v1/wifi', function (req, res) {
