@@ -19,7 +19,7 @@
     />
   </div>
 
-  <div v-if="noData" class="text-center">
+  <div v-if="noData" class="text-center q-mb-md">
     {{ $t('charts.cpu_stats.no_data') }}
   </div>
   <apexchart
