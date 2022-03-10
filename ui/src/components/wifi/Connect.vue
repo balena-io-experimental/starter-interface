@@ -233,7 +233,7 @@ export default defineComponent({
       expressApi
         .post('/v1/wifi', {
           type: 'POST',
-          path: 'v1/connect',
+          path: 'v1/forget',
           params: {
             all_networks: false
           }
