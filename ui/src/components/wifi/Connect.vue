@@ -105,12 +105,12 @@
 </template>
 
 <script lang="ts">
+import axios from 'axios'
 import expressApi, { AxiosError } from 'axios'
-import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'components/styles/qStyles'
+import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import axios from 'axios'
 
 interface connectionData {
   conn_type: string
@@ -161,15 +161,14 @@ export default defineComponent({
             await fetchNetworks()
           }
         })
-        .catch(function (error: Error | AxiosError) {
-          if (axios.isAxiosError(error)) {
-            if (error.response) {
+        .catch(function (err: Error | AxiosError) {
+          console.log(err)
+          if (axios.isAxiosError(err)) {
+            if (err.response) {
               notify('negative', t('wifi.network_request_fail'))
             } else {
               notify('warning', t('wifi.no_wifi_api'))
             }
-          } else {
-            console.log(error)
           }
 
           noWifiConnect.value = true
@@ -200,7 +199,8 @@ export default defineComponent({
             submitting.value = false
           }, 2000)
         })
-        .catch(function () {
+        .catch(function (err) {
+          console.log(err)
           notify('negative', t('wifi.network_connect_fail'))
           submitting.value = false
         })
@@ -221,7 +221,8 @@ export default defineComponent({
             notify('warning', t('wifi.no_networks'))
           }
         })
-        .catch(function () {
+        .catch(function (err) {
+          console.log(err)
           notify('negative', t('wifi.network_fetch_fail'))
         })
       submitting.value = false
@@ -246,7 +247,8 @@ export default defineComponent({
             submitting.value = false
           }, 1000)
         })
-        .catch(function () {
+        .catch(function (err) {
+          console.log(err)
           notify('negative', t('wifi.network_forget_fail'))
           submitting.value = false
         })

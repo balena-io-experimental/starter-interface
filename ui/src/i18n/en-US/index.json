@@ -63,6 +63,9 @@
     "Stop": "Stop",
     "Wrong_way": "Wrong way…"
   },
+  "network": {
+    "forget_all_wifi": "Forget All WiFi Connections"
+  },
   "supervisor_config": "Supervisor Config",
   "system": {
     "change_hostname": "Change hostname",
