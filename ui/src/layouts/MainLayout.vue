@@ -109,7 +109,7 @@ export default defineComponent({
         })
         .catch(() => {
           console.log(
-            "User's browser language is not installed. Reverting to en-US."
+            "User's browser language is not available. Reverting to en-US."
           )
         })
     })

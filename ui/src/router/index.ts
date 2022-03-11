@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import expressApi from 'axios'
 import { i18n } from 'boot/i18n'
-import { Notify } from 'quasar'
+import { Loading, Notify } from 'quasar'
 import { route } from 'quasar/wrappers'
 import {
   createMemoryHistory,
@@ -28,7 +28,13 @@ export default route(function (/* { store, ssrContext } */) {
     : createWebHashHistory
 
   const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
+    scrollBehavior(_to, _from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { left: 0, top: 0 }
+      }
+    },
     routes,
 
     // Leave this as is and make changes in quasar.conf.js instead!
@@ -38,6 +44,19 @@ export default route(function (/* { store, ssrContext } */) {
       // eslint-disable-next-line no-void
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     )
+  })
+
+  Router.beforeResolve((_to, _from, next) => {
+    // Show the loading indicator on a page change.
+    Loading.show({
+      delay: 300 // ms
+    })
+    next()
+  })
+
+  Router.afterEach(() => {
+    // Complete the animation of the loading indicator after page change.
+    Loading.hide()
   })
 
   // Set Axios express default url based on quasar.conf.js
