@@ -67,7 +67,6 @@
         "Configuration": "Configuration",
         "control_panel": "Panneau de contrôle",
         "title": "IU dispositif Balena",
-        "force_update": "Forcer la mise à jour ?",
         "Networking": "Mise en réseau",
         "Device_Info": "Infos sur l'appareil",
         "Settings": "Paramètres",
