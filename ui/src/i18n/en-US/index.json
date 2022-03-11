@@ -77,6 +77,9 @@
   "system": {
     "change_hostname": "Change hostname",
     "fetch_journald": "Fetch Journald Logs",
+    "force_update": "Force update?",
+    "force_restart": "Force restart?",
+    "force_shutdown": "Force shutdown?",
     "internet_required": "Internet connectivity is required to use this feature.",
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting…",
@@ -91,7 +94,6 @@
     "container_manager": "Container Manager",
     "control_panel": "Control Panel",
     "Device_Info": "Device Info",
-    "force_update": "Force update?",
     "Networking": "Networking",
     "Settings": "Settings",
     "System_Info": "System Info",

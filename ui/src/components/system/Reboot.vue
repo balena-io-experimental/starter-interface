@@ -7,18 +7,26 @@
     color="secondary"
     @click="confirm = true"
   />
-  <q-dialog v-model="confirm" persistent>
+  <q-dialog v-model="confirm">
     <q-card>
       <q-card-section
         class="row items-center"
         style="width: 300px; max-width: 80vw"
       >
-        <q-avatar
-          icon="power_settings_new"
-          color="primary"
-          text-color="accent"
-        />
-        <span class="q-ml-md">{{ $t('general.are_you_sure') }}</span>
+        <q-avatar icon="restart_alt" color="primary" text-color="accent" />
+        <div class="col">
+          <div class="row q-ml-sm q-mt-sm">
+            {{ $t('general.are_you_sure') }}
+          </div>
+          <div class="items-right align-right text-right justify-right">
+            <q-checkbox
+              v-model="checkBox"
+              class="q-ml-md text-caption"
+              size="xs"
+              :label="$t('system.force_restart')"
+            />
+          </div>
+        </div>
       </q-card-section>
       <q-card-actions align="right">
         <q-btn
@@ -57,12 +65,20 @@ export default defineComponent({
 
     const checkBox = ref<boolean>(false)
 
-    async function reboot() {
-      await supervisorRequests.reboot(checkBox.value).then(() => {
-        $q.notify({ type: 'positive', message: t('system.restarting') })
-      })
+    function reboot() {
+      void supervisorRequests.reboot(checkBox.value)
+
+      // This does not wait for return of promise as connection is lost too quickly
+      setTimeout(() => {
+        $q.notify({
+          type: 'positive',
+          timeout: 0,
+          message: t('system.restarting')
+        })
+      }, 1500)
     }
     return {
+      checkBox,
       confirm: ref(false),
       qBtnStyle,
       reboot
