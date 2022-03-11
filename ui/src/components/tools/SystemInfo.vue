@@ -6,7 +6,7 @@
         filled
         :loading="loadingRequest"
         :options="options"
-        :label="$t('systeminfo.select_request')"
+        :label="$t('systemInfo.select_request')"
         @update:model-value="getSystemInfo(model)"
       />
     </div>
