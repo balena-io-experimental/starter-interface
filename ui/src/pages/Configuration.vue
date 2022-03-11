@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-lg">
-    <div class="text-h5 q-mb-lg q-mt-lg">{{ $t('supervisorConfig') }}</div>
+    <div class="text-h5 q-mb-lg q-mt-lg">{{ $t('supervisor_config') }}</div>
     <change-hostname />
 
     <q-list bordered class="rounded-borders q-mt-md">
