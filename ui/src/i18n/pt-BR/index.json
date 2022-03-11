@@ -14,7 +14,8 @@
     "Name": "Nome",
     "are_you_sure": "Tem certeza?",
     "Stop": "Parar",
-    "Start": "Início"
+    "Start": "Início",
+    "Loading": "Carregando…"
   },
   "supervisor_config": "Configuração do supervisor",
   "system": {
@@ -107,7 +108,12 @@
       "cpu_status": "Status da CPU",
       "no_data": "Não foi possível buscar os dados da CPU.",
       "show_cores": "Mostrar os núcleos",
-      "pause": "Pausa"
+      "pause": "Pausa",
+      "Core": "Núcleo",
+      "CPU": "CPU"
     }
+  },
+  "network": {
+    "forget_all_wifi": "Esquecer todas as conexões WiFi"
   }
 }
