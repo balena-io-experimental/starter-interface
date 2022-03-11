@@ -15,7 +15,7 @@ export default computed(() => [
   },
   {
     icon: 'folder',
-    label: i18n.global.t('titles.VolumeManager'),
+    label: i18n.global.t('titles.volume_manager'),
     path: 'filemanager'
   },
   {

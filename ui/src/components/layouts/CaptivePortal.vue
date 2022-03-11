@@ -1,23 +1,103 @@
+<!-- eslint-disable @intlify/vue-i18n/no-raw-text -->
 <template>
-  <div class="q-pa-lg">
-    <div class="text-center q-mb-md">
+  <q-tabs
+    v-model="tab"
+    no-caps
+    outside-arrows
+    mobile-arrows
+    class="bg-primary shadow-2"
+  >
+    <q-tab name="welcome" :label="$t('captivePortal.Welcome')" />
+    <q-tab name="wifi" :label="$t('captivePortal.connect_to_wifi')" />
+  </q-tabs>
+
+  <!-- Welcome page -->
+  <div v-if="tab == 'welcome'" class="q-pa-lg text-center">
+    <!-- Logo -->
+    <div class="q-mb-md">
       <q-img :src="qHeaderStyle.logo" style="max-width: 175px" />
     </div>
-    <div class="text-h4 text-gray-600 text-center mt-2">
+    <!-- Title -->
+    <div class="text-h4 q-mb-md">
       {{ $t('titles.title') }}
     </div>
+    <!-- Welcome text -->
+    <div v-if="hostname" class="text-body1 text-center text-gray-600">
+      <div>
+        {{ $t('captivePortal.visit_to_begin') }}
+      </div>
+      <div class="q-mt-md">
+        http://{{ hostname }}.local
+        <q-btn
+          class="q-ml-2"
+          icon="content_copy"
+          padding="0"
+          flat
+          size="sm"
+          @click="copyUrl()"
+        >
+          <q-tooltip class="text-caption text-center">
+            {{ $t('captivePortal.copy_to_clipboard') }}
+          </q-tooltip>
+        </q-btn>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wi-Fi page -->
+  <div v-else>
+    <wifi-connect class="q-pa-lg" />
   </div>
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios'
+import WifiConnect from 'components/wifi/Connect.vue'
+import { copyToClipboard, useQuasar } from 'quasar'
 import { qHeaderStyle } from 'components/styles/qStyles'
-import { defineComponent } from 'vue'
+import { supervisorRequests } from 'src/api/SupervisorRequests'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+interface hostConfig {
+  network: { hostname: string }
+}
 
 export default defineComponent({
   name: 'IntCaptivePortal',
+  components: {
+    WifiConnect
+  },
   setup() {
+    const $q = useQuasar()
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { t } = useI18n()
+
+    const hostname = ref<string>()
+
+    onMounted(async () => {
+      await supervisorRequests
+        .device_host_config_get()
+        .then((res: AxiosResponse<hostConfig>) => {
+          hostname.value = res.data.network.hostname
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    })
+
+    const copyUrl = () => {
+      if (hostname.value) {
+        void copyToClipboard(`http://${hostname.value}.local`)
+        $q.notify(t('captivePortal.url_copied'))
+      }
+    }
+
     return {
-      qHeaderStyle
+      copyUrl,
+      hostname,
+      qHeaderStyle,
+      tab: ref('welcome')
     }
   }
 })
