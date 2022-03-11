@@ -4,7 +4,7 @@
     v-model="checkBox"
     class="q-ml-md"
     size="xs"
-    :label="$t('titles.force_update')"
+    :label="$t('system.force_update')"
   />
 </template>
 

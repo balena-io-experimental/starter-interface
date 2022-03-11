@@ -7,7 +7,7 @@
     color="secondary"
     @click="confirm = true"
   />
-  <q-dialog v-model="confirm" persistent>
+  <q-dialog v-model="confirm">
     <q-card>
       <q-card-section
         class="row items-center"
@@ -18,7 +18,19 @@
           color="primary"
           text-color="accent"
         />
-        <span class="q-ml-md">{{ $t('general.are_you_sure') }}</span>
+        <div class="col">
+          <div class="row q-ml-sm q-mt-sm">
+            {{ $t('general.are_you_sure') }}
+          </div>
+          <div class="items-right align-right text-right justify-right">
+            <q-checkbox
+              v-model="checkBox"
+              class="q-ml-md text-caption"
+              size="xs"
+              :label="$t('system.force_shutdown')"
+            />
+          </div>
+        </div>
       </q-card-section>
 
       <q-card-actions align="right">
@@ -57,12 +69,20 @@ export default defineComponent({
     const $q = useQuasar()
     const checkBox = ref<boolean>(false)
 
-    async function shutdown() {
-      await supervisorRequests.shutdown(checkBox.value).then(() => {
-        $q.notify({ type: 'positive', message: t('system.shutting_down') })
-      })
+    function shutdown() {
+      void supervisorRequests.shutdown(checkBox.value)
+
+      // This does not wait for return of promise as connection is lost too quickly
+      setTimeout(() => {
+        $q.notify({
+          type: 'positive',
+          timeout: 0,
+          message: t('system.shutting_down')
+        })
+      }, 1500)
     }
     return {
+      checkBox,
       confirm: ref(false),
       qBtnStyle,
       shutdown

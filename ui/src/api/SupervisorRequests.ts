@@ -160,7 +160,7 @@ export const supervisorRequests = {
   },
   reboot(force: boolean) {
     return expressApi.post(apiPathV1, {
-      type: 'GET',
+      type: 'POST',
       path: 'v1/reboot',
       params: { force: force },
       cacheTimeout: defaultCacheTimeout
