@@ -13,7 +13,7 @@
         <q-card flat bordered>
           <q-card-section horizontal>
             <q-card-section class="full-width">
-              <b class="q-mr-xs">{{ $t('deviceInfo.memory') }}</b>
+              <b class="q-mr-xs">{{ $t('device_info.memory') }}</b>
               <span> - </span>
               <span
                 >{{
@@ -28,7 +28,7 @@
               />
             </q-card-section>
             <q-card-section class="full-width">
-              <b class="q-mr-xs">{{ $t('deviceInfo.storage') }}</b>
+              <b class="q-mr-xs">{{ $t('device_info.storage') }}</b>
               <span>({{ f.data[0].mount }})</span>
               <span> - </span>
               <span
@@ -53,7 +53,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.os_version')
+                    $t('device_info.os_version')
                   }}</q-item-label>
                   <q-item-label>
                     {{ device.os_version }}
@@ -63,7 +63,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.supervisor_version')
+                    $t('device_info.supervisor_version')
                   }}</q-item-label>
                   <q-item-label>
                     {{ device.supervisor_version }}
@@ -73,7 +73,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.ip_address')
+                    $t('device_info.ip_address')
                   }}</q-item-label>
                   <q-item-label>{{ device.ip_address }}</q-item-label>
                 </q-item-section>
@@ -81,7 +81,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.mac_address')
+                    $t('device_info.mac_address')
                   }}</q-item-label>
                   <q-item-label>{{ device.mac_address }}</q-item-label>
                 </q-item-section>

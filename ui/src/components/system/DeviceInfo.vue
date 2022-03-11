@@ -15,8 +15,8 @@
       >
         {{
           response.data.is_undervolted
-            ? $t('deviceInfo.undervolted')
-            : $t('deviceInfo.not_undervolted')
+            ? $t('device_info.undervolted')
+            : $t('device_info.not_undervolted')
         }}
       </q-chip>
     </h4>
@@ -30,7 +30,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.location')
+                    $t('device_info.location')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.location }}</q-item-label>
                 </q-item-section>
@@ -38,7 +38,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.os_version')
+                    $t('device_info.os_version')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.os_version }}</q-item-label>
                 </q-item-section>
@@ -46,7 +46,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.supervisor_version')
+                    $t('device_info.supervisor_version')
                   }}</q-item-label>
                   <q-item-label>{{
                     response.data.supervisor_version
@@ -56,7 +56,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.ip_address')
+                    $t('device_info.ip_address')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.ip_address }}</q-item-label>
                 </q-item-section>
@@ -64,7 +64,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.mac_address')
+                    $t('device_info.mac_address')
                   }}</q-item-label>
                   <q-item-label
                     v-for="mac in response.data.mac_address.split(' ')"
@@ -76,7 +76,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('deviceInfo.public_ip')
+                    $t('device_info.public_ip')
                   }}</q-item-label>
                   <q-item-label>{{
                     response.data.public_address
@@ -90,7 +90,7 @@
           <!-- bars -->
           <q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('deviceInfo.memory') }}</b>
+              <b class="q-mr-xs">{{ $t('device_info.memory') }}</b>
               <span> - </span>
               <span
                 >{{ response.data.memory_usage }}MB /
@@ -104,7 +104,7 @@
               />
             </q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('deviceInfo.storage') }}</b>
+              <b class="q-mr-xs">{{ $t('device_info.storage') }}</b>
               <span>({{ response.data.storage_block_device }})</span>
               <span> - </span>
               <span
@@ -129,8 +129,8 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      :label="$t('deviceInfo.response_details')"
-      :caption="$t('deviceInfo.raw_json')"
+      :label="$t('device_info.response_details')"
+      :caption="$t('device_info.raw_json')"
     >
       <pre>{{ response.data }}</pre>
     </q-expansion-item>

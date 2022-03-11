@@ -6,7 +6,7 @@
         filled
         :loading="loadingRequest"
         :options="options"
-        :label="$t('systemInfo.select_request')"
+        :label="$t('system_info.select_request')"
         @update:model-value="getSystemInfo(model)"
       />
     </div>
@@ -15,8 +15,8 @@
     expand-separator
     default-opened
     icon="code"
-    :label="$t('deviceInfo.response_details')"
-    :caption="$t('deviceInfo.raw_json')"
+    :label="$t('device_info.response_details')"
+    :caption="$t('device_info.raw_json')"
   >
     <pre v-if="response">{{ response.data }}</pre>
   </q-expansion-item>

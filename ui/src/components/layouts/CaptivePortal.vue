@@ -7,8 +7,8 @@
     mobile-arrows
     class="bg-primary shadow-2"
   >
-    <q-tab name="welcome" :label="$t('captivePortal.Welcome')" />
-    <q-tab name="wifi" :label="$t('captivePortal.connect_to_wifi')" />
+    <q-tab name="welcome" :label="$t('captive_portal.Welcome')" />
+    <q-tab name="wifi" :label="$t('captive_portal.connect_to_wifi')" />
   </q-tabs>
 
   <!-- Welcome page -->
@@ -24,7 +24,7 @@
     <!-- Welcome text -->
     <div v-if="hostname" class="text-body1 text-center text-gray-600">
       <div>
-        {{ $t('captivePortal.visit_to_begin') }}
+        {{ $t('captive_portal.visit_to_begin') }}
       </div>
       <div class="q-mt-md">
         http://{{ hostname }}.local
@@ -37,7 +37,7 @@
           @click="copyUrl()"
         >
           <q-tooltip class="text-caption text-center">
-            {{ $t('captivePortal.copy_to_clipboard') }}
+            {{ $t('captive_portal.copy_to_clipboard') }}
           </q-tooltip>
         </q-btn>
       </div>
@@ -89,7 +89,7 @@ export default defineComponent({
     const copyUrl = () => {
       if (hostname.value) {
         void copyToClipboard(`http://${hostname.value}.local`)
-        $q.notify(t('captivePortal.url_copied'))
+        $q.notify(t('captive_portal.url_copied'))
       }
     }
 

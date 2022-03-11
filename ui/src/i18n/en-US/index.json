@@ -1,5 +1,12 @@
 {
   "Response": "Response",
+  "captive_portal": {
+    "connect_to_wifi": "Connect to WiFi",
+    "copy_to_clipboard": "Copy to clipboard",
+    "url_copied": "Copied to clipboard",
+    "visit_to_begin": "Visit the following URL in your browser to begin:",
+    "Welcome": "Welcome"
+  },
   "charts": {
     "cpu_stats": {
       "Core": "Core",
@@ -13,7 +20,7 @@
   "containers": {
     "Containers": "Containers"
   },
-  "deviceInfo": {
+  "device_info": {
     "environment_variables": "Environment Variables",
     "ip_address": "IP Address",
     "location": "Location",
@@ -28,7 +35,7 @@
     "supervisor_version": "Supervisor Version",
     "undervolted": "Undervolted"
   },
-  "fileManager": {
+  "file_manager": {
     "001_Mb": "0.01 Mb",
     "delete": "Delete",
     "empty_folder": "Empty Folder",
@@ -76,7 +83,7 @@
     "Services": "Services",
     "shutting_down": "Shutting device down…"
   },
-  "systeminfo": {
+  "system_info": {
     "select_request": "Select a request"
   },
   "titles": {
@@ -89,7 +96,7 @@
     "Settings": "Settings",
     "System_Info": "System Info",
     "title": "Balena Device UI",
-    "VolumeManager": "Volume Manager"
+    "volume_manager": "Volume Manager"
   },
   "update_device": "Update device",
   "wifi": {
