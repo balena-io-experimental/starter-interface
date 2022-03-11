@@ -39,7 +39,8 @@
         "are_you_sure": "Sind Sie sicher?",
         "close": "Schließen",
         "Home": "Startseite",
-        "Name": "Name"
+        "Name": "Name",
+        "Loading": "Wird geladen …"
     },
     "wifi": {
         "no_networks": "Keine Netzwerke verfügbar",
@@ -63,7 +64,9 @@
             "cpu_status": "Prozessor-Status",
             "no_data": "Die Prozessor-Daten können nicht abgerufen werden.",
             "show_cores": "Kerne anzeigen",
-            "pause": "Pause"
+            "pause": "Pause",
+            "Core": "Kern",
+            "CPU": "Pozessor"
         }
     }
 }
