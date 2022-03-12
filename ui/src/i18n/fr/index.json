@@ -58,7 +58,10 @@
         "restarting": "Votre appareil est en train de redémarrer…",
         "Services": "Services",
         "shutting_down": "L'appareil s'éteint…",
-        "fetch_journald": "Récupérer les journaux"
+        "fetch_journald": "Récupérer les journaux",
+        "force_shutdown": "Forcer l'arrêt ?",
+        "force_restart": "Forcer le redémarrage ?",
+        "force_update": "Forcer la mise à jour ?"
     },
     "system_info": {
         "select_request": "Sélectionnez une demande"
@@ -71,7 +74,8 @@
         "Device_Info": "Infos sur l'appareil",
         "Settings": "Paramètres",
         "System_Info": "Infos système",
-        "container_manager": "Gestionnaire de conteneurs"
+        "container_manager": "Gestionnaire de conteneurs",
+        "volume_manager": "Gestionnaire de volume"
     },
     "update_device": "Mettre à jour l'appareil",
     "wifi": {
@@ -113,5 +117,12 @@
     },
     "network": {
         "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
+    },
+    "captive_portal": {
+        "connect_to_wifi": "Se connecter au Wi-Fi",
+        "copy_to_clipboard": "Copier dans le presse-papiers",
+        "Welcome": "Bienvenue",
+        "url_copied": "Copié dans le presse-papiers",
+        "visit_to_begin": "Visitez l'URL suivant dans votre navigateur pour commencer :"
     }
 }
