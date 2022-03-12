@@ -22,7 +22,7 @@
   <div v-if="noData" class="text-center q-mb-md">
     {{ $t('charts.cpu_stats.no_data') }}
   </div>
-  <apexchart
+  <vue-apex-charts
     v-else
     :height="props.height"
     :options="chartOptions"
@@ -33,10 +33,10 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
-import { getCssVar } from 'quasar'
+import { getCssVar, LoadingBar } from 'quasar'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { LoadingBar } from 'quasar'
+import VueApexCharts from 'vue3-apexcharts'
 
 interface cpuStat {
   data: {
@@ -54,6 +54,7 @@ interface series {
 
 export default defineComponent({
   name: 'IntCpuStats',
+  components: { VueApexCharts },
   props: {
     height: {
       type: Number,
