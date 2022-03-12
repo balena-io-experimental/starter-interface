@@ -113,5 +113,9 @@
     },
     "network": {
         "forget_all_wifi": "Esquecer todas as conexões WiFi"
+    },
+    "captive_portal": {
+        "copy_to_clipboard": "Copiar para prancheta",
+        "Welcome": "Bem-vindo/a"
     }
 }
