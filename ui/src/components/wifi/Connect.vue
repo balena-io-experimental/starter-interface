@@ -183,11 +183,9 @@ export default defineComponent({
           type: 'POST',
           path: 'v1/connect',
           params: {
-            network: {
-              ssid: wifiSsid?.value?.ssid,
-              conn_type: wifiSsid?.value?.conn_type,
-              password: password.value
-            }
+            ssid: wifiSsid?.value?.ssid,
+            conn_type: wifiSsid?.value?.conn_type,
+            password: password.value
           }
         })
         .then(() => {
