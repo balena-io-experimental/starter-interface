@@ -1,72 +1,80 @@
 {
-  "titles": {
-    "Device_Info": "Geräteinformationen",
-    "Networking": "Vernetzung",
-    "Settings": "Einstellungen",
-    "System_Info": "Systeminformationen"
-  },
-  "Response": "Antwort",
-  "file_manager": {
-    "001_Mb": "0,01 Mb",
-    "delete": "Löschen",
-    "empty_folder": "Leerer Ordner",
-    "enter_name": "Geben Sie einen Namen ein",
-    "filter": "Filter",
-    "full_screen": "Vollbild",
-    "invalid_filemanager_string": "Sie haben einen ungültigen Namen eingegeben. Die folgenden Zeichen sind nicht kompatibel: /, \\0",
-    "item_already_exists": "Das Element existiert bereits",
-    "Name": "Name",
-    "new_folder": "Neuer Ordner",
-    "no_results_found": "Keine Ergebnisse gefunden",
-    "size_colon": "Größe:",
-    "upload": "Hochladen",
-    "upload_files_exist": "Einige der von Ihnen hinzugefügten Dateien sind bereits vorhanden. Diese Dateien werden überschrieben."
-  },
-  "device_info": {
-    "environment_variables": "Umgebungsvariablen",
-    "ip_address": "IP-Adresse",
-    "location": "Standort",
-    "mac_address": "MAC-Adresse",
-    "not_undervolted": "Normale Leistung",
-    "public_ip": "Öffentliche IP",
-    "response_details": "Details zur Antwort",
-    "memory": "Speicher",
-    "os_version": "Betriebssystemversion",
-    "raw_json": "Rohes JSON"
-  },
-  "general": {
-    "password": "Passwort",
-    "are_you_sure": "Sind Sie sicher?",
-    "close": "Schließen",
-    "Home": "Startseite",
-    "Name": "Name",
-    "Loading": "Wird geladen …"
-  },
-  "wifi": {
-    "no_networks": "Keine Netzwerke verfügbar",
-    "offline": "Offline",
-    "connection_request": "Ihr Gerät versucht nun, eine Verbindung mit dem Netzwerk herzustellen. Wenn es nach einer Minute nicht verfügbar ist, verbinden Sie sich erneut mit dem Gerät und überprüfen Sie, ob Ihr Passwort korrekt ist.",
-    "Connect": "Verbinden",
-    "Disconnect": "Trennen",
-    "password_set": "Passwort festgelegt. Wenn Sie einen Hotspot betreiben, wird dieser neu gestartet.",
-    "set_new_hotspot_password": "Ein neues Hotspot-Passwort festlegen",
-    "online": "Online",
-    "no_wifi_api": "Die Kommunikation mit Balena Py Wi-Fi Connect ist fehlgeschlagen. Vielleicht ist es nicht auf diesem Gerät installiert?",
-    "invalid_password_length": "Das Passwort muss mindestens 8 Zeichen lang sein.",
-    "searching_networks": "Suche nach Netzwerken",
-    "select_ssid": "Wählen Sie eine SSID"
-  },
-  "system": {
-    "Services": "Dienste"
-  },
-  "charts": {
-    "cpu_stats": {
-      "cpu_status": "Prozessor-Status",
-      "no_data": "Die Prozessor-Daten können nicht abgerufen werden.",
-      "show_cores": "Kerne anzeigen",
-      "pause": "Pause",
-      "Core": "Kern",
-      "CPU": "Pozessor"
+    "titles": {
+        "Device_Info": "Geräteinformationen",
+        "Networking": "Vernetzung",
+        "Settings": "Einstellungen",
+        "System_Info": "Systeminformationen"
+    },
+    "Response": "Antwort",
+    "file_manager": {
+        "001_Mb": "0,01 Mb",
+        "delete": "Löschen",
+        "empty_folder": "Leerer Ordner",
+        "enter_name": "Geben Sie einen Namen ein",
+        "filter": "Filter",
+        "full_screen": "Vollbild",
+        "invalid_filemanager_string": "Sie haben einen ungültigen Namen eingegeben. Die folgenden Zeichen sind nicht kompatibel: /, \\0",
+        "item_already_exists": "Das Element existiert bereits",
+        "Name": "Name",
+        "new_folder": "Neuer Ordner",
+        "no_results_found": "Keine Ergebnisse gefunden",
+        "size_colon": "Größe:",
+        "upload": "Hochladen",
+        "upload_files_exist": "Einige der von Ihnen hinzugefügten Dateien sind bereits vorhanden. Diese Dateien werden überschrieben."
+    },
+    "device_info": {
+        "environment_variables": "Umgebungsvariablen",
+        "ip_address": "IP-Adresse",
+        "location": "Standort",
+        "mac_address": "MAC-Adresse",
+        "not_undervolted": "Normale Leistung",
+        "public_ip": "Öffentliche IP",
+        "response_details": "Details zur Antwort",
+        "memory": "Speicher",
+        "os_version": "Betriebssystemversion",
+        "raw_json": "Rohes JSON"
+    },
+    "general": {
+        "password": "Passwort",
+        "are_you_sure": "Sind Sie sicher?",
+        "close": "Schließen",
+        "Home": "Startseite",
+        "Name": "Name",
+        "Loading": "Wird geladen …"
+    },
+    "wifi": {
+        "no_networks": "Keine Netzwerke verfügbar",
+        "offline": "Offline",
+        "connection_request": "Ihr Gerät versucht nun, eine Verbindung mit dem Netzwerk herzustellen. Wenn es nach einer Minute nicht verfügbar ist, verbinden Sie sich erneut mit dem Gerät und überprüfen Sie, ob Ihr Passwort korrekt ist.",
+        "Connect": "Verbinden",
+        "Disconnect": "Trennen",
+        "password_set": "Passwort festgelegt. Wenn Sie einen Hotspot betreiben, wird dieser neu gestartet.",
+        "set_new_hotspot_password": "Ein neues Hotspot-Passwort festlegen",
+        "online": "Online",
+        "no_wifi_api": "Die Kommunikation mit Balena Py Wi-Fi Connect ist fehlgeschlagen. Vielleicht ist es nicht auf diesem Gerät installiert?",
+        "invalid_password_length": "Das Passwort muss mindestens 8 Zeichen lang sein.",
+        "searching_networks": "Suche nach Netzwerken",
+        "select_ssid": "Wählen Sie eine SSID",
+        "refresh_not_compatible": "Ihr Gerät muss neu gestartet werden, um die Liste zu aktualisieren."
+    },
+    "system": {
+        "Services": "Dienste"
+    },
+    "charts": {
+        "cpu_stats": {
+            "cpu_status": "Prozessor-Status",
+            "no_data": "Die Prozessor-Daten können nicht abgerufen werden.",
+            "show_cores": "Kerne anzeigen",
+            "pause": "Pause",
+            "Core": "Kern",
+            "CPU": "Pozessor"
+        }
+    },
+    "captive_portal": {
+        "Welcome": "Willkommen",
+        "connect_to_wifi": "Mit Wi-Fi verbinden",
+        "copy_to_clipboard": "In die Zwischenablage kopieren",
+        "url_copied": "In die Zwischenablage kopiert",
+        "visit_to_begin": "Besuchen Sie die folgende URL in Ihrem Browser, um zu beginnen:"
     }
-  }
 }
