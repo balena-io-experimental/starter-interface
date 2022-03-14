@@ -25,7 +25,10 @@
         "restarting": "O seu dispositivo está reiniciando…",
         "fetch_journald": "Buscar os registros do journald",
         "shutting_down": "Desligando o dispositivo…",
-        "Services": "Serviços"
+        "Services": "Serviços",
+        "force_restart": "Impor o reinício?",
+        "force_update": "Impor a atualização?",
+        "force_shutdown": "Impor o desligamento?"
     },
     "device_info": {
         "location": "Localização",
@@ -71,7 +74,8 @@
         "title": "Interface do usuário do dispositivo Balena",
         "Settings": "Configurações",
         "Networking": "Rede",
-        "System_Info": "Informações do sistema"
+        "System_Info": "Informações do sistema",
+        "volume_manager": "Gerenciador de volumes"
     },
     "update_device": "Atualizar o dispositivo",
     "wifi": {
@@ -115,7 +119,10 @@
         "forget_all_wifi": "Esquecer todas as conexões WiFi"
     },
     "captive_portal": {
-        "copy_to_clipboard": "Copiar para prancheta",
-        "Welcome": "Bem-vindo/a"
+        "copy_to_clipboard": "Copiar para área de transferência",
+        "Welcome": "Bem-vindo/a",
+        "visit_to_begin": "Visite a seguinte URL no seu navegador para começar:",
+        "connect_to_wifi": "Conecte-se ao Wi-Fi",
+        "url_copied": "Foi copiado para a área de transferência"
     }
 }
