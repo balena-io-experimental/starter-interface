@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getSdk } from 'balena-sdk'
 import express from 'express'
@@ -124,6 +130,6 @@ function unlock(cb?: any) {
   return lockFile.unlock('/tmp/balena/updates.lock', cb)
 }
 
-init()
+void init()
 
 export default router

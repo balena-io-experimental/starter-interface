@@ -1,7 +1,11 @@
 import Logger from '@/common/logger'
 import dns = require('dns')
-import express from 'express'
+import express, { Request, Response } from 'express'
 import si from 'systeminformation'
+
+interface reqBodyData {
+  cmd: string
+}
 
 const router = express.Router()
 
@@ -17,362 +21,362 @@ router.get('/v1/system/internet_check', function (_req, res) {
   })
 })
 
-router.post('/v1/system/systeminfo', function (req, res) {
+router.post('/v1/system/systeminfo', function (req: Request, res: Response) {
+  const reqBody = req.body as reqBodyData
   // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/si.js
-  if (req.body.cmd === 'a') {
+  if (reqBody.cmd === 'a') {
     si.audio()
       .then((data) => res.json({ data }))
-      .catch((err) => {
-        console.log(err)
+      .catch((err: JSON) => {
         res.json({ err })
       })
-  } else if (req.body.cmd === 'b') {
+  } else if (reqBody.cmd === 'b') {
     si.bios()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'B') {
+  } else if (reqBody.cmd === 'B') {
     si.baseboard()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'C') {
+  } else if (reqBody.cmd === 'C') {
     si.chassis()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'c') {
+  } else if (reqBody.cmd === 'c') {
     si.cpu()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'd') {
+  } else if (reqBody.cmd === 'd') {
     si.diskLayout()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'D') {
+  } else if (reqBody.cmd === 'D') {
     si.disksIO()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'e') {
+  } else if (reqBody.cmd === 'e') {
     si.blockDevices()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'E') {
+  } else if (reqBody.cmd === 'E') {
     si.fsOpenFiles()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'f') {
+  } else if (reqBody.cmd === 'f') {
     si.fsSize()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'F') {
+  } else if (reqBody.cmd === 'F') {
     si.fsStats()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'g') {
+  } else if (reqBody.cmd === 'g') {
     si.graphics()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'h') {
+  } else if (reqBody.cmd === 'h') {
     si.bluetoothDevices()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'i') {
+  } else if (reqBody.cmd === 'i') {
     si.inetLatency()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'I') {
+  } else if (reqBody.cmd === 'I') {
     si.inetChecksite('https://systeminformation.io')
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'j') {
+  } else if (reqBody.cmd === 'j') {
     si.cpuCurrentSpeed()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'l') {
+  } else if (reqBody.cmd === 'l') {
     si.currentLoad()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'L') {
+  } else if (reqBody.cmd === 'L') {
     si.fullLoad()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'm') {
+  } else if (reqBody.cmd === 'm') {
     si.mem()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'M') {
+  } else if (reqBody.cmd === 'M') {
     si.memLayout()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'o') {
+  } else if (reqBody.cmd === 'o') {
     si.osInfo()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'p') {
+  } else if (reqBody.cmd === 'p') {
     si.processes()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'P') {
+  } else if (reqBody.cmd === 'P') {
     si.processLoad('postgres, login, apache, mysql, nginx, git, node')
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'r') {
+  } else if (reqBody.cmd === 'r') {
     si.printer()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 's') {
+  } else if (reqBody.cmd === 's') {
     si.services('apache2, postgres, wsearch')
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'S') {
+  } else if (reqBody.cmd === 'S') {
     si.shell()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'T') {
+  } else if (reqBody.cmd === 'T') {
     si.cpuTemperature()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'u') {
+  } else if (reqBody.cmd === 'u') {
     si.usb()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'U') {
+  } else if (reqBody.cmd === 'U') {
     si.uuid()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'v') {
+  } else if (reqBody.cmd === 'v') {
     si.versions()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'V') {
+  } else if (reqBody.cmd === 'V') {
     si.vboxInfo()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'w') {
+  } else if (reqBody.cmd === 'w') {
     si.wifiNetworks()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'W') {
+  } else if (reqBody.cmd === 'W') {
     si.wifiInterfaces()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'x') {
+  } else if (reqBody.cmd === 'x') {
     si.wifiConnections()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'y') {
+  } else if (reqBody.cmd === 'y') {
     si.system()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'Y') {
+  } else if (reqBody.cmd === 'Y') {
     si.battery()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === 'z') {
+  } else if (reqBody.cmd === 'z') {
     si.users()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '1') {
+  } else if (reqBody.cmd === '1') {
     si.networkInterfaceDefault()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '2') {
+  } else if (reqBody.cmd === '2') {
     si.networkGatewayDefault()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '3') {
+  } else if (reqBody.cmd === '3') {
     si.networkInterfaces()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '4') {
+  } else if (reqBody.cmd === '4') {
     si.networkStats()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '5') {
+  } else if (reqBody.cmd === '5') {
     si.networkConnections()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '6') {
+  } else if (reqBody.cmd === '6') {
     si.dockerInfo()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '7') {
+  } else if (reqBody.cmd === '7') {
     si.dockerImages()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '8') {
+  } else if (reqBody.cmd === '8') {
     si.dockerContainers(true)
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '9') {
+  } else if (reqBody.cmd === '9') {
     si.dockerContainerStats('*')
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '0') {
+  } else if (reqBody.cmd === '0') {
     si.dockerContainerProcesses('*')
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '+') {
+  } else if (reqBody.cmd === '+') {
     si.dockerVolumes()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === ',') {
+  } else if (reqBody.cmd === ',') {
     si.getStaticData()
       .then((data) => res.json({ data }))
-      .catch((err) => {
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '.') {
+  } else if (reqBody.cmd === '.') {
     si.getDynamicData('apache2, postgres, wsearch')
-      .then((data) => res.json({ data }))
-      .catch((err) => {
+      .then((data: unknown) => res.json({ data }))
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
-  } else if (req.body.cmd === '/') {
+  } else if (reqBody.cmd === '/') {
     si.getAllData('apache2, postgres, wsearch')
-      .then((data) => res.json({ data }))
-      .catch((err) => {
+      .then((data: unknown) => res.json({ data }))
+      .catch((err: JSON) => {
         console.log(err)
         res.json({ err })
       })
