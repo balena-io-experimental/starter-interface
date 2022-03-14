@@ -1,9 +1,19 @@
 import { Request, Response, NextFunction } from 'express'
 import Logger from '@/common/logger'
 
+interface sendResponse extends Response {
+  sendResponse: Response['json']
+}
+
+interface reqBodyData {
+  cacheTimeout: number
+  path: string
+  type: string
+}
+
 interface requestData {
   queueName?: string
-  cachedData?: string
+  cachedData?: JSON
   runtime?: number
 }
 
@@ -16,13 +26,17 @@ class QueueUnique {
   q: Promise<unknown>
 
   constructor(
-    func: (req: Request, res: Response, next: NextFunction) => Promise<unknown>
+    func: (
+      req: Request,
+      res: sendResponse,
+      next: NextFunction
+    ) => Promise<unknown>
   ) {
     this.func = func
     this.q = Promise.resolve()
   }
 
-  add(req: Request, res: Response, next: NextFunction) {
+  add(req: Request, res: sendResponse, next: NextFunction) {
     // Check if the item is already cached
     if (checkCache(req, res) === undefined) {
       return
@@ -30,10 +44,10 @@ class QueueUnique {
 
     // If not cached, add to queue
     const queuedFunc = this.queue(req, res, next)
-    queuedFunc()
+    void queuedFunc()
   }
 
-  queue(req: Request, res: Response, next: NextFunction) {
+  queue(req: Request, res: sendResponse, next: NextFunction) {
     return () => {
       this.q = this.q
         .then(() => this.func(req, res, next))
@@ -45,9 +59,10 @@ class QueueUnique {
   }
 }
 
-const response = (req: Request, res: Response, next: NextFunction) => {
+const response = (req: Request, res: sendResponse, next: NextFunction) => {
   return new Promise((resolve) => {
     const qName = compileQueueName(req)
+    const reqBody = req.body as reqBodyData
 
     // Do another check to see if the request that just finished has created a useful cache
     const cachedItemList = checkCache(req, res)
@@ -61,7 +76,7 @@ const response = (req: Request, res: Response, next: NextFunction) => {
 
       // Return response to user
       res.sendResponse = res.json
-      res.json = (body) => {
+      res.json = (body: JSON) => {
         res.sendResponse(body)
         // Find the current item in the request cache
         const arrayIndex = requestCache?.findIndex(
@@ -81,10 +96,10 @@ const response = (req: Request, res: Response, next: NextFunction) => {
 
       // Return the response to the caller
       res.sendResponse = res.json
-      res.json = (body) => {
+      res.json = (body: JSON) => {
         res.sendResponse(body)
         // Only use cache on GET requests. When not GET, this middleware only acts as a queue.
-        if (req.body.type === 'GET' || req.method === 'GET') {
+        if (reqBody.type === 'GET' || req.method === 'GET') {
           Logger.debug('GET item detected.')
 
           // Check if it is already in cache to avoid duplicates
@@ -112,22 +127,23 @@ const response = (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-function checkCache(req: Request, res: Response) {
+function checkCache(req: Request, res: sendResponse) {
+  const reqBody = req.body as reqBodyData
   // Fetch all cached items related to the current endpoint queue, which is named after the endpoint url
   const cachedItemList = {} as Array<requestData>
   cachedItemList[0] =
     requestCache.find((itm) => itm.queueName === compileQueueName(req)) || {}
 
   // Set the cache timeout for this request based on passed params
-  let cacheTimeout = 0 // By default cache is disabled
+  let cacheTimeout = 0 as number // By default cache is disabled
 
   // Checks whether param is greater than -1 because 0 is seen as falsy
-  if (req.body.cacheTimeout > -1) {
+  if (reqBody.cacheTimeout > -1) {
     // If a cache timeout is provided from the UI then use it
-    cacheTimeout = req.body.cacheTimeout
+    cacheTimeout = reqBody.cacheTimeout
   } else if (req.app.locals.defaultCacheTimeout) {
     // else if there is a default cache set in expressJs, use that
-    cacheTimeout = req.app.locals.defaultCacheTimeout
+    cacheTimeout = req.app.locals.defaultCacheTimeout as number
   }
 
   Logger.debug(`Cache timeout = ${cacheTimeout}`)
@@ -147,22 +163,24 @@ function checkCache(req: Request, res: Response) {
 }
 
 function compileQueueName(req: Request) {
+  const reqBody = req.body as reqBodyData
+  const reqRoute = req.route as Request
   // If a url path is passed then use it to set a custom queue name
-  if (req.body.path) {
-    return `${req.route.path}-${req.body.path}`
+  if (reqBody.path) {
+    return `${reqRoute.path}-${reqBody.path}`
   } else {
-    return req.route.path
+    return reqRoute.path
   }
 }
 
 // Create multipule queues, one for each endpoint
 function sortQueues(req: Request, res: Response, next: NextFunction) {
   // Use the queue name to create a queue within the queues array
-  const qName = compileQueueName(req)
+  const qName = compileQueueName(req) as never
   if (!queue[qName]) {
     queue[qName] = new QueueUnique(response)
   }
-  queue[qName].add(req, res, next)
+  queue[qName].add(req, res as sendResponse, next)
 }
 
 export default sortQueues

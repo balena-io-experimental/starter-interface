@@ -399,7 +399,7 @@ export default defineComponent({
           } else {
             expressApi
               .post('/v1/filemanager/newfolder', {
-                currentPath: objPath.value,
+                currentPathArray: objPath.value,
                 newFolderName: newName
               })
               .then(async () => {
@@ -445,7 +445,7 @@ export default defineComponent({
       loading.value = true
       await expressApi
         .post<Rows[]>('/v1/filemanager/list', {
-          currentPath: objPath.value
+          currentPathArray: objPath.value
         })
         .then((response) => {
           rows.value = response.data

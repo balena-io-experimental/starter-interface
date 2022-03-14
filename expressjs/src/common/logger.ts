@@ -47,7 +47,7 @@ const format = winston.format.combine(
   winston.format.colorize({ all: true }),
   // Define the format of the message showing the timestamp, the level and the message
   winston.format.printf(
-    (info) => `${info.timestamp} ${info.level}: ${info.message}`
+    (info) => `${info.timestamp as string} ${info.level}: ${info.message}`
   )
 )
 

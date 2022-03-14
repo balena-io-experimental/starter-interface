@@ -1,5 +1,10 @@
 import express from 'express'
 import Logger from '@/common/logger'
+
+interface myData {
+  mySentData: string
+}
+
 const router = express.Router()
 
 // Define your custom GET route path and actions
@@ -12,10 +17,11 @@ router.get('/v1/example_route_get', function (_req, res) {
 
 // Define your custom POST route
 router.post('/v1/example_route_post', function (req, res) {
-  // Store the value of paramater `path` as `pathVariable`
-  const pathVariable = req.body.path
+  const reqBody = req.body as myData
+  // Store the value of paramater `mySentData` as `mySentDataVariable`
+  const mySentDataVariable = reqBody.mySentData
   // Log the message to the console
-  Logger.info(pathVariable)
+  Logger.info(mySentDataVariable)
   // Return a message to the caller
   res.json({ message: 'All done.' })
 })

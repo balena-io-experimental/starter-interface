@@ -1,5 +1,5 @@
 import Logger from '@/common/logger'
-import express from 'express'
+import express, { Request, Response } from 'express'
 import formidable from 'formidable'
 import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
@@ -8,6 +8,12 @@ import process from 'process'
 
 interface extendKlawItem extends klawSync.Item {
   type: string
+}
+
+interface reqBodyData {
+  currentPath: string
+  currentPathArray: Array<string>
+  newFolderName: string
 }
 
 const router = express.Router()
@@ -38,7 +44,7 @@ const filterFn = (item: Item) => {
 }
 
 // Fetch files
-function fetchList(currentPath: Array<string>) {
+function fetchList(currentPathArray: Array<string>) {
   // Check the storage directory exists
   if (!fse.existsSync(rootDir)) {
     fse.ensureDir(rootDir).catch((err) => Logger.error(err))
@@ -46,7 +52,7 @@ function fetchList(currentPath: Array<string>) {
 
   // Fetch list of files
   const files = klawSync(
-    validatePath(path.join(rootDir, currentPath.join('/'))),
+    validatePath(path.join(rootDir, currentPathArray.join('/'))),
     {
       depthLimit: 0,
       nodir: true,
@@ -61,7 +67,7 @@ function fetchList(currentPath: Array<string>) {
 
   // Fetch list of folders
   const folders = klawSync(
-    validatePath(path.join(rootDir, currentPath.join('/'))),
+    validatePath(path.join(rootDir, currentPathArray.join('/'))),
     {
       depthLimit: 0,
       nofile: true,
@@ -79,32 +85,42 @@ function fetchList(currentPath: Array<string>) {
 }
 
 // Routes //
-router.post('/v1/filemanager/delete', function (req, res) {
-  fse.remove(validatePath(path.join(req.body.currentPath))).catch((err) => {
+router.post('/v1/filemanager/delete', function (req: Request, res: Response) {
+  const reqBody = req.body as reqBodyData
+  fse.remove(validatePath(path.join(reqBody.currentPath))).catch((err) => {
     Logger.error(err)
   })
   res.json({ message: 'success' })
 })
 
-router.get('/v1/filemanager/download', function (req, res) {
+router.get('/v1/filemanager/download', function (req: Request, res: Response) {
   res.download(validatePath(path.join(req.query.currentPath as string)))
 })
 
-router.post('/v1/filemanager/list', function (req, res) {
-  res.json(fetchList(req.body.currentPath))
+router.post('/v1/filemanager/list', function (req: Request, res: Response) {
+  const reqBody = req.body as reqBodyData
+  res.json(fetchList(reqBody.currentPathArray))
 })
 
-router.post('/v1/filemanager/newfolder', function (req, res) {
-  const newFolder = validatePath(
-    path.join(rootDir, req.body.currentPath.join('/'), req.body.newFolderName)
-  )
+router.post(
+  '/v1/filemanager/newfolder',
+  function (req: Request, res: Response) {
+    const reqBody = req.body as reqBodyData
+    const newFolder = validatePath(
+      path.join(
+        rootDir,
+        reqBody.currentPathArray.join('/'),
+        reqBody.newFolderName
+      )
+    )
 
-  fse.ensureDir(newFolder).catch((err) => Logger.error(err))
+    fse.ensureDir(newFolder).catch((err) => Logger.error(err))
 
-  res.json({ message: 'success' })
-})
+    res.json({ message: 'success' })
+  }
+)
 
-router.post('/v1/filemanager/upload', function (req, res) {
+router.post('/v1/filemanager/upload', function (req: Request, res: Response) {
   const form = new formidable.IncomingForm({
     maxFileSize: 5000 * 1024 * 1024
   })
