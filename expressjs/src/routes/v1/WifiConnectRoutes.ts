@@ -1,4 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
+import createAxiosInstance from '@/common/axios'
 import express, { Request, Response } from 'express'
 import Logger from '@/common/logger'
 import process from 'process'
@@ -12,7 +13,8 @@ interface reqBodyData {
 const router = express.Router()
 
 // Set Axios defaults
-const wifiAxios = axios.create({ timeout: 30000 })
+const wifiAxios = createAxiosInstance()
+wifiAxios.defaults.timeout = 30000
 
 if (process.env.WIFI_CONNECT_BASEURL) {
   wifiAxios.defaults.baseURL = process.env.WIFI_CONNECT_BASEURL

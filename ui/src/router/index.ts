@@ -1,4 +1,3 @@
-import axios, { AxiosError } from 'axios'
 import expressApi from 'axios'
 import { i18n } from 'boot/i18n'
 import { Loading, Notify } from 'quasar'
@@ -59,64 +58,46 @@ export default route(function (/* { store, ssrContext } */) {
     Loading.hide()
   })
 
-  // Set Axios express default url based on quasar.conf.js
+  // Set default baseURL
   expressApi.defaults.baseURL = process.env.ExpressAPI
 
-  // Axios interceptor
-  axios.interceptors.response.use(
+  // Axios request interceptor
+  expressApi.interceptors.request.use(
+    function (config) {
+      return config
+    },
+    function (error: Error) {
+      if (expressApi.isAxiosError(error) && error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        Notify.create({
+          type: 'negative',
+          message: i18n.global.t('general.request_error')
+        })
+      }
+      // Reject with UI Axios error
+      return Promise.reject(error)
+    }
+  )
+
+  // Axios response interceptor
+  expressApi.interceptors.response.use(
     function (response) {
       return response
     },
-    function (error: Error | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(
-            `Error. Axios returned status code: ${error.response.status}`
-          )
-          console.log(error.response.data)
-          console.log(error.response.headers)
-          // Notify of 404 errors, resulting from endpoints not being available
-          if (error.response.status === 404) {
-            Notify.create({
-              type: 'negative',
-              message: '404'
-            })
-          }
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log('Axios received no response.')
-          console.log(error.request)
-          // Display an error message
-          Notify.create({
-            type: 'negative',
-            message: i18n.global.t('general.request_error')
-          })
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Unknown Axios error.')
-          console.log(error.message)
-          // Display an error message
-          Notify.create({
-            type: 'negative',
-            message: `${i18n.global.t('general.Error')}: ${error.message}`
-          })
-        }
-        // Reject with UI Axios error
-        return Promise.reject(error)
-      } else {
-        console.log(error)
-        // Display an error message
+    function (error: Error) {
+      if (expressApi.isAxiosError(error) && error.response) {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
         Notify.create({
           type: 'negative',
-          message: i18n.global.t('general.Error')
+          message: `${i18n.global.t('general.Error')}: ${error.response.status}`
         })
-        return Promise.reject(error)
       }
+      // Reject with UI Axios error
+      return Promise.reject(error)
     }
   )
+
   return Router
 })
