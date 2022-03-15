@@ -105,7 +105,6 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios'
 import expressApi, { AxiosError } from 'axios'
 import { qBtnStyle } from 'components/styles/qStyles'
 import { useQuasar } from 'quasar'
@@ -162,10 +161,8 @@ export default defineComponent({
           }
         })
         .catch(function (err: Error | AxiosError) {
-          if (axios.isAxiosError(err)) {
+          if (expressApi.isAxiosError(err)) {
             if (err.response) {
-              notify('negative', t('wifi.network_request_fail'))
-            } else {
               notify('warning', t('wifi.no_wifi_api'))
             }
           }

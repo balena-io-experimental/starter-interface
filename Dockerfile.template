@@ -23,7 +23,11 @@ ENV NODE_ENV=development
 # The network timeout prevents build timeouts when building on devices with slow SD cards
 RUN yarn install --network-timeout 600000 --frozen-lockfile
 
+# Copy source files to container
 COPY expressjs .
+
+# Run lint to ensure build fails if there are coding issues
+RUN yarn lint
 
 RUN yarn build
 
