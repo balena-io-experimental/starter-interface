@@ -13,6 +13,3 @@ export default {
   'nb-NO': nbNO,
   'pt-BR': ptBR
 }
-
-// Don't forget to import the Quasar language pack too. Edit the line
-// begining with: /* webpackInclude in MainLayout.vue.

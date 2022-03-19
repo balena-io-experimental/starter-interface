@@ -1,6 +1,6 @@
 ## Build ExpressJS node_modules
 ## Done here to stop yarn leaving cache and other litter in the final container
-FROM node:16.13.2-alpine3.14 AS ejs-node-build
+FROM node:16.13.2-alpine3.15 AS ejs-node-build
 
 ENV NODE_ENV=production
 
@@ -33,7 +33,7 @@ RUN yarn build
 
 
 ## Build user interface
-FROM node:16.13.2-alpine3.14 AS ui-build-step
+FROM node:16.13.2-alpine3.15 AS ui-build-step
 
 WORKDIR /build-context
 
@@ -49,7 +49,7 @@ RUN yarn build
 
 
 ## Compile container
-FROM node:16.13.2-alpine3.14
+FROM node:16.13.2-alpine3.15
 
 ENV NODE_ENV=production
 

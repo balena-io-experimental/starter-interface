@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { boot } from 'quasar/wrappers'
 import { createI18n } from 'vue-i18n'
+
 import messages from 'src/i18n'
 
 const i18n = createI18n({
+  globalInjection: true,
   locale: 'en-US',
   messages
 })
 
-export default ({ app }: { app: any }) => {
+export default boot(({ app }) => {
   // Set i18n instance on app
   app.use(i18n)
-}
+})
 
 export { i18n }

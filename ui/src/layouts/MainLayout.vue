@@ -84,7 +84,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false)
     const { locale } = useI18n({ useScope: 'global' })
 
-    // Langauge need to be added here, and in the import statement below
+    // Langauges need to be added here.
     const localeOptions = [
       { value: 'en-US', label: 'English' },
       { value: 'de', label: 'Deutsch' },
@@ -97,12 +97,7 @@ export default defineComponent({
     // Quasar requires the Quasar language pack to be set seperate from Vue i18n
     watch(locale, (val) => {
       // Dynamic import, so loading on demand only
-      import(
-        // Set which Quasar language packs to import below:
-        // https://quasar.dev/options/quasar-language-packs#dynamical-non-ssr-
-        /* webpackInclude: /(en-US|de|fr|it|nb-NO|pt-BR)\.js$/ */
-        `quasar/lang/${val}`
-      )
+      import(`./quasar/lang/${val}/index.js`)
         .then((lang: { default: QuasarLanguage }) => {
           $q.lang.set(lang.default)
           $q.localStorage.set('lang', lang.default.isoName)
