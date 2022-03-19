@@ -10,16 +10,7 @@ import {
 } from 'vue-router'
 import routes from './routes'
 
-/*
- * If not building with SSR mode, you can
- * directly export the Router instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Router instance.
- */
-
-export default route(function (/* { store, ssrContext } */) {
+export default route(async function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
@@ -55,8 +46,11 @@ export default route(function (/* { store, ssrContext } */) {
     Loading.hide()
   })
 
-  // Set default baseURL
-  expressApi.defaults.baseURL = process.env.ExpressAPI
+  if (process.env.BACKEND_PORT) {
+    expressApi.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${process.env.BACKEND_PORT}`
+  } else if (!process.env.ON_DEVICE) {
+    expressApi.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}`
+  }
 
   // Axios request interceptor
   expressApi.interceptors.request.use(

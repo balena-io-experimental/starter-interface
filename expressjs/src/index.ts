@@ -54,5 +54,5 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(speedLimiter)
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+  console.log(`ExpressJS: listening on port ${port}`)
 })

@@ -1,10 +1,10 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
+    "baseUrl": ".",
     "composite": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
       "app/*": ["*"],

@@ -19,11 +19,11 @@ interface reqBodyData {
 const router = express.Router()
 
 // Root directory for files
-let rootDir = '/app/storage/'
+let rootDir = path.join(__dirname + '/dev-storage/')
 
-// In dev mode, change local directory
-if (process.env.NODE_ENV !== 'production') {
-  rootDir = path.join(__dirname + '/dev-storage/')
+// If on a Balena device, change local directory to local volume
+if (process.env.ON_DEVICE) {
+  rootDir = '/app/storage/'
 }
 
 // Prevent Directory Traversal and Null Bytes
