@@ -97,7 +97,7 @@ module.exports = configure(function (/* ctx */) {
     devServer: {
       https: false,
       host: '0.0.0.0',
-      open: true // opens browser window automatically
+      open: process.env.ON_DEVICE ? false : true
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

@@ -4,17 +4,17 @@ services:
   balena-device-ui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.dev
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
-      ON_DEVICE: true # Specify that this is being deployed to hardware with Balena OS
-      SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
+      ON_DEVICE: "true" # Specify that this is being deployed to hardware with Balena OS
+      BACKEND_PORT: 3000 # Change port to allow room for UI to be on port 80
     restart: always
     ports:
       - "80:80"
+      - "3000:3000"
     volumes:
-      - "bdu_db:/app/db" # Stores UI database files
-      - "bdu_storage:/app/storage" # Storage for the Volume Manager. See docs for more info.
+      - "dev_app:/app"
 
     # If using the Volume Manager to access volumes on other containers, ensure this container `depends_on` your
     # other container using the below:
@@ -24,6 +24,19 @@ services:
     labels:
       io.balena.features.supervisor-api: 1
       io.balena.features.balena-api: 1
+
+  nfs:
+    environment:
+      NFS_EXPORT_0: "/nfs *(rw,sync,no_subtree_check,no_auth_nlm,insecure,all_squash,anonuid=1026,anongid=100,fsid=root)"
+    image: ghcr.io/maggie0002/docker-nfs
+    network_mode: "host"
+    restart: always
+    depends_on:
+      - balena-device-ui
+    volumes:
+      - "dev_app:/nfs"
+    cap_add:
+      - SYS_ADMIN
 
   ## Optional Wi-Fi controller:
   ## https://github.com/maggie0002/balena-py-wifi-connect
@@ -38,7 +51,7 @@ services:
 
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
-    image: ghcr.io/maggie0002/py-wifi-connect:latest
+    image: ghcr.io/maggie0002/py-wifi-connect
     network_mode: "host"
     restart: always
     volumes:
@@ -50,6 +63,5 @@ services:
     privileged: true # This can be removed if you do not need the LED indicator.
 
 volumes:
-  bdu_db:
-  bdu_storage:
+  dev_app:
   pwc_db:
