@@ -10,14 +10,19 @@
 </template>
 
 <script lang="ts">
-import DeviceInfo from 'components/system/DeviceInfo.vue'
-import OfflineDeviceInfo from 'components/system/OfflineDeviceInfo.vue'
 import { internetConnectivity } from 'src/api/SystemRequests'
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',
-  components: { DeviceInfo, OfflineDeviceInfo },
+  components: {
+    DeviceInfo: defineAsyncComponent(
+      () => import('components/system/DeviceInfo.vue')
+    ),
+    OfflineDeviceInfo: defineAsyncComponent(
+      () => import('components/system/OfflineDeviceInfo.vue')
+    )
+  },
   setup() {
     return { internetConnectivity }
   }

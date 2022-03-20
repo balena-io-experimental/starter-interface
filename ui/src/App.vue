@@ -3,12 +3,15 @@
   <router-view v-else />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import CaptivePortal from 'components/layouts/CaptivePortal.vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'App',
-  components: { CaptivePortal },
+  components: {
+    CaptivePortal: defineAsyncComponent(
+      () => import('components/layouts/CaptivePortal.vue')
+    )
+  },
   setup() {
     const currentPage = location.hash
     return { currentPage }
