@@ -71,7 +71,9 @@
     "Wrong_way": "Wrong way…"
   },
   "network": {
-    "forget_all_wifi": "Forget All WiFi Connections"
+    "forget_all_wifi": "Forget All WiFi Connections",
+    "network_connection_down": "You are no longer connected to a network.",
+    "network_connection_restored": "Network connection restored."
   },
   "supervisor_config": "Supervisor Config",
   "system": {
