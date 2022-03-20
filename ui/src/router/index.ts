@@ -33,14 +33,6 @@ export default route(async function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
-  Router.beforeResolve((_to, _from, next) => {
-    // Show the loading indicator on a page change.
-    Loading.show({
-      delay: 300 // ms
-    })
-    next()
-  })
-
   Router.afterEach(() => {
     // Complete the animation of the loading indicator after page change.
     Loading.hide()

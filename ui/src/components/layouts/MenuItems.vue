@@ -1,5 +1,5 @@
 <template>
-  <q-item v-ripple:secondary clickable @click="$router.replace({ name: path })">
+  <q-item v-ripple:secondary clickable @click="clickedLink(path)">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
@@ -10,7 +10,9 @@
 </template>
 
 <script lang="ts">
+import { useQuasar } from 'quasar'
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'IntMenuItemsComponent',
@@ -27,6 +29,18 @@ export default defineComponent({
       type: String,
       default: ''
     }
+  },
+  setup() {
+    const $q = useQuasar()
+    const $router = useRouter()
+
+    function clickedLink(path: string) {
+      // Starts the loading indicator here, then stops it in the
+      // Router.afterEach function in ui/src/router
+      $q.loading.show()
+      $router.replace({ name: path })
+    }
+    return { clickedLink }
   }
 })
 </script>
