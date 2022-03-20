@@ -72,8 +72,6 @@ export default defineComponent({
   setup() {
     // Import required features
     const $q = useQuasar()
-
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     const SSIDInput = ref<QForm>()

@@ -147,13 +147,16 @@ import CpuStats from 'components/charts/CpuStats.vue'
 import { useQuasar } from 'quasar'
 import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'IntDeviceInfoComponent',
   components: { CpuStats },
   setup() {
-    const loading = ref<boolean>(true)
     const $q = useQuasar()
+    const { t } = useI18n()
+
+    const loading = ref<boolean>(true)
     const response = ref<AxiosResponse>()
 
     async function getDeviceInfo() {
@@ -164,6 +167,10 @@ export default defineComponent({
         })
         .catch(function (error: Error | AxiosError) {
           console.log(error)
+          $q.notify({
+            type: 'negative',
+            message: t('device_info.sdk_unavailable')
+          })
         })
     }
 

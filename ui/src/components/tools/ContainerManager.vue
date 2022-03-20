@@ -81,7 +81,6 @@ interface containers extends QTableProps {
 export default defineComponent({
   name: 'IntPingComponent',
   setup() {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
     const $q = useQuasar()
 
