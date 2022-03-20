@@ -70,7 +70,6 @@ export default defineComponent({
   },
   setup() {
     const $q = useQuasar()
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     const hostname = ref<string>()

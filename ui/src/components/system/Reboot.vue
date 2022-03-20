@@ -59,7 +59,6 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'IntRebootComponent',
   setup() {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
     const $q = useQuasar()
 
