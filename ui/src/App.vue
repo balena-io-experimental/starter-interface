@@ -19,9 +19,14 @@ export default defineComponent({
     const $q = useQuasar()
     const { t } = useI18n()
 
+    // Show loading indicator as early as possible in loading process.
+    // Is disabled by the router afterEach function in router/index.ts
+    $q.loading.show()
+
+    // Get the current page path to check if this is a captive portal
     const currentPage = location.hash
 
-    // Set a dismiss function var and remove immediately
+    // Set a dismiss function var and remove immediately to store function in var
     let dismiss = $q.notify({})
     dismiss()
 
