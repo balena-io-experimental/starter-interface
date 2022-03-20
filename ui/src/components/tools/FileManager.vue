@@ -295,11 +295,7 @@ export default defineComponent({
     ])
 
     onMounted(async () => {
-      $q.loading.show()
-
       await updateRows()
-
-      $q.loading.hide()
     })
 
     function checkUploadOverwrite(files: Array<QUploaderProps['onAdded']>) {
