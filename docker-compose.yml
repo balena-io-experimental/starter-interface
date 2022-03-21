@@ -7,11 +7,13 @@ services:
       dockerfile: Dockerfile.template
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
+      SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
     restart: always
     ports:
       - "80:80"
     volumes:
-      - "storage:/app/storage"
+      - "bdu_db:/app/db" # Stores UI database files
+      - "bdu_storage:/app/storage" # Storage for the Volume Manager. See docs for more info.
 
     # If using the Volume Manager to access volumes on other containers, ensure this container `depends_on` your
     # other container using the below:
@@ -39,24 +41,14 @@ services:
     network_mode: "host"
     restart: always
     volumes:
-      - "py_wifi_connect_db:/app/db" # Optional if not setting the hotspot ssid and password via the API
+      - "pwc_db:/app/db" # Optional if not setting the hotspot ssid and password via the API
     labels:
       io.balena.features.dbus: "1"
     cap_add:
       - NET_ADMIN
     privileged: true # This can be removed if you do not need the LED indicator.
 
-  mdns-advertise:
-    image: ghcr.io/nucleardreamer/mdns-advertise
-    restart: "always"
-    privileged: true
-    network_mode: host
-    labels:
-      io.balena.features.dbus: "1"
-    environment:
-      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
-      MDNS_TLD: "balena.local"
-
 volumes:
-  py_wifi_connect_db:
-  storage:
+  bdu_db:
+  bdu_storage:
+  pwc_db:

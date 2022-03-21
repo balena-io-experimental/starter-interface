@@ -1,3 +1,4 @@
+import boot from '@/boot'
 import cors from 'cors'
 import express from 'express'
 import process from 'process'
@@ -11,6 +12,10 @@ import SystemRoutes from '@/routes/v1/SystemRoutes'
 import TestRoutes from '@/routes/v1/TestRoutes'
 import WifiRoutes from '@/routes/v1/WifiConnectRoutes'
 
+// Run custom boot processes
+boot()
+
+// Set backend port number
 const port = process.env.BACKEND_PORT || 80
 
 // Speed limit API requests. Useful for FileManager that can require large number of requests for
