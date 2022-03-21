@@ -42,7 +42,9 @@ async function setNewHostname() {
       }
     })
     await setHostnameLockfile()
-    Logger.warn('Hostname changed.')
+    Logger.warn(
+      'Hostname changed. If your device is not accessible on your new hostname, try restarting the device.'
+    )
   } catch (error) {
     Logger.error('Error setting new hostname.')
   }
