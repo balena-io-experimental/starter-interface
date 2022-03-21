@@ -72,6 +72,7 @@ import { QTableProps } from 'quasar'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
+import { AxiosResponse } from 'axios'
 
 interface containers extends QTableProps {
   serviceName: string
@@ -127,69 +128,67 @@ export default defineComponent({
 
     async function getContainer() {
       loading.value = true
-      await supervisorRequests
-        .state_status()
-        .then((res: { data: { containers: containers[] } }) => {
-          rows.value = res.data.containers
-        })
-        .catch(function (error) {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-          console.log(error)
-        })
+
+      try {
+        const res: AxiosResponse<{ containers: containers[] }> =
+          await supervisorRequests.state_status()
+        rows.value = res.data.containers
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+        console.log(error)
+      }
+
       loading.value = false
     }
 
     async function restartContainer(serviceName: string) {
       loading.value = true
-      await supervisorRequests
-        .restart_service(serviceName)
-        .then(async (res) => {
-          await getContainer()
-          $q.notify({
-            type: 'positive',
-            message: res.data as string
-          })
+      try {
+        const res = await supervisorRequests.restart_service(serviceName)
+
+        await getContainer()
+        $q.notify({
+          type: 'positive',
+          message: res.data as string
         })
-        .catch(function (error) {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-          console.log(error)
-        })
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+        console.log(error)
+      }
       loading.value = false
     }
 
     async function startContainer(serviceName: string) {
       loading.value = true
-      await supervisorRequests
-        .start_service(serviceName)
-        .then(async (res) => {
-          await getContainer()
-          $q.notify({
-            type: 'positive',
-            message: res.data as string
-          })
+      try {
+        const res = await supervisorRequests.start_service(serviceName)
+
+        await getContainer()
+        $q.notify({
+          type: 'positive',
+          message: res.data as string
         })
-        .catch(function (error) {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-          console.log(error)
-        })
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+        console.log(error)
+      }
       loading.value = false
     }
 
     async function stopContainer(serviceName: string) {
       loading.value = true
-      await supervisorRequests
-        .stop_service(serviceName)
-        .then(async (res) => {
-          await getContainer()
-          $q.notify({
-            type: 'positive',
-            message: res.data as string
-          })
+      try {
+        const res = await supervisorRequests.stop_service(serviceName)
+
+        await getContainer()
+        $q.notify({
+          type: 'positive',
+          message: res.data as string
         })
-        .catch(function (error) {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-          console.log(error)
-        })
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+        console.log(error)
+      }
       loading.value = false
     }
 

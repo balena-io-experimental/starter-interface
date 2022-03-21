@@ -53,41 +53,41 @@ export default defineComponent({
     const $q = useQuasar()
     const { t } = useI18n()
 
-    function forget() {
+    async function forget() {
       submitting.value = true
-      expressApi
-        .post('/v1/wifi', {
+
+      try {
+        await expressApi.post('/v1/wifi', {
           type: 'POST',
           path: 'v1/forget',
           params: {
             all_networks: true
           }
         })
-        .then(() => {
-          // Delay to improve interface interaction
-          setTimeout(() => {
-            $q.notify({
-              type: 'positive',
-              multiLine: true,
-              timeout: 0,
-              actions: [
-                {
-                  label: t('general.close'),
-                  color: 'white',
-                  handler: () => {
-                    /* ... */
-                  }
+
+        // Delay to improve interface interaction
+        setTimeout(() => {
+          $q.notify({
+            type: 'positive',
+            multiLine: true,
+            timeout: 0,
+            actions: [
+              {
+                label: t('general.close'),
+                color: 'white',
+                handler: () => {
+                  /* ... */
                 }
-              ],
-              message: t('wifi.disconnect_request_sent')
-            })
-            submitting.value = false
-          }, 1000)
-        })
-        .catch(function () {
-          $q.notify({ type: 'negative', message: t('general.Error') })
+              }
+            ],
+            message: t('wifi.disconnect_request_sent')
+          })
           submitting.value = false
-        })
+        }, 1000)
+      } catch {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+        submitting.value = false
+      }
     }
 
     return {

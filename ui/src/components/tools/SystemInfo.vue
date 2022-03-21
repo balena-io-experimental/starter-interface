@@ -90,16 +90,15 @@ export default defineComponent({
     async function getSystemInfo(model: { cmd: string } | null) {
       if (model != null) {
         loadingRequest.value = true
-        await expressApi
-          .post('/v1/system/systeminfo', {
+        try {
+          const res = await expressApi.post('/v1/system/systeminfo', {
             cmd: model.cmd
           })
-          .then((res) => {
-            response.value = res
-          })
-          .catch(function () {
-            loadingRequest.value = false
-          })
+
+          response.value = res
+        } catch {
+          loadingRequest.value = false
+        }
       }
       loadingRequest.value = false
     }

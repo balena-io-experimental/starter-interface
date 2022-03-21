@@ -148,29 +148,28 @@ export default defineComponent({
     async function checkWifiStatus() {
       $q.loading.show()
 
-      await expressApi
-        .post<wifiStatus>('/v1/wifi', {
+      try {
+        const response = await expressApi.post<wifiStatus>('/v1/wifi', {
           type: 'GET',
           path: 'v1/connection_status'
         })
-        .then(async (response) => {
-          if (!response.data.wifi) {
-            wifiStatus.value = false
-            await fetchNetworks()
-          }
-        })
-        .catch(function () {
-          notify('warning', t('wifi.no_wifi_api'))
-          noWifiConnect.value = true
-        })
+
+        if (!response.data.wifi) {
+          wifiStatus.value = false
+          await fetchNetworks()
+        }
+      } catch {
+        notify('warning', t('wifi.no_wifi_api'))
+      }
+      noWifiConnect.value = true
       $q.loading.hide()
     }
 
     // Send connect request
     async function connect() {
       submitting.value = true
-      await expressApi
-        .post('/v1/wifi', {
+      try {
+        await expressApi.post('/v1/wifi', {
           type: 'POST',
           path: 'v1/connect',
           params: {
@@ -179,64 +178,61 @@ export default defineComponent({
             password: password.value
           }
         })
-        .then(() => {
-          wifiStatus.value = true
-          // Delay to improve interface interaction
-          setTimeout(() => {
-            notify('positive', t('wifi.connection_request'))
-            submitting.value = false
-          }, 2000)
-        })
-        .catch(function () {
-          notify('negative', t('wifi.network_connect_fail'))
+
+        wifiStatus.value = true
+        // Delay to improve interface interaction
+        setTimeout(() => {
+          notify('positive', t('wifi.connection_request'))
           submitting.value = false
-        })
+        }, 2000)
+      } catch {
+        notify('negative', t('wifi.network_connect_fail'))
+        submitting.value = false
+      }
       password.value = ''
     }
 
     async function fetchNetworks() {
       $q.loading.show({ message: t('wifi.searching_networks') })
-      await expressApi
-        .post<networksData>('/v1/wifi', {
+      try {
+        const response = await expressApi.post<networksData>('/v1/wifi', {
           type: 'GET',
           path: 'v1/list_access_points'
         })
-        .then((response) => {
-          refreshCompatible.value = response.data.iw_compatible
-          ssids.value = response.data.ssids
-          if (ssids.value.length === 0) {
-            notify('warning', t('wifi.no_networks'))
-          }
-        })
-        .catch(function () {
-          notify('negative', t('wifi.network_fetch_fail'))
-        })
+
+        refreshCompatible.value = response.data.iw_compatible
+        ssids.value = response.data.ssids
+        if (ssids.value.length === 0) {
+          notify('warning', t('wifi.no_networks'))
+        }
+      } catch {
+        notify('negative', t('wifi.network_fetch_fail'))
+      }
       submitting.value = false
       $q.loading.hide()
     }
 
-    function forget() {
+    async function forget() {
       submitting.value = true
-      expressApi
-        .post('/v1/wifi', {
+      try {
+        await expressApi.post('/v1/wifi', {
           type: 'POST',
           path: 'v1/forget',
           params: {
             all_networks: false
           }
         })
-        .then(() => {
-          wifiStatus.value = false
-          // Delay to improve interface interaction
-          setTimeout(() => {
-            notify('positive', t('wifi.disconnect_request_sent'))
-            submitting.value = false
-          }, 1000)
-        })
-        .catch(function () {
-          notify('negative', t('wifi.network_forget_fail'))
+
+        wifiStatus.value = false
+        // Delay to improve interface interaction
+        setTimeout(() => {
+          notify('positive', t('wifi.disconnect_request_sent'))
           submitting.value = false
-        })
+        }, 1000)
+      } catch {
+        notify('negative', t('wifi.network_forget_fail'))
+        submitting.value = false
+      }
     }
 
     function notify(type: string, message: string) {

@@ -357,22 +357,21 @@ export default defineComponent({
 
     async function download(row: Rows) {
       loading.value = true
-      await expressApi
-        .get('/v1/filemanager/download', {
+      try {
+        const response = await expressApi.get('/v1/filemanager/download', {
           responseType: 'blob',
           params: {
             currentPath: row.path
           }
         })
-        .then((response) =>
-          FileDownload(
-            response.data as string,
-            row.path.split('/').pop() as string
-          )
+
+        FileDownload(
+          response.data as string,
+          row.path.split('/').pop() as string
         )
-        .catch(function () {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-        })
+      } catch {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+      }
       loading.value = false
     }
 
@@ -385,7 +384,7 @@ export default defineComponent({
           isValid: (val) => val !== ''
         },
         cancel: true
-      }).onOk((newName: string) => {
+      }).onOk(async (newName: string) => {
         if (invalidCharacters.value.some((el) => newName.includes(el))) {
           $q.notify({
             type: 'negative',
@@ -398,18 +397,17 @@ export default defineComponent({
               message: t('file_manager.item_already_exists')
             })
           } else {
-            expressApi
-              .post('/v1/filemanager/newfolder', {
+            try {
+              await expressApi.post('/v1/filemanager/newfolder', {
                 currentPathArray: objPath.value,
                 newFolderName: newName
               })
-              .then(async () => {
-                await updateRows()
-                notifyComplete()
-              })
-              .catch(function () {
-                $q.notify({ type: 'negative', message: t('general.Error') })
-              })
+
+              await updateRows()
+              notifyComplete()
+            } catch {
+              $q.notify({ type: 'negative', message: t('general.Error') })
+            }
           }
         }
       })
@@ -444,16 +442,15 @@ export default defineComponent({
 
     async function updateRows() {
       loading.value = true
-      await expressApi
-        .post<Rows[]>('/v1/filemanager/list', {
+      try {
+        const response = await expressApi.post<Rows[]>('/v1/filemanager/list', {
           currentPathArray: objPath.value
         })
-        .then((response) => {
-          rows.value = response.data
-        })
-        .catch(function () {
-          $q.notify({ type: 'negative', message: t('general.Error') })
-        })
+
+        rows.value = response.data
+      } catch {
+        $q.notify({ type: 'negative', message: t('general.Error') })
+      }
       loading.value = false
     }
 

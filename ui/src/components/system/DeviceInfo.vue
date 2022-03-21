@@ -142,7 +142,7 @@
 
 <script lang="ts">
 import { sdkRequests } from 'src/api/SdkRequests'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import CpuStats from 'components/charts/CpuStats.vue'
 import { useQuasar } from 'quasar'
 import { internetConnectivity } from 'src/api/SystemRequests'
@@ -160,18 +160,16 @@ export default defineComponent({
     const response = ref<AxiosResponse>()
 
     async function getDeviceInfo() {
-      await sdkRequests
-        .device()
-        .then((res: AxiosResponse) => {
-          response.value = res
+      try {
+        const res = await sdkRequests.device()
+        response.value = res
+      } catch (error) {
+        console.log(error)
+        $q.notify({
+          type: 'negative',
+          message: t('device_info.sdk_unavailable')
         })
-        .catch(function (error: Error | AxiosError) {
-          console.log(error)
-          $q.notify({
-            type: 'negative',
-            message: t('device_info.sdk_unavailable')
-          })
-        })
+      }
     }
 
     onMounted(async () => {

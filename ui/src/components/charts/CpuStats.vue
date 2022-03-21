@@ -177,73 +177,72 @@ export default defineComponent({
 
     async function fetchCpuStats() {
       for (;;) {
-        await expressApi
-          .post<AxiosResponse>('/v1/system/systeminfo', {
-            cmd: 'l'
-          })
-          .then(async (res) => {
-            // Fetch the data from the response
-            const cpuStat: cpuStat = res.data
+        try {
+          const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
+            '/v1/system/systeminfo',
+            {
+              cmd: 'l'
+            }
+          )
 
-            if (!coresToggle.value) {
-              if (!series.value[0]) {
-                series.value[0] = {
-                  name: t('charts.cpu_stats.CPU'),
-                  data: [
-                    [
-                      new Date().getTime(),
-                      parseInt(cpuStat.data.currentLoad).toFixed(0)
-                    ]
+          if (!coresToggle.value) {
+            if (!series.value[0]) {
+              series.value[0] = {
+                name: t('charts.cpu_stats.CPU'),
+                data: [
+                  [
+                    new Date().getTime(),
+                    parseInt(cpuStat.data.data.currentLoad).toFixed(0)
                   ]
-                }
-              } else {
-                // If there are more than X items in the object, remove one
-                // to avoid it growing too big
-                if (series.value[0].data.length > props.maxDataPoints) {
-                  series.value[0].data.shift()
-                }
-
-                // Add the fetched data in to the chart data
-                series.value[0].data.push([
-                  new Date().getTime(),
-                  parseInt(cpuStat.data.currentLoad).toFixed(0)
-                ])
+                ]
               }
             } else {
-              if (cpuStat.data.cpus) {
-                let i = 0
-                cpuStat.data.cpus.forEach(function (value) {
-                  if (!series.value[i]) {
-                    series.value[i] = {
-                      name: `${t('charts.cpu_stats.Core')} ${i + 1}`,
-                      data: [
-                        [new Date().getTime(), parseInt(value.load).toFixed(0)]
-                      ]
-                    }
-                  } else {
-                    // If there are more than X items in the object, remove one
-                    // to avoid it growing too big
-                    if (series.value[i].data.length > props.maxDataPoints) {
-                      series.value[i].data.shift()
-                    }
-
-                    series.value[i].data.push([
-                      new Date().getTime(),
-                      parseInt(value.load).toFixed(0)
-                    ])
-                  }
-                  i = i + 1
-                })
+              // If there are more than X items in the object, remove one
+              // to avoid it growing too big
+              if (series.value[0].data.length > props.maxDataPoints) {
+                series.value[0].data.shift()
               }
+
+              // Add the fetched data in to the chart data
+              series.value[0].data.push([
+                new Date().getTime(),
+                parseInt(cpuStat.data.data.currentLoad).toFixed(0)
+              ])
             }
-            // Delay before calling next fetch
-            await delay(props.pollInterval)
-          })
-          .catch(function () {
-            // On error, stop the polling
-            noData.value = true
-            unMounted.value = true
-          })
+          } else {
+            if (cpuStat.data.data.cpus) {
+              let i = 0
+              cpuStat.data.data.cpus.forEach(function (value) {
+                if (!series.value[i]) {
+                  series.value[i] = {
+                    name: `${t('charts.cpu_stats.Core')} ${i + 1}`,
+                    data: [
+                      [new Date().getTime(), parseInt(value.load).toFixed(0)]
+                    ]
+                  }
+                } else {
+                  // If there are more than X items in the object, remove one
+                  // to avoid it growing too big
+                  if (series.value[i].data.length > props.maxDataPoints) {
+                    series.value[i].data.shift()
+                  }
+
+                  series.value[i].data.push([
+                    new Date().getTime(),
+                    parseInt(value.load).toFixed(0)
+                  ])
+                }
+                i = i + 1
+              })
+            }
+          }
+          // Delay before calling next fetch
+          await delay(props.pollInterval)
+        } catch {
+          // On error, stop the polling
+          noData.value = true
+          unMounted.value = true
+        }
         if (unMounted.value) {
           return
         }

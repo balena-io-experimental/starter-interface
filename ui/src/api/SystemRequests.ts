@@ -13,11 +13,11 @@ export const internetConnectivity = reactive({
 
 export const system = {
   async checkInternetConnection() {
-    await expressApi
-      .get<internetConnection>(`${apiPathV1}/internet_check`)
-      .then((res) => {
-        internetConnectivity.status = res.data.internet
-      })
+    const response = await expressApi.get<internetConnection>(
+      `${apiPathV1}/internet_check`
+    )
+
+    internetConnectivity.status = response.data.internet
     return internetConnectivity.status
   }
 }

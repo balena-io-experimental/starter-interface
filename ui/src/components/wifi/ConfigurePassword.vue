@@ -106,19 +106,19 @@ export default defineComponent({
         return
       }
       submitting.value = true
-      await expressApi
-        .post('/v1/wifi', {
+      try {
+        await expressApi.post('/v1/wifi', {
           type: 'POST',
           path: 'v1/set_hotspot_password',
           params: { password: passwordText.value }
         })
-        .then(() => {
-          notify('positive', t('wifi.password_set'))
-          submitting.value = false
-        })
-        .catch(function () {
-          notify('negative', t('wifi.no_wifi_api'))
-        })
+
+        notify('positive', t('wifi.password_set'))
+        submitting.value = false
+      } catch {
+        notify('negative', t('wifi.no_wifi_api'))
+      }
+
       passwordText.value = ''
       submitting.value = false
     }
