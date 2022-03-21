@@ -84,9 +84,9 @@ export default defineComponent({
       }
     })
 
-    const copyUrl = () => {
+    const copyUrl = async () => {
       if (hostname.value) {
-        void copyToClipboard(`http://${hostname.value}.local`)
+        await copyToClipboard(`http://${hostname.value}.local`)
         $q.notify(t('captive_portal.url_copied'))
       }
     }
