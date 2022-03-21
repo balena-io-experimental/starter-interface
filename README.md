@@ -30,3 +30,5 @@ Some of the features include:
 # Documentation
 
 Use of the UI and technical details can be found on the [wiki](https://github.com/maggie0002/balena-device-ui/wiki).
+
+The [Getting Started](https://github.com/maggie0002/balena-device-ui/wiki/Getting-Started) guide is a good place to start.
