@@ -53,6 +53,37 @@
     </q-drawer>
 
     <q-page-container>
+      <div>
+        <q-slide-transition>
+          <q-banner
+            v-if="networkDown"
+            dense
+            inline-actions
+            class="text-white bg-negative"
+          >
+            {{ $t('network.network_connection_down') }}
+            <template #action>
+              <q-btn
+                flat
+                padding="0"
+                color="white"
+                :label="$t('general.close')"
+                @click="networkDown = false"
+              />
+            </template>
+          </q-banner>
+        </q-slide-transition>
+        <q-slide-transition>
+          <q-banner
+            v-if="networkUp"
+            dense
+            inline-actions
+            class="text-white bg-positive"
+          >
+            {{ $t('network.network_connection_restored') }}
+          </q-banner>
+        </q-slide-transition>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -83,6 +114,8 @@ export default defineComponent({
 
     const leftDrawerOpen = ref(false)
     const { locale } = useI18n({ useScope: 'global' })
+    const networkDown = ref<boolean>(false)
+    const networkUp = ref<boolean>(false)
 
     // Langauges need to be added here.
     const localeOptions = [
@@ -93,6 +126,21 @@ export default defineComponent({
       { value: 'nb-NO', label: 'Norsk' },
       { value: 'pt-BR', label: 'Português' }
     ]
+
+    // Listeners for network status
+    // When network is available again
+    window.addEventListener('online', () => {
+      networkDown.value = false
+      networkUp.value = true
+      setTimeout(() => {
+        networkUp.value = false
+      }, 3000)
+    })
+
+    // When network is down
+    window.addEventListener('offline', () => {
+      networkDown.value = true
+    })
 
     // Quasar requires the Quasar language pack to be set seperate from Vue i18n
     watch(locale, (val) => {
@@ -121,6 +169,8 @@ export default defineComponent({
       locale,
       localeOptions,
       menuItems: menuList,
+      networkDown,
+      networkUp,
       qHeaderStyle,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
