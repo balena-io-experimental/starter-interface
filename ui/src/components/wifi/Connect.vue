@@ -105,7 +105,7 @@
 </template>
 
 <script lang="ts">
-import expressApi, { AxiosError } from 'axios'
+import expressApi from 'axios'
 import { qBtnStyle } from 'components/styles/qStyles'
 import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -160,13 +160,8 @@ export default defineComponent({
             await fetchNetworks()
           }
         })
-        .catch(function (err: Error | AxiosError) {
-          if (expressApi.isAxiosError(err)) {
-            if (err.response) {
-              notify('warning', t('wifi.no_wifi_api'))
-            }
-          }
-
+        .catch(function () {
+          notify('warning', t('wifi.no_wifi_api'))
           noWifiConnect.value = true
         })
       $q.loading.hide()
