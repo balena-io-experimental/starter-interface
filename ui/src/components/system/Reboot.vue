@@ -65,9 +65,9 @@ export default defineComponent({
     const checkBox = ref<boolean>(false)
 
     function reboot() {
+      // This does not wait for return of promise as connection is lost too quickly
       void supervisorRequests.reboot(checkBox.value)
 
-      // This does not wait for return of promise as connection is lost too quickly
       setTimeout(() => {
         $q.notify({
           type: 'positive',

@@ -420,15 +420,15 @@ export default defineComponent({
         timeout: 100
       })
     }
-    const onRowClick: QTableProps['onRowClick'] = (_evt, row: Rows) => {
+    const onRowClick: QTableProps['onRowClick'] = async (_evt, row: Rows) => {
       if (loading.value) {
         return
       }
       if (row.type === 'folder') {
         objPath.value.push(row.path.split('/').pop() as string)
-        void updateRows()
+        await updateRows()
       } else {
-        void download(row)
+        await download(row)
       }
     }
 
