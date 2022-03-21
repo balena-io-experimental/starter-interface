@@ -98,7 +98,6 @@ import Reboot from 'components/system/Reboot.vue'
 import Shutdown from 'components/system/Shutdown.vue'
 import { defineComponent, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { QuasarLanguage } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -143,18 +142,19 @@ export default defineComponent({
     })
 
     // Quasar requires the Quasar language pack to be set seperate from Vue i18n
-    watch(locale, (val) => {
-      // Dynamic import, so loading on demand only
-      import(`./quasar/lang/${val}/index.js`)
-        .then((lang: { default: QuasarLanguage }) => {
-          $q.lang.set(lang.default)
-          $q.localStorage.set('lang', lang.default.isoName)
-        })
-        .catch(() => {
-          console.log(
-            "User's browser language is not available. Reverting to en-US."
-          )
-        })
+    watch(locale, (isoName) => {
+      $q.localStorage.set('lang', isoName)
+
+      // Dynamic imports from node_modules are currently not available in Vite. When
+      // a fix is applied, will set here accordingly. In the meantime it means that
+      // Quasar language files are not available to populate generic content like
+      // table labels.
+
+      // import(`quasar/lang/${isoName}/index.js`).then(
+      //  (lang: { default: QuasarLanguage }) => {
+      //    $q.lang.set(lang.default)
+      //  }
+      // )
     })
 
     // Set language to previously chosen, otherwise use browser default
