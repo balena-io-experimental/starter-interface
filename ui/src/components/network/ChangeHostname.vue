@@ -7,7 +7,6 @@
       counter
       maxlength="32"
     >
-      {{ newHostname }}
       <template #after>
         <q-btn
           v-bind="qBtnStyle"

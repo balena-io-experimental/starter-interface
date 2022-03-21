@@ -103,19 +103,20 @@ export default defineComponent({
         return
       }
       submitting.value = true
-      await expressApi
-        .post('/v1/wifi', {
+
+      try {
+        await expressApi.post('/v1/wifi', {
           type: 'POST',
           path: 'v1/set_hotspot_ssid',
           params: { ssid: ssidText.value }
         })
-        .then(() => {
-          notify('positive', t('wifi.ssid_set'))
-          submitting.value = false
-        })
-        .catch(function () {
-          notify('negative', t('wifi.no_wifi_api'))
-        })
+
+        notify('positive', t('wifi.ssid_set'))
+        submitting.value = false
+      } catch {
+        notify('negative', t('wifi.no_wifi_api'))
+      }
+
       ssidText.value = ''
       submitting.value = false
     }

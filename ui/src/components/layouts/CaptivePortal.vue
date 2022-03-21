@@ -75,14 +75,13 @@ export default defineComponent({
     const hostname = ref<string>()
 
     onMounted(async () => {
-      await supervisorRequests
-        .device_host_config_get()
-        .then((res: AxiosResponse<hostConfig>) => {
-          hostname.value = res.data.network.hostname
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      try {
+        const response: AxiosResponse<hostConfig> =
+          await supervisorRequests.device_host_config_get()
+        hostname.value = response.data.network.hostname
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     const copyUrl = () => {
