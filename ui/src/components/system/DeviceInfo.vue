@@ -154,6 +154,7 @@ export default defineComponent({
   components: { CpuStats },
   setup() {
     const $q = useQuasar()
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     const loading = ref<boolean>(true)

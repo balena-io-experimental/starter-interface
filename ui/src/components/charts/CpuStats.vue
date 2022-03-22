@@ -70,6 +70,7 @@ export default defineComponent({
     }
   },
   setup(props) {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     // Constants

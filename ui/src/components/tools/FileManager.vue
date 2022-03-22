@@ -259,6 +259,7 @@ export default defineComponent({
   setup() {
     // Import required features
     const $q = useQuasar()
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     const delayUpload = ref<boolean>(false)
@@ -384,7 +385,7 @@ export default defineComponent({
           isValid: (val) => val !== ''
         },
         cancel: true
-      }).onOk(async (newName: string) => {
+      }).onOk((newName: string) => {
         if (invalidCharacters.value.some((el) => newName.includes(el))) {
           $q.notify({
             type: 'negative',
@@ -398,12 +399,12 @@ export default defineComponent({
             })
           } else {
             try {
-              await expressApi.post('/v1/filemanager/newfolder', {
+              void expressApi.post('/v1/filemanager/newfolder', {
                 currentPathArray: objPath.value,
                 newFolderName: newName
               })
 
-              await updateRows()
+              void updateRows()
               notifyComplete()
             } catch {
               $q.notify({ type: 'negative', message: t('general.Error') })
@@ -420,15 +421,15 @@ export default defineComponent({
         timeout: 100
       })
     }
-    const onRowClick: QTableProps['onRowClick'] = async (_evt, row: Rows) => {
+    const onRowClick: QTableProps['onRowClick'] = (_evt, row: Rows) => {
       if (loading.value) {
         return
       }
       if (row.type === 'folder') {
         objPath.value.push(row.path.split('/').pop() as string)
-        await updateRows()
+        void updateRows()
       } else {
-        await download(row)
+        void download(row)
       }
     }
 
