@@ -46,5 +46,10 @@ COPY ui dist/ui/
 # Copy the development sciprts required for launch
 COPY development .
 
+# Used to identify whether a new build has been pushed and updates are required. Otherwise
+# a container reinstall by Supervisor could overwrite your changes to the files when the container
+# being installed hasn't changed. 
+RUN echo $(date +%s) > dist/.build_timestamp
+
 # Run the start script
 CMD ["sh", "start.sh"]
