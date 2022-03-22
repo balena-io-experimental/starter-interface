@@ -1,8 +1,6 @@
 # Build UI package
 FROM node:16.13.2-alpine3.15 as UI
 
-RUN apk add tar
-
 ENV NODE_ENV=development
 
 WORKDIR /build
@@ -13,17 +11,9 @@ COPY ui/yarn.lock yarn.lock
 # The network timeout prevents build timeouts when building on devices with slow SD cards
 RUN yarn install --network-timeout 600000 --frozen-lockfile
 
-# Copy app in to container
-COPY ui .
-
-# Pack all the node_module files
-RUN tar -cf /ui.tar --mode='a+rwX' .
-
 
 # Build ExpressJS package
 FROM node:16.13.2-alpine3.15 as ExpressJS
-
-RUN apk add tar
 
 ENV NODE_ENV=development
 
@@ -35,25 +25,23 @@ COPY expressjs/yarn.lock yarn.lock
 # The network timeout prevents build timeouts when building on devices with slow SD cards
 RUN yarn install --network-timeout 600000 --frozen-lockfile
 
-# Copy app in to container
-COPY expressjs .
-
-# Pack all the node_module files
-RUN tar -cf /expressjs.tar --mode='a+rwX' .
-
 
 ## Build environment
 FROM node:16.13.2-alpine3.15
 
-RUN apk add supervisor tar --no-cache
+RUN apk add rsync supervisor --no-cache
 
 ENV NODE_ENV=development
 
 WORKDIR /build
 
-# Copy packages into container
-COPY --from=ExpressJS /expressjs.tar .
-COPY --from=UI /ui.tar .
+# Copy node_modules into container
+COPY --from=ExpressJS /build dist/expressjs/
+COPY --from=UI /build dist/ui/
+
+# Copy app in to container
+COPY expressjs dist/expressjs/
+COPY ui dist/ui/
 
 # Copy the development sciprts required for launch
 COPY development .
