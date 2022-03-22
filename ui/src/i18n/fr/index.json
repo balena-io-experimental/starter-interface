@@ -31,7 +31,8 @@
         "storage": "Stockage",
         "undervolted": "Sous-tendu",
         "location": "Emplacement",
-        "supervisor_version": "Version superviseur"
+        "supervisor_version": "Version superviseur",
+        "sdk_unavailable": "Impossible de joindre les serveurs de Balena."
     },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
@@ -116,7 +117,9 @@
         }
     },
     "network": {
-        "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
+        "forget_all_wifi": "Oublier toutes les connexions Wi-Fi",
+        "network_connection_down": "Vous n'êtes plus connecté(e) à un réseau. Essayez de vous reconnecter à votre appareil.",
+        "network_connection_restored": "Connexion réseau restaurée."
     },
     "captive_portal": {
         "connect_to_wifi": "Se connecter au Wi-Fi",
