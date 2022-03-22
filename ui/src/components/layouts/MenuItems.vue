@@ -34,11 +34,11 @@ export default defineComponent({
     const $q = useQuasar()
     const $router = useRouter()
 
-    function clickedLink(path: string) {
+    async function clickedLink(path: string) {
       // Starts the loading indicator here, then stops it in the
       // Router.afterEach function in ui/src/router
       $q.loading.show()
-      $router.replace({ name: path })
+      await $router.replace({ name: path })
     }
     return { clickedLink }
   }

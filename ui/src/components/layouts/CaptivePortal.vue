@@ -70,14 +70,15 @@ export default defineComponent({
   },
   setup() {
     const $q = useQuasar()
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     const hostname = ref<string>()
 
     onMounted(async () => {
       try {
-        const response: AxiosResponse<hostConfig> =
-          await supervisorRequests.device_host_config_get()
+        const response =
+          (await supervisorRequests.device_host_config_get()) as AxiosResponse<hostConfig>
         hostname.value = response.data.network.hostname
       } catch (error) {
         console.log(error)

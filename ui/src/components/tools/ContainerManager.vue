@@ -82,6 +82,7 @@ interface containers extends QTableProps {
 export default defineComponent({
   name: 'IntPingComponent',
   setup() {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
     const $q = useQuasar()
 
@@ -130,8 +131,9 @@ export default defineComponent({
       loading.value = true
 
       try {
-        const res: AxiosResponse<{ containers: containers[] }> =
-          await supervisorRequests.state_status()
+        const res = (await supervisorRequests.state_status()) as AxiosResponse<{
+          containers: containers[]
+        }>
         rows.value = res.data.containers
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.Error') })
