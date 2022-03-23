@@ -56,7 +56,6 @@
   },
   "general": {
     "are_you_sure": "Are you sure?",
-    "cancel": "cancel",
     "close": "Close",
     "Error": "Error",
     "Home": "Home",
@@ -69,6 +68,8 @@
     "Status": "Status",
     "Start": "Start",
     "Stop": "Stop",
+    "Cancel": "Cancel",
+    "Submit": "Submit",
     "Wrong_way": "Wrong way…"
   },
   "network": {
@@ -87,7 +88,9 @@
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting…",
     "Services": "Services",
-    "shutting_down": "Shutting device down…"
+    "shutting_down": "Shutting device down…",
+    "add_change_env_var": "Add/Change Environment Variable",
+    "delete_selected_records": "Delete Selected Records"
   },
   "system_info": {
     "select_request": "Select a request"

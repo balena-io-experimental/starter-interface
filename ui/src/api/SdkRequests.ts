@@ -3,6 +3,10 @@ import expressApi from 'axios'
 
 const apiPathV1 = '/v1/sdk' as string
 
+interface Env {
+  [key: string]: string
+}
+
 export const sdkRequests = {
   device() {
     return expressApi.get(`${apiPathV1}/device`)
@@ -12,5 +16,16 @@ export const sdkRequests = {
   },
   getEnv() {
     return expressApi.get(`${apiPathV1}/envVars`)
+  },
+  setEnv(newKey: string, newValue: string) {
+    const payload:Env = {}
+    payload[newKey] = newValue
+    return expressApi.post(`${apiPathV1}/envVars`, payload)
+  },
+  deleteEnv(objectOfKeys: object) {
+    // axios delete method is actually not the same as get or post, so 'data' option is needed in the body
+    return expressApi.delete(`${apiPathV1}/envVars`, {
+      data: objectOfKeys
+    })
   }
 }
