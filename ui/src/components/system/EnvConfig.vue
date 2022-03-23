@@ -12,10 +12,19 @@
       />
       <div class="q-pa-md q-gutter-y-md column items-start">
         <q-btn-group v-if="selectedRows.length > 0">
-          <q-btn :label="$t('system.delete_selected_records')" icon="delete" @click="deleteEnv()" />
+          <q-btn
+            :label="$t('system.delete_selected_records')"
+            icon="delete"
+            @click="deleteEnv()"
+          />
         </q-btn-group>
         <q-btn-group push>
-          <q-btn push :label="$t('system.add_change_env_var')" icon="add" @click="newVarDialogOpen = true" />
+          <q-btn
+            push
+            :label="$t('system.add_change_env_var')"
+            icon="add"
+            @click="newVarDialogOpen = true"
+          />
         </q-btn-group>
         <q-dialog v-model="newVarDialogOpen" persistent>
           <q-card style="min-width: 250px">
@@ -24,13 +33,23 @@
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-              <q-input v-model="newVarKey" label="Key" stack-label dense autofocus />
+              <q-input
+                v-model="newVarKey"
+                label="Key"
+                stack-label
+                dense
+                autofocus
+              />
               <q-input v-model="newVarValue" label="Value" stack-label dense />
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
               <q-btn v-close-popup flat :label="$t('general.Cancel')" />
-              <q-btn flat :label="$t('general.Submit')" @click="setEnv(newVarKey, newVarDialogOpen)" />
+              <q-btn
+                flat
+                :label="$t('general.Submit')"
+                @click="setEnv(newVarKey, newVarDialogOpen)"
+              />
             </q-card-actions>
           </q-card>
         </q-dialog>
@@ -89,7 +108,7 @@ export default defineComponent({
     let newVarDialogOpen = ref<boolean>(false)
 
     const loading = ref<boolean>(true)
-  
+
     const getEnvResponse = ref<AxiosResponse>()
 
     async function getEnv() {
@@ -97,12 +116,13 @@ export default defineComponent({
       rows.value = getEnvResponse.value
     }
 
-    function deleteEnv () {
+    function deleteEnv() {
       var toDelete: Env = {}
       selectedRows.value.forEach((item: Env) => {
         toDelete[item.name] = ''
       })
-      sdkRequests.deleteEnv(toDelete)
+      sdkRequests
+        .deleteEnv(toDelete)
         .then(async function () {
           await getEnv()
           selectedRows.value = []
@@ -119,7 +139,8 @@ export default defineComponent({
       newVarDialogOpen.value = false
       loading.value = true
 
-      sdkRequests.setEnv(newVarKey.value, newVarValue.value)
+      sdkRequests
+        .setEnv(newVarKey.value, newVarValue.value)
         .then(async function () {
           await getEnv()
           loading.value = false

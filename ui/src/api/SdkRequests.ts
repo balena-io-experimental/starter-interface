@@ -18,7 +18,7 @@ export const sdkRequests = {
     return expressApi.get(`${apiPathV1}/envVars`)
   },
   setEnv(newKey: string, newValue: string) {
-    const payload:Env = {}
+    const payload: Env = {}
     payload[newKey] = newValue
     return expressApi.post(`${apiPathV1}/envVars`, payload)
   },

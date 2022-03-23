@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-pa-lg">
-
     <q-card flat bordered class="q-mb-lg">
       <q-card-section>
         <div class="text-h5 q-mb-md q-mt-md">{{ $t('supervisor_config') }}</div>
@@ -40,17 +39,17 @@
             </q-item-section>
           </q-item>
         </q-list>
-
       </q-card-section>
     </q-card>
 
     <q-card flat bordered class="q-mb-lg">
       <q-card-section>
-        <div class="text-h5 q-mb-md q-mt-md">{{ $t('device_info.environment_variables') }}</div>
+        <div class="text-h5 q-mb-md q-mt-md">
+          {{ $t('device_info.environment_variables') }}
+        </div>
         <env-config />
       </q-card-section>
     </q-card>
-
   </q-page>
 </template>
 
