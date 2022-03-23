@@ -44,7 +44,7 @@
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
-              <q-btn v-close-popup flat :label="$t('general.Cancel')" />
+              <q-btn v-close-popup flat :label="$t('general.cancel')" />
               <q-btn
                 flat
                 :label="$t('general.Submit')"

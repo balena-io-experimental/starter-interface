@@ -57,6 +57,7 @@
   "general": {
     "are_you_sure": "Are you sure?",
     "close": "Close",
+    "cancel": "Cancel",
     "Error": "Error",
     "Home": "Home",
     "Loading": "Loading…",
@@ -68,7 +69,6 @@
     "Status": "Status",
     "Start": "Start",
     "Stop": "Stop",
-    "Cancel": "Cancel",
     "Submit": "Submit",
     "Wrong_way": "Wrong way…"
   },
