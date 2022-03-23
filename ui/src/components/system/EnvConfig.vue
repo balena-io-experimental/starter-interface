@@ -9,6 +9,7 @@
         :columns="columns"
         row-key="name"
         selection="multiple"
+        :pagination="pagination"
       />
       <div class="q-pa-md q-gutter-y-md column items-start">
         <q-btn-group v-if="selectedRows.length > 0">
@@ -103,6 +104,10 @@ export default defineComponent({
       }
     ]
 
+    const pagination = {
+      rowsPerPage: 10
+    }
+
     const newVarKey = ref<string>()
     const newVarValue = ref<string>()
     let newVarDialogOpen = ref<boolean>(false)
@@ -170,6 +175,7 @@ export default defineComponent({
       newVarValue,
       columns,
       rows,
+      pagination,
       selectedRows
     }
   }
