@@ -1,5 +1,9 @@
 <template>
-  <div v-if="getEnvResponse">
+  <div v-if="getEnvResponse && internetConnectivity.status">
+    <div class="row items-center q-mb-md">
+      <q-icon class="q-mr-sm" name="warning" color="warning" size="1rem" />
+      <span >{{ $t('system.env_var_warning_message') }}</span>
+    </div>
     <div class="q-mt-none q-mb-lg">
       <q-table
         v-model:selected="selectedRows"
@@ -73,6 +77,9 @@
   <div v-if="loading" class="text-center">
     <q-spinner color="primary" size="3em" />
   </div>
+  <div v-if="!loading && internetConnectivity.status === false">
+    {{ $t('system.internet_required') }}
+  </div>
 </template>
 
 <script lang="ts">
@@ -80,6 +87,7 @@ import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
+import { internetConnectivity } from 'src/api/SystemRequests'
 import { qBtnStyle } from 'components/styles/qStyles'
 
 interface Env {
@@ -90,7 +98,7 @@ export default defineComponent({
   name: 'IntEnvConfigComponent',
 
   setup() {
-    let selectedRows = ref([])
+    const selectedRows = ref([])
     const rows = ref([])
     const columns: QTableProps['columns'] = [
       {
@@ -116,7 +124,7 @@ export default defineComponent({
 
     const newVarKey = ref<string>()
     const newVarValue = ref<string>()
-    let newVarDialogOpen = ref<boolean>(false)
+    const newVarDialogOpen = ref<boolean>(false)
 
     const loading = ref<boolean>(true)
 
@@ -173,6 +181,7 @@ export default defineComponent({
 
     return {
       loading,
+      internetConnectivity,
       getEnvResponse,
       setEnv,
       deleteEnv,

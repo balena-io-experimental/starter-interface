@@ -90,7 +90,8 @@
     "Services": "Services",
     "shutting_down": "Shutting device down…",
     "add_change_env_var": "Add/Change Environment Variable",
-    "delete_selected_records": "Delete Selected Records"
+    "delete_selected_records": "Delete Selected Records",
+    "env_var_warning_message": "Adding or removing environment variables will restart the services on this machine, please be aware before proceeding."
   },
   "system_info": {
     "select_request": "Select a request"
