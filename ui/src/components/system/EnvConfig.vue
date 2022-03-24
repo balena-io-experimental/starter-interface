@@ -12,21 +12,22 @@
         :pagination="pagination"
       />
       <div class="q-pa-md q-gutter-y-md column items-start">
-        <q-btn-group v-if="selectedRows.length > 0">
+        <div v-if="selectedRows.length > 0">
           <q-btn
             :label="$t('system.delete_selected_records')"
             icon="delete"
+            v-bind="qBtnStyle"
             @click="deleteEnv()"
           />
-        </q-btn-group>
-        <q-btn-group push>
+        </div>
+        <div>
           <q-btn
-            push
             :label="$t('system.add_change_env_var')"
             icon="add"
+            v-bind="qBtnStyle"
             @click="newVarDialogOpen = true"
           />
-        </q-btn-group>
+        </div>
         <q-dialog v-model="newVarDialogOpen" persistent>
           <q-card style="min-width: 250px">
             <q-card-section>
@@ -45,10 +46,14 @@
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
-              <q-btn v-close-popup flat :label="$t('general.cancel')" />
               <q-btn
-                flat
+                v-close-popup
+                :label="$t('general.cancel')"
+                v-bind="qBtnStyle"
+              />
+              <q-btn
                 :label="$t('general.Submit')"
+                v-bind="qBtnStyle"
                 @click="setEnv(newVarKey, newVarDialogOpen)"
               />
             </q-card-actions>
@@ -75,6 +80,7 @@ import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
+import { qBtnStyle } from 'components/styles/qStyles'
 
 interface Env {
   [key: string]: string
@@ -176,7 +182,8 @@ export default defineComponent({
       columns,
       rows,
       pagination,
-      selectedRows
+      selectedRows,
+      qBtnStyle
     }
   }
 })
