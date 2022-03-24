@@ -1,15 +1,69 @@
 <template>
-  <div v-if="getEnvResponse">
+  <div v-if="getEnvResponse && internetConnectivity.status">
+    <div class="row items-center q-mb-md">
+      <q-icon class="q-mr-sm" name="warning" color="warning" size="1rem" />
+      <span>{{ $t('system.env_var_warning_message') }}</span>
+    </div>
     <div class="q-mt-none q-mb-lg">
       <q-table
+        v-model:selected="selectedRows"
         flat
-        bordered
         separator="cell"
-        :title="$t('device_info.environment_variables')"
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
+        selection="multiple"
+        :pagination="pagination"
       />
+      <div class="q-pa-md q-gutter-y-md column items-start">
+        <div v-if="selectedRows.length > 0">
+          <q-btn
+            :label="$t('system.delete_selected_records')"
+            icon="delete"
+            v-bind="qBtnStyle"
+            @click="deleteEnv()"
+          />
+        </div>
+        <div>
+          <q-btn
+            :label="$t('system.add_change_env_var')"
+            icon="add"
+            v-bind="qBtnStyle"
+            @click="newVarDialogOpen = true"
+          />
+        </div>
+        <q-dialog v-model="newVarDialogOpen" persistent>
+          <q-card style="min-width: 250px">
+            <q-card-section>
+              <div class="text-h6">{{ $t('system.add_change_env_var') }}</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+              <q-input
+                v-model="newVarKey"
+                label="Key"
+                stack-label
+                dense
+                autofocus
+              />
+              <q-input v-model="newVarValue" label="Value" stack-label dense />
+            </q-card-section>
+
+            <q-card-actions align="right" class="text-primary">
+              <q-btn
+                v-close-popup
+                :label="$t('general.cancel')"
+                v-bind="qBtnStyle"
+              />
+              <q-btn
+                :label="$t('general.Submit')"
+                v-bind="qBtnStyle"
+                @click="setEnv(newVarKey, newVarDialogOpen)"
+              />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+      </div>
     </div>
     <q-expansion-item
       expand-separator
@@ -23,6 +77,9 @@
   <div v-if="loading" class="text-center">
     <q-spinner color="primary" size="3em" />
   </div>
+  <div v-if="!loading && internetConnectivity.status === false">
+    {{ $t('system.internet_required') }}
+  </div>
 </template>
 
 <script lang="ts">
@@ -30,11 +87,19 @@ import { sdkRequests } from 'src/api/SdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
+import { internetConnectivity } from 'src/api/SystemRequests'
+import { qBtnStyle } from 'components/styles/qStyles'
+
+interface Env {
+  [key: string]: string
+}
 
 export default defineComponent({
   name: 'IntEnvConfigComponent',
 
   setup() {
+    const selectedRows = ref([])
+    const rows = ref([])
     const columns: QTableProps['columns'] = [
       {
         name: 'name',
@@ -53,8 +118,16 @@ export default defineComponent({
       }
     ]
 
+    const pagination = {
+      rowsPerPage: 10
+    }
+
+    const newVarKey = ref<string>()
+    const newVarValue = ref<string>()
+    const newVarDialogOpen = ref<boolean>(false)
+
     const loading = ref<boolean>(true)
-    const rows = ref()
+
     const getEnvResponse = ref<AxiosResponse>()
 
     async function getEnv() {
@@ -62,17 +135,64 @@ export default defineComponent({
       rows.value = getEnvResponse.value
     }
 
+    function deleteEnv() {
+      var toDelete: Env = {}
+      selectedRows.value.forEach((item: Env) => {
+        toDelete[item.name] = ''
+      })
+      sdkRequests
+        .deleteEnv(toDelete)
+        .then(async function () {
+          await getEnv()
+          selectedRows.value = []
+          loading.value = false
+        })
+        .catch(function (error: Error | AxiosError) {
+          console.error('deleteEnv', error)
+          selectedRows.value = []
+          loading.value = false
+        })
+    }
+
+    function setEnv() {
+      newVarDialogOpen.value = false
+      loading.value = true
+
+      sdkRequests
+        .setEnv(newVarKey.value, newVarValue.value)
+        .then(async function () {
+          await getEnv()
+          loading.value = false
+        })
+        .catch(function (error: Error | AxiosError) {
+          console.error('setEnv', error)
+          loading.value = false
+        })
+      newVarKey.value = ''
+      newVarValue.value = ''
+    }
+
     onMounted(async () => {
       await getEnv().catch(function (error: Error | AxiosError) {
-        console.log(error)
+        console.error('getEnv', error)
       })
       loading.value = false
     })
 
     return {
       loading,
+      internetConnectivity,
       getEnvResponse,
-      columns
+      setEnv,
+      deleteEnv,
+      newVarDialogOpen,
+      newVarKey,
+      newVarValue,
+      columns,
+      rows,
+      pagination,
+      selectedRows,
+      qBtnStyle
     }
   }
 })

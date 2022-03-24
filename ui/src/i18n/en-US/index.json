@@ -56,8 +56,8 @@
   },
   "general": {
     "are_you_sure": "Are you sure?",
-    "cancel": "cancel",
     "close": "Close",
+    "cancel": "Cancel",
     "Error": "Error",
     "Home": "Home",
     "Loading": "Loading…",
@@ -69,6 +69,7 @@
     "Status": "Status",
     "Start": "Start",
     "Stop": "Stop",
+    "Submit": "Submit",
     "Wrong_way": "Wrong way…"
   },
   "network": {
@@ -87,7 +88,10 @@
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting…",
     "Services": "Services",
-    "shutting_down": "Shutting device down…"
+    "shutting_down": "Shutting device down…",
+    "add_change_env_var": "Add/Change Environment Variable",
+    "delete_selected_records": "Delete Selected Records",
+    "env_var_warning_message": "Adding or removing environment variables will restart the services on this machine, please be aware before proceeding."
   },
   "system_info": {
     "select_request": "Select a request"
