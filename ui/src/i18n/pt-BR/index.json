@@ -43,7 +43,8 @@
         "environment_variables": "Variáveis do ambiente",
         "public_ip": "IP público",
         "raw_json": "JSON bruto",
-        "response_details": "Detalhes da resposta"
+        "response_details": "Detalhes da resposta",
+        "sdk_unavailable": "Não foi possível acessar os servidores Balena."
     },
     "file_manager": {
         "enter_name": "Insira um nome",
@@ -116,7 +117,9 @@
         }
     },
     "network": {
-        "forget_all_wifi": "Esquecer todas as conexões WiFi"
+        "forget_all_wifi": "Esquecer todas as conexões WiFi",
+        "network_connection_restored": "A conexão da rede foi restaurada.",
+        "network_connection_down": "Você não está mais conectado a uma rede. Tente se reconectar ao seu dispositivo."
     },
     "captive_portal": {
         "copy_to_clipboard": "Copiar para área de transferência",
