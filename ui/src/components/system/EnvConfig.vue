@@ -2,7 +2,7 @@
   <div v-if="getEnvResponse && internetConnectivity.status">
     <div class="row items-center q-mb-md">
       <q-icon class="q-mr-sm" name="warning" color="warning" size="1rem" />
-      <span >{{ $t('system.env_var_warning_message') }}</span>
+      <span>{{ $t('system.env_var_warning_message') }}</span>
     </div>
     <div class="q-mt-none q-mb-lg">
       <q-table
