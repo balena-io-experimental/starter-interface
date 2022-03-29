@@ -8,12 +8,13 @@
       <q-table
         v-model:selected="selectedRows"
         flat
+        :dense="$q.screen.gt.sm"
         separator="cell"
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
         selection="multiple"
-        :pagination="pagination"
+        :rows-per-page-options="[5, 10, 50, 0]"
       />
       <div class="q-pa-md q-gutter-y-md column items-start">
         <div v-if="selectedRows.length > 0">
@@ -52,13 +53,13 @@
             <q-card-actions align="right" class="text-primary">
               <q-btn
                 v-close-popup
-                :label="$t('general.cancel')"
                 v-bind="qBtnStyle"
+                :label="$t('general.cancel')"
               />
               <q-btn
                 :label="$t('general.Submit')"
                 v-bind="qBtnStyle"
-                @click="setEnv(newVarKey, newVarDialogOpen)"
+                @click="setEnv()"
               />
             </q-card-actions>
           </q-card>
@@ -95,7 +96,6 @@ export default defineComponent({
 
   setup() {
     const selectedRows = ref([])
-    const rows = ref([])
     const columns: QTableProps['columns'] = [
       {
         name: 'name',
@@ -114,12 +114,8 @@ export default defineComponent({
       }
     ]
 
-    const pagination = {
-      rowsPerPage: 10
-    }
-
-    const newVarKey = ref<string>()
-    const newVarValue = ref<string>()
+    const newVarKey = ref<string>('')
+    const newVarValue = ref<string>('')
     const newVarDialogOpen = ref<boolean>(false)
 
     const loading = ref<boolean>(true)
@@ -128,7 +124,6 @@ export default defineComponent({
 
     async function getEnv() {
       getEnvResponse.value = await sdkRequests.getEnv()
-      rows.value = getEnvResponse.value
     }
 
     function deleteEnv() {
@@ -176,18 +171,16 @@ export default defineComponent({
     })
 
     return {
-      loading,
-      getEnvResponse,
-      setEnv,
+      columns,
       deleteEnv,
+      getEnvResponse,
+      loading,
       newVarDialogOpen,
       newVarKey,
       newVarValue,
-      columns,
-      rows,
-      pagination,
+      qBtnStyle,
       selectedRows,
-      qBtnStyle
+      setEnv
     }
   }
 })
