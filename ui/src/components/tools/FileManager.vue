@@ -434,7 +434,7 @@ export default defineComponent({
     }
 
     const onUploaderFailed: QUploaderProps['onFailed'] = (info) => {
-      console.log(info)
+      console.error(info)
       $q.notify({
         type: 'negative',
         message: t('general.Error')

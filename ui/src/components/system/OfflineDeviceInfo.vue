@@ -170,7 +170,7 @@ export default defineComponent({
           m.value = results[2].data as m
         })
         .catch(function (error: Error | AxiosError) {
-          console.log(error)
+          console.error(error)
         })
     }
 

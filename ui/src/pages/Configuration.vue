@@ -42,7 +42,7 @@
       </q-card-section>
     </q-card>
 
-    <q-card flat bordered class="q-mb-lg">
+    <q-card v-if="internetConnectivity.status" flat bordered class="q-mb-lg">
       <q-card-section>
         <div class="text-h5 q-mb-md q-mt-md">
           {{ $t('device_info.environment_variables') }}
@@ -55,23 +55,25 @@
 
 <script lang="ts">
 import ChangeHostname from 'components/network/ChangeHostname.vue'
-import EnvConfig from 'components/system/EnvConfig.vue'
 import ForgetAllWifi from 'components/network/ForgetAllWifi.vue'
 import PingSupervisor from 'components/system/PingSupervisor.vue'
 import UpdateDevice from 'components/system/UpdateDevice.vue'
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
+import { internetConnectivity } from 'src/api/SystemRequests'
 
 export default defineComponent({
   name: 'IntConfiguration',
   components: {
     ChangeHostname,
-    EnvConfig,
+    EnvConfig: defineAsyncComponent(
+      () => import('components/system/EnvConfig.vue')
+    ),
     ForgetAllWifi,
     PingSupervisor,
     UpdateDevice
   },
   setup() {
-    return {}
+    return { internetConnectivity }
   }
 })
 </script>

@@ -137,7 +137,7 @@ export default defineComponent({
         rows.value = res.data.containers
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.Error') })
-        console.log(error)
+        console.error(error)
       }
 
       loading.value = false
@@ -155,7 +155,7 @@ export default defineComponent({
         })
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.Error') })
-        console.log(error)
+        console.error(error)
       }
       loading.value = false
     }
@@ -172,7 +172,7 @@ export default defineComponent({
         })
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.Error') })
-        console.log(error)
+        console.error(error)
       }
       loading.value = false
     }
@@ -189,7 +189,7 @@ export default defineComponent({
         })
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.Error') })
-        console.log(error)
+        console.error(error)
       }
       loading.value = false
     }
