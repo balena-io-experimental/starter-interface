@@ -165,7 +165,7 @@ export default defineComponent({
         const res = await sdkRequests.device()
         response.value = res
       } catch (error) {
-        console.log(error)
+        console.error(error)
         $q.notify({
           type: 'negative',
           message: t('device_info.sdk_unavailable')

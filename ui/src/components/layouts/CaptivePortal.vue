@@ -81,7 +81,7 @@ export default defineComponent({
           (await supervisorRequests.device_host_config_get()) as AxiosResponse<hostConfig>
         hostname.value = response.data.network.hostname
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     })
 

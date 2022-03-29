@@ -2,6 +2,6 @@ import { system } from 'src/api/SystemRequests'
 
 // Fetch internet status
 system.checkInternetConnection().catch(function (error) {
-  console.log('Failed fetching internet status.')
-  console.log(error)
+  console.error('Failed fetching internet status.')
+  console.error(error)
 })
