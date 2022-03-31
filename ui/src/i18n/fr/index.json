@@ -36,7 +36,7 @@
     },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
-        "cancel": "annuler",
+        "cancel": "Annuler",
         "close": "Fermer",
         "Error": "Erreur",
         "Home": "Accueil",
@@ -49,7 +49,8 @@
         "Name": "Nom",
         "Restart": "Redémarrer",
         "Stop": "Arrêter",
-        "Loading": "Chargement…"
+        "Loading": "Chargement…",
+        "Submit": "Soumettre"
     },
     "supervisor_config": "Configuration du superviseur",
     "system": {
@@ -62,7 +63,10 @@
         "fetch_journald": "Récupérer les journaux",
         "force_shutdown": "Forcer l'arrêt ?",
         "force_restart": "Forcer le redémarrage ?",
-        "force_update": "Forcer la mise à jour ?"
+        "force_update": "Forcer la mise à jour ?",
+        "add_change_env_var": "Ajouter/Modifier une variable d'environnement",
+        "delete_selected_records": "Supprimer les enregistrements sélectionnés",
+        "env_var_warning_message": "L'ajout ou la suppression de variables d'environnement redémarre les services sur cet appareil !"
     },
     "system_info": {
         "select_request": "Sélectionnez une demande"
