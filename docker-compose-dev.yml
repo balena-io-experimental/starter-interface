@@ -27,6 +27,7 @@ services:
 
   nfs:
     environment:
+      SYNC: False
       NFS_EXPORT_0: "/nfs *(rw,sync,no_subtree_check,no_auth_nlm,insecure,all_squash,anonuid=0,anongid=0,fsid=root)"
     image: ghcr.io/maggie0002/docker-nfs
     network_mode: "host"

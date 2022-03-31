@@ -15,10 +15,12 @@ RUN yarn install --network-timeout 600000 --frozen-lockfile
 
 ## Build ExpressJS UI
 ## Uses ejs-node-build container to benefit from already installed packages and cache
-FROM ejs-node-build AS ejs-ui-build
+FROM ejs-node-build AS ejs-build
 
 # Switch to development context to install required packages for build
 ENV NODE_ENV=development
+
+WORKDIR /build-context
 
 # The network timeout prevents build timeouts when building on devices with slow SD cards
 RUN yarn install --network-timeout 600000 --frozen-lockfile
@@ -33,7 +35,7 @@ RUN yarn build
 
 
 ## Build user interface
-FROM node:16.13.2-alpine3.15 AS ui-build-step
+FROM node:16.13.2-alpine3.15 AS ui-build
 
 WORKDIR /build-context
 
@@ -59,10 +61,10 @@ WORKDIR /app
 COPY --from=ejs-node-build /build-context/node_modules node_modules
 
 # Copy ExpressJS build in to container
-COPY --from=ejs-ui-build /build-context/dist .
+COPY --from=ejs-build /build-context/dist .
 
 # Copy UI in to container 
-COPY --from=ui-build-step /build-context/dist/spa public
+COPY --from=ui-build /build-context/dist/spa public
 
 # Copy startup scripts
 COPY scripts .
