@@ -5,7 +5,7 @@
         "request_error": "Erro de solicitação",
         "Wrong_way": "Caminho errado…",
         "close": "Fechar",
-        "cancel": "cancela",
+        "cancel": "Cancelar",
         "Error": "Erro",
         "ok": "ok",
         "Restart": "Reinicie",
@@ -15,7 +15,8 @@
         "are_you_sure": "Tem certeza?",
         "Stop": "Parar",
         "Start": "Início",
-        "Loading": "Carregando…"
+        "Loading": "Carregando…",
+        "Submit": "Enviar"
     },
     "supervisor_config": "Configuração do supervisor",
     "system": {
@@ -28,7 +29,10 @@
         "Services": "Serviços",
         "force_restart": "Impor o reinício?",
         "force_update": "Impor a atualização?",
-        "force_shutdown": "Impor o desligamento?"
+        "force_shutdown": "Impor o desligamento?",
+        "env_var_warning_message": "Ao adicionar ou ao remover as variáveis do ambiente os serviços nesta máquina serão reiniciados, por favor, esteja ciente disso antes de prosseguir.",
+        "delete_selected_records": "Excluir os registros selecionados",
+        "add_change_env_var": "Adicionar/alterar a variável de ambiente"
     },
     "device_info": {
         "location": "Localização",
