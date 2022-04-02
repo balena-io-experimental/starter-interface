@@ -92,6 +92,9 @@
       </div>
     </div>
   </div>
+  <div v-if="loading" class="text-center">
+    <q-spinner color="primary" size="3em" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -175,10 +178,8 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      $q.loading.show()
       await getDeviceInfo()
       loading.value = false
-      $q.loading.hide()
     })
 
     return {
