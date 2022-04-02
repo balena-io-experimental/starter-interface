@@ -119,7 +119,7 @@ module.exports = {
   },
   settings: {
     'vue-i18n': {
-      localeDir: './src/i18n/en-US/*.{json,json5,yaml,yml}', // extension is glob formatting!
+      localeDir: './src/i18n/en-US.json', // extension is glob formatting!
 
       // Specify the version of `vue-i18n` you are using.
       // If not specified, the message will be parsed twice.

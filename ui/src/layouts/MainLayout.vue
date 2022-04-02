@@ -9,7 +9,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
         <router-link v-if="qHeaderStyle.logo" to="/">
@@ -22,7 +22,14 @@
           {{ $t('titles.title') }}
         </q-toolbar-title>
 
-        <q-btn icon="translate" color="secondary" round flat dense>
+        <q-btn
+          :loading="changingLang"
+          icon="translate"
+          color="secondary"
+          round
+          flat
+          dense
+        >
           <q-menu>
             <q-list style="min-width: 100px">
               <q-item
@@ -30,7 +37,7 @@
                 :key="language.value"
                 v-close-popup
                 clickable
-                @click="locale = language.value"
+                @click="changeLang(language.value)"
               >
                 <q-item-section>{{ language.label }}</q-item-section>
               </q-item>
@@ -90,14 +97,15 @@
 </template>
 
 <script lang="ts">
+import { loadLanguageAsync } from 'boot/i18n'
 import MenuItems from 'components/layouts/MenuItems.vue'
 import menuList from 'components/styles/menuList'
 import { qHeaderStyle } from 'components/styles/qStyles'
-import { useQuasar } from 'quasar'
 import Reboot from 'components/system/Reboot.vue'
 import Shutdown from 'components/system/Shutdown.vue'
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -111,7 +119,7 @@ export default defineComponent({
   setup() {
     const $q = useQuasar()
 
-    const leftDrawerOpen = ref(false)
+    const changingLang = ref<boolean>(false)
     const { locale } = useI18n({ useScope: 'global' })
     const networkDown = ref<boolean>(false)
     const networkUp = ref<boolean>(false)
@@ -125,6 +133,17 @@ export default defineComponent({
       { value: 'nb-NO', label: 'Norsk' },
       { value: 'pt-BR', label: 'Português' }
     ]
+
+    onMounted(async () => {
+      // Set language to previously chosen according to local storage, otherwise use browser default
+      if ($q.localStorage.getItem('lang')) {
+        locale.value = await loadLanguageAsync(
+          $q.localStorage.getItem('lang') as string
+        )
+      } else {
+        locale.value = await loadLanguageAsync($q.lang.getLocale() as string)
+      }
+    })
 
     // Listeners for network status
     // When network is available again
@@ -141,8 +160,14 @@ export default defineComponent({
       networkDown.value = true
     })
 
-    // Quasar requires the Quasar language pack to be set seperate from Vue i18n
-    watch(locale, (isoName) => {
+    // Import and activate language
+    async function changeLang(isoName: string) {
+      // Start loading indicator
+      changingLang.value = true
+      // Load the language and set it as the current language
+      locale.value = await loadLanguageAsync(isoName)
+
+      // Store the chosen language in local storage
       $q.localStorage.set('lang', isoName)
 
       // Dynamic imports from node_modules are currently not available in Vite. When
@@ -155,26 +180,19 @@ export default defineComponent({
       //    $q.lang.set(lang.default)
       //  }
       // )
-    })
-
-    // Set language to previously chosen, otherwise use browser default
-    if (localStorage.getItem('lang')) {
-      locale.value = $q.localStorage.getItem('lang') as string
-    } else {
-      locale.value = $q.lang.getLocale() as string
+      changingLang.value = false
     }
 
     return {
-      leftDrawerOpen,
+      changeLang,
+      changingLang,
+      leftDrawerOpen: ref<boolean>(false),
       locale,
       localeOptions,
       menuItems: menuList,
       networkDown,
       networkUp,
-      qHeaderStyle,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      qHeaderStyle
     }
   }
 })
