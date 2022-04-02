@@ -1,64 +1,36 @@
 <template>
-  <div class="text-right">
-    <q-toggle
-      v-model="pauseToggle"
-      class="q-ml-sm"
-      color="secondary"
-      size="xs"
-      :label="$t('charts.cpu_stats.pause')"
-      left-label
-      @update:model-value="pause()"
-    />
-    <q-toggle
-      v-model="coresToggle"
-      color="secondary"
-      size="xs"
-      :label="$t('charts.cpu_stats.show_cores')"
-      left-label
-      @update:model-value="series = []"
-    />
-  </div>
-
-  <div v-if="noData" class="text-center q-mb-md">
-    {{ $t('charts.cpu_stats.no_data') }}
-  </div>
-  <vue-apex-charts
-    v-else
+  <LineChart
+    :chart-data="chartData"
+    :options="options"
     :height="props.height"
-    :options="chartOptions"
-    :series="series"
   />
 </template>
 
 <script lang="ts">
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { LineChart } from 'vue-chart-3'
+import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
+import { getCssVar, LoadingBar } from 'quasar'
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
-import { getCssVar, LoadingBar } from 'quasar'
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VueApexCharts from 'vue3-apexcharts'
 
 interface cpuStat {
   data: {
-    currentLoad: string
+    currentLoad: number
     cpus: Array<{ load: string }>
   }
 }
 
-interface series {
-  [index: number]: {
-    name: string
-    data: Array<Array<string | number>>
-  }
-}
+Chart.register(...registerables)
 
 export default defineComponent({
   name: 'IntCpuStats',
-  components: { VueApexCharts },
+  components: { LineChart },
   props: {
     height: {
       type: Number,
-      default: 175
+      default: 150
     },
     maxDataPoints: {
       type: Number,
@@ -69,83 +41,12 @@ export default defineComponent({
       default: 1500
     }
   },
+
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
-
-    // Constants
-    const coresToggle = ref<boolean>(false)
-    const noData = ref<boolean>(false)
-    const series = ref<series>([])
+    const chartHeight = 150
     const unMounted = ref<boolean>(false)
-
-    const chartOptions = ref({
-      chart: {
-        height: 'auto',
-        type: 'line',
-        animations: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        },
-        zoom: {
-          enabled: false
-        }
-      },
-      colors: [
-        getCssVar('primary'),
-        getCssVar('secondary'),
-        getCssVar('accent'),
-        getCssVar('negative'),
-        getCssVar('positive'),
-        getCssVar('dark'),
-        getCssVar('info'),
-        getCssVar('warning')
-      ],
-      tooltip: { enabled: true },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 2,
-        curve: 'smooth'
-      },
-      title: {
-        text: t('charts.cpu_stats.cpu_status'),
-        align: 'left'
-      },
-      markers: {
-        size: 0
-      },
-      xaxis: {
-        type: 'datetime',
-        labels: {
-          formatter: function (val: number) {
-            return new Date(val).toLocaleTimeString()
-          },
-          show: false
-        }
-      },
-      yaxis: {
-        min: 0,
-        max: 100,
-        labels: {
-          formatter: function (val: number) {
-            return `${val}%`
-          },
-          show: true
-        }
-      },
-      legend: {
-        show: false
-      },
-      noData: {
-        text: t('general.Loading'),
-        align: 'center',
-        verticalAlign: 'middle'
-      }
-    })
 
     onMounted(() => {
       // Disables the AJAX loading bar at the bottom of the page for polled system info requests
@@ -171,6 +72,56 @@ export default defineComponent({
       unMounted.value = true
     })
 
+    const chartData = ref<ChartData<'line'>>({
+      labels: [0],
+      datasets: [
+        {
+          backgroundColor: getCssVar('primary') as string,
+          data: [0]
+        }
+      ]
+    })
+
+    const options = ref<ChartOptions<'line'>>({
+      animation: {
+        duration: 0
+      },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      responsive: true,
+      scales: {
+        yAxis: {
+          min: 0,
+          max: 100,
+          display: true
+        },
+        xAxis: {
+          display: false
+        }
+      },
+
+      plugins: {
+        title: {
+          display: true,
+          align: 'start',
+          text: t('charts.cpu_stats.cpu_status'),
+          padding: {
+            top: 10,
+            bottom: 20
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        legend: {
+          display: false
+        }
+      }
+    })
+
     // Functions
     function delay(ms: number) {
       return new Promise((resolve) => setTimeout(resolve, ms))
@@ -186,88 +137,47 @@ export default defineComponent({
             }
           )
 
-          if (!coresToggle.value) {
-            if (!series.value[0]) {
-              series.value[0] = {
-                name: t('charts.cpu_stats.CPU'),
-                data: [
-                  [
-                    new Date().getTime(),
-                    parseInt(cpuStat.data.data.currentLoad).toFixed(0)
-                  ]
-                ]
-              }
-            } else {
-              // If there are more than X items in the object, remove one
-              // to avoid it growing too big
-              if (series.value[0].data.length > props.maxDataPoints) {
-                series.value[0].data.shift()
-              }
-
-              // Add the fetched data in to the chart data
-              series.value[0].data.push([
-                new Date().getTime(),
-                parseInt(cpuStat.data.data.currentLoad).toFixed(0)
-              ])
-            }
-          } else {
-            if (cpuStat.data.data.cpus) {
-              let i = 0
-              cpuStat.data.data.cpus.forEach(function (value) {
-                if (!series.value[i]) {
-                  series.value[i] = {
-                    name: `${t('charts.cpu_stats.Core')} ${i + 1}`,
-                    data: [
-                      [new Date().getTime(), parseInt(value.load).toFixed(0)]
-                    ]
-                  }
-                } else {
-                  // If there are more than X items in the object, remove one
-                  // to avoid it growing too big
-                  if (series.value[i].data.length > props.maxDataPoints) {
-                    series.value[i].data.shift()
-                  }
-
-                  series.value[i].data.push([
-                    new Date().getTime(),
-                    parseInt(value.load).toFixed(0)
-                  ])
-                }
-                i = i + 1
-              })
-            }
+          // If there are more than X items in the object, remove one
+          // to avoid it growing too big
+          if (chartData.value.datasets[0].data.length > props.maxDataPoints) {
+            chartData?.value?.labels?.shift()
+            chartData.value.datasets[0].data.shift()
           }
-          // Delay before calling next fetch
-          await delay(props.pollInterval)
-        } catch {
-          // On error, stop the polling
-          noData.value = true
+
+          // Add the fetched data in to the chart
+          chartData?.value?.labels?.push(
+            new Date(new Date().getTime()).toLocaleTimeString()
+          )
+          chartData.value.datasets[0].data.push(cpuStat.data.data.currentLoad)
+
+          if (cpuStat.data.data.currentLoad > 50) {
+            chartData.value.datasets[0].borderColor = getCssVar(
+              'warning'
+            ) as string
+          } else if (cpuStat.data.data.currentLoad > 80) {
+            chartData.value.datasets[0].borderColor = getCssVar(
+              'negative'
+            ) as string
+          } else {
+            chartData.value.datasets[0].borderColor = getCssVar(
+              'primary'
+            ) as string
+          }
+        } catch (err) {
           unMounted.value = true
+          console.error(err)
         }
-        if (unMounted.value) {
-          return
+
+        if (unMounted.value === true) {
+          break
         }
+
+        // Delay before calling next fetch
+        await delay(props.pollInterval)
       }
     }
 
-    function pause() {
-      if (unMounted.value) {
-        unMounted.value = false
-        void fetchCpuStats()
-      } else {
-        unMounted.value = true
-      }
-    }
-
-    return {
-      chartOptions,
-      coresToggle,
-      noData,
-      pause,
-      pauseToggle: ref<boolean>(false),
-      props,
-      series
-    }
+    return { chartData, chartHeight, options, props }
   }
 })
 </script>
