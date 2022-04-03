@@ -1,7 +1,7 @@
 <!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
   <div v-if="response && internetConnectivity.status">
-    <h4 class="row items-end q-mt-none q-mb-lg">
+    <h4 class="row items-end q-mt-none q-mb-md">
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
         :color="response.data.is_online ? 'green' : 'red'"
@@ -20,7 +20,7 @@
         }}
       </q-chip>
     </h4>
-    <div><cpu-stats /></div>
+    <div class="q-mb-sm"><cpu-stats /></div>
     <div class="row items-start">
       <q-card flat bordered class="">
         <q-card-section horizontal>
@@ -138,8 +138,8 @@
   <div v-if="!loading && internetConnectivity.status === false">
     {{ $t('system.internet_required') }}
   </div>
-  <div v-if="loading" class="text-center">
-    <q-spinner color="primary" size="3em" />
+  <div v-if="loading" class="window-height row justify-center items-center">
+    <q-spinner color="primary" size="5em" />
   </div>
 </template>
 

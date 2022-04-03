@@ -7,7 +7,7 @@
     >
       {{ internetConnectivity.status ? $t('wifi.online') : $t('wifi.offline') }}
     </q-chip>
-    <div><cpu-stats /></div>
+    <div class="q-mb-sm"><cpu-stats /></div>
     <div>
       <div class="q-mb-md">
         <q-card flat bordered>
@@ -92,8 +92,8 @@
       </div>
     </div>
   </div>
-  <div v-if="loading" class="text-center">
-    <q-spinner color="primary" size="3em" />
+  <div v-if="loading" class="window-height row justify-center items-center">
+    <q-spinner color="primary" size="5em" />
   </div>
 </template>
 
@@ -101,7 +101,6 @@
 import { AxiosError } from 'axios'
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/charts/CpuStats.vue'
-import { useQuasar } from 'quasar'
 import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -140,7 +139,6 @@ export default defineComponent({
   setup() {
     // Tools
     const loading = ref<boolean>(true)
-    const $q = useQuasar()
 
     // Constants
     const device = ref<device>()
