@@ -19,7 +19,7 @@
     </div>
     <!-- Title -->
     <div class="text-h4 q-mb-md">
-      {{ $t('titles.title') }}
+      {{ $t('title') }}
     </div>
     <!-- Welcome text -->
     <div v-if="hostname" class="text-body1 text-center text-gray-600">
@@ -29,7 +29,7 @@
       <div class="q-mt-md">
         http://{{ hostname }}.local
         <q-btn
-          class="q-ml-2"
+          class="q-ml-sm"
           icon="content_copy"
           padding="0"
           flat
