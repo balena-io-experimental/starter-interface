@@ -69,8 +69,14 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :width="225" bordered>
-      <MenuItems v-for="link in menuItems" :key="link.label" v-bind="link" />
+    <q-drawer v-model="leftDrawerOpen" show-if-above :width="210" bordered>
+      <MenuItems
+        v-for="link in menuItems"
+        :key="link.label"
+        v-bind="link"
+        :active="link.path === currentLink"
+        @click="currentLink = link.path"
+      />
     </q-drawer>
 
     <q-page-container>
@@ -122,6 +128,7 @@ import Shutdown from 'components/system/Shutdown.vue'
 import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -134,6 +141,7 @@ export default defineComponent({
 
   setup() {
     const $q = useQuasar()
+    const $router = useRouter()
 
     const deviceName = ref<string>()
     const changingLang = ref<boolean>(false)
@@ -221,6 +229,7 @@ export default defineComponent({
       changingLang,
       deviceName,
       leftDrawerOpen: ref<boolean>(false),
+      currentLink: ref($router.currentRoute.value.name),
       locale,
       localeOptions,
       menuItems: menuList,
