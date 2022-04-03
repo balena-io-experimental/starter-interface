@@ -33,6 +33,9 @@ RUN apk add rsync supervisor --no-cache
 
 ENV NODE_ENV=development
 
+# Specify that this is being deployed to a Balena device
+ENV ON_DEVICE=true
+
 WORKDIR /build
 
 # Copy node_modules into container
