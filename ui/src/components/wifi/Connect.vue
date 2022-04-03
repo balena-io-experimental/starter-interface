@@ -1,6 +1,6 @@
 <template>
   <q-form
-    class="mb-5 flex flex-col"
+    class="flex flex-col"
     :style="$q.screen.gt.sm ? 'min-width: 40vw' : 'min-width: 90vw'"
     @submit="connect()"
   >
@@ -8,7 +8,6 @@
       <div class="q-ml-md">
         <q-select
           v-model="wifiSsid"
-          class="mb-3"
           :label="$t('wifi.select_ssid')"
           :options="ssids"
           option-label="ssid"
@@ -28,14 +27,14 @@
                   show-value
                   font-size="11px"
                   :class="
-                    scope.opt.strength > 60 ? 'text-green' : 'text-orange'
+                    scope.opt.strength > 60 ? 'text-positive' : 'text-warning'
                   "
                   size="40px"
                   :thickness="0.13"
-                  :color="scope.opt.strength > 60 ? 'green' : 'orange'"
+                  :color="scope.opt.strength > 60 ? 'positive' : 'warning'"
                   track-color="grey-3"
                 >
-                  <div class="m-2 text-center">
+                  <div class="text-center">
                     <q-icon name="signal_cellular_alt" />
                     {{ scope.opt.strength }}
                   </div>
@@ -45,7 +44,7 @@
           </template>
           <template #after>
             <q-btn
-              class="mt-1"
+              class="q-mt-1"
               round
               dense
               flat

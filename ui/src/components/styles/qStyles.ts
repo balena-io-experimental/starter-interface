@@ -11,6 +11,6 @@ export const qHeaderStyle = {
     bordered: true,
     elevated: true
   },
-  logo: '/logo.png', // Remove this line to have no logo
+  logo: '/logo.svg', // Remove this line to have no logo
   title: { class: 'text-secondary' }
 }

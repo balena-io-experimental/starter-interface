@@ -194,18 +194,11 @@
         <q-td :props="props">
           <q-icon
             v-if="props.row.type === 'folder'"
-            class="mb-1"
             color="gray-800"
             left
             name="folder"
           />
-          <q-icon
-            v-else
-            class="mb-1"
-            color="gray-800"
-            left
-            name="insert_drive_file"
-          />
+          <q-icon v-else color="gray-800" left name="insert_drive_file" />
           {{ props.value }}
         </q-td>
       </template>
