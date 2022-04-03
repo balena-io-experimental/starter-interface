@@ -268,6 +268,7 @@ export default defineComponent({
     const objPath = ref<Array<string>>([])
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
+    // By default, for production, use relative paths to filemanager
     const uploaderAPIRoute = ref<string>('v1/filemanager/upload')
 
     // Change uploader path based on environment

@@ -19,8 +19,22 @@
         </router-link>
 
         <q-toolbar-title v-bind="qHeaderStyle.title">
-          {{ $t('titles.title') }}
+          <div v-if="$q.screen.gt.xs">{{ $t('title') }}</div>
+          <q-slide-transition v-else :duration="1000">
+            <div v-if="deviceName" class="text-secondary text-subtitle1">
+              {{ deviceName }}
+            </div>
+          </q-slide-transition>
         </q-toolbar-title>
+
+        <q-slide-transition :duration="1000">
+          <div
+            v-if="deviceName && $q.screen.gt.xs"
+            class="text-secondary text-subtitle1 q-mr-md"
+          >
+            {{ deviceName }}
+          </div>
+        </q-slide-transition>
 
         <q-btn
           :loading="changingLang"
@@ -68,7 +82,7 @@
             inline-actions
             class="text-white bg-negative"
           >
-            {{ $t('network.network_connection_down') }}
+            {{ $t('network_connection_down') }}
             <template #action>
               <q-btn
                 flat
@@ -87,7 +101,7 @@
             inline-actions
             class="text-white bg-positive"
           >
-            {{ $t('network.network_connection_restored') }}
+            {{ $t('network_connection_restored') }}
           </q-banner>
         </q-slide-transition>
       </div>
@@ -97,15 +111,17 @@
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios'
 import { loadLanguageAsync } from 'boot/i18n'
 import MenuItems from 'components/layouts/MenuItems.vue'
 import menuList from 'components/styles/menuList'
 import { qHeaderStyle } from 'components/styles/qStyles'
+import { useQuasar } from 'quasar'
 import Reboot from 'components/system/Reboot.vue'
 import Shutdown from 'components/system/Shutdown.vue'
+import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -119,6 +135,7 @@ export default defineComponent({
   setup() {
     const $q = useQuasar()
 
+    const deviceName = ref<string>()
     const changingLang = ref<boolean>(false)
     const { locale } = useI18n({ useScope: 'global' })
     const networkDown = ref<boolean>(false)
@@ -135,29 +152,9 @@ export default defineComponent({
     ]
 
     onMounted(async () => {
-      // Set language to previously chosen according to local storage, otherwise use browser default
-      if ($q.localStorage.getItem('lang')) {
-        locale.value = await loadLanguageAsync(
-          $q.localStorage.getItem('lang') as string
-        )
-      } else {
-        locale.value = await loadLanguageAsync($q.lang.getLocale() as string)
-      }
-    })
-
-    // Listeners for network status
-    // When network is available again
-    window.addEventListener('online', () => {
-      networkDown.value = false
-      networkUp.value = true
-      setTimeout(() => {
-        networkUp.value = false
-      }, 3000)
-    })
-
-    // When network is down
-    window.addEventListener('offline', () => {
-      networkDown.value = true
+      await Promise.all([getDeviceName(), setLang()]).catch(function (error) {
+        console.error(error)
+      })
     })
 
     // Import and activate language
@@ -183,9 +180,46 @@ export default defineComponent({
       changingLang.value = false
     }
 
+    async function getDeviceName() {
+      if (process.env.ON_DEVICE) {
+        const response =
+          (await supervisorRequests.device_name()) as AxiosResponse<{
+            deviceName: string
+          }>
+        deviceName.value = response.data.deviceName
+      }
+    }
+
+    async function setLang() {
+      // Set language to previously chosen according to local storage, otherwise use browser default
+      if ($q.localStorage.getItem('lang')) {
+        locale.value = await loadLanguageAsync(
+          $q.localStorage.getItem('lang') as string
+        )
+      } else {
+        locale.value = await loadLanguageAsync($q.lang.getLocale() as string)
+      }
+    }
+
+    // Listeners for network status
+    // When network is available again
+    window.addEventListener('online', () => {
+      networkDown.value = false
+      networkUp.value = true
+      setTimeout(() => {
+        networkUp.value = false
+      }, 3000)
+    })
+
+    // When network is down
+    window.addEventListener('offline', () => {
+      networkDown.value = true
+    })
+
     return {
       changeLang,
       changingLang,
+      deviceName,
       leftDrawerOpen: ref<boolean>(false),
       locale,
       localeOptions,
