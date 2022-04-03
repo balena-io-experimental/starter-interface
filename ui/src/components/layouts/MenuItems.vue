@@ -1,5 +1,10 @@
 <template>
-  <q-item v-ripple:secondary clickable @click="clickedLink(path)">
+  <q-item
+    v-ripple:secondary
+    clickable
+    active-class="bg-accent text-secondary"
+    @click="clickedLink(path)"
+  >
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
