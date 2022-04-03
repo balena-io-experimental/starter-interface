@@ -2,7 +2,7 @@
 <template>
   <div v-if="m && f && device && !loading">
     <q-chip
-      :color="internetConnectivity.status ? 'green' : 'red'"
+      :color="internetConnectivity.status ? 'positive' : 'negative'"
       text-color="white"
     >
       {{ internetConnectivity.status ? $t('wifi.online') : $t('wifi.offline') }}

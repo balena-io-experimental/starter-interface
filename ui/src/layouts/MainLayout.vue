@@ -3,6 +3,7 @@
     <q-header v-bind="qHeaderStyle.header">
       <q-toolbar>
         <q-btn
+          class="q-mr-sm"
           color="secondary"
           flat
           dense

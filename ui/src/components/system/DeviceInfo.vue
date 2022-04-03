@@ -4,13 +4,13 @@
     <h4 class="row items-end q-mt-none q-mb-md">
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
-        :color="response.data.is_online ? 'green' : 'red'"
+        :color="response.data.is_online ? 'positive' : 'negative'"
         text-color="white"
       >
         {{ response.data.is_online ? $t('wifi.online') : $t('wifi.offline') }}
       </q-chip>
       <q-chip
-        :color="response.data.is_undervolted ? 'red' : 'green'"
+        :color="response.data.is_undervolted ? 'negative' : 'positive'"
         text-color="white"
       >
         {{
