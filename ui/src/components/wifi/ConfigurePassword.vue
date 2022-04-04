@@ -7,7 +7,9 @@
       :loading="submitting"
       @click="passwordDialog = true"
     >
-      <q-tooltip>{{ $t('wifi.set_new_hotspot_password') }} </q-tooltip>
+      <q-tooltip
+        >{{ $t('components.wifi.configure_password.set_new_hotspot_password') }}
+      </q-tooltip>
     </q-btn>
 
     <q-dialog v-model="passwordDialog" persistent>
@@ -24,10 +26,14 @@
             v-model="passwordText"
             bottom-slots
             :rules="[
-              (value) => !value.includes(' ') || $t('wifi.invalid_name')
+              (value) =>
+                !value.includes(' ') ||
+                $t('components.wifi.configure_password.invalid_name')
             ]"
             :type="isPwd ? 'password' : 'text'"
-            :label="$t('wifi.set_new_hotspot_password')"
+            :label="
+              $t('components.wifi.configure_password.set_new_hotspot_password')
+            "
           >
             <template #append>
               <q-icon
@@ -38,7 +44,9 @@
               />
             </template>
             <template #hint>
-              {{ $t('wifi.invalid_password_length') }}
+              {{
+                $t('components.wifi.configure_password.invalid_password_length')
+              }}
             </template>
           </q-input>
         </q-card-section>
@@ -114,10 +122,10 @@ export default defineComponent({
           params: { password: passwordText.value }
         })
 
-        notify('positive', t('wifi.password_set'))
+        notify('positive', t('components.wifi.configure_password.password_set'))
         submitting.value = false
       } catch {
-        notify('negative', t('wifi.no_wifi_api'))
+        notify('negative', t('system.no_wifi_api'))
       }
 
       passwordText.value = ''

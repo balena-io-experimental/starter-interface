@@ -3,7 +3,7 @@
     <q-btn
       :loading="loading"
       v-bind="qBtnStyle"
-      :label="$t('system.fetch_journald')"
+      :label="$t('components.system.journal_d_logs.fetch_journald')"
       @click="fetchLogs()"
     />
   </div>

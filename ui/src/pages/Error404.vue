@@ -7,7 +7,7 @@
       <div style="font-size: 30vh">404</div>
 
       <div class="text-h2" style="opacity: 0.4">
-        {{ $t('general.wrong_way') }}
+        {{ $t('system.wrong_way') }}
       </div>
 
       <q-btn

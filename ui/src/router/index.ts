@@ -59,7 +59,7 @@ export default route(function (/* { store, ssrContext } */) {
         // http.ClientRequest in node.js
         Notify.create({
           type: 'negative',
-          message: t('general.request_error')
+          message: t('system.request_error')
         })
       }
       // Reject with UI Axios error

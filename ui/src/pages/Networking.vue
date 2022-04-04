@@ -6,7 +6,7 @@
           <q-item>
             <q-item-section>
               <q-item-label overline>{{
-                $t('wifi.configure_hotspot')
+                $t('components.wifi.connect.configure_hotspot')
               }}</q-item-label>
               <div class="row justify-center q-mt-sm">
                 <div class="q-mr-sm"><WifiConnectConfigureSSID /></div>

@@ -11,8 +11,8 @@
       :rows="rows"
       :rows-per-page-options="[50, 75, 100, 0]"
       :columns="columns"
-      :no-data-label="$t('file_manager.empty_folder')"
-      :no-results-label="$t('file_manager.no_results_found')"
+      :no-data-label="$t('components.tools.file_manager.empty_folder')"
+      :no-results-label="$t('components.tools.file_manager.no_results_found')"
       :selection="'multiple'"
       row-key="path"
       @row-click="onRowClick"
@@ -70,7 +70,7 @@
                   self="center middle"
                   :offset="[20, 20]"
                 >
-                  {{ $t('file_manager.new_folder') }}
+                  {{ $t('components.tools.file_manager.new_folder') }}
                 </q-tooltip>
               </q-btn>
               <q-btn
@@ -88,13 +88,13 @@
                   self="center middle"
                   :offset="[20, 20]"
                 >
-                  {{ $t('file_manager.upload') }}
+                  {{ $t('components.tools.file_manager.upload') }}
                 </q-tooltip>
               </q-btn>
               <q-dialog v-model="uploaderDialog">
                 <q-uploader
                   style="max-width: 300px"
-                  :label="$t('file_manager.upload')"
+                  :label="$t('components.tools.file_manager.upload')"
                   color="white"
                   text-color="black"
                   multiple
@@ -108,7 +108,9 @@
                   @rejected="
                     $q.notify({
                       type: 'negative',
-                      message: $t('file_manager.invalid_upload_string')
+                      message: $t(
+                        'components.tools.file_manager.invalid_upload_string'
+                      )
                     })
                   "
                   @added="checkUploadOverwrite"
@@ -130,7 +132,7 @@
                   self="center middle"
                   :offset="[20, 20]"
                 >
-                  {{ $t('file_manager.delete') }}
+                  {{ $t('components.tools.file_manager.delete') }}
                 </q-tooltip>
               </q-btn>
               <q-btn
@@ -147,7 +149,7 @@
                   self="center middle"
                   :offset="[20, 20]"
                 >
-                  {{ $t('file_manager.filter') }}
+                  {{ $t('components.tools.file_manager.filter') }}
                 </q-tooltip>
               </q-btn>
               <q-btn
@@ -165,7 +167,7 @@
                   self="center middle"
                   :offset="[20, 20]"
                 >
-                  {{ $t('file_manager.full_screen') }}
+                  {{ $t('components.tools.file_manager.full_screen') }}
                 </q-tooltip>
               </q-btn>
               <q-input
@@ -175,7 +177,7 @@
                 dense
                 debounce="300"
                 hide-bottom-space
-                :placeholder="$t('file_manager.filter')"
+                :placeholder="$t('components.tools.file_manager.filter')"
               >
                 <template #append>
                   <q-icon
@@ -217,13 +219,13 @@
             <q-icon size="xs" name="info">
               <q-tooltip class="text-caption">
                 <div v-if="props.row.stats.size < 10000">
-                  {{ $t('file_manager.size_colon')
-                  }}{{ $t('file_manager.mb_001') }}
+                  {{ $t('components.tools.file_manager.size_colon')
+                  }}{{ $t('components.tools.file_manager.mb_001') }}
                 </div>
                 <div v-else>
-                  {{ $t('file_manager.size_colon') }}
+                  {{ $t('components.tools.file_manager.size_colon') }}
                   {{ (props.row.stats.size / 1000000).toFixed(2) }}
-                  {{ $t('file_manager.mb') }}
+                  {{ $t('components.tools.file_manager.mb') }}
                 </div>
               </q-tooltip>
             </q-icon>
@@ -279,7 +281,7 @@ export default defineComponent({
       {
         name: 'path',
         required: true,
-        label: t('file_manager.name'),
+        label: t('components.tools.file_manager.name'),
         align: 'left',
         field: (row: Rows) => row.path.split('/').pop(),
         format: (val: string) => `${val}`
@@ -317,7 +319,7 @@ export default defineComponent({
           timeout: 0,
           type: 'warning',
           position: 'center',
-          message: t('file_manager.upload_files_exist')
+          message: t('components.tools.file_manager.upload_files_exist')
         })
       }
     }
@@ -372,8 +374,8 @@ export default defineComponent({
 
     function newFolder() {
       $q.dialog({
-        title: t('file_manager.new_folder'),
-        message: t('file_manager.enter_name'),
+        title: t('components.tools.file_manager.new_folder'),
+        message: t('components.tools.file_manager.enter_name'),
         prompt: {
           model: '',
           isValid: (val) => val !== ''
@@ -383,13 +385,15 @@ export default defineComponent({
         if (invalidCharacters.value.some((el) => newName.includes(el))) {
           $q.notify({
             type: 'negative',
-            message: t('file_manager.invalid_filemanager_string')
+            message: t(
+              'components.tools.file_manager.invalid_filemanager_string'
+            )
           })
         } else {
           if (checkRowExistence(newName)) {
             $q.notify({
               type: 'negative',
-              message: t('file_manager.item_already_exists')
+              message: t('components.tools.file_manager.item_already_exists')
             })
           } else {
             try {

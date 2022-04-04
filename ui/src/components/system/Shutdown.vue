@@ -27,7 +27,7 @@
               v-model="checkBox"
               class="q-ml-md text-caption"
               size="xs"
-              :label="$t('system.force_shutdown')"
+              :label="$t('components.system.shutdown.force_shutdown')"
             />
           </div>
         </div>
@@ -78,7 +78,7 @@ export default defineComponent({
         $q.notify({
           type: 'positive',
           timeout: 0,
-          message: t('system.shutting_down')
+          message: t('components.system.shutdown.shutting_down')
         })
       }, 1500)
     }

@@ -89,7 +89,7 @@
             inline-actions
             class="text-white bg-negative"
           >
-            {{ $t('network_connection_down') }}
+            {{ $t('system.network_connection_down') }}
             <template #action>
               <q-btn
                 flat
@@ -108,7 +108,7 @@
             inline-actions
             class="text-white bg-positive"
           >
-            {{ $t('network_connection_restored') }}
+            {{ $t('system.network_connection_restored') }}
           </q-banner>
         </q-slide-transition>
       </div>

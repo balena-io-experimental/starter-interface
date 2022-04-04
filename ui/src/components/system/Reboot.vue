@@ -23,7 +23,7 @@
               v-model="checkBox"
               class="q-ml-md text-caption"
               size="xs"
-              :label="$t('system.force_restart')"
+              :label="$t('components.system.reboot.force_restart')"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@ export default defineComponent({
         $q.notify({
           type: 'positive',
           timeout: 0,
-          message: t('system.restarting')
+          message: t('components.system.reboot.restarting')
         })
       }, 1500)
     }

@@ -2,7 +2,9 @@
   <div v-if="getEnvResponse">
     <div class="row items-center q-mb-md">
       <q-icon class="q-mr-sm" name="warning" color="warning" size="1rem" />
-      <span>{{ $t('system.env_var_warning_message') }}</span>
+      <span>{{
+        $t('components.system.env_config.env_var_warning_message')
+      }}</span>
     </div>
     <div class="q-mt-none q-mb-lg">
       <q-table
@@ -19,7 +21,7 @@
       <div class="q-pa-md q-gutter-y-md column items-start">
         <div v-if="selectedRows.length > 0">
           <q-btn
-            :label="$t('system.delete_selected_records')"
+            :label="$t('components.system.env_config.delete_selected_records')"
             icon="delete"
             v-bind="qBtnStyle"
             @click="deleteEnv()"
@@ -27,7 +29,7 @@
         </div>
         <div>
           <q-btn
-            :label="$t('system.add_change_env_var')"
+            :label="$t('components.system.env_config.add_change_env_var')"
             icon="add"
             v-bind="qBtnStyle"
             @click="newVarDialogOpen = true"
@@ -36,7 +38,9 @@
         <q-dialog v-model="newVarDialogOpen" persistent>
           <q-card style="min-width: 250px">
             <q-card-section>
-              <div class="text-h6">{{ $t('system.add_change_env_var') }}</div>
+              <div class="text-h6">
+                {{ $t('components.system.env_config.add_change_env_var') }}
+              </div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
@@ -69,8 +73,8 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      :label="$t('device_info.response_details')"
-      :caption="$t('device_info.raw_json')"
+      :label="$t('components.system.env_config.response_details')"
+      :caption="$t('components.system.env_config.raw_json')"
     >
       <pre>{{ getEnvResponse.data }}</pre>
     </q-expansion-item>

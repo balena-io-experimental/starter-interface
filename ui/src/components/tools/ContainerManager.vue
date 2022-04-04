@@ -1,7 +1,7 @@
 <template>
   <div class="q-mt-sm q-ml-md q-mr-md">
     <q-table
-      :title="$t('containers.containers')"
+      :title="$t('components.tools.container_manager.containers')"
       :loading="loading"
       flat
       dense

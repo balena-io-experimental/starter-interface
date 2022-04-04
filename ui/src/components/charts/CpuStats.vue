@@ -107,7 +107,7 @@ export default defineComponent({
         title: {
           display: true,
           align: 'start',
-          text: t('charts.cpu_stats.cpu_status'),
+          text: t('components.charts.cpu_stats.cpu_status'),
           padding: {
             top: 10,
             bottom: 20
