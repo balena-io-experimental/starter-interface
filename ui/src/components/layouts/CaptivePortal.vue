@@ -7,7 +7,7 @@
     mobile-arrows
     class="bg-primary shadow-2"
   >
-    <q-tab name="welcome" :label="$t('captive_portal.Welcome')" />
+    <q-tab name="welcome" :label="$t('captive_portal.welcome')" />
     <q-tab name="wifi" :label="$t('captive_portal.connect_to_wifi')" />
   </q-tabs>
 

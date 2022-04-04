@@ -2,35 +2,38 @@
 import { i18n } from 'boot/i18n'
 import { computed } from 'vue'
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { t } = i18n.global
+
 export default computed(() => [
   {
     icon: 'visibility',
-    label: i18n.global.t('menu_items.Device_Info'),
+    label: t('menu_items.device_info'),
     path: 'home'
   },
   {
     icon: 'all_inbox',
-    label: i18n.global.t('menu_items.container_manager'),
+    label: t('menu_items.container_manager'),
     path: 'containermanager'
   },
   {
     icon: 'folder',
-    label: i18n.global.t('menu_items.volume_manager'),
+    label: t('menu_items.volume_manager'),
     path: 'filemanager'
   },
   {
     icon: 'router',
-    label: i18n.global.t('menu_items.Networking'),
+    label: t('menu_items.networking'),
     path: 'networking'
   },
   {
     icon: 'settings',
-    label: i18n.global.t('menu_items.Configuration'),
+    label: t('menu_items.configuration'),
     path: 'configuration'
   },
   {
     icon: 'info',
-    label: i18n.global.t('menu_items.System_Info'),
+    label: t('menu_items.system_info'),
     path: 'systeminfo'
   }
 ])
