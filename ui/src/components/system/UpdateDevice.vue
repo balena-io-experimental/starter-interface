@@ -1,10 +1,14 @@
 <template>
-  <q-btn v-bind="qBtnStyle" :label="$t('update_device')" @click="update()" />
+  <q-btn
+    v-bind="qBtnStyle"
+    :label="$t('components.system.update_device.update_device')"
+    @click="update()"
+  />
   <q-checkbox
     v-model="checkBox"
     class="q-ml-md"
     size="xs"
-    :label="$t('system.force_update')"
+    :label="$t('components.system.update_device.force_update')"
   />
 </template>
 

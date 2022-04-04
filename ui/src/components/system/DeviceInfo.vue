@@ -7,7 +7,11 @@
         :color="response.data.is_online ? 'positive' : 'negative'"
         text-color="white"
       >
-        {{ response.data.is_online ? $t('wifi.online') : $t('wifi.offline') }}
+        {{
+          response.data.is_online
+            ? $t('components.system.device_info.online')
+            : $t('components.system.device_info.offline')
+        }}
       </q-chip>
       <q-chip
         :color="response.data.is_undervolted ? 'negative' : 'positive'"
@@ -15,8 +19,8 @@
       >
         {{
           response.data.is_undervolted
-            ? $t('device_info.undervolted')
-            : $t('device_info.not_undervolted')
+            ? $t('components.system.device_info.undervolted')
+            : $t('components.system.device_info.not_undervolted')
         }}
       </q-chip>
     </h4>
@@ -30,7 +34,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.location')
+                    $t('components.system.device_info.location')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.location }}</q-item-label>
                 </q-item-section>
@@ -38,7 +42,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.os_version')
+                    $t('components.system.device_info.os_version')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.os_version }}</q-item-label>
                 </q-item-section>
@@ -46,7 +50,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.supervisor_version')
+                    $t('components.system.device_info.supervisor_version')
                   }}</q-item-label>
                   <q-item-label>{{
                     response.data.supervisor_version
@@ -56,7 +60,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.ip_address')
+                    $t('components.system.device_info.ip_address')
                   }}</q-item-label>
                   <q-item-label>{{ response.data.ip_address }}</q-item-label>
                 </q-item-section>
@@ -64,7 +68,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.mac_address')
+                    $t('components.system.device_info.mac_address')
                   }}</q-item-label>
                   <q-item-label
                     v-for="mac in response.data.mac_address.split(' ')"
@@ -76,7 +80,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.public_ip')
+                    $t('components.system.device_info.public_ip')
                   }}</q-item-label>
                   <q-item-label>{{
                     response.data.public_address
@@ -90,7 +94,9 @@
           <!-- bars -->
           <q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('device_info.memory') }}</b>
+              <b class="q-mr-xs">{{
+                $t('components.system.device_info.memory')
+              }}</b>
               <span> - </span>
               <span
                 >{{ response.data.memory_usage }}MB /
@@ -104,7 +110,9 @@
               />
             </q-card-section>
             <q-card-section>
-              <b class="q-mr-xs">{{ $t('device_info.storage') }}</b>
+              <b class="q-mr-xs">{{
+                $t('components.system.device_info.storage')
+              }}</b>
               <span>({{ response.data.storage_block_device }})</span>
               <span> - </span>
               <span
@@ -129,14 +137,14 @@
     <q-expansion-item
       expand-separator
       icon="code"
-      :label="$t('device_info.response_details')"
-      :caption="$t('device_info.raw_json')"
+      :label="$t('components.system.device_info.response_details')"
+      :caption="$t('components.system.device_info.raw_json')"
     >
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
   <div v-if="!loading && internetConnectivity.status === false">
-    {{ $t('system.internet_required') }}
+    {{ $t('components.system.device_info.internet_required') }}
   </div>
   <div v-if="loading" class="window-height row justify-center items-center">
     <q-spinner color="primary" size="5em" />
@@ -171,7 +179,7 @@ export default defineComponent({
         console.error(error)
         $q.notify({
           type: 'negative',
-          message: t('device_info.sdk_unavailable')
+          message: t('components.system.device_info.sdk_unavailable')
         })
       }
     }

@@ -7,7 +7,11 @@
       :loading="submitting"
       @click="ssidDialog = true"
     >
-      <q-tooltip> {{ $t('wifi.set_new_hotspot_ssid') }}</q-tooltip>
+      <q-tooltip>
+        {{
+          $t('components.wifi.configure_ssid.set_new_hotspot_ssid')
+        }}</q-tooltip
+      >
     </q-btn>
 
     <q-dialog v-model="ssidDialog" persistent>
@@ -33,9 +37,9 @@
                   !value.includes(']') &&
                   value.length < 32 &&
                   !value.includes('+')) ||
-                $t('wifi.invalid_name')
+                $t('components.wifi.configure_ssid.invalid_name')
             ]"
-            :label="$t('wifi.set_new_hotspot_ssid')"
+            :label="$t('components.wifi.configure_ssid.set_new_hotspot_ssid')"
           />
         </q-card-section>
 
@@ -112,10 +116,10 @@ export default defineComponent({
           params: { ssid: ssidText.value }
         })
 
-        notify('positive', t('wifi.ssid_set'))
+        notify('positive', t('components.wifi.configure_ssid.ssid_set'))
         submitting.value = false
       } catch {
-        notify('negative', t('wifi.no_wifi_api'))
+        notify('negative', t('system.no_wifi_api'))
       }
 
       ssidText.value = ''

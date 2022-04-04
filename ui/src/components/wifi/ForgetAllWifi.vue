@@ -2,7 +2,7 @@
   <q-btn
     v-bind="qBtnStyle"
     :loading="submitting"
-    :label="$t('network.forget_all_wifi')"
+    :label="$t('components.wifi.forget_all_wifi.forget_all_wifi')"
     @click="confirm = true"
   />
   <q-dialog v-model="confirm" persistent>
@@ -81,7 +81,9 @@ export default defineComponent({
                 }
               }
             ],
-            message: t('wifi.disconnect_request_sent')
+            message: t(
+              'components.wifi.forget_all_wifi.disconnect_request_sent'
+            )
           })
           submitting.value = false
         }, 1000)

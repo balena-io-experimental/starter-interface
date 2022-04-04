@@ -115,7 +115,7 @@ module.exports = {
         src: './src',
         extensions: ['.js', '.vue', '.ts'],
         ignores: [],
-        enableFix: false
+        enableFix: true
       }
     ],
     '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',

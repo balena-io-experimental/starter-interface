@@ -5,7 +5,11 @@
       :color="internetConnectivity.status ? 'positive' : 'negative'"
       text-color="white"
     >
-      {{ internetConnectivity.status ? $t('wifi.online') : $t('wifi.offline') }}
+      {{
+        internetConnectivity.status
+          ? $t('components.system.device_info.online')
+          : $t('components.system.device_info.offline')
+      }}
     </q-chip>
     <div class="q-mb-sm"><cpu-stats /></div>
     <div>
@@ -13,7 +17,9 @@
         <q-card flat bordered>
           <q-card-section horizontal>
             <q-card-section class="full-width">
-              <b class="q-mr-xs">{{ $t('device_info.memory') }}</b>
+              <b class="q-mr-xs">{{
+                $t('components.system.device_info.memory')
+              }}</b>
               <span> - </span>
               <span
                 >{{
@@ -28,7 +34,9 @@
               />
             </q-card-section>
             <q-card-section class="full-width">
-              <b class="q-mr-xs">{{ $t('device_info.storage') }}</b>
+              <b class="q-mr-xs">{{
+                $t('components.system.device_info.storage')
+              }}</b>
               <span>({{ f.data[0].mount }})</span>
               <span> - </span>
               <span
@@ -53,7 +61,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.os_version')
+                    $t('components.system.device_info.os_version')
                   }}</q-item-label>
                   <q-item-label>
                     {{ device.os_version }}
@@ -63,7 +71,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.supervisor_version')
+                    $t('components.system.device_info.supervisor_version')
                   }}</q-item-label>
                   <q-item-label>
                     {{ device.supervisor_version }}
@@ -73,7 +81,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.ip_address')
+                    $t('components.system.device_info.ip_address')
                   }}</q-item-label>
                   <q-item-label>{{ device.ip_address }}</q-item-label>
                 </q-item-section>
@@ -81,7 +89,7 @@
               <q-item class="q-mb-sm">
                 <q-item-section>
                   <q-item-label caption>{{
-                    $t('device_info.mac_address')
+                    $t('components.system.device_info.mac_address')
                   }}</q-item-label>
                   <q-item-label>{{ device.mac_address }}</q-item-label>
                 </q-item-section>

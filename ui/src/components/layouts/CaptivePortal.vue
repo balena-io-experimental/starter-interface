@@ -7,8 +7,14 @@
     mobile-arrows
     class="bg-primary shadow-2"
   >
-    <q-tab name="welcome" :label="$t('captive_portal.welcome')" />
-    <q-tab name="wifi" :label="$t('captive_portal.connect_to_wifi')" />
+    <q-tab
+      name="welcome"
+      :label="$t('components.layouts.captive_portal.welcome')"
+    />
+    <q-tab
+      name="wifi"
+      :label="$t('components.layouts.captive_portal.connect_to_wifi')"
+    />
   </q-tabs>
 
   <!-- Welcome page -->
@@ -24,7 +30,7 @@
     <!-- Welcome text -->
     <div v-if="hostname" class="text-body1 text-center text-gray-600">
       <div>
-        {{ $t('captive_portal.visit_to_begin') }}
+        {{ $t('components.layouts.captive_portal.visit_to_begin') }}
       </div>
       <div class="q-mt-md">
         http://{{ hostname }}.local
@@ -37,7 +43,7 @@
           @click="copyUrl()"
         >
           <q-tooltip class="text-caption text-center">
-            {{ $t('captive_portal.copy_to_clipboard') }}
+            {{ $t('components.layouts.captive_portal.copy_to_clipboard') }}
           </q-tooltip>
         </q-btn>
       </div>
@@ -88,7 +94,7 @@ export default defineComponent({
     const copyUrl = async () => {
       if (hostname.value) {
         await copyToClipboard(`http://${hostname.value}.local`)
-        $q.notify(t('captive_portal.url_copied'))
+        $q.notify(t('components.layouts.captive_portal.url_copied'))
       }
     }
 
