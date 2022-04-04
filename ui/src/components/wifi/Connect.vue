@@ -84,7 +84,7 @@
         <q-btn
           v-if="!wifiStatus"
           v-bind="qBtnStyle"
-          :label="$t('wifi.Connect')"
+          :label="$t('wifi.connect')"
           class="q-ml-md"
           :loading="submitting"
           type="submit"
@@ -93,7 +93,7 @@
           v-else
           v-bind="qBtnStyle"
           :disable="noWifiConnect"
-          :label="$t('wifi.Disconnect')"
+          :label="$t('wifi.disconnect')"
           class="q-ml-md"
           :loading="submitting"
           @click="forget()"

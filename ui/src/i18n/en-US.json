@@ -3,53 +3,43 @@
   "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
   "network_connection_restored": "Network connection restored.",
   "menu_items": {
-    "Configuration": "Configuration",
+    "configuration": "Configuration",
     "container_manager": "Container Manager",
-    "control_panel": "Control Panel",
-    "Device_Info": "Device Info",
-    "Networking": "Networking",
-    "Settings": "Settings",
-    "System_Info": "System Info",
+    "device_info": "Device Info",
+    "networking": "Networking",
+    "system_info": "System Info",
     "volume_manager": "Volume Manager"
   },
   "general": {
     "are_you_sure": "Are you sure?",
     "close": "Close",
     "cancel": "Cancel",
-    "Error": "Error",
-    "Home": "Home",
-    "Loading": "Loading…",
-    "Name": "Name",
+    "error": "Error",
+    "name": "Name",
     "ok": "ok",
     "password": "Password",
-    "Restart": "Restart",
+    "restart": "Restart",
     "request_error": "Request error",
-    "Status": "Status",
-    "Start": "Start",
-    "Stop": "Stop",
-    "Submit": "Submit",
-    "Wrong_way": "Wrong way…"
+    "status": "Status",
+    "start": "Start",
+    "stop": "Stop",
+    "submit": "Submit",
+    "wrong_way": "Wrong way…"
   },
-  "Response": "Response",
   "captive_portal": {
     "connect_to_wifi": "Connect to WiFi",
     "copy_to_clipboard": "Copy to clipboard",
     "url_copied": "Copied to clipboard",
     "visit_to_begin": "Visit the following URL in your browser to begin:",
-    "Welcome": "Welcome"
+    "welcome": "Welcome"
   },
   "charts": {
     "cpu_stats": {
-      "Core": "Core",
-      "CPU": "CPU",
-      "cpu_status": "CPU Status",
-      "no_data": "Unable to fetch CPU data.",
-      "pause": "Pause",
-      "show_cores": "Show Cores"
+      "cpu_status": "CPU Status"
     }
   },
   "containers": {
-    "Containers": "Containers"
+    "containers": "Containers"
   },
   "device_info": {
     "environment_variables": "Environment Variables",
@@ -68,7 +58,7 @@
     "undervolted": "Undervolted"
   },
   "file_manager": {
-    "001_Mb": "0.01 Mb",
+    "mb_001": "0.01 Mb",
     "delete": "Delete",
     "empty_folder": "Empty Folder",
     "enter_name": "Enter a name",
@@ -77,8 +67,8 @@
     "invalid_upload_string": "Entries contain an invalid name and will not be uploaded. The following characters are not compatible: '/', '\\0'",
     "invalid_filemanager_string": "You entered an invalid name. The following characters are not compatible: '/', '\\0'",
     "item_already_exists": "Item already exists",
-    "Mb": "Mb",
-    "Name": "Name",
+    "mb": "Mb",
+    "name": "Name",
     "new_folder": "New Folder",
     "no_results_found": "No results found",
     "size_colon": "Size:",
@@ -98,7 +88,7 @@
     "internet_required": "Internet connectivity is required to use this feature.",
     "ping_supervisor": "Ping supervisor",
     "restarting": "Your device is restarting…",
-    "Services": "Services",
+    "services": "Services",
     "shutting_down": "Shutting device down…",
     "add_change_env_var": "Add/Change Environment Variable",
     "delete_selected_records": "Delete Selected Records",
@@ -109,17 +99,16 @@
   },
   "update_device": "Update device",
   "wifi": {
-    "Connect": "Connect",
+    "connect": "Connect",
     "connection_request": "Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.",
     "configure_hotspot": "Configure hotspot",
-    "Disconnect": "Disconnect",
+    "disconnect": "Disconnect",
     "disconnect_request_sent": "Disconnect request sent.",
     "invalid_name": "Invalid name",
     "invalid_password_length": "Password must be 8 characters or more.",
     "network_connect_fail": "Failed to execute the connect request.",
     "network_fetch_fail": "Failed to fetch the available networks.",
     "network_forget_fail": "Failed to execute the forget request.",
-    "network_request_fail": "Failed to communicate with Balena Py Wi-Fi Connect.",
     "no_networks": "No available networks",
     "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?",
     "offline": "Offline",

@@ -1,7 +1,7 @@
 <template>
   <div class="q-mt-sm q-ml-md q-mr-md">
     <q-table
-      :title="$t('containers.Containers')"
+      :title="$t('containers.containers')"
       :loading="loading"
       flat
       dense
@@ -94,7 +94,7 @@ export default defineComponent({
         required: true,
         align: 'left',
         sortOrder: 'ad',
-        label: t('general.Name'),
+        label: t('general.name'),
         field: (row: containers) => row.serviceName,
         format: (val: string) => `${val}`,
         sortable: true
@@ -102,23 +102,23 @@ export default defineComponent({
       {
         name: 'status',
         align: 'left',
-        label: t('general.Status'),
+        label: t('general.status'),
         field: 'status',
         sortable: true
       },
       {
         name: 'start',
-        label: t('general.Start'),
+        label: t('general.start'),
         field: 'start'
       },
       {
         name: 'stop',
-        label: t('general.Stop'),
+        label: t('general.stop'),
         field: 'stop'
       },
       {
         name: 'restart',
-        label: t('general.Restart'),
+        label: t('general.restart'),
         field: 'restart'
       }
     ])
@@ -136,7 +136,7 @@ export default defineComponent({
         }>
         rows.value = res.data.containers
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
 
@@ -154,7 +154,7 @@ export default defineComponent({
           message: res.data as string
         })
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
       loading.value = false
@@ -171,7 +171,7 @@ export default defineComponent({
           message: res.data as string
         })
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
       loading.value = false
@@ -188,7 +188,7 @@ export default defineComponent({
           message: res.data as string
         })
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
       loading.value = false

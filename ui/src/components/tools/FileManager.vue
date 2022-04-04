@@ -218,12 +218,12 @@
               <q-tooltip class="text-caption">
                 <div v-if="props.row.stats.size < 10000">
                   {{ $t('file_manager.size_colon')
-                  }}{{ $t('file_manager.001_Mb') }}
+                  }}{{ $t('file_manager.mb_001') }}
                 </div>
                 <div v-else>
                   {{ $t('file_manager.size_colon') }}
                   {{ (props.row.stats.size / 1000000).toFixed(2) }}
-                  {{ $t('file_manager.Mb') }}
+                  {{ $t('file_manager.mb') }}
                 </div>
               </q-tooltip>
             </q-icon>
@@ -279,7 +279,7 @@ export default defineComponent({
       {
         name: 'path',
         required: true,
-        label: t('file_manager.Name'),
+        label: t('file_manager.name'),
         align: 'left',
         field: (row: Rows) => row.path.split('/').pop(),
         format: (val: string) => `${val}`
@@ -328,7 +328,7 @@ export default defineComponent({
           currentPath: path
         })
         .catch(function () {
-          $q.notify({ type: 'negative', message: t('general.Error') })
+          $q.notify({ type: 'negative', message: t('general.error') })
         })
     }
 
@@ -365,7 +365,7 @@ export default defineComponent({
           row.path.split('/').pop() as string
         )
       } catch {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
       }
       loading.value = false
     }
@@ -401,7 +401,7 @@ export default defineComponent({
               void updateRows()
               notifyComplete()
             } catch {
-              $q.notify({ type: 'negative', message: t('general.Error') })
+              $q.notify({ type: 'negative', message: t('general.error') })
             }
           }
         }
@@ -431,7 +431,7 @@ export default defineComponent({
       console.error(info)
       $q.notify({
         type: 'negative',
-        message: t('general.Error')
+        message: t('general.error')
       })
     }
 
@@ -444,7 +444,7 @@ export default defineComponent({
 
         rows.value = response.data
       } catch {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
       }
       loading.value = false
     }

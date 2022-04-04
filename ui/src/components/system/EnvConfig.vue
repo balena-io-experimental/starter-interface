@@ -57,7 +57,7 @@
                 :label="$t('general.cancel')"
               />
               <q-btn
-                :label="$t('general.Submit')"
+                :label="$t('general.submit')"
                 v-bind="qBtnStyle"
                 @click="setEnv()"
               />

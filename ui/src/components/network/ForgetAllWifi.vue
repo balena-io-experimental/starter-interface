@@ -86,7 +86,7 @@ export default defineComponent({
           submitting.value = false
         }, 1000)
       } catch {
-        $q.notify({ type: 'negative', message: t('general.Error') })
+        $q.notify({ type: 'negative', message: t('general.error') })
         submitting.value = false
       }
     }

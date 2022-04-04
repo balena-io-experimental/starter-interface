@@ -10,6 +10,9 @@ import {
 } from 'vue-router'
 import routes from './routes'
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { t } = i18n.global
+
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
@@ -56,7 +59,7 @@ export default route(function (/* { store, ssrContext } */) {
         // http.ClientRequest in node.js
         Notify.create({
           type: 'negative',
-          message: i18n.global.t('general.request_error')
+          message: t('general.request_error')
         })
       }
       // Reject with UI Axios error
@@ -74,7 +77,7 @@ export default route(function (/* { store, ssrContext } */) {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         Notify.create({
           type: 'negative',
-          message: `${i18n.global.t('general.Error')}: ${error.response.status}`
+          message: `${t('general.error')}: ${error.response.status}`
         })
       }
       // Reject with UI Axios error

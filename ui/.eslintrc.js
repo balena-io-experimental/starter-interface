@@ -34,10 +34,9 @@ module.exports = {
     // Recommended i18n
     'plugin:@intlify/vue-i18n/recommended',
 
-    // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
+    // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin#usage
     // ESLint typescript rules
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
@@ -49,6 +48,34 @@ module.exports = {
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
     'prettier'
+  ],
+
+  overrides: [
+    {
+      files: ['*.json', '*.json5'],
+      extends: ['plugin:@intlify/vue-i18n/base'],
+      rules: {
+        'no-irregular-whitespace': 'off'
+      }
+    },
+    {
+      files: ['*.yaml', '*.yml'],
+      extends: ['plugin:@intlify/vue-i18n/base']
+    },
+    {
+      files: ['*.ts'],
+      extends: ['plugin:@typescript-eslint/recommended-requiring-type-checking']
+    },
+    {
+      files: ['*.vue'],
+      extends: [
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:vue/base'
+      ],
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    }
   ],
 
   plugins: [
