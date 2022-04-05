@@ -14,14 +14,6 @@
     "stop": "Stop",
     "submit": "Submit"
   },
-  "menu_items": {
-    "configuration": "Configuration",
-    "container_manager": "Container Manager",
-    "device_info": "Device Info",
-    "networking": "Networking",
-    "system_info": "System Info",
-    "volume_manager": "Volume Manager"
-  },
   "components": {
     "charts": {
       "cpu_stats": {
@@ -145,12 +137,26 @@
     }
   },
   "system": {
-    "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
-    "network_connection_restored": "Network connection restored.",
-    "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?",
-    "request_error": "Request error",
-    "services": "Services",
-    "supervisor_config": "Supervisor Config",
-    "wrong_way": "Wrong way…"
+    "errors": {
+      "request_error": "Request error",
+      "wrong_way": "Wrong way…"
+    },
+    "menu_items": {
+      "configuration": "Configuration",
+      "container_manager": "Container Manager",
+      "device_info": "Device Info",
+      "networking": "Networking",
+      "system_info": "System Info",
+      "volume_manager": "Volume Manager"
+    },
+    "network": {
+      "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
+      "network_connection_restored": "Network connection restored.",
+      "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Perhaps it is not installed on this device?"
+    },
+    "titles": {
+      "services": "Services",
+      "supervisor_config": "Supervisor Config"
+    }
   }
 }

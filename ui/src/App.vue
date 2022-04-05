@@ -1,5 +1,7 @@
 <template>
-  <div v-if="currentPage == '#/captiveportal'"><captive-portal /></div>
+  <div v-if="currentPage == '#/captiveportal'">
+    <captive-portal />
+  </div>
   <router-view v-else />
 </template>
 

@@ -3,7 +3,7 @@ const { resolve } = require('path')
 
 module.exports = {
   // Files not to lint
-  ignorePatterns: ['.eslintrc.js', 'quasar.conf.js'],
+  ignorePatterns: ['.eslintrc.js', '.eslintrc-treeshake.js', 'quasar.conf.js'],
 
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file
@@ -52,15 +52,11 @@ module.exports = {
 
   overrides: [
     {
-      files: ['*.json', '*.json5'],
+      files: ['*.json'],
       extends: ['plugin:@intlify/vue-i18n/base'],
       rules: {
         'no-irregular-whitespace': 'off'
       }
-    },
-    {
-      files: ['*.yaml', '*.yml'],
-      extends: ['plugin:@intlify/vue-i18n/base']
     },
     {
       files: ['*.ts'],
@@ -115,7 +111,7 @@ module.exports = {
         src: './src',
         extensions: ['.js', '.vue', '.ts'],
         ignores: [],
-        enableFix: true
+        enableFix: false
       }
     ],
     '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',

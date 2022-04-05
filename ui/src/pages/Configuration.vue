@@ -3,7 +3,7 @@
     <q-card flat bordered class="q-mb-lg">
       <q-card-section>
         <div class="text-h5 q-mb-md q-mt-md">
-          {{ $t('system.supervisor_config') }}
+          {{ $t('system.titles.supervisor_config') }}
         </div>
         <change-hostname />
       </q-card-section>
@@ -11,7 +11,9 @@
 
     <q-card flat bordered class="q-mb-lg">
       <q-card-section>
-        <div class="text-h5 q-mb-md q-mt-md">{{ $t('system.services') }}</div>
+        <div class="text-h5 q-mb-md q-mt-md">
+          {{ $t('system.titles.services') }}
+        </div>
         <q-list>
           <q-item>
             <q-item-section avatar>

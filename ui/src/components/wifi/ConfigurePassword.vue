@@ -7,8 +7,8 @@
       :loading="submitting"
       @click="passwordDialog = true"
     >
-      <q-tooltip
-        >{{ $t('components.wifi.configure_password.set_new_hotspot_password') }}
+      <q-tooltip>
+        {{ $t('components.wifi.configure_password.set_new_hotspot_password') }}
       </q-tooltip>
     </q-btn>
 
@@ -125,7 +125,7 @@ export default defineComponent({
         notify('positive', t('components.wifi.configure_password.password_set'))
         submitting.value = false
       } catch {
-        notify('negative', t('system.no_wifi_api'))
+        notify('negative', t('system.network.no_wifi_api'))
       }
 
       passwordText.value = ''

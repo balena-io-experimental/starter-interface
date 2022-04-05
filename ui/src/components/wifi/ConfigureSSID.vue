@@ -8,10 +8,8 @@
       @click="ssidDialog = true"
     >
       <q-tooltip>
-        {{
-          $t('components.wifi.configure_ssid.set_new_hotspot_ssid')
-        }}</q-tooltip
-      >
+        {{ $t('components.wifi.configure_ssid.set_new_hotspot_ssid') }}
+      </q-tooltip>
     </q-btn>
 
     <q-dialog v-model="ssidDialog" persistent>
@@ -119,7 +117,7 @@ export default defineComponent({
         notify('positive', t('components.wifi.configure_ssid.ssid_set'))
         submitting.value = false
       } catch {
-        notify('negative', t('system.no_wifi_api'))
+        notify('negative', t('system.network.no_wifi_api'))
       }
 
       ssidText.value = ''
