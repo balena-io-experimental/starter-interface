@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { i18n } from 'boot/i18n'
 import { computed } from 'vue'
 
@@ -18,7 +17,7 @@ export default computed(() => [
   },
   {
     icon: 'folder',
-    label: t('system.menu_items.volume_manager'),
+    label: t('system.menu_items.file_manager'),
     path: 'filemanager'
   },
   {

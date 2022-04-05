@@ -147,7 +147,7 @@
       "device_info": "Device Info",
       "networking": "Networking",
       "system_info": "System Info",
-      "volume_manager": "Volume Manager"
+      "file_manager": "File Manager"
     },
     "network": {
       "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
