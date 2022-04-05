@@ -7,6 +7,7 @@
   <q-checkbox
     v-model="checkBox"
     class="q-ml-md"
+    dense
     size="xs"
     :label="$t('components.system.update_device.force_update')"
   />
