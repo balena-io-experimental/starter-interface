@@ -1,30 +1,34 @@
 <template>
   <q-page class="q-pa-lg">
     <div v-if="internetConnectivity.status">
-      <device-info />
+      <component-frame :components="[DeviceInfo]" />
     </div>
     <div v-if="internetConnectivity.status == false">
-      <offline-device-info />
+      <component-frame :components="[OfflineDeviceInfo]" />
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
+import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
 import { internetConnectivity } from 'src/api/SystemRequests'
 import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IntPageIndex',
   components: {
-    DeviceInfo: defineAsyncComponent(
-      () => import('components/system/DeviceInfo.vue')
-    ),
-    OfflineDeviceInfo: defineAsyncComponent(
-      () => import('components/system/OfflineDeviceInfo.vue')
-    )
+    ComponentFrame
   },
   setup() {
-    return { internetConnectivity }
+    return {
+      internetConnectivity,
+      DeviceInfo: defineAsyncComponent(
+        () => import('components/system/DeviceInfo.vue')
+      ),
+      OfflineDeviceInfo: defineAsyncComponent(
+        () => import('components/system/OfflineDeviceInfo.vue')
+      )
+    }
   }
 })
 </script>
