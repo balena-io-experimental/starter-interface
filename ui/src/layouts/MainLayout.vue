@@ -20,7 +20,9 @@
         </router-link>
 
         <q-toolbar-title v-bind="qHeaderStyle.title">
-          <div v-if="$q.screen.gt.xs">{{ $t('title') }}</div>
+          <div v-if="$q.screen.gt.xs">
+            {{ $t('title') }}
+          </div>
           <q-slide-transition v-else :duration="1000">
             <div v-if="deviceName" class="text-secondary text-subtitle1">
               {{ deviceName }}
@@ -89,7 +91,7 @@
             inline-actions
             class="text-white bg-negative"
           >
-            {{ $t('system.network_connection_down') }}
+            {{ $t('system.network.network_connection_down') }}
             <template #action>
               <q-btn
                 flat
@@ -108,7 +110,7 @@
             inline-actions
             class="text-white bg-positive"
           >
-            {{ $t('system.network_connection_restored') }}
+            {{ $t('system.network.network_connection_restored') }}
           </q-banner>
         </q-slide-transition>
       </div>

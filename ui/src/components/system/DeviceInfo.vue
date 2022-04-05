@@ -24,7 +24,9 @@
         }}
       </q-chip>
     </h4>
-    <div class="q-mb-sm"><cpu-stats /></div>
+    <div class="q-mb-sm">
+      <cpu-stats />
+    </div>
     <div class="row items-start">
       <q-card flat bordered class="">
         <q-card-section horizontal>
@@ -33,58 +35,59 @@
             <q-list>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.location')
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.location') }}
+                  </q-item-label>
                   <q-item-label>{{ response.data.location }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.os_version')
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.os_version') }}
+                  </q-item-label>
                   <q-item-label>{{ response.data.os_version }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.supervisor_version')
-                  }}</q-item-label>
-                  <q-item-label>{{
-                    response.data.supervisor_version
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.supervisor_version') }}
+                  </q-item-label>
+                  <q-item-label>
+                    {{ response.data.supervisor_version }}
+                  </q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.ip_address')
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.ip_address') }}
+                  </q-item-label>
                   <q-item-label>{{ response.data.ip_address }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.mac_address')
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.mac_address') }}
+                  </q-item-label>
                   <q-item-label
                     v-for="mac in response.data.mac_address.split(' ')"
                     :key="mac"
-                    >{{ mac }}</q-item-label
                   >
+                    {{ mac }}
+                  </q-item-label>
                 </q-item-section>
               </q-item>
               <q-item class="q-mb-sm">
                 <q-item-section>
-                  <q-item-label caption>{{
-                    $t('components.system.device_info.public_ip')
-                  }}</q-item-label>
-                  <q-item-label>{{
-                    response.data.public_address
-                  }}</q-item-label>
+                  <q-item-label caption>
+                    {{ $t('components.system.device_info.public_ip') }}
+                  </q-item-label>
+                  <q-item-label>
+                    {{ response.data.public_address }}
+                  </q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>

@@ -5,11 +5,13 @@
         <q-list bordered padding style="max-width: 350px">
           <q-item>
             <q-item-section>
-              <q-item-label overline>{{
-                $t('components.wifi.connect.configure_hotspot')
-              }}</q-item-label>
+              <q-item-label overline>
+                {{ $t('components.wifi.connect.configure_hotspot') }}
+              </q-item-label>
               <div class="row justify-center q-mt-sm">
-                <div class="q-mr-sm"><WifiConnectConfigureSSID /></div>
+                <div class="q-mr-sm">
+                  <WifiConnectConfigureSSID />
+                </div>
                 <div><WifiConnectConfigurePassword /></div>
               </div>
             </q-item-section>
