@@ -1,8 +1,10 @@
 export const qBtnStyle = {
-  color: 'secondary',
-  outline: true,
+  color: 'primary',
+  outline: false,
   rounded: true,
-  size: 'sm'
+  unelevated: true,
+  size: 'sm',
+  'no-caps': true
 }
 
 export const qHeaderStyle = {

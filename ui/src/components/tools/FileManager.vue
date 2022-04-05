@@ -56,11 +56,9 @@
           <div class="col-auto q-ml-sm q-mb-sm">
             <div>
               <q-btn
+                v-bind="qBtnStyle"
                 class="q-mr-sm"
                 icon="create_new_folder"
-                color="gray-800"
-                outline
-                rounded
                 size="sm"
                 @click="newFolder()"
               >
@@ -74,11 +72,9 @@
                 </q-tooltip>
               </q-btn>
               <q-btn
+                v-bind="qBtnStyle"
                 class="q-mr-sm"
                 icon="upload"
-                color="gray-800"
-                outline
-                rounded
                 size="sm"
                 @click="uploaderDialog = true"
               >
@@ -117,11 +113,9 @@
                 />
               </q-dialog>
               <q-btn
+                v-bind="qBtnStyle"
                 class="q-mr-sm"
                 size="sm"
-                color="gray-800"
-                rounded
-                outline
                 :disabled="!selected[0]"
                 icon="delete"
                 @click="deleteSelectedItems()"
@@ -136,10 +130,9 @@
                 </q-tooltip>
               </q-btn>
               <q-btn
+                v-bind="qBtnStyle"
+                class="q-mr-sm"
                 icon="search"
-                color="gray-800 q-mr-xs"
-                outline
-                rounded
                 size="sm"
                 @click="searchTable = true"
               >
@@ -154,9 +147,8 @@
               </q-btn>
               <q-btn
                 v-if="$q.screen.gt.sm"
+                v-bind="qBtnStyle"
                 class="q-mr-xs"
-                flat
-                round
                 dense
                 :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                 @click="props.toggleFullscreen()"
@@ -240,6 +232,7 @@
 import expressApi from 'axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
+import { qBtnStyle } from 'components/styles/qStyles'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -465,6 +458,7 @@ export default defineComponent({
       objPath,
       onRowClick,
       onUploaderFailed,
+      qBtnStyle,
       rows,
       selected,
       searchTable: ref<boolean>(false),

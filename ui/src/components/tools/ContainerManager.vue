@@ -51,11 +51,11 @@
         <q-td auto-width>
           <q-space />
           <q-btn
+            v-bind="qBtnStyle"
             icon="restart_alt"
             :disable="loading"
             size="xs"
             round
-            v-bind="qBtnStyle"
             :loading="loading"
             @click="restartContainer(props.row.serviceName)"
           />

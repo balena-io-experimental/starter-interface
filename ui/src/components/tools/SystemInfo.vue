@@ -4,6 +4,7 @@
       <q-select
         v-model="model"
         filled
+        dense
         :loading="loadingRequest"
         :options="options"
         :label="$t('components.tools.system_info.select_request')"
