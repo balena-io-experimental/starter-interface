@@ -1,8 +1,15 @@
 <template>
   <q-card flat bordered class="q-mb-md">
     <q-card-section>
-      <template v-for="child in props.component" :key="child.name">
-        <component :is="child"></component>
+      <template v-for="(child, index) in props.components" :key="child.name">
+        <!-- If the first item passed, do not apply margins to top -->
+        <div v-if="index.toString() === '0'">
+          <component :is="child"></component>
+        </div>
+        <!-- If NOT the first item, apply margins to top -->
+        <div v-else class="q-mt-md">
+          <component :is="child"></component>
+        </div>
       </template>
     </q-card-section>
   </q-card>
@@ -14,7 +21,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'IntComponentFrame',
   props: {
-    component: {
+    components: {
       type: Object,
       default: () => ({})
     }
