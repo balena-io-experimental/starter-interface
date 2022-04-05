@@ -13,11 +13,8 @@
       <div class="row justify-end">
         <component-frame
           class="q-mr-xs"
-          :components="[WifiConnectConfigureSSID]"
-        />
-        <component-frame
-          class="q-mr-xs"
-          :components="[WifiConnectConfigurePassword]"
+          :components="[WifiConnectConfigureSSID, WifiConnectConfigurePassword]"
+          :rows="true"
         />
       </div>
       <div>
