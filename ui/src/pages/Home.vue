@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pa-lg">
     <div v-if="internetConnectivity.status">
-      <component-frame :components="[DeviceInfo]" />
+      <component-frame :components="[{ component: DeviceInfo }]" />
     </div>
     <div v-if="internetConnectivity.status == false">
-      <component-frame :components="[OfflineDeviceInfo]" />
+      <component-frame :components="[{ component: OfflineDeviceInfo }]" />
     </div>
   </q-page>
 </template>

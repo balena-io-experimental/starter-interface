@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pa-lg">
     <div class="row justify-end">
-      <component-frame :components="[JournalDLogs]" />
+      <component-frame :components="[{ component: JournalDLogs }]" />
     </div>
 
-    <div><component-frame :components="[SystemInfo]" /></div>
+    <div><component-frame :components="[{ component: SystemInfo }]" /></div>
   </q-page>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div><component-frame :components="[FileManager]" /></div>
+    <div><component-frame :components="[{ component: FileManager }]" /></div>
   </q-page>
 </template>
 

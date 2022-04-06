@@ -4,11 +4,11 @@
       <template v-for="(child, index) in props.components" :key="child.name">
         <!-- If the first item passed, do not apply margins to top or sides -->
         <div v-if="index.toString() === '0'">
-          <component :is="child"></component>
+          <component :is="child.component" v-bind="child.sentProps"></component>
         </div>
         <!-- If NOT the first item, apply margins -->
         <div v-else :class="componentSpacing">
-          <component :is="child"></component>
+          <component :is="child.component" v-bind="child.sentProps"></component>
         </div>
       </template>
     </q-card-section>

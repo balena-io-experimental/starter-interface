@@ -3,19 +3,21 @@
     <div class="text-h5 q-mb-md">
       {{ $t('system.titles.supervisor_config') }}
     </div>
-    <component-frame :components="[ChangeHostname]" />
+    <component-frame :components="[{ component: ChangeHostname }]" />
 
     <div class="text-h5 q-mb-md q-mt-md">
       {{ $t('system.titles.services') }}
     </div>
-    <component-frame :components="[UpdateDevice, ForgetAllWifi]" />
+    <component-frame
+      :components="[{ component: UpdateDevice }, { component: ForgetAllWifi }]"
+    />
 
     <div v-if="internetConnectivity.status" class="text-h5 q-mb-md q-mt-md">
       {{ $t('components.system.device_info.environment_variables') }}
     </div>
     <component-frame
       v-if="internetConnectivity.status"
-      :components="[EnvConfig]"
+      :components="[{ component: EnvConfig }]"
     />
   </q-page>
 </template>

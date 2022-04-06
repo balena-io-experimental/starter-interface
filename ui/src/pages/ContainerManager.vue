@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-lg">
-    <component-frame :components="[ContainerManager]" />
+    <component-frame :components="[{ component: ContainerManager }]" />
   </q-page>
 </template>
 

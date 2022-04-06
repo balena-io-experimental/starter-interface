@@ -8,12 +8,15 @@
       </div>
       <div class="row justify-end">
         <component-frame
-          :components="[WifiConnectConfigureSSID, WifiConnectConfigurePassword]"
+          :components="[
+            { component: WifiConnectConfigureSSID },
+            { component: WifiConnectConfigurePassword }
+          ]"
           :rows="true"
         />
       </div>
       <div>
-        <component-frame :components="[WifiConnect]" />
+        <component-frame :components="[{ component: WifiConnect }]" />
       </div>
     </div>
   </q-page>
