@@ -1,18 +1,13 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+  <q-page class="q-pa-lg">
     <div>
       <div class="row justify-end">
-        <q-item>
-          <q-item-section>
-            <q-item-label overline>
-              {{ $t('components.wifi.connect.configure_hotspot') }}
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+        <q-item-label class="q-mr-sm q-mb-sm" overline>
+          {{ $t('components.wifi.connect.configure_hotspot') }}
+        </q-item-label>
       </div>
       <div class="row justify-end">
         <component-frame
-          class="q-mr-xs"
           :components="[WifiConnectConfigureSSID, WifiConnectConfigurePassword]"
           :rows="true"
         />
