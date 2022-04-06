@@ -75,7 +75,7 @@ export const supervisorRequests = {
       type: 'GET',
       path: 'v2/device/name',
       params: false,
-      cacheTimeout: defaultCacheTimeout
+      cacheTimeout: 60
     })
   },
   device_tags() {
