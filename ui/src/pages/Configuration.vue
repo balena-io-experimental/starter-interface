@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-lg">
-    <div class="text-h5 q-mb-md q-mt-md">
+    <div class="text-h5 q-mb-md">
       {{ $t('system.titles.supervisor_config') }}
     </div>
     <component-frame :components="[ChangeHostname]" />
@@ -8,19 +8,15 @@
     <div class="text-h5 q-mb-md q-mt-md">
       {{ $t('system.titles.services') }}
     </div>
-    <q-list>
-      <component-frame :components="[UpdateDevice, ForgetAllWifi]" />
-    </q-list>
+    <component-frame :components="[UpdateDevice, ForgetAllWifi]" />
 
-    <div
-      v-if="internetConnectivity.status"
-      flat
-      bordered
-      class="text-h5 q-mb-md q-mt-md"
-    >
+    <div v-if="internetConnectivity.status" class="text-h5 q-mb-md q-mt-md">
       {{ $t('components.system.device_info.environment_variables') }}
     </div>
-    <component-frame :components="[EnvConfig]" />
+    <component-frame
+      v-if="internetConnectivity.status"
+      :components="[EnvConfig]"
+    />
   </q-page>
 </template>
 
