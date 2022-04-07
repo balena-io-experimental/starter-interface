@@ -9,36 +9,36 @@
       <div class="row justify-end">
         <component-frame
           :components="[
-            { component: WifiConnectConfigureSSID },
-            { component: WifiConnectConfigurePassword }
+            { component: ConfigureSSID },
+            { component: ConfigurePassword }
           ]"
           :rows="true"
         />
       </div>
       <div>
-        <component-frame :components="[{ component: WifiConnect }]" />
+        <component-frame :components="[{ component: Connect }]" />
       </div>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
-import WifiConnect from 'components/wifi/Connect.vue'
-import WifiConnectConfigurePassword from 'components/wifi/ConfigurePassword.vue'
-import WifiConnectConfigureSSID from 'components/wifi/ConfigureSSID.vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
+import Connect from 'components/WifiConnect.vue'
+import ConfigurePassword from 'components/WifiConfigurePassword.vue'
+import ConfigureSSID from 'components/WifiConfigureSSID.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntNetworking',
+  name: 'NetworkingPage',
   components: {
     ComponentFrame
   },
   setup() {
     return {
-      WifiConnect,
-      WifiConnectConfigurePassword,
-      WifiConnectConfigureSSID
+      Connect,
+      ConfigurePassword,
+      ConfigureSSID
     }
   }
 })

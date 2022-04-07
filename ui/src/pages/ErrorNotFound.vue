@@ -28,7 +28,7 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntError404',
+  name: 'ErrorNotFoundPage',
   setup() {
     return { qBtnStyle }
   }

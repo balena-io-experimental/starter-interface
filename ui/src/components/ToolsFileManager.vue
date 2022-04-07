@@ -243,7 +243,7 @@ interface Rows extends QTableProps {
 }
 
 export default defineComponent({
-  name: 'IntFileManagerComponent',
+  name: 'ToolsFileManager',
   setup() {
     // Import required features
     const $q = useQuasar()

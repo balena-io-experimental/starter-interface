@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
-import FileManager from 'components/tools/FileManager.vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
+import FileManager from 'components/ToolsFileManager.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntFileManager',
+  name: 'FileManagerPage',
   components: { ComponentFrame },
   setup() {
     return { FileManager }

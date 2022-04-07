@@ -110,9 +110,9 @@
 <script lang="ts">
 import { AxiosError } from 'axios'
 import { expressApi } from 'boot/axios'
-import CpuStats from 'components/charts/CpuStats.vue'
-import { supervisorRequests } from 'src/api/supervisorRequests'
-import { internetConnectivity } from 'src/api/systemRequests'
+import CpuStats from 'components/ChartsCpuStats.vue'
+import { supervisor } from 'src/api/supervisor'
+import { internetConnectivity } from 'src/api/system'
 import { defineComponent, onMounted, ref } from 'vue'
 
 interface device {
@@ -144,7 +144,7 @@ interface m {
 }
 
 export default defineComponent({
-  name: 'IntOfflineDeviceInfoComponent',
+  name: 'SystemOfflineDeviceInfo',
   components: { CpuStats },
   setup() {
     // Tools
@@ -157,7 +157,7 @@ export default defineComponent({
 
     // Axios Functions
     function deviceInfo() {
-      return supervisorRequests.device()
+      return supervisor.device()
     }
 
     function fsSize() {

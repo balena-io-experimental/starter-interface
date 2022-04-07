@@ -123,17 +123,17 @@
 import { AxiosResponse } from 'axios'
 import { loadLanguageAsync } from 'boot/i18n'
 import localeOptions from 'src/config/localeOptions'
-import MenuItems from 'components/layouts/MenuItems.vue'
+import MenuItems from 'layouts/MenuItems.vue'
 import menuList from 'src/config/menuList'
 import { qHeaderStyle } from 'src/config/qStyles'
-import Reboot from 'components/system/Reboot.vue'
-import Shutdown from 'components/system/Shutdown.vue'
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import Reboot from 'components/SystemReboot.vue'
+import Shutdown from 'components/SystemShutdown.vue'
+import { supervisor } from 'src/api/supervisor'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'LayoutsMainLayout',
 
   components: {
     MenuItems,
@@ -175,10 +175,9 @@ export default defineComponent({
 
     async function getDeviceName() {
       if (process.env.ON_DEVICE) {
-        const response =
-          (await supervisorRequests.device_name()) as AxiosResponse<{
-            deviceName: string
-          }>
+        const response = (await supervisor.device_name()) as AxiosResponse<{
+          deviceName: string
+        }>
         deviceName.value = response.data.deviceName
       }
     }

@@ -25,7 +25,7 @@ interface cpuStat {
 Chart.register(...registerables)
 
 export default defineComponent({
-  name: 'IntCpuStats',
+  name: 'ChartsCpuStats',
   components: { LineChart },
   props: {
     height: {

@@ -47,7 +47,7 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: 'IntForgetAllWifiComponent',
+  name: 'WifiForgetAllWifi',
   setup() {
     const submitting = ref<boolean>(false)
     const $q = useQuasar()

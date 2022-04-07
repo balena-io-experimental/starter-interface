@@ -29,7 +29,7 @@ import { AxiosResponse } from 'axios'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'IntSystemInfoComponent',
+  name: 'ToolsSystemInfo',
   setup() {
     const loadingRequest = ref<boolean>(false)
     const response = ref<AxiosResponse>()

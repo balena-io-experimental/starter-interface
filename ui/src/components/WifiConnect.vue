@@ -125,7 +125,7 @@ interface wifiStatus {
 }
 
 export default defineComponent({
-  name: 'IntWifiConnectComponent',
+  name: 'WifiConnect',
   setup() {
     // Import required features
     const $q = useQuasar()

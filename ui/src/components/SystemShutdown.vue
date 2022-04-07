@@ -3,7 +3,7 @@
     flat
     dense
     round
-    icon="restart_alt"
+    icon="power_settings_new"
     color="secondary"
     @click="confirm = true"
   />
@@ -13,7 +13,11 @@
         class="row items-center"
         style="width: 300px; max-width: 80vw"
       >
-        <q-avatar icon="restart_alt" color="primary" text-color="accent" />
+        <q-avatar
+          icon="power_settings_new"
+          color="primary"
+          text-color="accent"
+        />
         <div class="col">
           <div class="row q-ml-sm q-mt-sm">
             {{ $t('general.are_you_sure') }}
@@ -23,11 +27,12 @@
               v-model="checkBox"
               class="q-ml-md text-caption"
               size="xs"
-              :label="$t('components.system.reboot.force_restart')"
+              :label="$t('components.system.shutdown.force_shutdown')"
             />
           </div>
         </div>
       </q-card-section>
+
       <q-card-actions align="right">
         <q-btn
           v-close-popup
@@ -42,7 +47,7 @@
           flat
           :label="$t('general.ok')"
           color="primary"
-          @click="reboot()"
+          @click="shutdown()"
         />
       </q-card-actions>
     </q-card>
@@ -50,14 +55,14 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: 'IntRebootComponent',
+  name: 'SystemShutdown',
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
@@ -65,15 +70,15 @@ export default defineComponent({
 
     const checkBox = ref<boolean>(false)
 
-    function reboot() {
+    function shutdown() {
       // This does not wait for return of promise as connection is lost too quickly
-      void supervisorRequests.reboot(checkBox.value)
+      void supervisor.shutdown(checkBox.value)
 
       setTimeout(() => {
         $q.notify({
           type: 'positive',
           timeout: 0,
-          message: t('components.system.reboot.restarting')
+          message: t('components.system.shutdown.shutting_down')
         })
       }, 1500)
     }
@@ -81,7 +86,7 @@ export default defineComponent({
       checkBox,
       confirm: ref(false),
       qBtnStyle,
-      reboot
+      shutdown
     }
   }
 })

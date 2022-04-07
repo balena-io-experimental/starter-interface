@@ -13,7 +13,7 @@ interface hostConfigProxy {
 const apiPathV1 = '/v1/supervisor' as string
 const defaultCacheTimeout = 0 as number
 
-export const supervisorRequests = {
+export const supervisor = {
   applications_state() {
     return expressApi.post(apiPathV1, {
       type: 'GET',

@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from 'src/api/sdkRequests'
+import { sdk } from 'src/api/sdk'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
@@ -96,7 +96,7 @@ interface Env {
 }
 
 export default defineComponent({
-  name: 'IntEnvConfigComponent',
+  name: 'SystemEnvConfig',
 
   setup() {
     const selectedRows = ref([])
@@ -127,7 +127,7 @@ export default defineComponent({
     const getEnvResponse = ref<AxiosResponse>()
 
     async function getEnv() {
-      getEnvResponse.value = await sdkRequests.getEnv()
+      getEnvResponse.value = await sdk.getEnv()
     }
 
     function deleteEnv() {
@@ -135,7 +135,7 @@ export default defineComponent({
       selectedRows.value.forEach((item: Env) => {
         toDelete[item.name] = ''
       })
-      sdkRequests
+      sdk
         .deleteEnv(toDelete)
         .then(async function () {
           await getEnv()
@@ -153,7 +153,7 @@ export default defineComponent({
       newVarDialogOpen.value = false
       loading.value = true
 
-      sdkRequests
+      sdk
         .setEnv(newVarKey.value, newVarValue.value)
         .then(async function () {
           await getEnv()

@@ -19,7 +19,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'IntComponentFrame',
+  name: 'LayoutsComponentFrame',
   props: {
     components: {
       type: Object,

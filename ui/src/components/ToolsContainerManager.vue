@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { qBtnStyle } from 'src/config/qStyles'
 import { QTableProps } from 'quasar'
 import { computed, defineComponent, onMounted, ref } from 'vue'
@@ -80,7 +80,7 @@ interface containers extends QTableProps {
 }
 
 export default defineComponent({
-  name: 'IntPingComponent',
+  name: 'ToolsContainerManager',
   setup() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
@@ -131,7 +131,7 @@ export default defineComponent({
       loading.value = true
 
       try {
-        const res = (await supervisorRequests.state_status()) as AxiosResponse<{
+        const res = (await supervisor.state_status()) as AxiosResponse<{
           containers: containers[]
         }>
         rows.value = res.data.containers
@@ -146,7 +146,7 @@ export default defineComponent({
     async function restartContainer(serviceName: string) {
       loading.value = true
       try {
-        const res = await supervisorRequests.restart_service(serviceName)
+        const res = await supervisor.restart_service(serviceName)
 
         await getContainer()
         $q.notify({
@@ -163,7 +163,7 @@ export default defineComponent({
     async function startContainer(serviceName: string) {
       loading.value = true
       try {
-        const res = await supervisorRequests.start_service(serviceName)
+        const res = await supervisor.start_service(serviceName)
 
         await getContainer()
         $q.notify({
@@ -180,7 +180,7 @@ export default defineComponent({
     async function stopContainer(serviceName: string) {
       loading.value = true
       try {
-        const res = await supervisorRequests.stop_service(serviceName)
+        const res = await supervisor.stop_service(serviceName)
 
         await getContainer()
         $q.notify({
