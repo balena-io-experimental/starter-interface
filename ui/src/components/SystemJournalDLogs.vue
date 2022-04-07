@@ -10,21 +10,21 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { AxiosResponse } from 'axios'
 import { exportFile } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'IntJournalD',
+  name: 'SystemJournalDLogs',
   setup() {
     const loading = ref<boolean>(false)
     const response = ref<AxiosResponse>()
 
     async function fetchLogs() {
       loading.value = true
-      response.value = await supervisorRequests.journald_logs()
+      response.value = await supervisor.journald_logs()
       loading.value = false
 
       exportFile('journald-logs.txt', response.value.data as string)

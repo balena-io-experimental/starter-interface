@@ -8,17 +8,17 @@ export default computed(() => [
   {
     icon: 'visibility',
     label: t('system.menu_items.device_info'),
-    path: 'home'
+    path: 'indexPage'
   },
   {
     icon: 'all_inbox',
     label: t('system.menu_items.container_manager'),
-    path: 'containermanager'
+    path: 'containerManager'
   },
   {
     icon: 'folder',
     label: t('system.menu_items.file_manager'),
-    path: 'filemanager'
+    path: 'fileManager'
   },
   {
     icon: 'router',
@@ -33,6 +33,6 @@ export default computed(() => [
   {
     icon: 'info',
     label: t('system.menu_items.system_info'),
-    path: 'systeminfo'
+    path: 'systemInfo'
   }
 ])

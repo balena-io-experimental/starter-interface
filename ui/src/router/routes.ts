@@ -5,7 +5,11 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Home.vue'), name: 'home' },
+      {
+        path: '',
+        component: () => import('pages/IndexPage.vue'),
+        name: 'indexPage'
+      },
       {
         path: 'configuration',
         component: () => import('pages/Configuration.vue'),
@@ -14,12 +18,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'filemanager',
         component: () => import('pages/FileManager.vue'),
-        name: 'filemanager'
+        name: 'fileManager'
       },
       {
         path: 'containermanager',
         component: () => import('pages/ContainerManager.vue'),
-        name: 'containermanager'
+        name: 'containerManager'
       },
       {
         path: 'networking',
@@ -29,7 +33,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'systeminfo',
         component: () => import('pages/SystemInfo.vue'),
-        name: 'systeminfo'
+        name: 'systemInfo'
       }
     ]
   },
@@ -38,7 +42,7 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('src/pages/ErrorNotFound.vue')
   }
 ]
 

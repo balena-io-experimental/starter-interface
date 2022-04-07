@@ -7,7 +7,7 @@ interface Env {
   [key: string]: string
 }
 
-export const sdkRequests = {
+export const sdk = {
   device() {
     return expressApi.get(`${apiPathV1}/device`)
   },

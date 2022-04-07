@@ -58,10 +58,10 @@
 
 <script lang="ts">
 import { AxiosResponse } from 'axios'
-import WifiConnect from 'components/wifi/Connect.vue'
+import WifiConnect from 'components/WifiConnect.vue'
 import { copyToClipboard, useQuasar } from 'quasar'
 import { qHeaderStyle } from 'src/config/qStyles'
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -70,7 +70,7 @@ interface hostConfig {
 }
 
 export default defineComponent({
-  name: 'IntCaptivePortal',
+  name: 'LayoutsCaptivePortal',
   components: {
     WifiConnect
   },
@@ -84,7 +84,7 @@ export default defineComponent({
     onMounted(async () => {
       try {
         const response =
-          (await supervisorRequests.device_host_config_get()) as AxiosResponse<hostConfig>
+          (await supervisor.device_host_config_get()) as AxiosResponse<hostConfig>
         hostname.value = response.data.network.hostname
       } catch (error) {
         console.error(error)

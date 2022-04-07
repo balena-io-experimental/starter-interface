@@ -19,20 +19,20 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'IntChangeHostnameComponent',
+  name: 'NetworkChangeHostname',
   setup() {
     const response = ref<AxiosResponse>()
     const $q = useQuasar()
 
     async function changeHostname(newHostname: string) {
-      response.value = await supervisorRequests.device_host_config_patch({
+      response.value = await supervisor.device_host_config_patch({
         network: { hostname: newHostname }
       })
       $q.notify({

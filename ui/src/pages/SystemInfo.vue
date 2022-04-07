@@ -9,13 +9,13 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
-import JournalDLogs from 'components/system/JournalDLogs.vue'
-import SystemInfo from 'components/tools/SystemInfo.vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
+import JournalDLogs from 'components/SystemJournalDLogs.vue'
+import SystemInfo from 'components/ToolsSystemInfo.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IntSystemInfo',
+  name: 'SystemInfoPage',
   components: { ComponentFrame },
   setup() {
     return { ComponentFrame, JournalDLogs, SystemInfo }

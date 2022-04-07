@@ -3,14 +3,14 @@ import cors from 'cors'
 import express from 'express'
 import process from 'process'
 import slowDown from 'express-slow-down'
-import BalenaSDKRoutes from '@/routes/v1/BalenaSDKRoutes'
+import BalenaSDK from '@/routes/v1/BalenaSDK'
 import CaptivePortal from '@/routes/v1/CaptivePortal'
-import CustomRoutes from '@/routes/v1/CustomRoutes'
-import FileManagerRoutes from '@/routes/v1/FileManagerRoutes'
-import SupervisorRoutes from '@/routes/v1/SupervisorRoutes'
-import SystemRoutes from '@/routes/v1/SystemRoutes'
-import TestRoutes from '@/routes/v1/TestRoutes'
-import WifiRoutes from '@/routes/v1/WifiConnectRoutes'
+import Examples from '@/routes/v1/Examples'
+import FileManager from '@/routes/v1/FileManager'
+import Supervisor from '@/routes/v1/Supervisor'
+import System from '@/routes/v1/System'
+import Tests from '@/routes/v1/Tests'
+import Wifi from '@/routes/v1/Wifi'
 
 // Run custom boot processes
 boot()
@@ -37,17 +37,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public', { dotfiles: 'allow' }))
 
 // Routes
-app.use(BalenaSDKRoutes)
+app.use(BalenaSDK)
 app.use(CaptivePortal)
-app.use(CustomRoutes)
-app.use(FileManagerRoutes)
-app.use(SupervisorRoutes)
-app.use(SystemRoutes)
-app.use(WifiRoutes)
+app.use(Examples)
+app.use(FileManager)
+app.use(Supervisor)
+app.use(System)
+app.use(Wifi)
 
 // Add test routes outside of production environment
 if (process.env.NODE_ENV !== 'production') {
-  app.use(TestRoutes)
+  app.use(Tests)
 }
 
 // Add speed limiter

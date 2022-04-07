@@ -14,21 +14,21 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/supervisorRequests'
+import { supervisor } from 'src/api/supervisor'
 import { AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'IntUpdateDeviceComponent',
+  name: 'SystemUpdateDevice',
   setup() {
     const checkBox = ref<boolean>(false)
     const response = ref<AxiosResponse>()
     const $q = useQuasar()
 
     async function update() {
-      response.value = await supervisorRequests.update(checkBox.value)
+      response.value = await supervisor.update(checkBox.value)
       $q.notify({
         type: 'positive',
         message: response.value.data as string

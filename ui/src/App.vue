@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'App',
   components: {
     CaptivePortal: defineAsyncComponent(
-      () => import('components/layouts/CaptivePortal.vue')
+      () => import('layouts/CaptivePortal.vue')
     )
   },
   setup() {

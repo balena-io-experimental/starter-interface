@@ -155,16 +155,16 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from 'src/api/sdkRequests'
+import { sdk } from 'src/api/sdk'
 import { AxiosResponse } from 'axios'
-import CpuStats from 'components/charts/CpuStats.vue'
+import CpuStats from 'components/ChartsCpuStats.vue'
 import { useQuasar } from 'quasar'
-import { internetConnectivity } from 'src/api/systemRequests'
+import { internetConnectivity } from 'src/api/system'
 import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: 'IntDeviceInfoComponent',
+  name: 'SystemDeviceInfo',
   components: { CpuStats },
   setup() {
     const $q = useQuasar()
@@ -176,7 +176,7 @@ export default defineComponent({
 
     async function getDeviceInfo() {
       try {
-        const res = await sdkRequests.device()
+        const res = await sdk.device()
         response.value = res
       } catch (error) {
         console.error(error)
