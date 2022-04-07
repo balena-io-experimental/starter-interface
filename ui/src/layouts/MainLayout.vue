@@ -125,12 +125,10 @@ import { loadLanguageAsync } from 'boot/i18n'
 import MenuItems from 'components/layouts/MenuItems.vue'
 import menuList from 'components/styles/menuList'
 import { qHeaderStyle } from 'components/styles/qStyles'
-import { useQuasar } from 'quasar'
 import Reboot from 'components/system/Reboot.vue'
 import Shutdown from 'components/system/Shutdown.vue'
 import { supervisorRequests } from 'src/api/SupervisorRequests'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -143,12 +141,10 @@ export default defineComponent({
   },
 
   setup() {
-    const $q = useQuasar()
     const $router = useRouter()
 
     const deviceName = ref<string>()
     const changingLang = ref<boolean>(false)
-    const { locale } = useI18n({ useScope: 'global' })
     const networkDown = ref<boolean>(false)
     const networkUp = ref<boolean>(false)
 
@@ -162,10 +158,8 @@ export default defineComponent({
       { value: 'pt-BR', label: 'Português' }
     ]
 
-    onMounted(async () => {
-      await Promise.all([getDeviceName(), setLang()]).catch(function (error) {
-        console.error(error)
-      })
+    onMounted(() => {
+      void getDeviceName()
     })
 
     // Import and activate language
@@ -173,10 +167,7 @@ export default defineComponent({
       // Start loading indicator
       changingLang.value = true
       // Load the language and set it as the current language
-      locale.value = await loadLanguageAsync(isoName)
-
-      // Store the chosen language in local storage
-      $q.localStorage.set('lang', isoName)
+      await loadLanguageAsync(isoName)
 
       // Dynamic imports from node_modules are currently not available in Vite. When
       // a fix is applied, will set here accordingly. In the meantime it means that
@@ -201,17 +192,6 @@ export default defineComponent({
       }
     }
 
-    async function setLang() {
-      // Set language to previously chosen according to local storage, otherwise use browser default
-      if ($q.localStorage.getItem('lang')) {
-        locale.value = await loadLanguageAsync(
-          $q.localStorage.getItem('lang') as string
-        )
-      } else {
-        locale.value = await loadLanguageAsync($q.lang.getLocale() as string)
-      }
-    }
-
     // Listeners for network status
     // When network is available again
     window.addEventListener('online', () => {
@@ -230,10 +210,9 @@ export default defineComponent({
     return {
       changeLang,
       changingLang,
+      currentLink: ref($router.currentRoute.value.name),
       deviceName,
       leftDrawerOpen: ref<boolean>(false),
-      currentLink: ref($router.currentRoute.value.name),
-      locale,
       localeOptions,
       menuItems: menuList,
       networkDown,
