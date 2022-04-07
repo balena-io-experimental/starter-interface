@@ -66,8 +66,8 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/SupervisorRequests'
-import { qBtnStyle } from 'components/styles/qStyles'
+import { supervisorRequests } from 'src/api/supervisorRequests'
+import { qBtnStyle } from 'src/config/qStyles'
 import { QTableProps } from 'quasar'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

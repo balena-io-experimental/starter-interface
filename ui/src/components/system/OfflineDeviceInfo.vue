@@ -111,8 +111,8 @@
 import { AxiosError } from 'axios'
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/charts/CpuStats.vue'
-import { supervisorRequests } from 'src/api/SupervisorRequests'
-import { internetConnectivity } from 'src/api/SystemRequests'
+import { supervisorRequests } from 'src/api/supervisorRequests'
+import { internetConnectivity } from 'src/api/systemRequests'
 import { defineComponent, onMounted, ref } from 'vue'
 
 interface device {

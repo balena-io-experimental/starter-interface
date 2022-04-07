@@ -1,4 +1,4 @@
-import { system } from 'src/api/SystemRequests'
+import { system } from 'src/api/systemRequests'
 
 // Fetch internet status
 system.checkInternetConnection().catch(function (error) {

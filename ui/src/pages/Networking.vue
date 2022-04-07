@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
+import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
 import WifiConnect from 'components/wifi/Connect.vue'
 import WifiConnectConfigurePassword from 'components/wifi/ConfigurePassword.vue'
 import WifiConnectConfigureSSID from 'components/wifi/ConfigureSSID.vue'

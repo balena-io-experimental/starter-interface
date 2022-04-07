@@ -23,12 +23,12 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
+import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
 import ChangeHostname from 'components/network/ChangeHostname.vue'
 import ForgetAllWifi from 'src/components/wifi/ForgetAllWifi.vue'
 import UpdateDevice from 'components/system/UpdateDevice.vue'
 import { defineAsyncComponent, defineComponent } from 'vue'
-import { internetConnectivity } from 'src/api/SystemRequests'
+import { internetConnectivity } from 'src/api/systemRequests'
 
 export default defineComponent({
   name: 'IntConfiguration',

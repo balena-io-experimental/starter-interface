@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import expressApi from 'axios'
-import { qBtnStyle } from 'components/styles/qStyles'
+import { qBtnStyle } from 'src/config/qStyles'
 import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

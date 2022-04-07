@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
+import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
 import FileManager from 'components/tools/FileManager.vue'
 import { defineComponent } from 'vue'
 

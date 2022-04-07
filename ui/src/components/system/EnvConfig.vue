@@ -85,11 +85,11 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from 'src/api/SdkRequests'
+import { sdkRequests } from 'src/api/sdkRequests'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
-import { qBtnStyle } from 'components/styles/qStyles'
+import { qBtnStyle } from 'src/config/qStyles'
 
 interface Env {
   [key: string]: string
