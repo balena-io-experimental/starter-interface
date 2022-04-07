@@ -122,12 +122,13 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { loadLanguageAsync } from 'boot/i18n'
+import localeOptions from 'src/config/localeOptions'
 import MenuItems from 'components/layouts/MenuItems.vue'
-import menuList from 'components/styles/menuList'
-import { qHeaderStyle } from 'components/styles/qStyles'
+import menuList from 'src/config/menuList'
+import { qHeaderStyle } from 'src/config/qStyles'
 import Reboot from 'components/system/Reboot.vue'
 import Shutdown from 'components/system/Shutdown.vue'
-import { supervisorRequests } from 'src/api/SupervisorRequests'
+import { supervisorRequests } from 'src/api/supervisorRequests'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -147,16 +148,6 @@ export default defineComponent({
     const changingLang = ref<boolean>(false)
     const networkDown = ref<boolean>(false)
     const networkUp = ref<boolean>(false)
-
-    // Langauges need to be added here.
-    const localeOptions = [
-      { value: 'en-US', label: 'English' },
-      { value: 'de', label: 'Deutsch' },
-      { value: 'fr', label: 'Français' },
-      { value: 'it', label: 'Italiano' },
-      { value: 'nb-NO', label: 'Norsk' },
-      { value: 'pt-BR', label: 'Português' }
-    ]
 
     onMounted(() => {
       void getDeviceName()

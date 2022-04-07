@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
-import { internetConnectivity } from 'src/api/SystemRequests'
+import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
+import { internetConnectivity } from 'src/api/systemRequests'
 import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({

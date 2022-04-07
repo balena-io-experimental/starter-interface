@@ -232,7 +232,7 @@
 import expressApi from 'axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
-import { qBtnStyle } from 'components/styles/qStyles'
+import { qBtnStyle } from 'src/config/qStyles'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

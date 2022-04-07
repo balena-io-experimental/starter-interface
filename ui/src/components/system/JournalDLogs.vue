@@ -10,10 +10,10 @@
 </template>
 
 <script lang="ts">
-import { supervisorRequests } from 'src/api/SupervisorRequests'
+import { supervisorRequests } from 'src/api/supervisorRequests'
 import { AxiosResponse } from 'axios'
 import { exportFile } from 'quasar'
-import { qBtnStyle } from 'components/styles/qStyles'
+import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({

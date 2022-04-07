@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'src/components/styles/ComponentFrame.vue'
+import ComponentFrame from 'src/components/layouts/ComponentFrame.vue'
 import JournalDLogs from 'components/system/JournalDLogs.vue'
 import SystemInfo from 'components/tools/SystemInfo.vue'
 import { defineComponent } from 'vue'

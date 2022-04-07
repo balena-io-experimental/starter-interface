@@ -155,11 +155,11 @@
 </template>
 
 <script lang="ts">
-import { sdkRequests } from 'src/api/SdkRequests'
+import { sdkRequests } from 'src/api/sdkRequests'
 import { AxiosResponse } from 'axios'
 import CpuStats from 'components/charts/CpuStats.vue'
 import { useQuasar } from 'quasar'
-import { internetConnectivity } from 'src/api/SystemRequests'
+import { internetConnectivity } from 'src/api/systemRequests'
 import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
