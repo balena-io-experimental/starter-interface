@@ -19,11 +19,11 @@ export const useSystemStore = defineStore('system', {
           `${apiPathV1}/internet_check`
         )
         this.internetConnectivity = response.data.internet
-      } catch (err) {
+      } catch (error) {
         console.error('Failed fetching internet status.')
-        console.error(err)
+        console.error(error)
         this.internetConnectivity = false
-        return Promise.reject(err)
+        return Promise.reject(error)
       }
     }
   }
