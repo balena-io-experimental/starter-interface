@@ -160,16 +160,6 @@ export default defineComponent({
       // Load the language and set it as the current language
       await loadLanguageAsync(isoName)
 
-      // Dynamic imports from node_modules are currently not available in Vite. When
-      // a fix is applied, will set here accordingly. In the meantime it means that
-      // Quasar language files are not available to populate generic content like
-      // table labels.
-
-      // import(`quasar/lang/${isoName}/index.js`).then(
-      //  (lang: { default: QuasarLanguage }) => {
-      //    $q.lang.set(lang.default)
-      //  }
-      // )
       changingLang.value = false
     }
 

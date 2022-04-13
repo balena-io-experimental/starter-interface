@@ -44,7 +44,6 @@
           </template>
           <template #after>
             <q-btn
-              class="q-mt-1"
               round
               dense
               flat
