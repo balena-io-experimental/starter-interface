@@ -22,9 +22,9 @@ async function init() {
   try {
     await sdk.auth.logout()
     await sdk.auth.loginWithToken(apiKey)
-  } catch (err: any) {
-    err.message = 'Error logging into with balena SDK'
-    throw new Error(err)
+  } catch (error: any) {
+    error.message = 'Error logging into with balena SDK'
+    throw new Error(error)
   }
 }
 
@@ -33,8 +33,8 @@ router.get('/v1/sdk/uuid', (_req, res) => res.json(uuid))
 router.get('/v1/sdk/device', async (_req, res, next) => {
   try {
     res.json(await sdk.models.device.get(uuid))
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -49,17 +49,17 @@ router.get('/v1/sdk/envVars', async (_req, res, next) => {
       _.pick(value, ['name', 'value'])
     )
     res.send(omittedEnvVars)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
 router.delete('/v1/sdk/envVars', async (req, res, next) => {
-  lock(async function (err: Error) {
+  lock(async function (error: Error) {
     // a non-null err probably means the supervisor is about to kill us
-    if (err != null) {
-      err.message = '/v1/sdk/setEnvVars: Could not acquire lock'
-      return next(err)
+    if (error != null) {
+      error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
+      return next(error)
     }
 
     try {
@@ -74,23 +74,23 @@ router.delete('/v1/sdk/envVars', async (req, res, next) => {
           unlock()
           res.sendStatus(200)
         })
-        .catch((err) => {
+        .catch((error) => {
           unlock()
-          next(err)
+          next(error)
         })
-    } catch (err) {
+    } catch (error) {
       unlock()
-      next(err)
+      next(error)
     }
   })
 })
 
 router.post('/v1/sdk/envVars', (req, res, next) => {
-  lock(async function (err: Error) {
+  lock(async function (error: Error) {
     // a non-null err probably means the supervisor is about to kill us
-    if (err != null) {
-      err.message = '/v1/sdk/setEnvVars: Could not acquire lock'
-      return next(err)
+    if (error != null) {
+      error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
+      return next(error)
     }
     try {
       const allSetCalls = []
@@ -104,13 +104,13 @@ router.post('/v1/sdk/envVars', (req, res, next) => {
           unlock()
           res.sendStatus(200)
         })
-        .catch((err) => {
+        .catch((error) => {
           unlock()
-          next(err)
+          next(error)
         })
-    } catch (err) {
+    } catch (error) {
       unlock()
-      next(err)
+      next(error)
     }
   })
 })

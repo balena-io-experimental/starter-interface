@@ -51,8 +51,8 @@ class QueueUnique {
     return () => {
       this.q = this.q
         .then(() => this.func(req, res, next))
-        .catch((err) => {
-          Logger.error(err)
+        .catch((error) => {
+          Logger.error(error)
         })
       return this.q
     }

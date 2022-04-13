@@ -47,7 +47,7 @@ const filterFn = (item: Item) => {
 function fetchList(currentPathArray: Array<string>) {
   // Check the storage directory exists
   if (!fse.existsSync(rootDir)) {
-    fse.ensureDir(rootDir).catch((err) => Logger.error(err))
+    fse.ensureDir(rootDir).catch((error) => Logger.error(error))
   }
 
   // Fetch list of files
@@ -87,8 +87,8 @@ function fetchList(currentPathArray: Array<string>) {
 // Routes //
 router.post('/v1/filemanager/delete', function (req: Request, res: Response) {
   const reqBody = req.body as reqBodyData
-  fse.remove(validatePath(path.join(reqBody.currentPath))).catch((err) => {
-    Logger.error(err)
+  fse.remove(validatePath(path.join(reqBody.currentPath))).catch((error) => {
+    Logger.error(error)
   })
   res.json({ message: 'success' })
 })
@@ -114,7 +114,7 @@ router.post(
       )
     )
 
-    fse.ensureDir(newFolder).catch((err) => Logger.error(err))
+    fse.ensureDir(newFolder).catch((error) => Logger.error(error))
 
     res.json({ message: 'success' })
   }
@@ -125,8 +125,8 @@ router.post('/v1/filemanager/upload', function (req: Request, res: Response) {
     maxFileSize: 5000 * 1024 * 1024
   })
 
-  form.on('error', (err) => {
-    Logger.error(err)
+  form.on('error', (error) => {
+    Logger.error(error)
   })
 
   form.on('fileBegin', function (_name, file) {

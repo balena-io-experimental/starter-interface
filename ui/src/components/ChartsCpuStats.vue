@@ -163,9 +163,9 @@ export default defineComponent({
               'primary'
             ) as string
           }
-        } catch (err) {
+        } catch (error) {
           unMounted.value = true
-          console.error(err)
+          console.error(error)
         }
 
         if (unMounted.value === true) {

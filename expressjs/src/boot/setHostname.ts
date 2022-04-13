@@ -28,9 +28,9 @@ async function setHostnameLockfile() {
   try {
     await fse.ensureFile(hostnameLockFile)
     Logger.debug('Hostname lockfile created.')
-  } catch (err) {
+  } catch (error) {
     Logger.error('Failed settting hostname lockfile.')
-    Logger.error(err)
+    Logger.error(error)
   }
 }
 
@@ -46,6 +46,7 @@ async function setNewHostname() {
       'Hostname changed. If your device is not accessible on your new hostname, try restarting the device.'
     )
   } catch (error) {
+    Logger.error(error)
     Logger.error('Error setting new hostname.')
   }
 }
@@ -75,6 +76,7 @@ export default async function checkHostname() {
         await setHostnameLockfile()
       }
     } catch (error) {
+      Logger.error(error)
       Logger.error('Error fetching current hostname.')
     }
   }

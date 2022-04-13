@@ -38,7 +38,7 @@ async function setLanguage(isoName: string) {
         Quasar.lang.set(lang.default as QuasarLanguage)
       }
     )
-  } catch (err) {
+  } catch (error) {
     // Requested Quasar Language Pack does not exist,
     // let's not break the app, so catching error
   }
