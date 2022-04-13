@@ -16,6 +16,7 @@
     "axios": "^0.26.0",
     "chart.js": "^3.7.1",
     "js-file-download": "^0.4.12",
+    "pinia": "^2.0.13",
     "quasar": "^2.6.5",
     "vue": "^3.0.0",
     "vue-chart-3": "^3.1.8",

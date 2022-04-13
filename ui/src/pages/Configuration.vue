@@ -12,11 +12,14 @@
       :components="[{ component: UpdateDevice }, { component: ForgetAllWifi }]"
     />
 
-    <div v-if="internetConnectivity.status" class="text-h5 q-mb-md q-mt-md">
+    <div
+      v-if="systemStore.internetConnectivity"
+      class="text-h5 q-mb-md q-mt-md"
+    >
       {{ $t('components.system.device_info.environment_variables') }}
     </div>
     <component-frame
-      v-if="internetConnectivity.status"
+      v-if="systemStore.internetConnectivity"
       :components="[{ component: EnvConfig }]"
     />
   </q-page>
@@ -28,7 +31,7 @@ import ChangeHostname from 'components/SystemChangeHostname.vue'
 import ForgetAllWifi from 'components/WifiForgetAllWifi.vue'
 import UpdateDevice from 'components/SystemUpdateDevice.vue'
 import { defineAsyncComponent, defineComponent } from 'vue'
-import { internetConnectivity } from 'src/api/system'
+import { useSystemStore } from 'stores/system'
 
 export default defineComponent({
   name: 'ConfigurationPage',
@@ -36,8 +39,9 @@ export default defineComponent({
     ComponentFrame
   },
   setup() {
+    const systemStore = useSystemStore()
     return {
-      internetConnectivity,
+      systemStore,
       ChangeHostname,
       EnvConfig: defineAsyncComponent(
         () => import('src/components/SystemEnvConfig.vue')

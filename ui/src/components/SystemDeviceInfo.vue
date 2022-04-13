@@ -1,6 +1,6 @@
 <!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
-  <div v-if="response && internetConnectivity.status">
+  <div v-if="response && systemStore.internetConnectivity">
     <h4 class="row items-end q-mt-none q-mb-md">
       <span class="q-mr-sm">{{ response.data.device_name }}</span>
       <q-chip
@@ -146,7 +146,7 @@
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="!loading && internetConnectivity.status === false">
+  <div v-if="!loading && systemStore.internetConnectivity === false">
     {{ $t('components.system.device_info.internet_required') }}
   </div>
   <div v-if="loading" class="window-height row justify-center items-center">
@@ -159,7 +159,7 @@ import { sdk } from 'src/api/sdk'
 import { AxiosResponse } from 'axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { useQuasar } from 'quasar'
-import { internetConnectivity } from 'src/api/system'
+import { useSystemStore } from 'stores/system'
 import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -168,6 +168,7 @@ export default defineComponent({
   components: { CpuStats },
   setup() {
     const $q = useQuasar()
+    const systemStore = useSystemStore()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
@@ -193,9 +194,9 @@ export default defineComponent({
     })
 
     return {
-      internetConnectivity,
       loading,
-      response
+      response,
+      systemStore
     }
   }
 })
