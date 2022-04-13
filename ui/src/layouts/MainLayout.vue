@@ -57,6 +57,9 @@
                 @click="changeLang(language.value)"
               >
                 <q-item-section>{{ language.label }}</q-item-section>
+                <q-item-section v-if="language.value === locale" avatar>
+                  <q-icon size="xs" color="primary" name="check" />
+                </q-item-section>
               </q-item>
             </q-list>
           </q-menu>
@@ -131,6 +134,7 @@ import Shutdown from 'components/SystemShutdown.vue'
 import { supervisor } from 'src/api/supervisor'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'LayoutsMainLayout',
@@ -142,6 +146,7 @@ export default defineComponent({
   },
 
   setup() {
+    const { locale } = useI18n({ useScope: 'global' })
     const $router = useRouter()
 
     const deviceName = ref<string>()
@@ -193,6 +198,7 @@ export default defineComponent({
       currentLink: ref($router.currentRoute.value.name),
       deviceName,
       leftDrawerOpen: ref<boolean>(false),
+      locale,
       localeOptions,
       menuItems: menuList,
       networkDown,
