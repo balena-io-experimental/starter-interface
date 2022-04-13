@@ -2,11 +2,11 @@
 <template>
   <div v-if="m && f && device && !loading">
     <q-chip
-      :color="internetConnectivity.status ? 'positive' : 'negative'"
+      :color="systemStore.internetConnectivity ? 'positive' : 'negative'"
       text-color="white"
     >
       {{
-        internetConnectivity.status
+        systemStore.internetConnectivity
           ? $t('components.system.device_info.online')
           : $t('components.system.device_info.offline')
       }}
@@ -112,7 +112,7 @@ import { AxiosError } from 'axios'
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { supervisor } from 'src/api/supervisor'
-import { internetConnectivity } from 'src/api/system'
+import { useSystemStore } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 
 interface device {
@@ -147,6 +147,8 @@ export default defineComponent({
   name: 'SystemOfflineDeviceInfo',
   components: { CpuStats },
   setup() {
+    const systemStore = useSystemStore()
+
     // Tools
     const loading = ref<boolean>(true)
 
@@ -193,9 +195,9 @@ export default defineComponent({
     return {
       device,
       f,
-      internetConnectivity,
       loading,
-      m
+      m,
+      systemStore
     }
   }
 })

@@ -1,9 +1,9 @@
 <template>
   <q-page class="q-pa-lg">
-    <div v-if="internetConnectivity.status">
+    <div v-if="systemStore.internetConnectivity">
       <component-frame :components="[{ component: DeviceInfo }]" />
     </div>
-    <div v-if="internetConnectivity.status == false">
+    <div v-if="systemStore.internetConnectivity == false">
       <component-frame :components="[{ component: OfflineDeviceInfo }]" />
     </div>
   </q-page>
@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import ComponentFrame from 'layouts/ComponentFrame.vue'
-import { internetConnectivity } from 'src/api/system'
+import { useSystemStore } from 'stores/system'
 import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
@@ -20,8 +20,10 @@ export default defineComponent({
     ComponentFrame
   },
   setup() {
+    const systemStore = useSystemStore()
+
     return {
-      internetConnectivity,
+      systemStore,
       DeviceInfo: defineAsyncComponent(
         () => import('src/components/SystemDeviceInfo.vue')
       ),
