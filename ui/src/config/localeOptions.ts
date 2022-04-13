@@ -15,3 +15,15 @@ export default [
   { value: 'nb-NO', label: 'Norsk' },
   { value: 'pt-BR', label: 'Português' }
 ]
+
+// Quasar has its own language packs that are used as generic labels for things like tables. To keep
+// the build small, only the language packs for active languages are imported. When adding additional
+// languages, change the glob in the import statement to include the new language pack. Entires
+// should match those included in the default export above.
+
+// '../../node_modules/quasar/lang/(en-US|fr).mjs' <-- imports English and French
+// '../../node_modules/quasar/lang/(en-US|fr|it).mjs' <-- imports English, French and Italian
+
+export const qLangList = import.meta.glob(
+  '../../node_modules/quasar/lang/(en-US|de|fr|it|nb-NO|pt-BR).mjs'
+)
