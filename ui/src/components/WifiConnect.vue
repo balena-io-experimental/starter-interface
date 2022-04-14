@@ -159,8 +159,8 @@ export default defineComponent({
         }
       } catch {
         notify('warning', t('system.network.no_wifi_api'))
+        noWifiConnect.value = true
       }
-      noWifiConnect.value = true
       $q.loading.hide()
     }
 
