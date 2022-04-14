@@ -23,11 +23,11 @@
         <q-td auto-width>
           <q-space />
           <q-btn
+            v-bind="qBtnStyle"
             icon="play_arrow"
             size="xs"
             round
             :disable="loading"
-            v-bind="qBtnStyle"
             :loading="loading"
             @click="startContainer(props.row.serviceName)"
           />
@@ -37,11 +37,11 @@
         <q-td auto-width>
           <q-space />
           <q-btn
+            v-bind="qBtnStyle"
             icon="stop"
             :disable="loading"
             size="xs"
             round
-            v-bind="qBtnStyle"
             :loading="loading"
             @click="stopContainer(props.row.serviceName)"
           />
