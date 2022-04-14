@@ -116,7 +116,10 @@ const response = (req: Request, res: sendResponse, next: NextFunction) => {
               runtime: new Date().getTime() // Add the time the request was made
             })
           }
+        } else {
+          Logger.debug('Not a GET item. Skipping.')
         }
+
         Logger.debug('Current cached content:')
         Logger.debug(requestCache)
         return res
@@ -146,15 +149,13 @@ function checkCache(req: Request, res: sendResponse) {
     cacheTimeout = req.app.locals.defaultCacheTimeout as number
   }
 
-  Logger.debug(`Cache timeout = ${cacheTimeout}`)
-
   // If the current request is within X seconds of the last successful request, return the cached version
   if (
     cachedItemList[0].runtime &&
     new Date().getTime() - cachedItemList[0].runtime < cacheTimeout
   ) {
     // Return the cached item to the user
-    Logger.debug('Returning cached item.')
+    Logger.debug(`Returning cached item with cache timeout ${cacheTimeout}.`)
     res.json(cachedItemList[0].cachedData)
     return undefined
   } else {
