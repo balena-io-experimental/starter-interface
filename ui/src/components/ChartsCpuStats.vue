@@ -132,9 +132,7 @@ export default defineComponent({
         try {
           const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
             '/v1/system/systeminfo',
-            {
-              cmd: 'l'
-            }
+            { cmd: 'l' }
           )
 
           // If there are more than X items in the object, remove one
@@ -164,11 +162,14 @@ export default defineComponent({
             ) as string
           }
         } catch (error) {
-          unMounted.value = true
+          console.error('Error fetching CPU stats')
           console.error(error)
         }
 
         if (unMounted.value === true) {
+          // Reset chart content
+          chartData.value.datasets = []
+          // Stop the loop
           break
         }
 
