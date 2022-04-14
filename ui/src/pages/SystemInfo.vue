@@ -18,7 +18,7 @@ export default defineComponent({
   name: 'SystemInfoPage',
   components: { ComponentFrame },
   setup() {
-    return { ComponentFrame, JournalDLogs, SystemInfo }
+    return { JournalDLogs, SystemInfo }
   }
 })
 </script>
