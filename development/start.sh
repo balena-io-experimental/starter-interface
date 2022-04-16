@@ -22,5 +22,8 @@ fi
 
 echo "Development environment ready. Setup took $(($(date +%s)-$start_time)) seconds."
 
-# Start Supervisor
-exec supervisord -c supervisord.conf
+# Change to app directory as `yarn --cwd` does not recognise corepack
+cd $destination
+
+# Start dev environment
+exec yarn oddev

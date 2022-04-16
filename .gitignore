@@ -1,8 +1,18 @@
+# General 
 .DS_Store
 .thumbs.db
 node_modules
 .vscode
 dist
+
+# Yarn
+**/.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
 
 # Quasar core related directories
 .quasar

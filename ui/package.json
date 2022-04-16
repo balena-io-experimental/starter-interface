@@ -9,6 +9,7 @@
     "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
+    "oddev": "quasar dev -p 80",
     "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build"
   },
   "dependencies": {
