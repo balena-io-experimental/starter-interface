@@ -33,7 +33,7 @@ async function setLanguage(isoName: string) {
   i18n.global.locale.value = isoName
   // Load and set the selected Quasar language pack
   try {
-    await qLangList[`../../node_modules/quasar/lang/${isoName}.mjs`]().then(
+    await qLangList[`../../../node_modules/quasar/lang/${isoName}.mjs`]().then(
       (lang) => {
         Quasar.lang.set(lang.default as QuasarLanguage)
       }

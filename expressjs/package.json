@@ -1,14 +1,15 @@
 {
   "name": "expressjs",
   "license": "MIT",
-  "repository": "https://github.com/maggie0002/balena-device-ui",
   "author": "maggie0002",
+  "repository": "https://github.com/maggie0002/balena-device-ui",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"No test specified\" && exit 0",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore",
     "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
     "dev": "nodemon -r tsconfig-paths/register ./src/index.ts",
+    "oddev": "nodemon -r tsconfig-paths/register ./src/index.ts",
     "start": "node ./dist/index.js",
     "build": "yarn tsc -p tsconfig.json && tsc-alias -p tsconfig.json"
   },

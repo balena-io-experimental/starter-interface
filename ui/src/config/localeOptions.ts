@@ -21,9 +21,9 @@ export default [
 // languages, change the glob in the import statement to include the new language pack. Entires
 // should match those included in the default export above.
 
-// '../../node_modules/quasar/lang/(en-US|fr).mjs' <-- imports English and French
-// '../../node_modules/quasar/lang/(en-US|fr|it).mjs' <-- imports English, French and Italian
+// '../../../node_modules/quasar/lang/(en-US|fr).mjs' <-- imports English and French
+// '../../../node_modules/quasar/lang/(en-US|fr|it).mjs' <-- imports English, French and Italian
 
 export const qLangList = import.meta.glob(
-  '../../node_modules/quasar/lang/(en-US|de|fr|it|nb-NO|pt-BR).mjs'
+  '../../../node_modules/quasar/lang/(en-US|de|fr|it|nb-NO|pt-BR).mjs'
 )

@@ -1,58 +1,44 @@
-# Build UI package
-FROM node:16.13.2-alpine3.15 as UI
-
-ENV NODE_ENV=development
-
-WORKDIR /build
-
-COPY ui/package.json package.json
-COPY ui/yarn.lock yarn.lock
-
-# The network timeout prevents build timeouts when building on devices with slow SD cards
-RUN yarn install --network-timeout 600000 --frozen-lockfile
-
-
-# Build ExpressJS package
-FROM node:16.13.2-alpine3.15 as ExpressJS
-
-ENV NODE_ENV=development
-
-WORKDIR /build
-
-COPY expressjs/package.json package.json
-COPY expressjs/yarn.lock yarn.lock
-
-# The network timeout prevents build timeouts when building on devices with slow SD cards
-RUN yarn install --network-timeout 600000 --frozen-lockfile
-
-
 ## Build environment
 FROM node:16.13.2-alpine3.15
 
-RUN apk add rsync supervisor --no-cache
+RUN apk add rsync --no-cache
 
 ENV NODE_ENV=development
 
 # Specify that this is being deployed to a Balena device
 ENV ON_DEVICE=true
 
-WORKDIR /build
+# Enable corepack for alternative Yarn versions
+RUN corepack enable
 
-# Copy node_modules into container
-COPY --from=ExpressJS /build dist/expressjs/
-COPY --from=UI /build dist/ui/
+# Set working directory for distribution
+WORKDIR /build/dist
+
+# Copy required files for installs
+COPY package.json .
+COPY yarn.lock .
+COPY .yarn .yarn
+COPY .yarnrc.yml .
+COPY expressjs/package.json expressjs/package.json
+COPY ui/package.json ui/package.json
+
+# Install packages
+RUN yarn install --immutable
 
 # Copy app in to container
-COPY expressjs dist/expressjs/
-COPY ui dist/ui/
-
-# Copy the development sciprts required for launch
-COPY development .
+COPY expressjs expressjs
+COPY ui ui
 
 # Used to identify whether a new build has been pushed and updates are required. Otherwise
 # a container reinstall by Supervisor could overwrite your changes to the files when the container
 # being installed hasn't changed. 
-RUN echo $(date +%s) > dist/.build_timestamp
+RUN echo $(date +%s) > .build_timestamp
+
+# Switch to primary build directory
+WORKDIR /build
+
+# Copy the development scripts required for launch
+COPY development .
 
 # Run the start script
 CMD ["sh", "start.sh"]
