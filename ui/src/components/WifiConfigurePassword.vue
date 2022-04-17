@@ -4,7 +4,7 @@
       v-bind="qBtnStyle"
       icon="wifi_password"
       color="primary"
-      :loading="submitting"
+      :loading="isSubmitting"
       @click="passwordDialog = true"
     >
       <q-tooltip>
@@ -87,9 +87,9 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
+    const isSubmitting = ref<boolean>(false)
     const passwordInput = ref<QForm>()
     const passwordText = ref<string>('')
-    const submitting = ref<boolean>(false)
 
     function notify(type: string, message: string) {
       $q.notify({
@@ -114,7 +114,7 @@ export default defineComponent({
       if (!passwordInput.value?.validate()) {
         return
       }
-      submitting.value = true
+      isSubmitting.value = true
       try {
         await expressApi.post('/v1/wifi', {
           type: 'POST',
@@ -123,23 +123,23 @@ export default defineComponent({
         })
 
         notify('positive', t('components.wifi.configure_password.password_set'))
-        submitting.value = false
+        isSubmitting.value = false
       } catch {
         notify('negative', t('system.network.no_wifi_api'))
       }
 
       passwordText.value = ''
-      submitting.value = false
+      isSubmitting.value = false
     }
 
     return {
       isPwd: ref(true),
+      isSubmitting,
       passwordDialog: ref(false),
       passwordInput,
       passwordText,
       qBtnStyle,
-      setHotspotPassword,
-      submitting
+      setHotspotPassword
     }
   }
 })

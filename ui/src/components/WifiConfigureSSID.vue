@@ -4,7 +4,7 @@
       v-bind="qBtnStyle"
       icon="drive_file_rename_outline"
       color="primary"
-      :loading="submitting"
+      :loading="isSubmitting"
       @click="ssidDialog = true"
     >
       <q-tooltip>
@@ -22,7 +22,7 @@
             text-color="accent"
           />
           <q-input
-            ref="SSIDInput"
+            ref="ssidInput"
             v-model="ssidText"
             bottom-slots
             :rules="[
@@ -77,10 +77,10 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    const SSIDInput = ref<QForm>()
+    const ssidInput = ref<QForm>()
     const ssidText = ref<string>('')
 
-    const submitting = ref<boolean>(false)
+    const isSubmitting = ref<boolean>(false)
 
     function notify(type: string, message: string) {
       $q.notify({
@@ -102,10 +102,10 @@ export default defineComponent({
 
     // Set SSID
     async function setHotspotSSID() {
-      if (!SSIDInput.value?.validate()) {
+      if (!ssidInput.value?.validate()) {
         return
       }
-      submitting.value = true
+      isSubmitting.value = true
 
       try {
         await expressApi.post('/v1/wifi', {
@@ -115,22 +115,22 @@ export default defineComponent({
         })
 
         notify('positive', t('components.wifi.configure_ssid.ssid_set'))
-        submitting.value = false
+        isSubmitting.value = false
       } catch {
         notify('negative', t('system.network.no_wifi_api'))
       }
 
       ssidText.value = ''
-      submitting.value = false
+      isSubmitting.value = false
     }
 
     return {
+      isSubmitting,
       qBtnStyle,
       ssidDialog: ref(false),
-      SSIDInput,
+      ssidInput,
       ssidText,
-      setHotspotSSID,
-      submitting
+      setHotspotSSID
     }
   }
 })

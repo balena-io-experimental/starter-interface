@@ -5,7 +5,7 @@
         v-model="model"
         filled
         dense
-        :loading="loadingRequest"
+        :loading="isLoadingRequest"
         :options="options"
         :label="$t('components.tools.system_info.select_request')"
         @update:model-value="getSystemInfo(model)"
@@ -31,7 +31,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'ToolsSystemInfo',
   setup() {
-    const loadingRequest = ref<boolean>(false)
+    const isLoadingRequest = ref<boolean>(false)
     const response = ref<AxiosResponse>()
 
     const options = [
@@ -62,7 +62,7 @@ export default defineComponent({
       { cmd: '.', label: 'Get Dynamic Data' },
       { cmd: ',', label: 'Get Static Data' },
       { cmd: 'g', label: 'Graphics' },
-      { cmd: 'I', label: 'Inet Checksite' },
+      { cmd: 'I', label: 'Inet Check Site' },
       { cmd: 'i', label: 'Inet Latency' },
       { cmd: 'm', label: 'Mem' },
       { cmd: 'M', label: 'Mem Layout' },
@@ -90,7 +90,7 @@ export default defineComponent({
 
     async function getSystemInfo(model: { cmd: string } | null) {
       if (model != null) {
-        loadingRequest.value = true
+        isLoadingRequest.value = true
         try {
           const res = await expressApi.post('/v1/system/systeminfo', {
             cmd: model.cmd
@@ -98,15 +98,15 @@ export default defineComponent({
 
           response.value = res
         } catch {
-          loadingRequest.value = false
+          isLoadingRequest.value = false
         }
       }
-      loadingRequest.value = false
+      isLoadingRequest.value = false
     }
 
     return {
       getSystemInfo,
-      loadingRequest,
+      isLoadingRequest,
       model: ref(null),
       options,
       response

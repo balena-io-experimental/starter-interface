@@ -41,7 +41,7 @@ export default defineComponent({
 
     async function clickedLink(path: string) {
       // Starts the loading indicator here, then stops it in the
-      // Router.afterEach function in ui/src/router
+      // router.afterEach function in ui/src/router
       $q.loading.show()
       await $router.replace({ name: path })
     }

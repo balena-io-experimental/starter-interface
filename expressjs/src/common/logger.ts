@@ -61,11 +61,11 @@ const transports = [
 
 // Create the logger instance that has to be exported
 // and used to log messages.
-const Logger = winston.createLogger({
+const logger = winston.createLogger({
   level: level(),
   levels,
   format,
   transports
 })
 
-export default Logger
+export default logger

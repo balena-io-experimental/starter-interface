@@ -32,10 +32,10 @@
             :label="$t('components.system.env_config.add_change_env_var')"
             icon="add"
             v-bind="qBtnStyle"
-            @click="newVarDialogOpen = true"
+            @click="isNewVarDialogOpen = true"
           />
         </div>
-        <q-dialog v-model="newVarDialogOpen" persistent>
+        <q-dialog v-model="isNewVarDialogOpen" persistent>
           <q-card style="min-width: 250px">
             <q-card-section>
               <div class="text-h6">
@@ -79,7 +79,7 @@
       <pre>{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="loading" class="text-center">
+  <div v-if="isLoading" class="text-center">
     <q-spinner color="primary" size="3em" />
   </div>
 </template>
@@ -120,9 +120,9 @@ export default defineComponent({
 
     const newVarKey = ref<string>('')
     const newVarValue = ref<string>('')
-    const newVarDialogOpen = ref<boolean>(false)
+    const isNewVarDialogOpen = ref<boolean>(false)
 
-    const loading = ref<boolean>(true)
+    const isLoading = ref<boolean>(true)
 
     const getEnvResponse = ref<AxiosResponse>()
 
@@ -140,28 +140,28 @@ export default defineComponent({
         .then(async function () {
           await getEnv()
           selectedRows.value = []
-          loading.value = false
+          isLoading.value = false
         })
         .catch(function (error: Error | AxiosError) {
           console.error('deleteEnv', error)
           selectedRows.value = []
-          loading.value = false
+          isLoading.value = false
         })
     }
 
     function setEnv() {
-      newVarDialogOpen.value = false
-      loading.value = true
+      isNewVarDialogOpen.value = false
+      isLoading.value = true
 
       sdk
         .setEnv(newVarKey.value, newVarValue.value)
         .then(async function () {
           await getEnv()
-          loading.value = false
+          isLoading.value = false
         })
         .catch(function (error: Error | AxiosError) {
           console.error('setEnv', error)
-          loading.value = false
+          isLoading.value = false
         })
       newVarKey.value = ''
       newVarValue.value = ''
@@ -171,15 +171,15 @@ export default defineComponent({
       await getEnv().catch(function (error: Error | AxiosError) {
         console.error('getEnv', error)
       })
-      loading.value = false
+      isLoading.value = false
     })
 
     return {
       columns,
       deleteEnv,
       getEnvResponse,
-      loading,
-      newVarDialogOpen,
+      isLoading,
+      isNewVarDialogOpen,
       newVarKey,
       newVarValue,
       qBtnStyle,

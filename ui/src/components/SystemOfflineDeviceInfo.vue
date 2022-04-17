@@ -1,6 +1,6 @@
 <!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
-  <div v-if="m && f && device && !loading">
+  <div v-if="m && f && device && !isLoading">
     <q-chip
       :color="systemStore.internetConnectivity ? 'positive' : 'negative'"
       text-color="white"
@@ -102,7 +102,7 @@
       </div>
     </div>
   </div>
-  <div v-if="loading" class="window-height row justify-center items-center">
+  <div v-if="isLoading" class="window-height row justify-center items-center">
     <q-spinner color="primary" size="5em" />
   </div>
 </template>
@@ -150,7 +150,7 @@ export default defineComponent({
     const systemStore = useSystemStore()
 
     // Tools
-    const loading = ref<boolean>(true)
+    const isLoading = ref<boolean>(true)
 
     // Constants
     const device = ref<device>()
@@ -189,13 +189,13 @@ export default defineComponent({
 
     onMounted(async () => {
       await getDeviceInfo()
-      loading.value = false
+      isLoading.value = false
     })
 
     return {
       device,
       f,
-      loading,
+      isLoading,
       m,
       systemStore
     }

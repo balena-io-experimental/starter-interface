@@ -5,7 +5,7 @@
     @click="update()"
   />
   <q-checkbox
-    v-model="checkBox"
+    v-model="isCheckBox"
     class="q-ml-md"
     dense
     size="xs"
@@ -23,12 +23,12 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'SystemUpdateDevice',
   setup() {
-    const checkBox = ref<boolean>(false)
+    const isCheckBox = ref<boolean>(false)
     const response = ref<AxiosResponse>()
     const $q = useQuasar()
 
     async function update() {
-      response.value = await supervisor.update(checkBox.value)
+      response.value = await supervisor.update(isCheckBox.value)
       $q.notify({
         type: 'positive',
         message: response.value.data as string
@@ -36,7 +36,7 @@ export default defineComponent({
     }
 
     return {
-      checkBox,
+      isCheckBox,
       qBtnStyle,
       update
     }

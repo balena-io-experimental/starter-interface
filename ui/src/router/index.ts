@@ -20,7 +20,7 @@ export default route(function (/* { store, ssrContext } */) {
     ? createWebHistory
     : createWebHashHistory
 
-  const Router = createRouter({
+  const router = createRouter({
     scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition
@@ -36,7 +36,7 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
-  Router.afterEach(() => {
+  router.afterEach(() => {
     // Complete the animation of the loading indicator after page change.
     Loading.hide()
   })
@@ -85,5 +85,5 @@ export default route(function (/* { store, ssrContext } */) {
     }
   )
 
-  return Router
+  return router
 })

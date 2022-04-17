@@ -13,5 +13,23 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'prettier'
-  ]
+  ],
+
+  rules: {
+    // Naming conventions
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'variableLike',
+        format: ['camelCase'],
+        leadingUnderscore: 'allow'
+      },
+      {
+        selector: 'variable',
+        types: ['boolean'],
+        format: ['PascalCase'],
+        prefix: ['is']
+      }
+    ]
+  }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <q-btn
-      :loading="loading"
+      :loading="isLoading"
       v-bind="qBtnStyle"
       :label="$t('components.system.journal_d_logs.fetch_journald')"
       @click="fetchLogs()"
@@ -19,19 +19,19 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'SystemJournalDLogs',
   setup() {
-    const loading = ref<boolean>(false)
+    const isLoading = ref<boolean>(false)
     const response = ref<AxiosResponse>()
 
     async function fetchLogs() {
-      loading.value = true
+      isLoading.value = true
       response.value = await supervisor.journald_logs()
-      loading.value = false
+      isLoading.value = false
 
       exportFile('journald-logs.txt', response.value.data as string)
     }
     return {
       fetchLogs,
-      loading,
+      isLoading,
       qBtnStyle
     }
   }
