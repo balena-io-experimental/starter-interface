@@ -16,7 +16,8 @@ export const useSystemStore = defineStore('system', {
     async checkInternetStatus() {
       try {
         const response = await expressApi.get<internetConnection>(
-          `${apiPathV1}/internet_check`
+          `${apiPathV1}/internet_check`,
+          { timeout: 3000 }
         )
         this.internetConnectivity = response.data.internet
       } catch (error) {

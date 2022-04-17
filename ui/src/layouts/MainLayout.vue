@@ -198,7 +198,6 @@ export default defineComponent({
 
     return {
       changeLang,
-
       currentLink: ref($router.currentRoute.value.name),
       deviceName,
       isChangingLang,
@@ -208,7 +207,6 @@ export default defineComponent({
       locale,
       localeOptions,
       menuItems: menuList,
-
       qHeaderStyle
     }
   }

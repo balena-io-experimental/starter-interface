@@ -56,7 +56,7 @@ router.post(
       .then((response) => {
         // Return the same http code as Axios request
         res.status(response.status)
-        // Return only the data recieved from Axios (no headers)
+        // Return only the data received from Axios (no headers)
         res.json(response.data)
         Logger.debug('Returned Supervisor data.')
       })
