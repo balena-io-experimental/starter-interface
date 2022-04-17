@@ -88,6 +88,7 @@
                 </q-tooltip>
               </q-btn>
               <q-dialog v-model="uploaderDialog">
+                <!-- Uploader headers must be lowercase, not CamelCase -->
                 <q-uploader
                   style="max-width: 300px"
                   :label="$t('components.tools.file_manager.upload')"
