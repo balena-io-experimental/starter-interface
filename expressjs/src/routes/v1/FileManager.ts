@@ -133,6 +133,7 @@ router.post('/v1/filemanager/upload', function (req: Request, res: Response) {
     file.filepath = validatePath(
       path.join(
         rootDir,
+        // Uploader headers must be lowercase, not CamelCase
         req.headers.currentpath as string,
         file.originalFilename || file.newFilename
       )

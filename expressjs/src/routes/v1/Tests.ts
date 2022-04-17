@@ -4,12 +4,15 @@ import queueCache from '@/middleware/queueCache'
 
 const router = express.Router()
 
-// Define your custom GET route path and actions
-router.get('/v1/test/cacheping', queueCache, function (_req, res) {
-  // Log to the console that this is running
+// Cache tests
+router.get('/v1/test/cache', queueCache, function (_req, res) {
   Logger.warn('Running test route.')
-  // Actions to take when this route is visited go here.
   res.send({ test: 'Testing Cache' })
+})
+
+router.get('/v1/test/cache2', queueCache, function (_req, res) {
+  Logger.warn('Running test route.')
+  res.send({ test2: 'Testing Cache 2' })
 })
 
 export default router
