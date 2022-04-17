@@ -11,7 +11,7 @@
           :label="$t('components.wifi.connect.select_ssid')"
           :options="ssids"
           option-label="ssid"
-          :disable="wifiStatus"
+          :disable="isWifiStatus"
         >
           <template #option="scope">
             <q-item v-bind="scope.itemProps">
@@ -49,16 +49,16 @@
               flat
               color="primary"
               icon="refresh"
-              :disable="!refreshCompatible || wifiStatus"
+              :disable="!isRefreshCompatible || isWifiStatus"
               @click="fetchNetworks()"
             />
             <q-tooltip
-              v-if="!refreshCompatible"
+              v-if="!isRefreshCompatible"
               class="text-caption text-center"
               anchor="top middle"
               self="center middle"
               :offset="[20, 20]"
-              :disable="!refreshCompatible"
+              :disable="!isRefreshCompatible"
             >
               {{ $t('components.wifi.connect.refresh_not_compatible') }}
             </q-tooltip>
@@ -76,25 +76,25 @@
             || $t('components.wifi.connect.invalid_password_length')]"
           :label="$t('general.password')"
           type="password"
-          :disable="wifiStatus"
+          :disable="isWifiStatus"
         />
       </div>
       <div class="q-mt-md text-center">
         <q-btn
-          v-if="!wifiStatus"
+          v-if="!isWifiStatus"
           v-bind="qBtnStyle"
           :label="$t('components.wifi.connect.connect')"
           class="q-ml-md"
-          :loading="submitting"
+          :loading="isSubmitting"
           type="submit"
         />
         <q-btn
           v-else
           v-bind="qBtnStyle"
-          :disable="noWifiConnect"
+          :disable="isNoWifiConnect"
           :label="$t('components.wifi.connect.disconnect')"
           class="q-ml-md"
-          :loading="submitting"
+          :loading="isSubmitting"
           @click="forget()"
         />
       </div>
@@ -119,7 +119,7 @@ interface networksData {
   ssids: Array<string>
 }
 
-interface wifiStatus {
+interface isWifiStatus {
   wifi: boolean
 }
 
@@ -132,13 +132,13 @@ export default defineComponent({
     const { t } = useI18n()
 
     // Env vars
-    const noWifiConnect = ref<boolean>(false)
+    const isNoWifiConnect = ref<boolean>(false)
     const password = ref<string>('')
-    const refreshCompatible = ref<boolean>(true)
+    const isRefreshCompatible = ref<boolean>(true)
     const ssids = ref<Array<string>>()
-    const submitting = ref<boolean>(false)
+    const isSubmitting = ref<boolean>(false)
     const wifiSsid = ref<connectionData>()
-    const wifiStatus = ref<boolean>(true)
+    const isWifiStatus = ref<boolean>(true)
 
     onMounted(async () => {
       await checkWifiStatus()
@@ -148,25 +148,25 @@ export default defineComponent({
       $q.loading.show()
 
       try {
-        const response = await expressApi.post<wifiStatus>('/v1/wifi', {
+        const response = await expressApi.post<isWifiStatus>('/v1/wifi', {
           type: 'GET',
           path: 'v1/connection_status'
         })
 
         if (!response.data.wifi) {
-          wifiStatus.value = false
+          isWifiStatus.value = false
           await fetchNetworks()
         }
       } catch {
         notify('warning', t('system.network.no_wifi_api'))
-        noWifiConnect.value = true
+        isNoWifiConnect.value = true
       }
       $q.loading.hide()
     }
 
     // Send connect request
     async function connect() {
-      submitting.value = true
+      isSubmitting.value = true
       try {
         await expressApi.post('/v1/wifi', {
           type: 'POST',
@@ -178,15 +178,15 @@ export default defineComponent({
           }
         })
 
-        wifiStatus.value = true
+        isWifiStatus.value = true
         // Delay to improve interface interaction
         setTimeout(() => {
           notify('positive', t('components.wifi.connect.connection_request'))
-          submitting.value = false
+          isSubmitting.value = false
         }, 2000)
       } catch {
         notify('negative', t('components.wifi.connect.network_connect_fail'))
-        submitting.value = false
+        isSubmitting.value = false
       }
       password.value = ''
     }
@@ -201,7 +201,7 @@ export default defineComponent({
           path: 'v1/list_access_points'
         })
 
-        refreshCompatible.value = response.data.iw_compatible
+        isRefreshCompatible.value = response.data.iw_compatible
         ssids.value = response.data.ssids
         if (ssids.value.length === 0) {
           notify('warning', t('components.wifi.connect.no_networks'))
@@ -209,12 +209,12 @@ export default defineComponent({
       } catch {
         notify('negative', t('components.wifi.connect.network_fetch_fail'))
       }
-      submitting.value = false
+      isSubmitting.value = false
       $q.loading.hide()
     }
 
     async function forget() {
-      submitting.value = true
+      isSubmitting.value = true
       try {
         await expressApi.post('/v1/wifi', {
           type: 'POST',
@@ -224,18 +224,18 @@ export default defineComponent({
           }
         })
 
-        wifiStatus.value = false
+        isWifiStatus.value = false
         // Delay to improve interface interaction
         setTimeout(() => {
           notify(
             'positive',
             t('components.wifi.connect.disconnect_request_sent')
           )
-          submitting.value = false
+          isSubmitting.value = false
         }, 1000)
       } catch {
         notify('negative', t('components.wifi.connect.network_forget_fail'))
-        submitting.value = false
+        isSubmitting.value = false
       }
     }
 
@@ -261,14 +261,14 @@ export default defineComponent({
       connect,
       fetchNetworks,
       forget,
-      noWifiConnect,
+      isNoWifiConnect,
+      isRefreshCompatible,
+      isSubmitting,
+      isWifiStatus,
       password,
       qBtnStyle,
-      refreshCompatible,
       ssids,
-      submitting,
-      wifiSsid,
-      wifiStatus
+      wifiSsid
     }
   }
 })

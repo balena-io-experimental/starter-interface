@@ -24,7 +24,7 @@
           </div>
           <div class="items-right align-right text-right justify-right">
             <q-checkbox
-              v-model="checkBox"
+              v-model="isCheckBox"
               class="q-ml-md text-caption"
               size="xs"
               :label="$t('components.system.shutdown.force_shutdown')"
@@ -68,11 +68,11 @@ export default defineComponent({
     const { t } = useI18n()
     const $q = useQuasar()
 
-    const checkBox = ref<boolean>(false)
+    const isCheckBox = ref<boolean>(false)
 
     function shutdown() {
       // This does not wait for return of promise as connection is lost too quickly
-      void supervisor.shutdown(checkBox.value)
+      void supervisor.shutdown(isCheckBox.value)
 
       setTimeout(() => {
         $q.notify({
@@ -83,8 +83,8 @@ export default defineComponent({
       }, 1500)
     }
     return {
-      checkBox,
       confirm: ref(false),
+      isCheckBox,
       qBtnStyle,
       shutdown
     }

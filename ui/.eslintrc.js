@@ -55,7 +55,8 @@ module.exports = {
       files: ['*.json'],
       extends: ['plugin:@intlify/vue-i18n/base'],
       rules: {
-        'no-irregular-whitespace': 'off'
+        'no-irregular-whitespace': 'off',
+        '@typescript-eslint/naming-convention': 'off'
       }
     },
     {
@@ -102,7 +103,6 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    // Optional.
     '@intlify/vue-i18n/no-missing-keys': 'error',
     '@intlify/vue-i18n/no-dynamic-keys': 'error',
     '@intlify/vue-i18n/no-unused-keys': [
@@ -138,7 +138,28 @@ module.exports = {
     'no-unused-vars': 'off',
 
     // allow debugger during development only
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+
+    // Naming conventions
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'variableLike',
+        format: ['camelCase'],
+        leadingUnderscore: 'allow'
+      },
+      {
+        selector: 'variable',
+        types: ['boolean'],
+        format: ['PascalCase'],
+        prefix: ['is']
+      },
+      {
+        selector: 'typeParameter',
+        format: ['PascalCase'],
+        prefix: ['T']
+      }
+    ]
   },
   settings: {
     'vue-i18n': {

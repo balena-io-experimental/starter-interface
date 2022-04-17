@@ -7,7 +7,7 @@
       :dense="$q.screen.gt.sm"
       wrap-cells
       :filter="filter"
-      :loading="loading"
+      :loading="isLoading"
       :rows="rows"
       :rows-per-page-options="[50, 75, 100, 0]"
       :columns="columns"
@@ -76,7 +76,7 @@
                 class="q-mr-sm"
                 icon="upload"
                 size="sm"
-                @click="uploaderDialog = true"
+                @click="isUploaderDialog = true"
               >
                 <q-tooltip
                   class="text-caption text-center"
@@ -87,7 +87,7 @@
                   {{ $t('components.tools.file_manager.upload') }}
                 </q-tooltip>
               </q-btn>
-              <q-dialog v-model="uploaderDialog">
+              <q-dialog v-model="isUploaderDialog">
                 <!-- Uploader headers must be lowercase, not CamelCase -->
                 <q-uploader
                   style="max-width: 300px"
@@ -97,7 +97,7 @@
                   multiple
                   flat
                   no-thumbnails
-                  :readonly="delayUpload"
+                  :readonly="isDelayUpload"
                   :url="uploaderAPIRoute"
                   :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
                   @uploaded="updateRows()"
@@ -135,7 +135,7 @@
                 class="q-mr-sm"
                 icon="search"
                 size="sm"
-                @click="searchTable = true"
+                @click="isSearchTable = true"
               >
                 <q-tooltip
                   class="text-caption text-center"
@@ -164,7 +164,7 @@
                 </q-tooltip>
               </q-btn>
               <q-input
-                v-if="searchTable"
+                v-if="isSearchTable"
                 v-model="filter"
                 class="q-ml-md"
                 dense
@@ -251,9 +251,9 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    const delayUpload = ref<boolean>(false)
+    const isDelayUpload = ref<boolean>(false)
     const invalidCharacters = ref<Array<string>>(['/', '\\0'])
-    const loading = ref<boolean>(true)
+    const isLoading = ref<boolean>(true)
     const objPath = ref<Array<string>>([])
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
@@ -296,7 +296,7 @@ export default defineComponent({
       })
 
       if (itemCheck.length > 0) {
-        delayUpload.value = true
+        isDelayUpload.value = true
         $q.notify({
           actions: [
             {
@@ -308,7 +308,7 @@ export default defineComponent({
             }
           ],
           onDismiss: () => {
-            delayUpload.value = false
+            isDelayUpload.value = false
           },
           timeout: 0,
           type: 'warning',
@@ -329,25 +329,25 @@ export default defineComponent({
     }
 
     async function deleteItem(row: Rows) {
-      loading.value = true
+      isLoading.value = true
       await deleteCall(row.path)
       await updateRows()
-      loading.value = false
+      isLoading.value = false
     }
 
     async function deleteSelectedItems() {
-      loading.value = true
+      isLoading.value = true
 
       for (const item of selected.value) {
         await deleteCall(item.path)
       }
 
       await updateRows()
-      loading.value = false
+      isLoading.value = false
     }
 
     async function download(row: Rows) {
-      loading.value = true
+      isLoading.value = true
       try {
         const response = await expressApi.get('/v1/filemanager/download', {
           responseType: 'blob',
@@ -363,7 +363,7 @@ export default defineComponent({
       } catch {
         $q.notify({ type: 'negative', message: t('general.error') })
       }
-      loading.value = false
+      isLoading.value = false
     }
 
     function newFolder() {
@@ -413,8 +413,9 @@ export default defineComponent({
         timeout: 100
       })
     }
+
     const onRowClick: QTableProps['onRowClick'] = (_evt, row: Rows) => {
-      if (loading.value) {
+      if (isLoading.value) {
         return
       }
       if (row.type === 'folder') {
@@ -434,7 +435,7 @@ export default defineComponent({
     }
 
     async function updateRows() {
-      loading.value = true
+      isLoading.value = true
       try {
         const response = await expressApi.post<Rows[]>('/v1/filemanager/list', {
           currentPathArray: objPath.value
@@ -444,17 +445,20 @@ export default defineComponent({
       } catch {
         $q.notify({ type: 'negative', message: t('general.error') })
       }
-      loading.value = false
+      isLoading.value = false
     }
 
     return {
       checkUploadOverwrite,
       columns,
-      delayUpload,
+
       deleteItem,
       deleteSelectedItems,
       filter: ref(),
-      loading,
+      isDelayUpload,
+      isLoading,
+      isSearchTable: ref<boolean>(false),
+      isUploaderDialog: ref<boolean>(false),
       newFolder,
       objPath,
       onRowClick,
@@ -462,10 +466,9 @@ export default defineComponent({
       qBtnStyle,
       rows,
       selected,
-      searchTable: ref<boolean>(false),
+
       updateRows,
-      uploaderAPIRoute,
-      uploaderDialog: ref<boolean>(false)
+      uploaderAPIRoute
     }
   }
 })

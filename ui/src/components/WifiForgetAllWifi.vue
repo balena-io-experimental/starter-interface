@@ -1,7 +1,7 @@
 <template>
   <q-btn
     v-bind="qBtnStyle"
-    :loading="submitting"
+    :loading="isSubmitting"
     :label="$t('components.wifi.forget_all_wifi.forget_all_wifi')"
     @click="confirm = true"
   />
@@ -49,13 +49,14 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'WifiForgetAllWifi',
   setup() {
-    const submitting = ref<boolean>(false)
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
+    const isSubmitting = ref<boolean>(false)
+
     async function forget() {
-      submitting.value = true
+      isSubmitting.value = true
 
       try {
         await expressApi.post('/v1/wifi', {
@@ -85,19 +86,19 @@ export default defineComponent({
               'components.wifi.forget_all_wifi.disconnect_request_sent'
             )
           })
-          submitting.value = false
+          isSubmitting.value = false
         }, 1000)
       } catch {
         $q.notify({ type: 'negative', message: t('general.error') })
-        submitting.value = false
+        isSubmitting.value = false
       }
     }
 
     return {
       confirm: ref(false),
       forget,
-      qBtnStyle,
-      submitting
+      isSubmitting,
+      qBtnStyle
     }
   }
 })

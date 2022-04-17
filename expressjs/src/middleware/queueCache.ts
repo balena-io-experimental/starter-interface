@@ -27,7 +27,7 @@ const requestCache = {} as requestObject
 // Class to queue items and cache results
 class QueueUnique {
   func
-  q: Promise<unknown>
+  returnedQueue: Promise<unknown>
 
   constructor(
     func: (
@@ -37,7 +37,7 @@ class QueueUnique {
     ) => Promise<unknown>
   ) {
     this.func = func
-    this.q = Promise.resolve()
+    this.returnedQueue = Promise.resolve()
   }
 
   add(req: Request, res: sendResponse, next: NextFunction) {
@@ -53,12 +53,12 @@ class QueueUnique {
 
   queue(req: Request, res: sendResponse, next: NextFunction) {
     return () => {
-      this.q = this.q
+      this.returnedQueue = this.returnedQueue
         .then(() => this.func(req, res, next))
         .catch((error) => {
           Logger.error(error)
         })
-      return this.q
+      return this.returnedQueue
     }
   }
 }

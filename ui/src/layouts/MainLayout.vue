@@ -10,7 +10,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="isLeftDrawerOpen = !isLeftDrawerOpen"
         />
 
         <router-link v-if="qHeaderStyle.logo" to="/">
@@ -44,7 +44,7 @@
         </q-slide-transition>
         <q-separator class="q-mr-sm" vertical inset />
         <q-btn
-          :loading="changingLang"
+          :loading="isChangingLang"
           icon="translate"
           color="secondary"
           round
@@ -79,7 +79,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :width="210" bordered>
+    <q-drawer v-model="isLeftDrawerOpen" show-if-above :width="210" bordered>
       <MenuItems
         v-for="link in menuItems"
         :key="link.label"
@@ -93,7 +93,7 @@
       <div>
         <q-slide-transition>
           <q-banner
-            v-if="networkDown"
+            v-if="isNetworkDown"
             dense
             inline-actions
             class="text-white bg-negative"
@@ -105,14 +105,14 @@
                 padding="0"
                 color="white"
                 :label="$t('general.close')"
-                @click="networkDown = false"
+                @click="isNetworkDown = false"
               />
             </template>
           </q-banner>
         </q-slide-transition>
         <q-slide-transition>
           <q-banner
-            v-if="networkUp"
+            v-if="isNetworkUp"
             dense
             inline-actions
             class="text-white bg-positive"
@@ -154,9 +154,9 @@ export default defineComponent({
     const $router = useRouter()
 
     const deviceName = ref<string>()
-    const changingLang = ref<boolean>(false)
-    const networkDown = ref<boolean>(false)
-    const networkUp = ref<boolean>(false)
+    const isChangingLang = ref<boolean>(false)
+    const isNetworkDown = ref<boolean>(false)
+    const isNetworkUp = ref<boolean>(false)
 
     onMounted(() => {
       void getDeviceName()
@@ -165,11 +165,11 @@ export default defineComponent({
     // Import and activate language
     async function changeLang(isoName: string) {
       // Start loading indicator
-      changingLang.value = true
+      isChangingLang.value = true
       // Load the language and set it as the current language
       await loadLanguageAsync(isoName)
 
-      changingLang.value = false
+      isChangingLang.value = false
     }
 
     async function getDeviceName() {
@@ -184,29 +184,31 @@ export default defineComponent({
     // Listeners for network status
     // When network is available again
     window.addEventListener('online', () => {
-      networkDown.value = false
-      networkUp.value = true
+      isNetworkDown.value = false
+      isNetworkUp.value = true
       setTimeout(() => {
-        networkUp.value = false
+        isNetworkUp.value = false
       }, 3000)
     })
 
     // When network is down
     window.addEventListener('offline', () => {
-      networkDown.value = true
+      isNetworkDown.value = true
     })
 
     return {
       changeLang,
-      changingLang,
+
       currentLink: ref($router.currentRoute.value.name),
       deviceName,
-      leftDrawerOpen: ref<boolean>(false),
+      isChangingLang,
+      isNetworkDown,
+      isNetworkUp,
+      isLeftDrawerOpen: ref<boolean>(false),
       locale,
       localeOptions,
       menuItems: menuList,
-      networkDown,
-      networkUp,
+
       qHeaderStyle
     }
   }

@@ -2,7 +2,7 @@
   <div class="q-mt-sm q-ml-md q-mr-md">
     <q-table
       :title="$t('components.tools.container_manager.containers')"
-      :loading="loading"
+      :loading="isLoading"
       flat
       dense
       :rows-per-page-options="[10, 20, 0]"
@@ -13,9 +13,8 @@
       <template #top-right>
         <q-btn
           icon="refresh"
-          :disable="loading"
+          :disable="isLoading"
           v-bind="qBtnStyle"
-          :loading="loading"
           @click="getContainer()"
         />
       </template>
@@ -27,8 +26,7 @@
             icon="play_arrow"
             size="xs"
             round
-            :disable="loading"
-            :loading="loading"
+            :disable="isLoading"
             @click="startContainer(props.row.serviceName)"
           />
         </q-td>
@@ -39,10 +37,9 @@
           <q-btn
             v-bind="qBtnStyle"
             icon="stop"
-            :disable="loading"
+            :disable="isLoading"
             size="xs"
             round
-            :loading="loading"
             @click="stopContainer(props.row.serviceName)"
           />
         </q-td>
@@ -53,10 +50,9 @@
           <q-btn
             v-bind="qBtnStyle"
             icon="restart_alt"
-            :disable="loading"
+            :disable="isLoading"
             size="xs"
             round
-            :loading="loading"
             @click="restartContainer(props.row.serviceName)"
           />
         </q-td>
@@ -86,7 +82,7 @@ export default defineComponent({
     const { t } = useI18n()
     const $q = useQuasar()
 
-    const loading = ref<boolean>(true)
+    const isLoading = ref<boolean>(true)
     const rows = ref<containers[]>()
     const columns = computed<QTableProps['columns']>(() => [
       {
@@ -128,7 +124,7 @@ export default defineComponent({
     })
 
     async function getContainer() {
-      loading.value = true
+      isLoading.value = true
 
       try {
         const res = (await supervisor.state_status()) as AxiosResponse<{
@@ -140,11 +136,11 @@ export default defineComponent({
         console.error(error)
       }
 
-      loading.value = false
+      isLoading.value = false
     }
 
     async function restartContainer(serviceName: string) {
-      loading.value = true
+      isLoading.value = true
       try {
         const res = await supervisor.restart_service(serviceName)
 
@@ -157,11 +153,11 @@ export default defineComponent({
         $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
-      loading.value = false
+      isLoading.value = false
     }
 
     async function startContainer(serviceName: string) {
-      loading.value = true
+      isLoading.value = true
       try {
         const res = await supervisor.start_service(serviceName)
 
@@ -174,11 +170,11 @@ export default defineComponent({
         $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
-      loading.value = false
+      isLoading.value = false
     }
 
     async function stopContainer(serviceName: string) {
-      loading.value = true
+      isLoading.value = true
       try {
         const res = await supervisor.stop_service(serviceName)
 
@@ -191,13 +187,13 @@ export default defineComponent({
         $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
-      loading.value = false
+      isLoading.value = false
     }
 
     return {
       columns,
       getContainer,
-      loading,
+      isLoading,
       qBtnStyle,
       restartContainer,
       rows,

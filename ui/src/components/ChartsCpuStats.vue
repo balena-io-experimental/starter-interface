@@ -46,7 +46,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
     const chartHeight = 150
-    const unMounted = ref<boolean>(false)
+    const isUnMounted = ref<boolean>(false)
 
     onMounted(() => {
       // Disables the AJAX loading bar at the bottom of the page for polled system info requests
@@ -69,7 +69,7 @@ export default defineComponent({
       })
 
       // Instructs to exit the running poll loop, because this component is no longer visible
-      unMounted.value = true
+      isUnMounted.value = true
     })
 
     const chartData = ref<ChartData<'line'>>({
@@ -166,7 +166,7 @@ export default defineComponent({
           console.error(error)
         }
 
-        if (unMounted.value === true) {
+        if (isUnMounted.value === true) {
           // Reset chart content
           chartData.value.datasets = []
           // Stop the loop

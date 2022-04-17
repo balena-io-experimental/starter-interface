@@ -146,10 +146,10 @@
       <pre>{{ response.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="!loading && systemStore.internetConnectivity === false">
+  <div v-if="!isLoading && systemStore.internetConnectivity === false">
     {{ $t('components.system.device_info.internet_required') }}
   </div>
-  <div v-if="loading" class="window-height row justify-center items-center">
+  <div v-if="isLoading" class="window-height row justify-center items-center">
     <q-spinner color="primary" size="5em" />
   </div>
 </template>
@@ -172,7 +172,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    const loading = ref<boolean>(true)
+    const isLoading = ref<boolean>(true)
     const response = ref<AxiosResponse>()
 
     async function getDeviceInfo() {
@@ -190,11 +190,11 @@ export default defineComponent({
 
     onMounted(async () => {
       await getDeviceInfo()
-      loading.value = false
+      isLoading.value = false
     })
 
     return {
-      loading,
+      isLoading,
       response,
       systemStore
     }
