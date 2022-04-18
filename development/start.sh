@@ -22,7 +22,7 @@ fi
 
 echo "Development environment ready. Setup took $(($(date +%s)-$start_time)) seconds."
 
-# Change to app directory as `yarn --cwd` does not recognise corepack
+# Change to app directory as `yarn --cwd` does not recognise locally set Yarn version
 cd $destination
 
 # Start dev environment
