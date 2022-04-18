@@ -25,417 +25,474 @@ router.get('/v1/system/internet_check', function (_req, res) {
 router.post(
   '/v1/system/systeminfo',
   queueCache,
-  function (req: Request, res: Response) {
+  async function (req: Request, res: Response) {
     const reqBody = req.body as reqBodyData
-    // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/si.js
+    // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/const data = await si.js
     if (reqBody.cmd === 'a') {
-      si.audio()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.audio()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'b') {
-      si.bios()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.bios()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'B') {
-      si.baseboard()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.baseboard()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'C') {
-      si.chassis()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.chassis()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'c') {
-      si.cpu()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.cpu()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'd') {
-      si.diskLayout()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.diskLayout()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'D') {
-      si.disksIO()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.disksIO()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'e') {
-      si.blockDevices()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.blockDevices()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'E') {
-      si.fsOpenFiles()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.fsOpenFiles()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'f') {
-      si.fsSize()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.fsSize()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'F') {
-      si.fsStats()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.fsStats()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'g') {
-      si.graphics()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.graphics()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'h') {
-      si.bluetoothDevices()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.bluetoothDevices()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'i') {
-      si.inetLatency()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.inetLatency()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'I') {
-      si.inetChecksite('https://systeminformation.io')
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.inetChecksite('https://systeminformation.io')
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'j') {
-      si.cpuCurrentSpeed()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.cpuCurrentSpeed()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'l') {
-      si.currentLoad()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.currentLoad()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'L') {
-      si.fullLoad()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.fullLoad()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'm') {
-      si.mem()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.mem()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'M') {
-      si.memLayout()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.memLayout()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'o') {
-      si.osInfo()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.osInfo()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'p') {
-      si.processes()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.processes()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'P') {
-      si.processLoad('postgres, login, apache, mysql, nginx, git, node')
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.processLoad(
+          'postgres, login, apache, mysql, nginx, git, node'
+        )
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'r') {
-      si.printer()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.printer()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 's') {
-      si.services('apache2, postgres, wsearch')
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.services('apache2, postgres, wsearch')
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'S') {
-      si.shell()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.shell()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'T') {
-      si.cpuTemperature()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.cpuTemperature()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'u') {
-      si.usb()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.usb()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'U') {
-      si.uuid()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.uuid()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'v') {
-      si.versions()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.versions()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'V') {
-      si.vboxInfo()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.vboxInfo()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'w') {
-      si.wifiNetworks()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.wifiNetworks()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'W') {
-      si.wifiInterfaces()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.wifiInterfaces()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'x') {
-      si.wifiConnections()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.wifiConnections()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'y') {
-      si.system()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.system()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'Y') {
-      si.battery()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.battery()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === 'z') {
-      si.users()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.users()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '1') {
-      si.networkInterfaceDefault()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.networkInterfaceDefault()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '2') {
-      si.networkGatewayDefault()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.networkGatewayDefault()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '3') {
-      si.networkInterfaces()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.networkInterfaces()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '4') {
-      si.networkStats()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.networkStats()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '5') {
-      si.networkConnections()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.networkConnections()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '6') {
-      si.dockerInfo()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerInfo()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '7') {
-      si.dockerImages()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerImages()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '8') {
-      si.dockerContainers(true)
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerContainers(true)
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '9') {
-      si.dockerContainerStats('*')
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerContainerStats('*')
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '0') {
-      si.dockerContainerProcesses('*')
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerContainerProcesses('*')
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '+') {
-      si.dockerVolumes()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.dockerVolumes()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === ',') {
-      si.getStaticData()
-        .then((data) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = await si.getStaticData()
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '.') {
-      si.getDynamicData('apache2, postgres, wsearch')
-        .then((data: unknown) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = (await si.getDynamicData(
+          'apache2, postgres, wsearch'
+        )) as unknown
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     } else if (reqBody.cmd === '/') {
-      si.getAllData('apache2, postgres, wsearch')
-        .then((data: unknown) => res.json({ data }))
-        .catch((error: JSON) => {
-          Logger.error(error)
-          res.status(500)
-          res.json({ error })
-        })
+      try {
+        const data = (await si.getAllData(
+          'apache2, postgres, wsearch'
+        )) as unknown
+        res.json({ data })
+      } catch (error) {
+        Logger.error(error)
+        res.status(500)
+        res.json({ error })
+      }
     }
   }
 )

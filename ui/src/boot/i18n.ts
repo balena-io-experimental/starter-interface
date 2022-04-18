@@ -33,11 +33,10 @@ async function setLanguage(isoName: string) {
   i18n.global.locale.value = isoName
   // Load and set the selected Quasar language pack
   try {
-    await qLangList[`../../../node_modules/quasar/lang/${isoName}.mjs`]().then(
-      (lang) => {
-        Quasar.lang.set(lang.default as QuasarLanguage)
-      }
-    )
+    const lang = await qLangList[
+      `../../../node_modules/quasar/lang/${isoName}.mjs`
+    ]()
+    Quasar.lang.set(lang.default as QuasarLanguage)
   } catch (error) {
     // Requested Quasar Language Pack does not exist,
     // let's not break the app, so catching error
