@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig } from 'axios'
+import request, { AxiosRequestConfig } from 'axios'
 import createAxiosInstance from '@/common/axios'
 import Logger from '@/common/logger'
 import express, { Request, Response } from 'express'
@@ -29,7 +29,7 @@ supervisorAxios.defaults.headers.common.Authorization = `Bearer ${
 router.post(
   '/v1/supervisor',
   queueCache,
-  function (req: Request, res: Response) {
+  async function (req: Request, res: Response) {
     const reqBody = req.body as reqBodyData
 
     // If Balena App ID is required
@@ -52,25 +52,24 @@ router.post(
     }
 
     // Send the request
-    supervisorAxios(payload as AxiosRequestConfig)
-      .then((response) => {
-        // Return the same http code as Axios request
-        res.status(response.status)
-        // Return only the data received from Axios (no headers)
-        res.json(response.data)
-        Logger.debug('Returned Supervisor data.')
-      })
-      .catch(function (error: AxiosError) {
-        // Mirror the Axios status code
-        if (error.response) {
-          res.status(error.response.status)
-        } else {
-          res.status(500)
-        }
+    try {
+      const response = await supervisorAxios(payload as AxiosRequestConfig)
 
-        // Return the error to the UI
-        res.json(error)
-      })
+      // Return the same http code as Axios request
+      res.status(response.status)
+      // Return only the data received from Axios (no headers)
+      res.json(response.data)
+      Logger.debug('Returned Supervisor data.')
+    } catch (error) {
+      // Mirror the Axios status code
+      if (request.isAxiosError(error) && error.response) {
+        res.status(error.response.status)
+      } else {
+        res.status(500)
+      }
+      // Return the error to the UI
+      res.json(error)
+    }
   }
 )
 

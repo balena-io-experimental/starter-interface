@@ -108,7 +108,6 @@
 </template>
 
 <script lang="ts">
-import { AxiosError } from 'axios'
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { supervisor } from 'src/api/supervisor'
@@ -176,15 +175,15 @@ export default defineComponent({
 
     // Functions
     async function getDeviceInfo() {
-      await Promise.all([deviceInfo(), fsSize(), mem()])
-        .then(function (results) {
-          device.value = results[0].data as device
-          f.value = results[1].data as f
-          m.value = results[2].data as m
-        })
-        .catch(function (error: Error | AxiosError) {
-          console.error(error)
-        })
+      try {
+        const results = await Promise.all([deviceInfo(), fsSize(), mem()])
+
+        device.value = results[0].data as device
+        f.value = results[1].data as f
+        m.value = results[2].data as m
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     onMounted(async () => {
