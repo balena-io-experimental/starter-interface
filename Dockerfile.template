@@ -9,16 +9,13 @@ ENV NODE_ENV=production
 
 WORKDIR /build-context
 
-# Enable corepack for alternative yarn versions
-RUN corepack enable
-
 # Copy required files for installs
 COPY package.json .
 COPY yarn.lock .
-COPY .yarn .yarn
-COPY .yarnrc.yml .
 COPY expressjs/package.json expressjs/package.json
 COPY ui/package.json ui/package.json
+COPY .yarn .yarn
+COPY .yarnrc.yml .
 
 # Install packages
 RUN yarn install --immutable

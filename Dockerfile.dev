@@ -8,19 +8,16 @@ ENV NODE_ENV=development
 # Specify that this is being deployed to a Balena device
 ENV ON_DEVICE=true
 
-# Enable corepack for alternative Yarn versions
-RUN corepack enable
-
 # Set working directory for distribution
 WORKDIR /build/dist
 
 # Copy required files for installs
 COPY package.json .
 COPY yarn.lock .
-COPY .yarn .yarn
-COPY .yarnrc.yml .
 COPY expressjs/package.json expressjs/package.json
 COPY ui/package.json ui/package.json
+COPY .yarn .yarn
+COPY .yarnrc.yml .
 
 # Install packages
 RUN yarn install --immutable
