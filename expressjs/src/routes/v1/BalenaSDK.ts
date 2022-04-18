@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { getSdk } from 'balena-sdk'
-import express from 'express'
+import express, { RequestHandler } from 'express'
 import process from 'process'
 import lockFile from 'lockfile'
 import _ from 'lodash'
+import logger from '@/common/logger'
 
 const router = express.Router()
 
@@ -22,27 +19,26 @@ async function init() {
   try {
     await sdk.auth.logout()
     await sdk.auth.loginWithToken(apiKey)
-  } catch (error: any) {
-    error.message = 'Error logging into with balena SDK'
-    throw new Error(error)
+  } catch (error) {
+    logger.error('Error logging into with balena SDK')
   }
 }
 
 router.get('/v1/sdk/uuid', (_req, res) => res.json(uuid))
 
-router.get('/v1/sdk/device', async (_req, res, next) => {
+router.get('/v1/sdk/device', (async (_req, res, next) => {
   try {
     res.json(await sdk.models.device.get(uuid))
   } catch (error) {
     next(error)
   }
-})
+}) as RequestHandler)
 
 //
 // environment variables
 //
 
-router.get('/v1/sdk/envVars', async (_req, res, next) => {
+router.get('/v1/sdk/envVars', (async (_req, res, next) => {
   try {
     const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
     const omittedEnvVars = _.map(envVars, (value) =>
@@ -52,10 +48,10 @@ router.get('/v1/sdk/envVars', async (_req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}) as RequestHandler)
 
-router.delete('/v1/sdk/envVars', async (req, res, next) => {
-  lock(async function (error: Error) {
+router.delete('/v1/sdk/envVars', (req, res, next) => {
+  lock(function (error: Error) {
     // a non-null err probably means the supervisor is about to kill us
     if (error != null) {
       error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
@@ -63,7 +59,7 @@ router.delete('/v1/sdk/envVars', async (req, res, next) => {
     }
 
     try {
-      const removeAll: any = []
+      const removeAll: Array<Promise<void>> = []
 
       _.each(_.compact(_.keys(req.body)), (value) => {
         removeAll.push(sdk.models.device.envVar.remove(uuid, value))
@@ -86,7 +82,7 @@ router.delete('/v1/sdk/envVars', async (req, res, next) => {
 })
 
 router.post('/v1/sdk/envVars', (req, res, next) => {
-  lock(async function (error: Error) {
+  lock(function (error: Error) {
     // a non-null err probably means the supervisor is about to kill us
     if (error != null) {
       error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
@@ -94,7 +90,7 @@ router.post('/v1/sdk/envVars', (req, res, next) => {
     }
     try {
       const allSetCalls = []
-      for (const [key, val] of Object.entries(req.body)) {
+      for (const [key, val] of Object.entries(req.body as Request)) {
         if (key && !_.isNull(key)) {
           allSetCalls.push(sdk.models.device.envVar.set(uuid, key, String(val)))
         }
