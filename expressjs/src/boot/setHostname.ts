@@ -29,7 +29,7 @@ async function setHostnameLockfile() {
     await fse.ensureFile(hostnameLockFile)
     Logger.debug('Hostname lockfile created.')
   } catch (error) {
-    Logger.error('Failed settting hostname lockfile.')
+    Logger.error('Failed setting hostname lockfile.')
     Logger.error(error)
   }
 }
@@ -52,7 +52,7 @@ async function setNewHostname() {
 }
 
 export default async function checkHostname() {
-  // If there is an env variable specifiying a new hostname and hostname has not already been set
+  // If there is an env variable specifying a new hostname and hostname has not already been set
   if (
     process.env.NODE_ENV === 'production' &&
     process.env.SET_HOSTNAME &&
