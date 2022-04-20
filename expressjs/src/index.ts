@@ -1,4 +1,5 @@
 import boot from '@/boot'
+import compression from 'compression'
 import cors from 'cors'
 import express from 'express'
 import process from 'process'
@@ -29,14 +30,28 @@ const speedLimiter = slowDown({
 // Initiate ExpressJS
 const app = express()
 
-// ExpressJS setup
-app.locals.defaultCacheTimeout = 0 // Default middleware cache timeout used when none is provided in payload. 0 is disabled.
+/** 
+==========================================================
+ExpressJS setup. Order of these functions is important.
+==========================================================
+*/
+
+// Default Balena UI middleware cache timeout. 0 is disabled.
+app.locals.defaultCacheTimeout = 0
+// Allow CORS
 app.use(cors())
+// Import JSON functionality
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+// Add a low compression, considerate of low resource devices. Level 1 can reduce
+// some asset sizes by 50%. Gains from 2 and up are marginal.
+app.use(compression({ level: 1 })) //
+// Enable sharing of static files
 app.use(express.static('public', { dotfiles: 'allow' }))
 
-// Routes
+// ==========================================================
+
+// Import routes
 app.use(BalenaSDK)
 app.use(CaptivePortal)
 app.use(Examples)
@@ -53,6 +68,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Add speed limiter
 app.use(speedLimiter)
 
+// Start and listen for requests
 app.listen(port, () => {
   console.log(`ExpressJS: listening on port ${port}`)
 })
