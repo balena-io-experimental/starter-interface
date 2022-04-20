@@ -4,7 +4,7 @@ services:
   balena-device-ui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
       ON_DEVICE: true # Specify that this is being deployed to hardware with Balena OS
