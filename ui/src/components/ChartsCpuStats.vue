@@ -10,7 +10,7 @@
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { LineChart } from 'vue-chart-3'
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
-import { getCssVar, LoadingBar } from 'quasar'
+import { colors, getCssVar, LoadingBar } from 'quasar'
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
 import { useI18n } from 'vue-i18n'
@@ -46,6 +46,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
     const chartHeight = 150
+    const chartBackgroundOpacity = 70
     const isUnMounted = ref<boolean>(false)
 
     onMounted(() => {
@@ -76,7 +77,12 @@ export default defineComponent({
       labels: [0],
       datasets: [
         {
-          backgroundColor: getCssVar('primary') as string,
+          backgroundColor: colors.lighten(
+            getCssVar('primary'),
+            chartBackgroundOpacity
+          ),
+          borderWidth: 2,
+          fill: 'start',
           data: [0]
         }
       ]
@@ -149,14 +155,26 @@ export default defineComponent({
           chartData.value.datasets[0].data.push(cpuStat.data.data.currentLoad)
 
           if (cpuStat.data.data.currentLoad > 50) {
+            chartData.value.datasets[0].backgroundColor = colors.lighten(
+              getCssVar('warning'),
+              chartBackgroundOpacity
+            )
             chartData.value.datasets[0].borderColor = getCssVar(
               'warning'
             ) as string
           } else if (cpuStat.data.data.currentLoad > 80) {
+            chartData.value.datasets[0].backgroundColor = colors.lighten(
+              getCssVar('negative'),
+              chartBackgroundOpacity
+            )
             chartData.value.datasets[0].borderColor = getCssVar(
               'negative'
             ) as string
           } else {
+            chartData.value.datasets[0].backgroundColor = colors.lighten(
+              getCssVar('primary'),
+              chartBackgroundOpacity
+            )
             chartData.value.datasets[0].borderColor = getCssVar(
               'primary'
             ) as string
