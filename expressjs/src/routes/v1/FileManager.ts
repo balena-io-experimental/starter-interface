@@ -46,9 +46,7 @@ const filterFn = (item: Item) => {
 // Fetch files
 function fetchList(currentPathArray: Array<string>) {
   // Check the storage directory exists
-  if (!fse.existsSync(rootDir)) {
-    fse.ensureDir(rootDir).catch((error) => Logger.error(error))
-  }
+  fse.ensureDir(rootDir).catch((error) => Logger.error(error))
 
   // Fetch list of files
   const files = klawSync(
