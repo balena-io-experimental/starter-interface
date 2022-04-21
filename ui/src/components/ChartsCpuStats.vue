@@ -135,68 +135,66 @@ export default defineComponent({
       })
     }
 
-    async function fetchCpuStats() {
-      for (;;) {
-        try {
-          // eslint-disable-next-line no-await-in-loop
-          const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
-            '/v1/system/systeminfo',
-            { cmd: 'l' }
-          )
+    async function fetchCpuStats(): Promise<void> {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
+          '/v1/system/systeminfo',
+          { cmd: 'l' }
+        )
 
-          // If there are more than X items in the object, remove one
-          // to avoid it growing too big
-          if (chartData.value.datasets[0].data.length > props.maxDataPoints) {
-            chartData?.value?.labels?.shift()
-            chartData.value.datasets[0].data.shift()
-          }
-
-          // Add the fetched data in to the chart
-          chartData?.value?.labels?.push(
-            new Date(new Date().getTime()).toLocaleTimeString()
-          )
-          chartData.value.datasets[0].data.push(cpuStat.data.data.currentLoad)
-
-          if (cpuStat.data.data.currentLoad > 50) {
-            chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('warning') as string,
-              chartBackgroundOpacity
-            )
-            chartData.value.datasets[0].borderColor = getCssVar(
-              'warning'
-            ) as string
-          } else if (cpuStat.data.data.currentLoad > 80) {
-            chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('negative') as string,
-              chartBackgroundOpacity
-            )
-            chartData.value.datasets[0].borderColor = getCssVar(
-              'negative'
-            ) as string
-          } else {
-            chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('primary') as string,
-              chartBackgroundOpacity
-            )
-            chartData.value.datasets[0].borderColor = getCssVar(
-              'primary'
-            ) as string
-          }
-        } catch (error) {
-          console.error('Error fetching CPU stats')
-          console.error(error)
+        // If there are more than X items in the object, remove one
+        // to avoid it growing too big
+        if (chartData.value.datasets[0].data.length > props.maxDataPoints) {
+          chartData?.value?.labels?.shift()
+          chartData.value.datasets[0].data.shift()
         }
 
-        if (isUnMounted.value === true) {
-          // Reset chart content
-          chartData.value.datasets = []
-          // Stop the loop
-          break
-        }
+        // Add the fetched data in to the chart
+        chartData?.value?.labels?.push(
+          new Date(new Date().getTime()).toLocaleTimeString()
+        )
+        chartData.value.datasets[0].data.push(cpuStat.data.data.currentLoad)
 
+        if (cpuStat.data.data.currentLoad > 50) {
+          chartData.value.datasets[0].backgroundColor = colors.lighten(
+            getCssVar('warning') as string,
+            chartBackgroundOpacity
+          )
+          chartData.value.datasets[0].borderColor = getCssVar(
+            'warning'
+          ) as string
+        } else if (cpuStat.data.data.currentLoad > 80) {
+          chartData.value.datasets[0].backgroundColor = colors.lighten(
+            getCssVar('negative') as string,
+            chartBackgroundOpacity
+          )
+          chartData.value.datasets[0].borderColor = getCssVar(
+            'negative'
+          ) as string
+        } else {
+          chartData.value.datasets[0].backgroundColor = colors.lighten(
+            getCssVar('primary') as string,
+            chartBackgroundOpacity
+          )
+          chartData.value.datasets[0].borderColor = getCssVar(
+            'primary'
+          ) as string
+        }
+      } catch (error) {
+        // Continuing as may have just been due to a temporary connection issue
+        console.error('Error fetching CPU stats')
+        console.error(error)
+      }
+
+      if (isUnMounted.value) {
+        // Stop the loop and reset chart content
+        chartData.value.datasets = []
+      } else {
         // Delay before calling next fetch
         // eslint-disable-next-line no-await-in-loop
         await delay(props.pollInterval)
+        void fetchCpuStats()
       }
     }
 
