@@ -1,11 +1,10 @@
-<!-- eslint-disable @intlify/vue-i18n/no-raw-text -->
 <template>
   <q-tabs
     v-model="tab"
     no-caps
     outside-arrows
     mobile-arrows
-    class="bg-primary shadow-2"
+    class="bg-accent shadow-2"
   >
     <q-tab
       name="welcome"
@@ -33,6 +32,7 @@
         {{ $t('components.layouts.captive_portal.visit_to_begin') }}
       </div>
       <div class="q-mt-md">
+        <!-- eslint-disable @intlify/vue-i18n/no-raw-text -->
         http://{{ hostname }}.local
         <q-btn
           class="q-ml-sm"
