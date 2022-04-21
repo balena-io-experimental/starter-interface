@@ -289,11 +289,9 @@ export default defineComponent({
     })
 
     function checkUploadOverwrite(files: Array<QUploaderProps['onAdded']>) {
-      const itemCheck = files.filter((obj) => {
-        return rows.value?.some(
-          ({ path }) => path.split('/').pop() === obj?.name
-        )
-      })
+      const itemCheck = files.filter((obj) =>
+        rows.value?.some(({ path }) => path.split('/').pop() === obj?.name)
+      )
 
       if (itemCheck.length > 0) {
         isDelayUpload.value = true
@@ -323,9 +321,10 @@ export default defineComponent({
         .post('/v1/filemanager/delete', {
           currentPath: path
         })
-        .catch(function () {
+        .catch(() => {
           $q.notify({ type: 'negative', message: t('general.error') })
         })
+      return Promise.resolve()
     }
 
     async function deleteItem(row: Rows) {
@@ -338,9 +337,9 @@ export default defineComponent({
     async function deleteSelectedItems() {
       isLoading.value = true
 
-      for (const item of selected.value) {
-        await deleteCall(item.path)
-      }
+      selected.value.forEach((item) => {
+        deleteCall(item.path).catch((err) => console.log(err))
+      })
 
       await updateRows()
       isLoading.value = false
@@ -383,24 +382,22 @@ export default defineComponent({
               'components.tools.file_manager.invalid_filemanager_string'
             )
           })
+        } else if (checkRowExistence(newName)) {
+          $q.notify({
+            type: 'negative',
+            message: t('components.tools.file_manager.item_already_exists')
+          })
         } else {
-          if (checkRowExistence(newName)) {
-            $q.notify({
-              type: 'negative',
-              message: t('components.tools.file_manager.item_already_exists')
+          try {
+            void expressApi.post('/v1/filemanager/newfolder', {
+              currentPathArray: objPath.value,
+              newFolderName: newName
             })
-          } else {
-            try {
-              void expressApi.post('/v1/filemanager/newfolder', {
-                currentPathArray: objPath.value,
-                newFolderName: newName
-              })
 
-              void updateRows()
-              notifyComplete()
-            } catch {
-              $q.notify({ type: 'negative', message: t('general.error') })
-            }
+            void updateRows()
+            notifyComplete()
+          } catch {
+            $q.notify({ type: 'negative', message: t('general.error') })
           }
         }
       })

@@ -27,6 +27,7 @@ const requestCache = {} as requestObject
 // Class to queue items and cache results
 class QueueUnique {
   func
+
   returnedQueue: Promise<unknown>
 
   constructor(
@@ -63,8 +64,8 @@ class QueueUnique {
   }
 }
 
-const response = (req: Request, res: sendResponse, next: NextFunction) => {
-  return new Promise((resolve) => {
+const response = (req: Request, res: sendResponse, next: NextFunction) =>
+  new Promise((resolve) => {
     const qName = compileQueueName(req)
     const reqBody = req.body as reqBodyData
 
@@ -120,7 +121,6 @@ const response = (req: Request, res: sendResponse, next: NextFunction) => {
     next()
     resolve(true)
   })
-}
 
 function checkCache(req: Request, res: sendResponse) {
   const reqBody = req.body as reqBodyData
@@ -152,9 +152,8 @@ function checkCache(req: Request, res: sendResponse) {
     Logger.debug(`Returning cached item with cache timeout ${cacheTimeout}.`)
     res.json(cachedItemList.cachedData)
     return undefined
-  } else {
-    return cachedItemList
   }
+  return cachedItemList
 }
 
 function compileQueueName(req: Request) {
@@ -163,9 +162,8 @@ function compileQueueName(req: Request) {
   // If a url path is passed then use it to set a custom queue name
   if (reqBody.path) {
     return `${reqRoute.path}-${reqBody.path}`
-  } else {
-    return reqRoute.path
   }
+  return reqRoute.path
 }
 
 // Create multiple queues, one for each endpoint

@@ -64,10 +64,9 @@
 <script lang="ts">
 import { supervisor } from 'src/api/supervisor'
 import { qBtnStyle } from 'src/config/qStyles'
-import { QTableProps } from 'quasar'
+import { QTableProps, useQuasar } from 'quasar'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useQuasar } from 'quasar'
 import { AxiosResponse } from 'axios'
 
 interface containers extends QTableProps {

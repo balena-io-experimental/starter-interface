@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -51,7 +53,7 @@ router.get('/v1/sdk/envVars', (async (_req, res, next) => {
 }) as RequestHandler)
 
 router.delete('/v1/sdk/envVars', (req, res, next) => {
-  lock(function (error: Error) {
+  lock((error: Error) => {
     // a non-null err probably means the supervisor is about to kill us
     if (error != null) {
       error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
@@ -78,11 +80,12 @@ router.delete('/v1/sdk/envVars', (req, res, next) => {
       unlock()
       next(error)
     }
+    return Promise.resolve()
   })
 })
 
 router.post('/v1/sdk/envVars', (req, res, next) => {
-  lock(function (error: Error) {
+  lock((error: Error) => {
     // a non-null err probably means the supervisor is about to kill us
     if (error != null) {
       error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
@@ -90,6 +93,7 @@ router.post('/v1/sdk/envVars', (req, res, next) => {
     }
     try {
       const allSetCalls = []
+
       for (const [key, val] of Object.entries(req.body as Request)) {
         if (key && !_.isNull(key)) {
           allSetCalls.push(sdk.models.device.envVar.set(uuid, key, String(val)))
@@ -108,6 +112,7 @@ router.post('/v1/sdk/envVars', (req, res, next) => {
       unlock()
       next(error)
     }
+    return Promise.resolve()
   })
 })
 

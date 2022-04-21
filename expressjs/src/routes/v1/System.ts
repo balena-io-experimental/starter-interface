@@ -1,8 +1,8 @@
-import Logger from '@/common/logger'
 import dns = require('dns')
 import express, { Request, Response } from 'express'
-import queueCache from '@/middleware/queueCache'
 import si from 'systeminformation'
+import queueCache from '@/middleware/queueCache'
+import Logger from '@/common/logger'
 
 interface reqBodyData {
   cmd: string
@@ -11,10 +11,10 @@ interface reqBodyData {
 const router = express.Router()
 
 // -- Routes -- //
-router.get('/v1/system/internet_check', function (_req, res) {
+router.get('/v1/system/internet_check', (_req, res) => {
   Logger.debug('Running internet connectivity check.')
-  dns.lookup('google.com', function (error) {
-    if (error && error.code == 'ENOTFOUND') {
+  dns.lookup('google.com', (error) => {
+    if (error && error.code === 'ENOTFOUND') {
       res.json({ internet: false })
     } else {
       res.json({ internet: true })
@@ -25,7 +25,7 @@ router.get('/v1/system/internet_check', function (_req, res) {
 router.post(
   '/v1/system/systeminfo',
   queueCache,
-  async function (req: Request, res: Response) {
+  async (req: Request, res: Response) => {
     const reqBody = req.body as reqBodyData
     // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/const data = await si.js
     if (reqBody.cmd === 'a') {

@@ -13,7 +13,7 @@ import routes from './routes'
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { t } = i18n.global
 
-export default route(function (/* { store, ssrContext } */) {
+export default route((/* { store, ssrContext } */) => {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
@@ -24,9 +24,8 @@ export default route(function (/* { store, ssrContext } */) {
     scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition
-      } else {
-        return { left: 0, top: 0 }
       }
+      return { left: 0, top: 0 }
     },
     routes,
 
@@ -49,10 +48,8 @@ export default route(function (/* { store, ssrContext } */) {
 
   // Axios request interceptor
   expressApi.interceptors.request.use(
-    function (config) {
-      return config
-    },
-    function (error: Error) {
+    (config) => config,
+    (error: Error) => {
       if (expressApi.isAxiosError(error) && error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -69,10 +66,8 @@ export default route(function (/* { store, ssrContext } */) {
 
   // Axios response interceptor
   expressApi.interceptors.response.use(
-    function (response) {
-      return response
-    },
-    function (error: Error) {
+    (response) => response,
+    (error: Error) => {
       if (expressApi.isAxiosError(error) && error.response) {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         Notify.create({

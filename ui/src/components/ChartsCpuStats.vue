@@ -78,7 +78,7 @@ export default defineComponent({
       datasets: [
         {
           backgroundColor: colors.lighten(
-            getCssVar('primary'),
+            getCssVar('primary') as string,
             chartBackgroundOpacity
           ),
           borderWidth: 2,
@@ -130,12 +130,15 @@ export default defineComponent({
 
     // Functions
     function delay(ms: number) {
-      return new Promise((resolve) => setTimeout(resolve, ms))
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms)
+      })
     }
 
     async function fetchCpuStats() {
       for (;;) {
         try {
+          // eslint-disable-next-line no-await-in-loop
           const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
             '/v1/system/systeminfo',
             { cmd: 'l' }
@@ -156,7 +159,7 @@ export default defineComponent({
 
           if (cpuStat.data.data.currentLoad > 50) {
             chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('warning'),
+              getCssVar('warning') as string,
               chartBackgroundOpacity
             )
             chartData.value.datasets[0].borderColor = getCssVar(
@@ -164,7 +167,7 @@ export default defineComponent({
             ) as string
           } else if (cpuStat.data.data.currentLoad > 80) {
             chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('negative'),
+              getCssVar('negative') as string,
               chartBackgroundOpacity
             )
             chartData.value.datasets[0].borderColor = getCssVar(
@@ -172,7 +175,7 @@ export default defineComponent({
             ) as string
           } else {
             chartData.value.datasets[0].backgroundColor = colors.lighten(
-              getCssVar('primary'),
+              getCssVar('primary') as string,
               chartBackgroundOpacity
             )
             chartData.value.datasets[0].borderColor = getCssVar(
@@ -192,11 +195,17 @@ export default defineComponent({
         }
 
         // Delay before calling next fetch
+        // eslint-disable-next-line no-await-in-loop
         await delay(props.pollInterval)
       }
     }
 
-    return { chartData, chartHeight, options, props }
+    return {
+      chartData,
+      chartHeight,
+      options,
+      props
+    }
   }
 })
 </script>

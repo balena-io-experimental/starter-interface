@@ -8,7 +8,7 @@ interface myData {
 const router = express.Router()
 
 // Define your custom GET route path and actions
-router.get('/v1/example_route_get', function (_req, res) {
+router.get('/v1/example_route_get', (_req, res) => {
   // Log to the console that this is running
   Logger.warn('Running content of example_route_get route.')
   // Actions to take when this route is visited go here.
@@ -16,7 +16,7 @@ router.get('/v1/example_route_get', function (_req, res) {
 })
 
 // Define your custom POST route
-router.post('/v1/example_route_post', function (req, res) {
+router.post('/v1/example_route_post', (req, res) => {
   const reqBody = req.body as myData
   // Store the value of paramater `mySentData` as `mySentDataVariable`
   const mySentDataVariable = reqBody.mySentData
