@@ -1,10 +1,14 @@
 # Balena Device UI
 
+This project is still under heavy development and subject to significant changes. Apologies if the documentation is out of date in places, we are moving quickly and will try and keep up as best as possible. 
+
+---
+
 A community-built device interface for using Balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
 <b>Vue user interface with prebuilt features:</b>
 
-<img width="1349" alt="Screenshot 2022-03-10 at 10 02 09" src="https://user-images.githubusercontent.com/64841595/157638584-34211de5-8d95-4960-b0e7-8431a70aa1ca.png">
+<img width="1426" alt="demo" src="https://user-images.githubusercontent.com/64841595/164546113-cc72e8ae-26c9-485d-82d9-1e9fcb02821d.png">
 
 <b>Connect to nearby Wi-Fi networks:</b>
 
