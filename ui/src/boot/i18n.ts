@@ -43,7 +43,7 @@ async function setLanguage(isoName: string) {
   }
 }
 
-export function loadLanguageAsync(isoName: string) {
+export async function loadLanguageAsync(isoName: string) {
   // Store the chosen language in local storage
   LocalStorage.set('lang', isoName)
 
@@ -53,14 +53,18 @@ export function loadLanguageAsync(isoName: string) {
   }
 
   // If the language hasn't been loaded yet
-  return langGlob[`../i18n/${isoName}.json`]().then((messages) => {
+  try {
+    const messages = await langGlob[`../i18n/${isoName}.json`]()
     i18n.global.setLocaleMessage(
       isoName,
       messages.default as LocaleMessageDictionary<VueMessageType>
     )
     loadedLanguages.push(isoName)
+
     return Promise.resolve(setLanguage(isoName))
-  })
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
 export default boot(({ app }) => {
