@@ -20,6 +20,7 @@ export const useSystemStore = defineStore('system', {
           { timeout: 3000 }
         )
         this.internetConnectivity = response.data.internet
+        return Promise.resolve()
       } catch (error) {
         console.error('Failed fetching internet status.')
         console.error(error)

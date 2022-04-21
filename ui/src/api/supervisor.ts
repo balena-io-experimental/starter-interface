@@ -154,7 +154,7 @@ export const supervisor = {
     return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/purge',
-      params: { appId: appId },
+      params: { appId },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -162,7 +162,7 @@ export const supervisor = {
     return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/reboot',
-      params: { force: force },
+      params: { force },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -177,7 +177,7 @@ export const supervisor = {
     return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/restart',
-      params: { appId: appId },
+      params: { appId },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -186,7 +186,7 @@ export const supervisor = {
       type: 'POST',
       path: 'v2/applications',
       path2: 'restart-service',
-      params: { serviceName: serviceName },
+      params: { serviceName },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -194,7 +194,7 @@ export const supervisor = {
     return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/shutdown',
-      params: { force: force },
+      params: { force },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -203,7 +203,7 @@ export const supervisor = {
       type: 'POST',
       path: 'v2/applications',
       path2: 'start-service',
-      params: { serviceName: serviceName },
+      params: { serviceName },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -220,7 +220,7 @@ export const supervisor = {
       type: 'POST',
       path: 'v2/applications',
       path2: 'stop-service',
-      params: { serviceName: serviceName },
+      params: { serviceName },
       cacheTimeout: defaultCacheTimeout
     })
   },
@@ -228,7 +228,7 @@ export const supervisor = {
     return expressApi.post(apiPathV1, {
       type: 'POST',
       path: 'v1/update',
-      params: { force: force },
+      params: { force },
       cacheTimeout: defaultCacheTimeout
     })
   },

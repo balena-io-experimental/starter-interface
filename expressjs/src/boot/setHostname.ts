@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios'
-import createAxiosInstance from '@/common/axios'
-import Logger from '@/common/logger'
 import fse from 'fs-extra'
 import process from 'process'
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
 
 interface hostConfigHostname {
   network: { hostname: string }
@@ -66,7 +66,7 @@ export default async function checkHostname() {
         await hostnameAxios.get('v1/device/host-config')
 
       // If the current hostname is not the same as the provided var
-      if (response.data.network.hostname != process.env.SET_HOSTNAME) {
+      if (response.data.network.hostname !== process.env.SET_HOSTNAME) {
         Logger.warn(`Changing hostname to ${process.env.SET_HOSTNAME}.`)
         void setNewHostname()
       } else {

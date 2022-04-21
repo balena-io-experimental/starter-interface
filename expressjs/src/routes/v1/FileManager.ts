@@ -1,10 +1,10 @@
-import Logger from '@/common/logger'
-import express, { Request, Response } from 'express'
+import express, { Request, RequestHandler, Response } from 'express'
 import formidable from 'formidable'
 import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
 import process from 'process'
+import Logger from '@/common/logger'
 
 interface extendKlawItem extends klawSync.Item {
   type: string
@@ -19,7 +19,7 @@ interface reqBodyData {
 const router = express.Router()
 
 // Root directory for files
-let rootDir = path.join(__dirname + '/dev-storage/')
+let rootDir = path.join(`${__dirname}/dev-storage/`)
 
 // If on a Balena device, change local directory to local volume
 if (process.env.ON_DEVICE) {
@@ -29,12 +29,12 @@ if (process.env.ON_DEVICE) {
 // Prevent Directory Traversal and Null Bytes
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#preventing-directory-traversal
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#poison-null-bytes
-function validatePath(path: string) {
-  if (path.indexOf(rootDir) !== 0 || path.indexOf('\0') !== -1) {
+function validatePath(checkPath: string) {
+  if (checkPath.indexOf(rootDir) !== 0 || checkPath.indexOf('\0') !== -1) {
     Logger.warn('User attempting to reach out of the root dir?')
     throw new Error('User attempting to reach out of the root dir?')
   }
-  return path
+  return checkPath
 }
 
 // Ignore hidden directories and files
@@ -56,12 +56,12 @@ function fetchList(currentPathArray: Array<string>) {
       nodir: true,
       filter: filterFn
     }
-  )
+  ) as extendKlawItem[]
 
   // Add 'file' tag to all files
-  for (const file of files as extendKlawItem[]) {
+  files.forEach((file) => {
     file.type = 'file'
-  }
+  })
 
   // Fetch list of folders
   const folders = klawSync(
@@ -71,54 +71,58 @@ function fetchList(currentPathArray: Array<string>) {
       nofile: true,
       filter: filterFn
     }
-  )
+  ) as extendKlawItem[]
 
   // Add 'folder' tag to all folders
-  for (const folder of folders as extendKlawItem[]) {
+  folders.forEach((folder) => {
     folder.type = 'folder'
-  }
+  })
 
   // Return the combined list of folders and files
   return folders.concat(files)
 }
 
 // Routes //
-router.post('/v1/filemanager/delete', function (req: Request, res: Response) {
+router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
   const reqBody = req.body as reqBodyData
-  fse.remove(validatePath(path.join(reqBody.currentPath))).catch((error) => {
+  try {
+    await fse.remove(validatePath(path.join(reqBody.currentPath)))
+  } catch (error) {
     Logger.error(error)
-  })
+  }
   res.json({ message: 'success' })
-})
+}) as RequestHandler)
 
-router.get('/v1/filemanager/download', function (req: Request, res: Response) {
+router.get('/v1/filemanager/download', (req: Request, res: Response) => {
   res.download(validatePath(path.join(req.query.currentPath as string)))
 })
 
-router.post('/v1/filemanager/list', function (req: Request, res: Response) {
+router.post('/v1/filemanager/list', (req: Request, res: Response) => {
   const reqBody = req.body as reqBodyData
   res.json(fetchList(reqBody.currentPathArray))
 })
 
-router.post(
-  '/v1/filemanager/newfolder',
-  function (req: Request, res: Response) {
-    const reqBody = req.body as reqBodyData
-    const newFolder = validatePath(
-      path.join(
-        rootDir,
-        reqBody.currentPathArray.join('/'),
-        reqBody.newFolderName
-      )
+router.post('/v1/filemanager/newfolder', (async (
+  req: Request,
+  res: Response
+) => {
+  const reqBody = req.body as reqBodyData
+  const newFolder = validatePath(
+    path.join(
+      rootDir,
+      reqBody.currentPathArray.join('/'),
+      reqBody.newFolderName
     )
+  )
 
-    fse.ensureDir(newFolder).catch((error) => Logger.error(error))
+  // Awaiting here as immediately after receiving a response, the UI will refresh the page.
+  // If it refreshes before this completes, it could end up showing without the new folder
+  await fse.ensureDir(newFolder).catch((error) => Logger.error(error))
 
-    res.json({ message: 'success' })
-  }
-)
+  res.json({ message: 'success' })
+}) as RequestHandler)
 
-router.post('/v1/filemanager/upload', function (req: Request, res: Response) {
+router.post('/v1/filemanager/upload', (req: Request, res: Response) => {
   const form = new formidable.IncomingForm({
     maxFileSize: 5000 * 1024 * 1024
   })
@@ -127,7 +131,7 @@ router.post('/v1/filemanager/upload', function (req: Request, res: Response) {
     Logger.error(error)
   })
 
-  form.on('fileBegin', function (_name, file) {
+  form.on('fileBegin', (_name, file) => {
     file.filepath = validatePath(
       path.join(
         rootDir,

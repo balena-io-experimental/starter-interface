@@ -131,18 +131,18 @@ export default defineComponent({
     }
 
     function deleteEnv() {
-      var toDelete: Env = {}
+      const toDelete: Env = {}
       selectedRows.value.forEach((item: Env) => {
         toDelete[item.name] = ''
       })
       sdk
         .deleteEnv(toDelete)
-        .then(async function () {
+        .then(async () => {
           await getEnv()
           selectedRows.value = []
           isLoading.value = false
         })
-        .catch(function (error: Error | AxiosError) {
+        .catch((error: Error | AxiosError) => {
           console.error('deleteEnv', error)
           selectedRows.value = []
           isLoading.value = false
@@ -155,11 +155,11 @@ export default defineComponent({
 
       sdk
         .setEnv(newVarKey.value, newVarValue.value)
-        .then(async function () {
+        .then(async () => {
           await getEnv()
           isLoading.value = false
         })
-        .catch(function (error: Error | AxiosError) {
+        .catch((error: Error | AxiosError) => {
           console.error('setEnv', error)
           isLoading.value = false
         })
@@ -168,7 +168,7 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await getEnv().catch(function (error: Error | AxiosError) {
+      await getEnv().catch((error: Error | AxiosError) => {
         console.error('getEnv', error)
       })
       isLoading.value = false

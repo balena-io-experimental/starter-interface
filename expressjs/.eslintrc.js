@@ -12,10 +12,20 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'airbnb-base',
     'prettier'
   ],
 
   rules: {
+    // AirBnB
+    'no-shadow': 'off',
+    'no-use-before-define': 'off',
+    'no-console': 'off',
+    'no-void': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'no-param-reassign': 'off',
+
     // Naming conventions
     '@typescript-eslint/naming-convention': [
       'error',
@@ -30,6 +40,9 @@ module.exports = {
         format: ['PascalCase'],
         prefix: ['is']
       }
-    ]
+    ],
+
+    // General
+    '@typescript-eslint/no-shadow': 'error'
   }
 }

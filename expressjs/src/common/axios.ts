@@ -9,10 +9,8 @@ export default function createAxiosInstance() {
 
   // Axios request interceptor
   newInstance.interceptors.request.use(
-    function (config) {
-      return config
-    },
-    function (error: Error | AxiosError) {
+    (config) => config,
+    (error: Error | AxiosError) => {
       if (axios.isAxiosError(error) && error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -29,10 +27,8 @@ export default function createAxiosInstance() {
 
   // Axios response interceptor
   newInstance.interceptors.response.use(
-    function (response) {
-      return response
-    },
-    function (error: Error | AxiosError) {
+    (response) => response,
+    (error: Error | AxiosError) => {
       if (axios.isAxiosError(error) && error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx

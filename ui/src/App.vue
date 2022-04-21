@@ -24,7 +24,7 @@ export default defineComponent({
     $q.loading.show()
 
     // Get the current page path to check if this is a captive portal
-    const currentPage = location.hash
+    const currentPage = window.location.hash
 
     return { currentPage }
   }

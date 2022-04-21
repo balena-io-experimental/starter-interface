@@ -1,10 +1,10 @@
 import request, { AxiosRequestConfig } from 'axios'
-import createAxiosInstance from '@/common/axios'
-import Logger from '@/common/logger'
 import express, { Request, Response } from 'express'
-import queueCache from '@/middleware/queueCache'
 import path from 'path'
 import process from 'process'
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
+import queueCache from '@/middleware/queueCache'
 
 interface reqBodyData {
   params: Array<string>
@@ -29,7 +29,7 @@ supervisorAxios.defaults.headers.common.Authorization = `Bearer ${
 router.post(
   '/v1/supervisor',
   queueCache,
-  async function (req: Request, res: Response) {
+  async (req: Request, res: Response) => {
     const reqBody = req.body as reqBodyData
 
     // If Balena App ID is required
@@ -48,7 +48,7 @@ router.post(
     const payload = {
       data: reqBody.params,
       method: reqBody.type,
-      url: url
+      url
     }
 
     // Send the request

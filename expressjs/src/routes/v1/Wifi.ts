@@ -1,8 +1,8 @@
 import request, { AxiosRequestConfig } from 'axios'
-import createAxiosInstance from '@/common/axios'
 import express, { Request, RequestHandler, Response } from 'express'
-import Logger from '@/common/logger'
 import process from 'process'
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
 
 interface reqBodyData {
   params: Array<string>
@@ -27,7 +27,7 @@ if (process.env.WIFI_CONNECT_BASEURL) {
 }
 
 // -- Routes -- //
-router.post('/v1/wifi', async function (req: Request, res: Response) {
+router.post('/v1/wifi', (async (req: Request, res: Response) => {
   // Construct the payload
   const reqBody = req.body as reqBodyData
 
@@ -57,6 +57,6 @@ router.post('/v1/wifi', async function (req: Request, res: Response) {
     // Return the error to the UI
     res.json(error)
   }
-} as RequestHandler)
+}) as RequestHandler)
 
 export default router

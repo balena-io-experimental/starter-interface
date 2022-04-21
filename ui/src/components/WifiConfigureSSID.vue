@@ -84,7 +84,7 @@ export default defineComponent({
 
     function notify(type: string, message: string) {
       $q.notify({
-        type: type,
+        type,
         multiLine: true,
         timeout: 0,
         actions: [
@@ -96,7 +96,7 @@ export default defineComponent({
             }
           }
         ],
-        message: message
+        message
       })
     }
 
