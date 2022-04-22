@@ -1,8 +1,6 @@
 {
     "file_manager": {
-        "enter_name": "Inserisci un nome",
-        "Name": "Nome",
-        "upload_files_exist": "Alcuni dei file che hai aggiunto esistono già. Questi file saranno sovrascritti."
+        "Name": "Nome"
     },
     "general": {
         "cancel": "annulla",
@@ -11,17 +9,10 @@
         "password": "Password",
         "are_you_sure": "Sei sicuro/a?"
     },
-    "system_info": {
-        "select_request": "Seleziona una richiesta"
-    },
     "titles": {
         "Networking": "Rete"
     },
-    "update_device": "Aggiorna il dispositivo",
     "wifi": {
         "connection_request": "Il tuo dispositivo cercherà ora di connettersi alla rete. Se non è disponibile entro un minuto, riconnettiti al dispositivo e controlla che la tua password sia corretta."
-    },
-    "captive_portal": {
-        "url_copied": "Copiato negli appunti"
     }
 }

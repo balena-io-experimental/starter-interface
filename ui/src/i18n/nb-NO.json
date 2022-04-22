@@ -1,8 +1,6 @@
 {
     "device_info": {
-        "public_ip": "Offentlig IP",
-        "location": "Sted",
-        "not_undervolted": "Normal spenning"
+        "location": "Sted"
     },
     "file_manager": {
         "full_screen": "Fullskjermsvisning"
