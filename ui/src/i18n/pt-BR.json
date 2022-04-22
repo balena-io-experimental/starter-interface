@@ -6,13 +6,7 @@
         "ok": "ok",
         "are_you_sure": "Tem certeza?"
     },
-    "device_info": {
-        "sdk_unavailable": "Não foi possível acessar os servidores Balena."
-    },
     "wifi": {
         "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis."
-    },
-    "captive_portal": {
-        "url_copied": "Foi copiado para a área de transferência"
     }
 }
