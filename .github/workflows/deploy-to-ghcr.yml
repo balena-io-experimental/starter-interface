@@ -1,6 +1,4 @@
-# Deploy a compiled container to GitHub Container Registry
-
-name: Create and publish Docker image
+name: Deploy to GHCR
 
 on:
   push:
