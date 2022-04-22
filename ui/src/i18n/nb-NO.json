@@ -1,27 +1,18 @@
 {
-  "Response": "Svar",
-  "device_info": {
-    "environment_variables": "Miljøvariabler",
-    "ip_address": "IP-adresse",
-    "public_ip": "Offentlig IP",
-    "raw_json": "Rå-JSON",
-    "response_details": "Svar-detaljer",
-    "mac_address": "MAC-adresse",
-    "location": "Sted",
-    "memory": "Minne",
-    "os_version": "OS-versjon",
-    "undervolted": "Redusert spenning",
-    "not_undervolted": "Normal spenning",
-    "storage": "Lagring"
-  },
-  "file_manager": {
-    "delete": "Slett",
-    "enter_name": "Skriv inn et navn",
-    "full_screen": "Fullskjermsvisning",
-    "size_colon": "Størrelse:",
-    "upload": "Last opp"
-  },
-  "general": {
-    "are_you_sure": "Er du sikker?"
-  }
+    "device_info": {
+        "environment_variables": "Miljøvariabler",
+        "public_ip": "Offentlig IP",
+        "response_details": "Svar-detaljer",
+        "location": "Sted",
+        "os_version": "OS-versjon",
+        "not_undervolted": "Normal spenning"
+    },
+    "file_manager": {
+        "delete": "Slett",
+        "full_screen": "Fullskjermsvisning",
+        "upload": "Last opp"
+    },
+    "general": {
+        "are_you_sure": "Er du sikker?"
+    }
 }
