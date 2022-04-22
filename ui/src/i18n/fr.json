@@ -6,9 +6,6 @@
         "ok": "OK",
         "password": "Mot de passe"
     },
-    "titles": {
-        "container_manager": "Gestionnaire de conteneurs"
-    },
     "network": {
         "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
     }
