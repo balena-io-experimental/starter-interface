@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="fullscreen bg-secondary text-accent text-center q-pa-md flex flex-center"
-  >
+  <div class="fullscreen text-center q-pa-md flex flex-center">
     <div>
       <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
       <div style="font-size: 30vh">404</div>
@@ -13,7 +11,6 @@
       <q-btn
         v-bind="qBtnStyle"
         class="q-mt-xl"
-        color="accent"
         unelevated
         to="/"
         label="Go Home"

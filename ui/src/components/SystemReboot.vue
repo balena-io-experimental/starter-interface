@@ -1,10 +1,10 @@
 <template>
   <q-btn
+    size="12px"
     flat
     dense
     round
     icon="restart_alt"
-    color="secondary"
     @click="confirm = true"
   />
   <q-dialog v-model="confirm">
@@ -13,35 +13,26 @@
         class="row items-center"
         style="width: 300px; max-width: 80vw"
       >
-        <q-avatar icon="restart_alt" color="primary" text-color="accent" />
-        <div class="col">
-          <div class="row q-ml-sm q-mt-sm">
-            {{ $t('general.are_you_sure') }}
-          </div>
-          <div class="items-right align-right text-right justify-right">
-            <q-checkbox
-              v-model="checkBox"
-              class="q-ml-md text-caption"
-              size="xs"
-              :label="$t('components.system.reboot.force_restart')"
-            />
-          </div>
+        <q-avatar v-bind="qAvatarStyle" icon="restart_alt" />
+        <div class="row q-ml-md">
+          {{ $t('general.are_you_sure') }}
         </div>
       </q-card-section>
+
       <q-card-actions align="right">
+        <div class="q-mr-md">
+          <q-checkbox
+            v-model="checkBox"
+            class="q-ml-md text-caption"
+            size="xs"
+            :label="$t('components.system.reboot.force_restart')"
+          />
+        </div>
+        <q-btn v-close-popup v-bind="qBtnStyle" :label="$t('general.cancel')" />
         <q-btn
           v-close-popup
           v-bind="qBtnStyle"
-          flat
-          :label="$t('general.cancel')"
-          color="primary"
-        />
-        <q-btn
-          v-close-popup
-          v-bind="qBtnStyle"
-          flat
           :label="$t('general.ok')"
-          color="primary"
           @click="reboot()"
         />
       </q-card-actions>
@@ -52,7 +43,7 @@
 <script lang="ts">
 import { supervisor } from 'src/api/supervisor'
 import { useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/config/qStyles'
+import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -78,6 +69,7 @@ export default defineComponent({
       }, 1500)
     }
     return {
+      qAvatarStyle,
       checkBox,
       confirm: ref(false),
       qBtnStyle,

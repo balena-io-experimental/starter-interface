@@ -27,7 +27,7 @@
       {{ $t('title') }}
     </div>
     <!-- Welcome text -->
-    <div v-if="hostname" class="text-body1 text-center text-gray-600">
+    <div v-if="hostname" class="text-body1 text-center">
       <div>
         {{ $t('components.layouts.captive_portal.visit_to_begin') }}
       </div>

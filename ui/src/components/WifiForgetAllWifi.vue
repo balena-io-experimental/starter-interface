@@ -11,27 +11,15 @@
         class="row items-center"
         style="width: 300px; max-width: 80vw"
       >
-        <q-avatar
-          icon="wifi_tethering_off"
-          color="primary"
-          text-color="accent"
-        />
+        <q-avatar v-bind="qAvatarStyle" icon="wifi_tethering_off" />
         <span class="q-ml-md">{{ $t('general.are_you_sure') }}</span>
       </q-card-section>
       <q-card-actions align="right">
+        <q-btn v-close-popup v-bind="qBtnStyle" :label="$t('general.cancel')" />
         <q-btn
           v-close-popup
           v-bind="qBtnStyle"
-          flat
-          :label="$t('general.cancel')"
-          color="primary"
-        />
-        <q-btn
-          v-close-popup
-          v-bind="qBtnStyle"
-          flat
           :label="$t('general.ok')"
-          color="primary"
           @click="forget()"
         />
       </q-card-actions>
@@ -42,7 +30,7 @@
 <script lang="ts">
 import expressApi from 'axios'
 import { useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/config/qStyles'
+import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -76,7 +64,6 @@ export default defineComponent({
             actions: [
               {
                 label: t('general.close'),
-                color: 'white',
                 handler: () => {
                   /* ... */
                 }
@@ -98,6 +85,7 @@ export default defineComponent({
       confirm: ref(false),
       forget,
       isSubmitting,
+      qAvatarStyle,
       qBtnStyle
     }
   }

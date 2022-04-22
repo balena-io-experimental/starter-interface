@@ -247,7 +247,6 @@ export default defineComponent({
         actions: [
           {
             label: t('general.close'),
-            color: 'white',
             handler: () => {
               /* ... */
             }

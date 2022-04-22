@@ -80,7 +80,7 @@
     </q-expansion-item>
   </div>
   <div v-if="isLoading" class="text-center">
-    <q-spinner color="primary" size="3em" />
+    <q-spinner v-bind="qSpinnerStyle" size="3em" />
   </div>
 </template>
 
@@ -89,7 +89,7 @@ import { sdk } from 'src/api/sdk'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
-import { qBtnStyle } from 'src/config/qStyles'
+import { qBtnStyle, qSpinnerStyle } from 'src/config/qStyles'
 
 interface Env {
   [key: string]: string
@@ -183,6 +183,7 @@ export default defineComponent({
       newVarKey,
       newVarValue,
       qBtnStyle,
+      qSpinnerStyle,
       selectedRows,
       setEnv
     }

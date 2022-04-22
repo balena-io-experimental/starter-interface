@@ -3,7 +3,6 @@
     <q-btn
       v-bind="qBtnStyle"
       icon="drive_file_rename_outline"
-      color="primary"
       :loading="isSubmitting"
       @click="ssidDialog = true"
     >
@@ -16,10 +15,9 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar
+            v-bind="qAvatarStyle"
             class="q-mr-md"
             icon="drive_file_rename_outline"
-            color="primary"
-            text-color="accent"
           />
           <q-input
             ref="ssidInput"
@@ -65,7 +63,7 @@
 <script lang="ts">
 import expressApi from 'axios'
 import { QForm, useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/config/qStyles'
+import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -90,7 +88,6 @@ export default defineComponent({
         actions: [
           {
             label: t('general.close'),
-            color: 'accent',
             handler: () => {
               /* ... */
             }
@@ -126,6 +123,7 @@ export default defineComponent({
 
     return {
       isSubmitting,
+      qAvatarStyle,
       qBtnStyle,
       ssidDialog: ref(false),
       ssidInput,

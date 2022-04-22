@@ -29,7 +29,6 @@
                 }}MB / {{ (m.data.total / 1000000).toFixed(0) }}MB</span
               >
               <q-linear-progress
-                color="secondary"
                 rounded
                 :value="(m.data.total - m.data.available) / m.data.total"
                 class="q-mt-md"
@@ -46,7 +45,6 @@
                 {{ (f.data[0].size / 1000000000).toFixed(2) }}GB</span
               >
               <q-linear-progress
-                color="secondary"
                 rounded
                 :value="f.data[0].used / f.data[0].size"
                 class="q-mt-md"
@@ -103,7 +101,7 @@
     </div>
   </div>
   <div v-if="isLoading" class="window-height row justify-center items-center">
-    <q-spinner color="primary" size="5em" />
+    <q-spinner v-bind="qSpinnerStyle" />
   </div>
 </template>
 
@@ -113,6 +111,7 @@ import CpuStats from 'components/ChartsCpuStats.vue'
 import { supervisor } from 'src/api/supervisor'
 import { useSystemStore } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
+import { qSpinnerStyle } from 'src/config/qStyles'
 
 interface device {
   current_release: string
@@ -196,6 +195,7 @@ export default defineComponent({
       f,
       isLoading,
       m,
+      qSpinnerStyle,
       systemStore
     }
   }
