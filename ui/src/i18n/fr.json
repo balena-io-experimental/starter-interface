@@ -1,32 +1,22 @@
 {
     "file_manager": {
-        "upload": "Téléverser",
         "Mb": "Mb"
-    },
-    "device_info": {
-        "public_ip": "IP public"
     },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
         "cancel": "Annuler",
         "close": "Fermer",
         "ok": "OK",
-        "password": "Mot de passe",
-        "Loading": "Chargement…"
+        "password": "Mot de passe"
     },
     "system": {
         "shutting_down": "L'appareil s'éteint…"
-    },
-    "system_info": {
-        "select_request": "Sélectionnez une demande"
     },
     "titles": {
         "container_manager": "Gestionnaire de conteneurs"
     },
     "wifi": {
-        "network_fetch_fail": "Échec de la recherche des réseaux disponibles.",
-        "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès",
-        "network_forget_fail": "Échec de l'exécution de la demande d'oubli."
+        "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès"
     },
     "network": {
         "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
