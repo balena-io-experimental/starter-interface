@@ -6,18 +6,11 @@
         "ok": "ok",
         "are_you_sure": "Tem certeza?"
     },
-    "system": {
-        "env_var_warning_message": "Ao adicionar ou ao remover as variáveis do ambiente os serviços neste dispositivo serão reiniciados!"
-    },
     "device_info": {
         "sdk_unavailable": "Não foi possível acessar os servidores Balena."
     },
-    "file_manager": {
-        "upload_files_exist": "Alguns arquivos que você adicionou já existem. Esses arquivos serão sobreescritos."
-    },
     "wifi": {
-        "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis.",
-        "configure_hotspot": "Configurar um ponto de acesso"
+        "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis."
     },
     "captive_portal": {
         "url_copied": "Foi copiado para a área de transferência"

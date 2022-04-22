@@ -1,13 +1,7 @@
 {
-    "file_manager": {
-        "no_results_found": "Keine Ergebnisse gefunden"
-    },
     "general": {
         "password": "Passwort",
         "are_you_sure": "Sind Sie sicher?",
         "close": "Schließen"
-    },
-    "wifi": {
-        "refresh_not_compatible": "Ihr Gerät muss neu gestartet werden, um die Liste zu aktualisieren."
     }
 }

@@ -1,7 +1,4 @@
 {
-    "file_manager": {
-        "Mb": "Mb"
-    },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
         "cancel": "Annuler",
@@ -9,14 +6,8 @@
         "ok": "OK",
         "password": "Mot de passe"
     },
-    "system": {
-        "shutting_down": "L'appareil s'éteint…"
-    },
     "titles": {
         "container_manager": "Gestionnaire de conteneurs"
-    },
-    "wifi": {
-        "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès"
     },
     "network": {
         "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
