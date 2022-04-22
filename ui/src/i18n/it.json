@@ -1,16 +1,10 @@
 {
-    "file_manager": {
-        "Name": "Nome"
-    },
     "general": {
         "cancel": "annulla",
         "close": "Chiudi",
         "ok": "OK",
         "password": "Password",
         "are_you_sure": "Sei sicuro/a?"
-    },
-    "titles": {
-        "Networking": "Rete"
     },
     "wifi": {
         "connection_request": "Il tuo dispositivo cercherà ora di connettersi alla rete. Se non è disponibile entro un minuto, riconnettiti al dispositivo e controlla che la tua password sia corretta."

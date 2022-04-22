@@ -7,29 +7,17 @@
         "are_you_sure": "Tem certeza?"
     },
     "system": {
-        "ping_supervisor": "Ping do supervisor",
         "env_var_warning_message": "Ao adicionar ou ao remover as variáveis do ambiente os serviços neste dispositivo serão reiniciados!"
     },
     "device_info": {
-        "mac_address": "Endereço MAC",
         "sdk_unavailable": "Não foi possível acessar os servidores Balena."
     },
     "file_manager": {
-        "new_folder": "Nova pasta",
         "upload_files_exist": "Alguns arquivos que você adicionou já existem. Esses arquivos serão sobreescritos."
-    },
-    "titles": {
-        "Networking": "Rede"
     },
     "wifi": {
         "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis.",
-        "set_new_hotspot_ssid": "Defina um novo SSID para o ponto de acesso",
         "configure_hotspot": "Configurar um ponto de acesso"
-    },
-    "charts": {
-        "cpu_stats": {
-            "CPU": "CPU"
-        }
     },
     "captive_portal": {
         "url_copied": "Foi copiado para a área de transferência"

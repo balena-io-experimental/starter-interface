@@ -1,10 +1,6 @@
 {
     "file_manager": {
-        "empty_folder": "Leerer Ordner",
         "no_results_found": "Keine Ergebnisse gefunden"
-    },
-    "device_info": {
-        "not_undervolted": "Normale Leistung"
     },
     "general": {
         "password": "Passwort",
@@ -12,10 +8,6 @@
         "close": "Schließen"
     },
     "wifi": {
-        "Disconnect": "Trennen",
         "refresh_not_compatible": "Ihr Gerät muss neu gestartet werden, um die Liste zu aktualisieren."
-    },
-    "captive_portal": {
-        "Welcome": "Willkommen"
     }
 }
