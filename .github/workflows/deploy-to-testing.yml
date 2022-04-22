@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  balena_cloud_build:
+  deploy-to-testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

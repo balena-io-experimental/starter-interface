@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: maggie0002/bdu
 
 jobs:
-  build-and-push-image:
+  deploy-to-gcr:
     runs-on: ubuntu-latest
     permissions:
       contents: read

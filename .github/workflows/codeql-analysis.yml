@@ -21,7 +21,7 @@ on:
     - cron: "26 22 * * 5"
 
 jobs:
-  analyze:
+  codeql-analyze:
     name: Analyze
     runs-on: ubuntu-latest
 
