@@ -37,14 +37,12 @@
                 class="cursor-pointer q-mb-xs"
                 icon="home"
                 clickable
-                color="gray-800"
                 @click="objPath.splice(0, objPath.length), updateRows()"
               />
               <q-breadcrumbs-el
                 v-for="item in objPath"
                 :key="item"
                 v-ripple
-                class="cursor-pointer"
                 clickable
                 :label="item"
                 @click="
@@ -92,8 +90,6 @@
                 <q-uploader
                   style="max-width: 300px"
                   :label="$t('components.tools.file_manager.upload')"
-                  color="white"
-                  text-color="black"
                   multiple
                   flat
                   no-thumbnails
@@ -187,13 +183,8 @@
       <!-- Row icons -->
       <template #body-cell-path="props">
         <q-td :props="props">
-          <q-icon
-            v-if="props.row.type === 'folder'"
-            color="gray-800"
-            left
-            name="folder"
-          />
-          <q-icon v-else color="gray-800" left name="insert_drive_file" />
+          <q-icon v-if="props.row.type === 'folder'" left name="folder" />
+          <q-icon v-else left name="insert_drive_file" />
           {{ props.value }}
         </q-td>
       </template>
@@ -299,7 +290,6 @@ export default defineComponent({
           actions: [
             {
               label: t('general.close'),
-              color: 'black',
               handler: () => {
                 /* ... */
               }

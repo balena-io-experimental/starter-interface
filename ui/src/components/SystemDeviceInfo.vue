@@ -106,7 +106,6 @@
                 {{ response.data.memory_total }}MB</span
               >
               <q-linear-progress
-                color="secondary"
                 rounded
                 :value="response.data.memory_usage / response.data.memory_total"
                 class="q-mt-md"
@@ -123,7 +122,6 @@
                 {{ (response.data.storage_total / 1000).toFixed(2) }}GB</span
               >
               <q-linear-progress
-                color="secondary"
                 rounded
                 :value="
                   response.data.storage_usage / response.data.storage_total
@@ -150,7 +148,7 @@
     {{ $t('components.system.device_info.internet_required') }}
   </div>
   <div v-if="isLoading" class="window-height row justify-center items-center">
-    <q-spinner color="primary" size="5em" />
+    <q-spinner v-bind="qSpinnerStyle" />
   </div>
 </template>
 
@@ -162,6 +160,7 @@ import { useQuasar } from 'quasar'
 import { useSystemStore } from 'stores/system'
 import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { qSpinnerStyle } from 'src/config/qStyles'
 
 export default defineComponent({
   name: 'SystemDeviceInfo',
@@ -195,6 +194,7 @@ export default defineComponent({
 
     return {
       isLoading,
+      qSpinnerStyle,
       response,
       systemStore
     }

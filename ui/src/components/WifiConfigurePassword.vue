@@ -3,7 +3,6 @@
     <q-btn
       v-bind="qBtnStyle"
       icon="wifi_password"
-      color="primary"
       :loading="isSubmitting"
       @click="passwordDialog = true"
     >
@@ -16,10 +15,9 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar
+            v-bind="qAvatarStyle"
             class="q-mr-md"
             icon="wifi_password"
-            color="primary"
-            text-color="accent"
           />
           <q-input
             ref="passwordInput"
@@ -75,7 +73,7 @@
 <script lang="ts">
 import expressApi from 'axios'
 import { QForm, useQuasar } from 'quasar'
-import { qBtnStyle } from 'src/config/qStyles'
+import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -99,7 +97,6 @@ export default defineComponent({
         actions: [
           {
             label: t('general.close'),
-            color: 'accent',
             handler: () => {
               /* ... */
             }
@@ -138,6 +135,7 @@ export default defineComponent({
       passwordDialog: ref(false),
       passwordInput,
       passwordText,
+      qAvatarStyle,
       qBtnStyle,
       setHotspotPassword
     }

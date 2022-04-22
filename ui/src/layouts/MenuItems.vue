@@ -2,7 +2,7 @@
   <q-item
     v-ripple:secondary
     clickable
-    active-class="bg-grey-3 text-secondary"
+    active-class="bg-grey-3"
     @click="clickedLink(path)"
   >
     <q-item-section v-if="icon" avatar>

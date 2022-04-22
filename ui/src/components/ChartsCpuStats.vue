@@ -78,7 +78,7 @@ export default defineComponent({
       datasets: [
         {
           backgroundColor: colors.lighten(
-            getCssVar('primary') as string,
+            getCssVar('secondary') as string,
             chartBackgroundOpacity
           ),
           borderWidth: 2,
@@ -174,11 +174,11 @@ export default defineComponent({
           ) as string
         } else {
           chartData.value.datasets[0].backgroundColor = colors.lighten(
-            getCssVar('primary') as string,
+            getCssVar('secondary') as string,
             chartBackgroundOpacity
           )
           chartData.value.datasets[0].borderColor = getCssVar(
-            'primary'
+            'secondary'
           ) as string
         }
       } catch (error) {

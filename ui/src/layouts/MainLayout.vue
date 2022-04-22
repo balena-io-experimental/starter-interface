@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn
           class="q-mr-sm"
-          color="secondary"
+          size="12px"
           flat
           dense
           round
@@ -24,10 +24,8 @@
             {{ $t('title') }}
           </div>
           <q-slide-transition v-else :duration="1000">
-            <div v-if="deviceName" class="text-secondary text-subtitle1">
-              <q-icon class="q-mr-xs" name="local_offer" color="secondary" />{{
-                deviceName
-              }}
+            <div v-if="deviceName" class="text-subtitle1">
+              <q-icon class="q-mr-xs" name="local_offer" />{{ deviceName }}
             </div>
           </q-slide-transition>
         </q-toolbar-title>
@@ -35,18 +33,16 @@
         <q-slide-transition :duration="1000">
           <div
             v-if="deviceName && $q.screen.gt.xs"
-            class="text-secondary text-subtitle1 q-mr-md"
+            class="text-subtitle1 q-mr-md"
           >
-            <q-icon class="q-mr-xs" name="local_offer" color="secondary" />{{
-              deviceName
-            }}
+            <q-icon class="q-mr-xs" name="local_offer" />{{ deviceName }}
           </div>
         </q-slide-transition>
-        <q-separator class="q-mr-sm" vertical inset />
+        <q-separator size="2px" class="q-mr-sm" vertical inset />
         <q-btn
+          size="12px"
           :loading="isChangingLang"
           icon="translate"
-          color="secondary"
           round
           flat
           dense
@@ -62,7 +58,7 @@
               >
                 <q-item-section>{{ language.label }}</q-item-section>
                 <q-item-section v-if="language.value === locale" avatar>
-                  <q-icon size="xs" color="primary" name="check" />
+                  <q-icon size="xs" name="check" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -103,7 +99,6 @@
               <q-btn
                 flat
                 padding="0"
-                color="white"
                 :label="$t('general.close')"
                 @click="isNetworkDown = false"
               />

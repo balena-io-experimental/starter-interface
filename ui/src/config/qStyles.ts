@@ -1,5 +1,5 @@
 export const qBtnStyle = {
-  color: 'primary',
+  color: 'secondary',
   outline: false,
   rounded: true,
   unelevated: true,
@@ -9,10 +9,19 @@ export const qBtnStyle = {
 
 export const qHeaderStyle = {
   header: {
-    class: 'bg-white',
-    bordered: true,
     elevated: true
   },
   logo: '/logo.svg', // Remove this line to have no logo
-  title: { class: 'text-secondary text-weight-bold' }
+  title: { class: 'text-h6 text-weight-bold' }
+}
+
+export const qAvatarStyle = {
+  size: 'lg',
+  color: 'accent',
+  'text-color': 'primary'
+}
+
+export const qSpinnerStyle = {
+  class: 'text-accent',
+  size: '6em'
 }
