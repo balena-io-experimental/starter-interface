@@ -1,64 +1,27 @@
 {
     "file_manager": {
-        "001_Mb": "0,01 Mb",
-        "delete": "Elimina",
-        "empty_folder": "Cartella vuota",
         "enter_name": "Inserisci un nome",
-        "Mb": "Mb",
-        "size_colon": "Dimensione:",
-        "full_screen": "Schermo intero",
         "Name": "Nome",
-        "new_folder": "Nuova cartella",
-        "filter": "Filtro",
-        "no_results_found": "Nessun risultato trovato",
-        "upload_files_exist": "Alcuni dei file che hai aggiunto esistono già. Questi file saranno sovrascritti.",
-        "upload": "Carica"
+        "upload_files_exist": "Alcuni dei file che hai aggiunto esistono già. Questi file saranno sovrascritti."
     },
     "general": {
         "cancel": "annulla",
         "close": "Chiudi",
-        "Error": "Errore",
-        "Home": "Pagina principale",
         "ok": "OK",
         "password": "Password",
-        "request_error": "Errore di richiesta",
         "are_you_sure": "Sei sicuro/a?"
-    },
-    "system": {
-        "restarting": "Il tuo dispositivo si sta riavviando…",
-        "Services": "Servizi",
-        "shutting_down": "Spegnimento del dispositivo…"
     },
     "system_info": {
         "select_request": "Seleziona una richiesta"
     },
     "titles": {
-        "Configuration": "Configurazione",
-        "control_panel": "Pannello di controllo",
-        "Device_Info": "Info sul dispositivo",
-        "Networking": "Rete",
-        "Settings": "Impostazioni",
-        "System_Info": "Informazioni sul sistema",
-        "title": "Interfaccia utente del dispositivo Balena"
+        "Networking": "Rete"
     },
     "update_device": "Aggiorna il dispositivo",
     "wifi": {
-        "Connect": "Connetti",
-        "offline": "Fuori linea",
-        "online": "In linea",
         "connection_request": "Il tuo dispositivo cercherà ora di connettersi alla rete. Se non è disponibile entro un minuto, riconnettiti al dispositivo e controlla che la tua password sia corretta."
     },
-    "charts": {
-        "cpu_stats": {
-            "pause": "Pausa"
-        }
-    },
     "captive_portal": {
-        "connect_to_wifi": "Connettiti al Wi-Fi",
-        "copy_to_clipboard": "Copia negli appunti",
-        "url_copied": "Copiato negli appunti",
-        "Welcome": "Benvenuto/a",
-        "visit_to_begin": "Visita il seguente URL nel tuo browser per iniziare:"
-    },
-    "Response": "Risposta"
+        "url_copied": "Copiato negli appunti"
+    }
 }
