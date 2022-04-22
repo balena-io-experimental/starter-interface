@@ -1,14 +1,10 @@
 {
     "file_manager": {
-        "enter_name": "Entrez un nom",
         "upload": "Téléverser",
-        "new_folder": "Nouveau dossier",
         "Mb": "Mb"
     },
     "device_info": {
-        "environment_variables": "Variables d'environnement",
-        "public_ip": "IP public",
-        "undervolted": "Sous-tendu"
+        "public_ip": "IP public"
     },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
@@ -16,38 +12,23 @@
         "close": "Fermer",
         "ok": "OK",
         "password": "Mot de passe",
-        "Start": "Démarrer",
         "Loading": "Chargement…"
     },
     "system": {
-        "internet_required": "Une connectivité Internet est nécessaire pour utiliser cette fonction.",
-        "shutting_down": "L'appareil s'éteint…",
-        "force_update": "Forcer la mise à jour ?"
+        "shutting_down": "L'appareil s'éteint…"
     },
     "system_info": {
         "select_request": "Sélectionnez une demande"
     },
     "titles": {
-        "Networking": "Mise en réseau",
         "container_manager": "Gestionnaire de conteneurs"
     },
     "wifi": {
-        "connection_request": "Votre appareil va maintenant essayer de se connecter au réseau. S'il n'est pas disponible dans une minute, reconnectez-vous à l'appareil et vérifiez que votre mot de passe est correct.",
         "network_fetch_fail": "Échec de la recherche des réseaux disponibles.",
-        "password_set": "Mot de passe défini. Si vous utilisez un point d'accès, il va redémarrer.",
         "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès",
-        "no_wifi_api": "Échec de la communication avec Balena Py Wi-Fi Connect. Peut-être n'est-il pas installé sur cet appareil ?",
         "network_forget_fail": "Échec de l'exécution de la demande d'oubli."
-    },
-    "charts": {
-        "cpu_stats": {
-            "pause": "Pause"
-        }
     },
     "network": {
         "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
-    },
-    "captive_portal": {
-        "copy_to_clipboard": "Copier dans le presse-papiers"
     }
 }

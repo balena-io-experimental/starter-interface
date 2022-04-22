@@ -4,47 +4,34 @@
         "close": "Fechar",
         "cancel": "Cancelar",
         "ok": "ok",
-        "Name": "Nome",
-        "are_you_sure": "Tem certeza?",
-        "Submit": "Enviar"
+        "are_you_sure": "Tem certeza?"
     },
     "system": {
         "ping_supervisor": "Ping do supervisor",
-        "Services": "Serviços",
         "env_var_warning_message": "Ao adicionar ou ao remover as variáveis do ambiente os serviços neste dispositivo serão reiniciados!"
     },
     "device_info": {
-        "not_undervolted": "Potência normal",
         "mac_address": "Endereço MAC",
-        "environment_variables": "Variáveis do ambiente",
         "sdk_unavailable": "Não foi possível acessar os servidores Balena."
     },
     "file_manager": {
-        "invalid_upload_string": "As entradas contêm um nome inválido e não serão enviadas. Os seguintes caracteres não são compatíveis: '/', '\\0'",
         "new_folder": "Nova pasta",
-        "filter": "Filtro",
         "upload_files_exist": "Alguns arquivos que você adicionou já existem. Esses arquivos serão sobreescritos."
     },
     "titles": {
-        "control_panel": "Painel de controle",
         "Networking": "Rede"
     },
     "wifi": {
-        "disconnect_request_sent": "Um pedido de desconexão foi enviado.",
         "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis.",
-        "refresh_not_compatible": "O seu dispositivo precisa reiniciar para fazer a atualização da lista.",
         "set_new_hotspot_ssid": "Defina um novo SSID para o ponto de acesso",
-        "no_wifi_api": "Houve uma falha ao se comunicar com a conexão Wi-Fi Balena Py. Talvez não esteja instalado neste dispositivo?",
         "configure_hotspot": "Configurar um ponto de acesso"
     },
     "charts": {
         "cpu_stats": {
-            "no_data": "Não foi possível buscar os dados da CPU.",
             "CPU": "CPU"
         }
     },
     "captive_portal": {
-        "copy_to_clipboard": "Copiar para área de transferência",
         "url_copied": "Foi copiado para a área de transferência"
     }
 }

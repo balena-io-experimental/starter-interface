@@ -1,16 +1,10 @@
 {
-    "titles": {
-        "System_Info": "Systeminformationen"
-    },
     "file_manager": {
         "empty_folder": "Leerer Ordner",
-        "invalid_filemanager_string": "Sie haben einen ungültigen Namen eingegeben. Die folgenden Zeichen sind nicht kompatibel: /, \\0",
         "no_results_found": "Keine Ergebnisse gefunden"
     },
     "device_info": {
-        "environment_variables": "Umgebungsvariablen",
-        "not_undervolted": "Normale Leistung",
-        "os_version": "Betriebssystemversion"
+        "not_undervolted": "Normale Leistung"
     },
     "general": {
         "password": "Passwort",
@@ -18,18 +12,10 @@
         "close": "Schließen"
     },
     "wifi": {
-        "no_networks": "Keine Netzwerke verfügbar",
         "Disconnect": "Trennen",
-        "no_wifi_api": "Die Kommunikation mit Balena Py Wi-Fi Connect ist fehlgeschlagen. Vielleicht ist es nicht auf diesem Gerät installiert?",
         "refresh_not_compatible": "Ihr Gerät muss neu gestartet werden, um die Liste zu aktualisieren."
     },
-    "charts": {
-        "cpu_stats": {
-            "show_cores": "Kerne anzeigen"
-        }
-    },
     "captive_portal": {
-        "Welcome": "Willkommen",
-        "visit_to_begin": "Besuchen Sie die folgende URL in Ihrem Browser, um zu beginnen:"
+        "Welcome": "Willkommen"
     }
 }
