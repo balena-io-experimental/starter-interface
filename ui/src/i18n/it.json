@@ -1,39 +1,27 @@
 {
     "file_manager": {
-        "delete": "Elimina",
         "enter_name": "Inserisci un nome",
-        "size_colon": "Dimensione:",
         "Name": "Nome",
-        "filter": "Filtro",
         "upload_files_exist": "Alcuni dei file che hai aggiunto esistono già. Questi file saranno sovrascritti."
     },
     "general": {
         "cancel": "annulla",
         "close": "Chiudi",
-        "Home": "Pagina principale",
         "ok": "OK",
         "password": "Password",
         "are_you_sure": "Sei sicuro/a?"
-    },
-    "system": {
-        "Services": "Servizi"
     },
     "system_info": {
         "select_request": "Seleziona una richiesta"
     },
     "titles": {
-        "control_panel": "Pannello di controllo",
-        "Networking": "Rete",
-        "System_Info": "Informazioni sul sistema"
+        "Networking": "Rete"
     },
     "update_device": "Aggiorna il dispositivo",
     "wifi": {
-        "offline": "Fuori linea",
         "connection_request": "Il tuo dispositivo cercherà ora di connettersi alla rete. Se non è disponibile entro un minuto, riconnettiti al dispositivo e controlla che la tua password sia corretta."
     },
     "captive_portal": {
-        "connect_to_wifi": "Connettiti al Wi-Fi",
-        "url_copied": "Copiato negli appunti",
-        "visit_to_begin": "Visita il seguente URL nel tuo browser per iniziare:"
+        "url_copied": "Copiato negli appunti"
     }
 }
