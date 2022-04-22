@@ -1,80 +1,53 @@
 {
     "file_manager": {
-        "full_screen": "Plein écran",
         "enter_name": "Entrez un nom",
-        "invalid_upload_string": "Les entrées contiennent un nom invalide et ne seront pas téléversées. Les caractères suivants ne sont pas compatibles : /, \\0",
         "upload": "Téléverser",
-        "001_Mb": "0,01 Mb",
         "new_folder": "Nouveau dossier",
-        "invalid_filemanager_string": "Vous avez saisi un nom invalide. Les caractères suivants ne sont pas compatibles : /, \\0",
         "Mb": "Mb"
     },
     "device_info": {
-        "memory": "Mémoire",
         "environment_variables": "Variables d'environnement",
-        "not_undervolted": "Puissance normale",
         "public_ip": "IP public",
-        "response_details": "Détails de la réponse",
-        "undervolted": "Sous-tendu",
-        "supervisor_version": "Version superviseur"
+        "undervolted": "Sous-tendu"
     },
     "general": {
         "are_you_sure": "Êtes-vous sûr(e) ?",
         "cancel": "Annuler",
         "close": "Fermer",
-        "Home": "Accueil",
         "ok": "OK",
         "password": "Mot de passe",
-        "Wrong_way": "Fausse route…",
         "Start": "Démarrer",
-        "Restart": "Redémarrer",
         "Loading": "Chargement…"
     },
-    "supervisor_config": "Configuration du superviseur",
     "system": {
         "internet_required": "Une connectivité Internet est nécessaire pour utiliser cette fonction.",
-        "restarting": "Votre appareil est en train de redémarrer…",
         "shutting_down": "L'appareil s'éteint…",
-        "force_shutdown": "Forcer l'arrêt ?",
-        "force_update": "Forcer la mise à jour ?",
-        "delete_selected_records": "Supprimer les enregistrements sélectionnés"
+        "force_update": "Forcer la mise à jour ?"
     },
     "system_info": {
         "select_request": "Sélectionnez une demande"
     },
     "titles": {
-        "control_panel": "Panneau de contrôle",
         "Networking": "Mise en réseau",
-        "Settings": "Paramètres",
         "container_manager": "Gestionnaire de conteneurs"
     },
-    "update_device": "Mettre à jour l'appareil",
     "wifi": {
         "connection_request": "Votre appareil va maintenant essayer de se connecter au réseau. S'il n'est pas disponible dans une minute, reconnectez-vous à l'appareil et vérifiez que votre mot de passe est correct.",
-        "invalid_password_length": "Le mot de passe doit comporter 8 caractères ou plus.",
         "network_fetch_fail": "Échec de la recherche des réseaux disponibles.",
-        "offline": "Hors ligne",
         "password_set": "Mot de passe défini. Si vous utilisez un point d'accès, il va redémarrer.",
-        "select_ssid": "Sélectionnez un SSID",
         "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès",
-        "refresh_not_compatible": "Votre appareil doit être redémarré pour que la liste soit actualisée.",
         "no_wifi_api": "Échec de la communication avec Balena Py Wi-Fi Connect. Peut-être n'est-il pas installé sur cet appareil ?",
-        "Disconnect": "Déconnecter",
         "network_forget_fail": "Échec de l'exécution de la demande d'oubli."
     },
     "charts": {
         "cpu_stats": {
-            "cpu_status": "État du processeur",
-            "pause": "Pause",
-            "Core": "Cœur"
+            "pause": "Pause"
         }
     },
     "network": {
-        "forget_all_wifi": "Oublier toutes les connexions Wi-Fi",
-        "network_connection_restored": "Connexion réseau restaurée."
+        "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
     },
     "captive_portal": {
-        "copy_to_clipboard": "Copier dans le presse-papiers",
-        "url_copied": "Copié dans le presse-papiers"
+        "copy_to_clipboard": "Copier dans le presse-papiers"
     }
 }

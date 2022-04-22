@@ -1,49 +1,35 @@
 {
     "titles": {
-        "Networking": "Vernetzung",
         "System_Info": "Systeminformationen"
     },
     "file_manager": {
-        "001_Mb": "0,01 Mb",
         "empty_folder": "Leerer Ordner",
-        "filter": "Filter",
         "invalid_filemanager_string": "Sie haben einen ungültigen Namen eingegeben. Die folgenden Zeichen sind nicht kompatibel: /, \\0",
-        "Name": "Name",
-        "no_results_found": "Keine Ergebnisse gefunden",
-        "upload": "Hochladen"
+        "no_results_found": "Keine Ergebnisse gefunden"
     },
     "device_info": {
         "environment_variables": "Umgebungsvariablen",
-        "location": "Standort",
         "not_undervolted": "Normale Leistung",
-        "response_details": "Details zur Antwort",
         "os_version": "Betriebssystemversion"
     },
     "general": {
         "password": "Passwort",
         "are_you_sure": "Sind Sie sicher?",
-        "close": "Schließen",
-        "Name": "Name"
+        "close": "Schließen"
     },
     "wifi": {
         "no_networks": "Keine Netzwerke verfügbar",
-        "connection_request": "Ihr Gerät versucht nun, eine Verbindung mit dem Netzwerk herzustellen. Wenn es nach einer Minute nicht verfügbar ist, verbinden Sie sich erneut mit dem Gerät und überprüfen Sie, ob Ihr Passwort korrekt ist.",
         "Disconnect": "Trennen",
-        "set_new_hotspot_password": "Ein neues Hotspot-Passwort festlegen",
         "no_wifi_api": "Die Kommunikation mit Balena Py Wi-Fi Connect ist fehlgeschlagen. Vielleicht ist es nicht auf diesem Gerät installiert?",
-        "searching_networks": "Suche nach Netzwerken",
         "refresh_not_compatible": "Ihr Gerät muss neu gestartet werden, um die Liste zu aktualisieren."
     },
     "charts": {
         "cpu_stats": {
-            "cpu_status": "Prozessor-Status",
-            "show_cores": "Kerne anzeigen",
-            "Core": "Kern"
+            "show_cores": "Kerne anzeigen"
         }
     },
     "captive_portal": {
         "Welcome": "Willkommen",
-        "copy_to_clipboard": "In die Zwischenablage kopieren",
         "visit_to_begin": "Besuchen Sie die folgende URL in Ihrem Browser, um zu beginnen:"
     }
 }
