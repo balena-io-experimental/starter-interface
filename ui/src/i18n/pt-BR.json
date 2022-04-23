@@ -5,8 +5,5 @@
         "cancel": "Cancelar",
         "ok": "ok",
         "are_you_sure": "Tem certeza?"
-    },
-    "wifi": {
-        "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis."
     }
 }

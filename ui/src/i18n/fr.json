@@ -5,8 +5,5 @@
         "close": "Fermer",
         "ok": "OK",
         "password": "Mot de passe"
-    },
-    "network": {
-        "forget_all_wifi": "Oublier toutes les connexions Wi-Fi"
     }
 }
