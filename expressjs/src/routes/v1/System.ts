@@ -1,4 +1,4 @@
-import dns = require('dns')
+import * as dns from 'dns'
 import express, { Request, Response } from 'express'
 import si from 'systeminformation'
 import queueCache from '@/middleware/queueCache'

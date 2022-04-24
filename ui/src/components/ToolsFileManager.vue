@@ -43,6 +43,7 @@
                 v-for="item in objPath"
                 :key="item"
                 v-ripple
+                class="cursor-pointer"
                 clickable
                 :label="item"
                 @click="

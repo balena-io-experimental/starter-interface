@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { getSdk } from 'balena-sdk'
-import express, { RequestHandler } from 'express'
+import express, { Request, RequestHandler } from 'express'
 import process from 'process'
 import lockFile from 'lockfile'
 import _ from 'lodash'
