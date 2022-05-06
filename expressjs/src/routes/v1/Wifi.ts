@@ -44,7 +44,7 @@ router.post('/v1/wifi', (async (req: Request, res: Response) => {
     Logger.debug('Returning wifi-connect request.')
     // Return the same http code as Axios request
     res.status(response.status)
-    // Return only the data received from Axios (no headers)
+    // Return only the data received from Axios
     res.json(response.data)
   } catch (error) {
     // Mirror the Axios status code

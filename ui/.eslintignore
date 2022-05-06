@@ -1,9 +1,10 @@
 /dist
+/node_modules
+/.quasar
 /src-bex/www
 /src-capacitor
 /src-cordova
-/.quasar
-/node_modules
-.eslintrc.js
-babel.config.js
 /src-ssr
+.eslintrc-treeshake.js
+.eslintrc.js
+quasar.conf.js

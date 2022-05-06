@@ -31,7 +31,6 @@ if (process.env.ON_DEVICE) {
 // https://nodejs.org/en/knowledge/file-system/security/introduction/#poison-null-bytes
 function validatePath(checkPath: string) {
   if (checkPath.indexOf(rootDir) !== 0 || checkPath.indexOf('\0') !== -1) {
-    Logger.warn('User attempting to reach out of the root dir?')
     throw new Error('User attempting to reach out of the root dir?')
   }
   return checkPath

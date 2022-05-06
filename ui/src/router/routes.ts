@@ -38,8 +38,7 @@ const routes: RouteRecordRaw[] = [
     ]
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
+  // Always leave this as last one, or remove it entirely
   {
     path: '/:catchAll(.*)*',
     component: () => import('src/pages/ErrorNotFound.vue')
