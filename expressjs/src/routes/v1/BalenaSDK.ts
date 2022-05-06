@@ -1,134 +1,106 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { getSdk } from 'balena-sdk'
 import express, { Request, RequestHandler } from 'express'
 import process from 'process'
 import lockFile from 'lockfile'
-import _ from 'lodash'
 import logger from '@/common/logger'
 
+interface lockfileError {
+  code: string
+}
+
 const router = express.Router()
-
-const uuid = process.env.BALENA_DEVICE_UUID || ''
-const apiKey = process.env.BALENA_API_KEY || ''
-
 const sdk = getSdk()
+
+const balenaLockfilePath = '/tmp/balena/updates.lock'
+const apiKey = process.env.BALENA_API_KEY || ''
+const uuid = process.env.BALENA_DEVICE_UUID || ''
 
 async function init() {
   try {
     await sdk.auth.logout()
     await sdk.auth.loginWithToken(apiKey)
   } catch (error) {
-    logger.error('Error logging into with balena SDK')
+    logger.error(error)
+    logger.error('Error logging in to Balena SDK')
   }
 }
 
 router.get('/v1/sdk/uuid', (_req, res) => res.json(uuid))
 
-router.get('/v1/sdk/device', (async (_req, res, next) => {
-  try {
-    res.json(await sdk.models.device.get(uuid))
-  } catch (error) {
-    next(error)
-  }
+router.get('/v1/sdk/device', (async (_req, res) => {
+  res.json(await sdk.models.device.get(uuid))
 }) as RequestHandler)
 
 //
 // environment variables
 //
 
-router.get('/v1/sdk/envVars', (async (_req, res, next) => {
-  try {
-    const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
-    const omittedEnvVars = _.map(envVars, (value) =>
-      _.pick(value, ['name', 'value'])
-    )
-    res.send(omittedEnvVars)
-  } catch (error) {
-    next(error)
-  }
+router.get('/v1/sdk/envVars', (async (_req, res) => {
+  const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
+
+  const omittedEnvVars = envVars.map((vars) => ({
+    name: vars.name,
+    value: vars.value
+  }))
+
+  return res.json(omittedEnvVars)
 }) as RequestHandler)
 
-router.delete('/v1/sdk/envVars', (req, res, next) => {
-  lock((error: Error) => {
-    // a non-null err probably means the supervisor is about to kill us
-    if (error != null) {
-      error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
-      return next(error)
-    }
+router.delete('/v1/sdk/envVars', (async (req, res) => {
+  if (process.env.ON_DEVICE) {
+    await lock()
 
-    try {
-      const removeAll: Array<Promise<void>> = []
-
-      _.each(_.compact(_.keys(req.body)), (value) => {
-        removeAll.push(sdk.models.device.envVar.remove(uuid, value))
+    await Promise.all(
+      Object.entries(req.body as Request).map(async ([key]) => {
+        await sdk.models.device.envVar.remove(uuid, key)
       })
+    )
 
-      Promise.all(removeAll)
-        .then(() => {
-          unlock()
-          res.sendStatus(200)
-        })
-        .catch((error) => {
-          unlock()
-          next(error)
-        })
-    } catch (error) {
-      unlock()
-      next(error)
-    }
-    return Promise.resolve()
-  })
-})
-
-router.post('/v1/sdk/envVars', (req, res, next) => {
-  lock((error: Error) => {
-    // a non-null err probably means the supervisor is about to kill us
-    if (error != null) {
-      error.message = '/v1/sdk/setEnvVars: Could not acquire lock'
-      return next(error)
-    }
-    try {
-      const allSetCalls = []
-
-      for (const [key, val] of Object.entries(req.body as Request)) {
-        if (key && !_.isNull(key)) {
-          allSetCalls.push(sdk.models.device.envVar.set(uuid, key, String(val)))
-        }
-      }
-      Promise.all(allSetCalls)
-        .then(() => {
-          unlock()
-          res.sendStatus(200)
-        })
-        .catch((error) => {
-          unlock()
-          next(error)
-        })
-    } catch (error) {
-      unlock()
-      next(error)
-    }
-    return Promise.resolve()
-  })
-})
-
-// since we can't batch update env vars, we need to create a lockfile to stop the supervisor from restarting our services before all of them are set
-function lock(cb?: any) {
-  if (!process.env.ON_DEVICE) {
-    return _.isFunction(cb) ? cb() : null
+    await unlock()
   }
-  return lockFile.lock('/tmp/balena/updates.lock', cb)
+
+  return res.json({ message: 'done' })
+}) as RequestHandler)
+
+router.post('/v1/sdk/envVars', (async (req, res) => {
+  if (process.env.ON_DEVICE) {
+    await lock()
+
+    await Promise.all(
+      Object.entries(req.body as Request).map(async ([key, val]) => {
+        if (val) {
+          await sdk.models.device.envVar.set(uuid, key, val as string)
+        }
+      })
+    )
+
+    await unlock()
+  }
+  return res.json({ message: 'done' })
+}) as RequestHandler)
+
+function lock() {
+  try {
+    return lockFile.lockSync(balenaLockfilePath)
+  } catch (error) {
+    const err = error as lockfileError
+
+    // Check the error code and if the lockfile already exists then continue. This avoids a
+    // permanent lockup that can occur if the lockfile exists and the UI refuses to continue
+    // which is required to remove the lockfile.
+    if (err.code === 'EEXIST') {
+      return Promise.resolve()
+    }
+    return Promise.reject(error)
+  }
 }
 
-function unlock(cb?: any) {
-  if (!process.env.ON_DEVICE) {
-    return _.isFunction(cb) ? cb() : null
+function unlock() {
+  try {
+    return lockFile.unlockSync(balenaLockfilePath)
+  } catch (error) {
+    return Promise.reject(error)
   }
-  return lockFile.unlock('/tmp/balena/updates.lock', cb)
 }
 
 void init()
