@@ -16,7 +16,7 @@
         :columns="columns"
         row-key="name"
         selection="multiple"
-        :rows-per-page-options="[5, 10, 50, 0]"
+        :rows-per-page-options="[0]"
       />
       <div class="q-pa-md q-gutter-y-md column items-start">
         <div v-if="selectedRows.length > 0">
