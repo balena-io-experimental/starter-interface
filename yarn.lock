@@ -6895,6 +6895,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.20.0
     autoprefixer: ^10.4.5
     axios: ^0.26.1
+    balena-sdk: ^16.19.8
     chart.js: ^3.7.1
     eslint: ^8.14.0
     eslint-config-airbnb-base: ^15.0.0

@@ -18,6 +18,8 @@
     "src/**/*.d.ts",
     "src/**/*.json",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    // Include for Balena SDK
+    "public/umd/*.min.js"
   ]
 }
