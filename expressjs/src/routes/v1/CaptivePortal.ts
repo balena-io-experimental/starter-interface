@@ -34,7 +34,7 @@ router.get('clients3.google.com', (_req, res) => {
 })
 
 // iOS/OSX
-router.get('/success.html', (req, res) => {
+router.get('/success.html', (_req, res) => {
   Logger.info('Redirecting to captive portal.')
   res.redirect(302, '/#/captiveportal')
 })

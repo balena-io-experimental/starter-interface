@@ -439,7 +439,6 @@ export default defineComponent({
     return {
       checkUploadOverwrite,
       columns,
-
       deleteItem,
       deleteSelectedItems,
       filter: ref(),
@@ -454,7 +453,6 @@ export default defineComponent({
       qBtnStyle,
       rows,
       selected,
-
       updateRows,
       uploaderAPIRoute
     }

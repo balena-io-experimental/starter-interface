@@ -41,12 +41,12 @@ export default defineComponent({
   setup() {
     const systemStore = useSystemStore()
     return {
-      systemStore,
       ChangeHostname,
       EnvConfig: defineAsyncComponent(
         () => import('src/components/SystemEnvConfig.vue')
       ),
       ForgetAllWifi,
+      systemStore,
       UpdateDevice
     }
   }

@@ -27,7 +27,7 @@ router.post(
   queueCache,
   async (req: Request, res: Response) => {
     const reqBody = req.body as reqBodyData
-    // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/const data = await si.js
+    // Sourced from: https://github.com/sebhildebrandt/systeminformation/blob/master/test/const
     if (reqBody.cmd === 'a') {
       try {
         const data = await si.audio()

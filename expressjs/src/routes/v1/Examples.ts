@@ -18,7 +18,7 @@ router.get('/v1/example_route_get', (_req, res) => {
 // Define your custom POST route
 router.post('/v1/example_route_post', (req, res) => {
   const reqBody = req.body as myData
-  // Store the value of paramater `mySentData` as `mySentDataVariable`
+  // Store the value of parameter `mySentData` as `mySentDataVariable`
   const mySentDataVariable = reqBody.mySentData
   // Log the message to the console
   Logger.info(mySentDataVariable)

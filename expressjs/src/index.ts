@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true }))
 // some asset sizes by 50%. Gains from 2 and up are marginal.
 app.use(compression({ level: 1 })) //
 // Enable sharing of static files
-app.use(express.static('public', { dotfiles: 'allow' }))
+app.use(express.static('public'))
 
 // ==========================================================
 
