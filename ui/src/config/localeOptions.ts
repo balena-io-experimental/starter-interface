@@ -9,8 +9,8 @@
 
 export default [
   { value: 'en-US', label: 'English' },
-  { value: 'fr', label: 'Français' },
   { value: 'es', label: 'Español' },
+  { value: 'fr', label: 'Français' },
   { value: 'pt-BR', label: 'Português' }
 ]
 
