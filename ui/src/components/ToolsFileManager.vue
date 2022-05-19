@@ -280,8 +280,8 @@ export default defineComponent({
       await updateRows()
     })
 
-    function checkUploadOverwrite(files: Array<QUploaderProps['onAdded']>) {
-      const itemCheck = files.filter((obj) =>
+    const checkUploadOverwrite: QUploaderProps['onAdded'] = (files) => {
+      const itemCheck = files.filter((obj: QUploaderProps['onAdded']) =>
         rows.value?.some(({ path }) => path.split('/').pop() === obj?.name)
       )
 
