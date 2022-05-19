@@ -1,1 +1,162 @@
-{}
+{
+    "general": {
+        "password": "Contraseña",
+        "name": "Nombre",
+        "submit": "Enviar",
+        "cancel": "Cancelar",
+        "close": "Cerrar",
+        "error": "Error",
+        "restart": "Reiniciar",
+        "status": "Estado",
+        "start": "Empezar",
+        "stop": "Parar",
+        "are_you_sure": "Estas seguro?",
+        "ok": "De acuerdo"
+    },
+    "components": {
+        "wifi": {
+            "connect": {
+                "network_connect_fail": "No se pudo ejecutar la solicitud de conexión.",
+                "connection_request": "Su dispositivo ahora intentará conectarse a la red. Si no está disponible en un minuto, vuelva a conectarse al dispositivo y verifique que su contraseña sea correcta.",
+                "connect": "Conectar",
+                "configure_hotspot": "Configurar punto de acceso",
+                "disconnect": "Desconectar",
+                "disconnect_request_sent": "Solicitud de desconexión enviada.",
+                "invalid_password_length": "La contraseña debe tener 8 caracteres o más.",
+                "network_fetch_fail": "Error al obtener las redes disponibles.",
+                "network_forget_fail": "Error al ejecutar la solicitud de olvido.",
+                "no_networks": "No hay redes disponibles",
+                "refresh_not_compatible": "Su dispositivo requiere un reinicio para actualizar la lista.",
+                "searching_networks": "Buscando redes",
+                "select_ssid": "Seleccione un SSID"
+            },
+            "configure_ssid": {
+                "ssid_set": "Conjunto de SSID. Si está ejecutando un punto de acceso, se reiniciará.",
+                "invalid_name": "Nombre inválido",
+                "set_new_hotspot_ssid": "Establecer un nuevo SSID de punto de acceso"
+            },
+            "configure_password": {
+                "set_new_hotspot_password": "Establecer una nueva contraseña de punto de acceso",
+                "invalid_name": "Nombre inválido",
+                "invalid_password_length": "La contraseña debe tener 8 caracteres o más.",
+                "password_set": "Conjunto de contraseñas. Si está ejecutando un punto de acceso, se reiniciará."
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "Solicitud de desconexión enviada.",
+                "forget_all_wifi": "Olvidar todas las conexiones WiFi"
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "copy_to_clipboard": "Copiar al portapapeles",
+                "url_copied": "Copiado en el portapapeles",
+                "connect_to_wifi": "Conectarse a WiFi",
+                "visit_to_begin": "Visite la siguiente URL en su navegador para comenzar:",
+                "welcome": "Bienvenido"
+            }
+        },
+        "system": {
+            "reboot": {
+                "restarting": "Su dispositivo se está reiniciando…",
+                "force_restart": "¿Forzar el reinicio?"
+            },
+            "device_info": {
+                "environment_variables": "Variables de entorno",
+                "internet_required": "Se requiere conexión a Internet para utilizar esta función.",
+                "ip_address": "Dirección IP",
+                "location": "Ubicación",
+                "mac_address": "Dirección MAC",
+                "memory": "Memoria",
+                "not_undervolted": "Potencia normal",
+                "os_version": "Versión del sistema operativo",
+                "public_ip": "IP pública",
+                "raw_json": "JSON sin procesar",
+                "response_details": "Detalles de la respuesta",
+                "sdk_unavailable": "No se puede conectar con los servidores de Balena.",
+                "storage": "Almacenamiento",
+                "supervisor_version": "Versión del supervisor",
+                "undervolted": "Infravalorado",
+                "offline": "Desconectado",
+                "online": "En línea"
+            },
+            "env_config": {
+                "add_change_env_var": "Agregar/Cambiar variable de entorno",
+                "raw_json": "JSON sin procesar",
+                "response_details": "Detalles de la respuesta",
+                "delete_selected_records": "Eliminar registros seleccionados",
+                "env_var_warning_message": "¡Agregar o eliminar variables de entorno reiniciará los servicios en este dispositivo!"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "Obtener registros diarios"
+            },
+            "shutdown": {
+                "force_shutdown": "¿Forzar apagado?",
+                "shutting_down": "Apagando el dispositivo…"
+            },
+            "update_device": {
+                "force_update": "¿Forzar actualización?",
+                "update_device": "Actualizar dispositivo"
+            }
+        },
+        "tools": {
+            "file_manager": {
+                "upload_files_exist": "Algunos de los archivos que ha añadido ya existen. Se sobrescribirán estos archivos.",
+                "mb": "Mb",
+                "mb_001": "0.01 Mb",
+                "delete": "Eliminar",
+                "empty_folder": "Carpeta vacía",
+                "enter_name": "Introduzca un nombre",
+                "filter": "Filtro",
+                "full_screen": "Pantalla completa",
+                "invalid_upload_string": "Las entradas contienen un nombre no válido y no se cargarán. Los siguientes caracteres no son compatibles: '/', '\\0'",
+                "invalid_filemanager_string": "Ha introducido un nombre no válido. Los caracteres siguientes no son compatibles: '/', '\\0'",
+                "item_already_exists": "El elemento ya existe",
+                "name": "Nombre",
+                "new_folder": "Carpeta nueva",
+                "no_results_found": "No se encontró ningún resultado",
+                "size_colon": "Tamaño:",
+                "upload": "Cargar"
+            },
+            "container_manager": {
+                "containers": "Recipientes"
+            },
+            "system_info": {
+                "select_request": "Seleccione una solicitud"
+            }
+        },
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": "Estado de la CPU"
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "Cambiar nombre de host"
+            }
+        }
+    },
+    "system": {
+        "menu_items": {
+            "configuration": "Configuración",
+            "device_info": "Información del dispositivo",
+            "networking": "Redes",
+            "system_info": "Información del sistema",
+            "file_manager": "Gestor de archivos",
+            "container_manager": "Gestor de contenedores"
+        },
+        "errors": {
+            "request_error": "Solicitud de error",
+            "wrong_way": "Manera incorrecta…"
+        },
+        "network": {
+            "network_connection_down": "Ya no estás conectado a una red. Intente volver a conectarse a su dispositivo.",
+            "network_connection_restored": "Conexión de red restaurada.",
+            "no_wifi_api": "No se pudo comunicar con Balena Py Wi-Fi Connect. ¿Está instalado en este dispositivo?"
+        },
+        "titles": {
+            "services": "Servicios",
+            "supervisor_config": "Configuración del supervisor"
+        }
+    },
+    "title": "Interfaz de dispositivo Balena"
+}
