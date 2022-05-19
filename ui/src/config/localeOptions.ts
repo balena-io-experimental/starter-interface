@@ -10,6 +10,7 @@
 export default [
   { value: 'en-US', label: 'English' },
   { value: 'fr', label: 'Français' },
+  { value: 'es', label: 'Español' },
   { value: 'pt-BR', label: 'Português' }
 ]
 
@@ -22,5 +23,5 @@ export default [
 // '../../../node_modules/quasar/lang/(en-US|fr|it).mjs' <-- imports English, French and Italian
 
 export const qLangList = import.meta.glob(
-  '../../../node_modules/quasar/lang/(en-US|fr|pt-BR).mjs'
+  '../../../node_modules/quasar/lang/(en-US|es|fr|pt-BR).mjs'
 )
