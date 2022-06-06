@@ -323,9 +323,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@quasar/app-vite@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@quasar/app-vite@npm:1.0.0"
+"@quasar/app-vite@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@quasar/app-vite@npm:1.0.1"
   dependencies:
     "@quasar/fastclick": 1.1.5
     "@quasar/vite-plugin": ^1.0.9
@@ -374,7 +374,7 @@ __metadata:
       optional: true
   bin:
     quasar: bin/quasar
-  checksum: e5306e58f371acfb8b91f57b9f4936ab9eedf4acce0ba0b828966445d6523a4fa6a4162fcf44e79e307a7e52077aa420ad9d6bfb7310e806bba969ff844b6f4f
+  checksum: d8c5be6c6d63458877883caaa1a2ae1753a3c6dc5a6ff62d2eda547f4d4c84452478dcd0daba2f2c69b1ef07dc0ad148885eef93ef7bc0e0fb6d3d7ccce49ac6
   languageName: node
   linkType: hard
 
@@ -637,7 +637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.34":
+"@types/node@npm:*":
   version: 17.0.34
   resolution: "@types/node@npm:17.0.34"
   checksum: eb9a640ab85b62e8f7b9db1f19b674cc4ff49b94d55085ab6c28c997dbe90356631c4df484fe686082c938bfc6fb02c9e85eb805d1415dfe6de7e31f47a09a70
@@ -655,6 +655,13 @@ __metadata:
   version: 12.20.52
   resolution: "@types/node@npm:12.20.52"
   checksum: b720ee939a43f1427baf1606deee97e50892ff482bf3d64ab8a1eda3a50802a80866a232aeab337621f6ea4fdc4515147d7829337653e9e99d97c3aaeec3615d
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^17.0.40":
+  version: 17.0.40
+  resolution: "@types/node@npm:17.0.40"
+  checksum: e3b2fe876672fbe4be84ce17773944eb2f5eaba50e2c6c0536bdf6d4972ed6488581580581f154183fdc8f2d56fa42a42e3d6e83b9b71ee25adea16a84765e92
   languageName: node
   linkType: hard
 
@@ -1359,9 +1366,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"balena-sdk@npm:^16.20.4":
-  version: 16.20.4
-  resolution: "balena-sdk@npm:16.20.4"
+"balena-sdk@npm:^16.21.0":
+  version: 16.21.0
+  resolution: "balena-sdk@npm:16.21.0"
   dependencies:
     "@balena/es-version": ^1.0.0
     "@types/json-schema": ^7.0.9
@@ -1380,7 +1387,7 @@ __metadata:
     ndjson: ^2.0.0
     pinejs-client-core: ^6.9.6
     tslib: ^2.1.0
-  checksum: 7d82bd21fe13ec505f13e002f040f322dca26d8a0d757e54828c1e1b172fa364442f06d5fd114f0aee1eb83fa60aa4fc720dd9c051e7b3e5aa1ad647fe245694
+  checksum: 290ca5272a90bbf77bc29a9f7f0040ca620a516165ffd1351618e5ef70661a65887d4010115da85ab0c4c30c0aca26d66aa4541a03662455379a712fddc8194d
   languageName: node
   linkType: hard
 
@@ -1689,10 +1696,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:^3.7.1":
-  version: 3.7.1
-  resolution: "chart.js@npm:3.7.1"
-  checksum: f9d118d3b7dd3c36b6da7a8d71ac9e5d9673b81095cc66c3f61ff91674e20020c6700f8c9c6f93713fa8474eb471ded106114346ccc6afa88b4a7d0eb73dcea4
+"chart.js@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "chart.js@npm:3.8.0"
+  checksum: 0360212bf5d534effc8475a1aa705ba7257a315af368b5e8eecf476f0bd57a6bb80ad740e870d552f2d11e134dd1497ccef02950d7e626c21a400ff00ecf59af
   languageName: node
   linkType: hard
 
@@ -3355,11 +3362,11 @@ __metadata:
     "@types/fs-extra": ^9.0.13
     "@types/klaw-sync": ^6.0.1
     "@types/lockfile": ^1.0.2
-    "@types/node": ^17.0.34
+    "@types/node": ^17.0.40
     "@typescript-eslint/eslint-plugin": ^5.25.0
     "@typescript-eslint/parser": ^5.25.0
     axios: ^0.27.2
-    balena-sdk: ^16.20.4
+    balena-sdk: ^16.21.0
     compression: ^1.7.4
     cors: ^2.8.5
     eslint: ^8.15.0
@@ -3374,7 +3381,7 @@ __metadata:
     lockfile: ^1.0.4
     nodemon: ^2.0.16
     prettier: ^2.6.2
-    systeminformation: ^5.11.15
+    systeminformation: ^5.11.16
     ts-node: ^10.7.0
     tsc-alias: ^1.6.7
     tsconfig-paths: ^4.0.0
@@ -5900,10 +5907,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"quasar@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "quasar@npm:2.7.0"
-  checksum: 7b78c4fe8be56494c6286b300c755b146a315fc7561db4a2ff1ac9f9bae6f098aa90f21f2bb63108d110bc0917e2f20e09155d8de73699ceda001d8b98d1fde3
+"quasar@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "quasar@npm:2.7.1"
+  checksum: c87a96f3e69c7d80ccbd07acb3b637b6aa35ea876ba224edaa97ea108e0e17aa0e997ac9f31800ee3d5345ded5ab5877ba4e5a9b3b9bc28bfa383a2d369c78b4
   languageName: node
   linkType: hard
 
@@ -6693,12 +6700,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.11.15":
-  version: 5.11.15
-  resolution: "systeminformation@npm:5.11.15"
+"systeminformation@npm:^5.11.16":
+  version: 5.11.16
+  resolution: "systeminformation@npm:5.11.16"
   bin:
     systeminformation: lib/cli.js
-  checksum: 29bfd93cd6b733a2730a40daba415ecccb030b1dd965f872d0d0b272a935d31ab35c092ad273ce174f10f123899de03d95295336e5f9c68df0eb4a93b8eaed21
+  checksum: 4e4fb4c9c86c658c7e07a7661ac85a102bfb0a134f76cc5c5e7daf7ba13f9b43895d4ce4d80e55275a3395d254d20a84c53f036f1baececf5b94028ec93242c4
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
@@ -7057,14 +7064,14 @@ __metadata:
   dependencies:
     "@intlify/eslint-plugin-vue-i18n": ^2.0.0
     "@intlify/vite-plugin-vue-i18n": ^3.4.0
-    "@quasar/app-vite": ^1.0.0
+    "@quasar/app-vite": ^1.0.1
     "@quasar/extras": ^1.14.0
-    "@types/node": ^17.0.34
+    "@types/node": ^17.0.40
     "@typescript-eslint/eslint-plugin": ^5.25.0
     "@typescript-eslint/parser": ^5.25.0
     autoprefixer: ^10.4.7
     axios: ^0.27.2
-    chart.js: ^3.7.1
+    chart.js: ^3.8.0
     eslint: ^8.15.0
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.5.0
@@ -7072,7 +7079,7 @@ __metadata:
     js-file-download: ^0.4.12
     pinia: ^2.0.14
     prettier: ^2.6.2
-    quasar: ^2.7.0
+    quasar: ^2.7.1
     typescript: ^4.6.4
     vue: ^3.2.34
     vue-chart-3: ^3.1.8
