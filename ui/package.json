@@ -15,10 +15,10 @@
   "dependencies": {
     "@quasar/extras": "^1.14.0",
     "axios": "^0.27.2",
-    "chart.js": "^3.7.1",
+    "chart.js": "^3.8.0",
     "js-file-download": "^0.4.12",
     "pinia": "^2.0.14",
-    "quasar": "^2.7.0",
+    "quasar": "^2.7.1",
     "vue": "^3.2.34",
     "vue-chart-3": "^3.1.8",
     "vue-i18n": "^9.1.10",
@@ -27,8 +27,8 @@
   "devDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
-    "@quasar/app-vite": "^1.0.0",
-    "@types/node": "^17.0.34",
+    "@quasar/app-vite": "^1.0.1",
+    "@types/node": "^17.0.40",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "autoprefixer": "^10.4.7",

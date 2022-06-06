@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "balena-sdk": "^16.20.4",
+    "balena-sdk": "^16.21.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^5.0.0-beta.1",
@@ -24,7 +24,7 @@
     "fs-extra": "^10.1.0",
     "klaw-sync": "^6.0.0",
     "lockfile": "^1.0.4",
-    "systeminformation": "^5.11.15",
+    "systeminformation": "^5.11.16",
     "winston": "^3.7.2"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/klaw-sync": "^6.0.1",
     "@types/lockfile": "^1.0.2",
-    "@types/node": "^17.0.34",
+    "@types/node": "^17.0.40",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "eslint": "^8.15.0",
