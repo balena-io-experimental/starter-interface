@@ -202,7 +202,12 @@
         <q-td :props="props" auto-width>
           <div v-if="props.row.type == 'file'">
             <q-icon size="xs" name="info">
-              <q-tooltip class="text-caption">
+              <q-tooltip
+                class="text-caption text-center text-no-wrap"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+              >
                 <div v-if="props.row.stats.size < 10000">
                   {{ $t('components.tools.file_manager.size_colon')
                   }}{{ $t('components.tools.file_manager.mb_001') }}
@@ -308,13 +313,13 @@ export default defineComponent({
     }
 
     async function deleteCall(path: string) {
-      await expressApi
-        .post('/v1/filemanager/delete', {
+      try {
+        await expressApi.post('/v1/filemanager/delete', {
           currentPath: path
         })
-        .catch(() => {
-          $q.notify({ type: 'negative', message: t('general.error') })
-        })
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.error') })
+      }
       return Promise.resolve()
     }
 
@@ -328,9 +333,13 @@ export default defineComponent({
     async function deleteSelectedItems() {
       isLoading.value = true
 
-      selected.value.forEach((item) => {
-        deleteCall(item.path).catch((err) => console.log(err))
-      })
+      try {
+        await expressApi.post('/v1/filemanager/delete', {
+          selectedPaths: selected.value
+        })
+      } catch (error) {
+        $q.notify({ type: 'negative', message: t('general.error') })
+      }
 
       await updateRows()
       isLoading.value = false
@@ -379,17 +388,18 @@ export default defineComponent({
             message: t('components.tools.file_manager.item_already_exists')
           })
         } else {
-          try {
-            void expressApi.post('/v1/filemanager/newfolder', {
+          expressApi
+            .post('/v1/filemanager/newfolder', {
               currentPathArray: objPath.value,
               newFolderName: newName
             })
-
-            void updateRows()
-            notifyComplete()
-          } catch {
-            $q.notify({ type: 'negative', message: t('general.error') })
-          }
+            .then(async () => {
+              await updateRows()
+              notifyComplete()
+            })
+            .catch(() => {
+              $q.notify({ type: 'negative', message: t('general.error') })
+            })
         }
       })
     }
