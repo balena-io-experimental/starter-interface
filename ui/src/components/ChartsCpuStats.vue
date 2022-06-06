@@ -142,7 +142,7 @@ export default defineComponent({
       try {
         const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
           '/v1/system/systeminfo',
-          { cmd: cmdCurrentLoad?.cmd }
+          { id: cmdCurrentLoad?.id }
         )
 
         // If there are more than X items in the object, remove one

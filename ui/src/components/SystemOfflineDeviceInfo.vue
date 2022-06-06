@@ -165,13 +165,13 @@ export default defineComponent({
 
     function fsSize() {
       return expressApi.post('/v1/system/systeminfo', {
-        cmd: cmdFsSize?.cmd
+        id: cmdFsSize?.id
       })
     }
 
     function mem() {
       return expressApi.post('/v1/system/systeminfo', {
-        cmd: cmdMem?.cmd
+        id: cmdMem?.id
       })
     }
 

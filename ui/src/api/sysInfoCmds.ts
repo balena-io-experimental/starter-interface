@@ -54,5 +54,5 @@ export default [
   { id: 'V', cmd: 'vboxInfo', label: 'VBox Info' },
   { id: 'v', cmd: 'versions', label: 'Versions' },
   { id: 'x', cmd: 'wifiConnections', label: 'Wifi Connections' },
-  { id: '/', cmd: 'wifiInterfaces', label: 'Wifi Interfaces' }
+  { id: 'W', cmd: 'wifiInterfaces', label: 'Wifi Interfaces' }
 ]

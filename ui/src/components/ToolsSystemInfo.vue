@@ -35,12 +35,12 @@ export default defineComponent({
     const isLoadingRequest = ref<boolean>(false)
     const response = ref<AxiosResponse>()
 
-    async function getSystemInfo(model: { cmd: string } | null) {
+    async function getSystemInfo(model: { id: string } | null) {
       if (model != null) {
         isLoadingRequest.value = true
         try {
           const res = await expressApi.post('/v1/system/systeminfo', {
-            cmd: model.cmd
+            id: model.id
           })
 
           response.value = res
