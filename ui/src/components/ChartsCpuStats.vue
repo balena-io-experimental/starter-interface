@@ -13,6 +13,7 @@ import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
 import { colors, getCssVar, LoadingBar } from 'quasar'
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
+import sysInfoCmds from 'src/api/sysInfoCmds'
 import { useI18n } from 'vue-i18n'
 
 interface cpuStat {
@@ -45,6 +46,8 @@ export default defineComponent({
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
+
+    const cmdCurrentLoad = sysInfoCmds.find((cmd) => cmd.id === 'l')
     const chartHeight = 150
     const chartBackgroundOpacity = 70
     const isUnMounted = ref<boolean>(false)
@@ -137,10 +140,9 @@ export default defineComponent({
 
     async function fetchCpuStats(): Promise<void> {
       try {
-        // eslint-disable-next-line no-await-in-loop
         const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
           '/v1/system/systeminfo',
-          { cmd: 'l' }
+          { cmd: cmdCurrentLoad?.cmd }
         )
 
         // If there are more than X items in the object, remove one
@@ -192,7 +194,6 @@ export default defineComponent({
         chartData.value.datasets = []
       } else {
         // Delay before calling next fetch
-        // eslint-disable-next-line no-await-in-loop
         await delay(props.pollInterval)
         void fetchCpuStats()
       }

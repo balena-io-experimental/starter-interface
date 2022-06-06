@@ -109,6 +109,7 @@
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { supervisor } from 'src/api/supervisor'
+import sysInfoCmds from 'src/api/sysInfoCmds'
 import { useSystemStore } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 import { qSpinnerStyle } from 'src/config/qStyles'
@@ -151,6 +152,8 @@ export default defineComponent({
     const isLoading = ref<boolean>(true)
 
     // Constants
+    const cmdFsSize = sysInfoCmds.find((cmd) => cmd.id === 'f')
+    const cmdMem = sysInfoCmds.find((cmd) => cmd.id === 'm')
     const device = ref<device>()
     const f = ref<f>()
     const m = ref<m>()
@@ -162,13 +165,13 @@ export default defineComponent({
 
     function fsSize() {
       return expressApi.post('/v1/system/systeminfo', {
-        cmd: 'f'
+        cmd: cmdFsSize?.cmd
       })
     }
 
     function mem() {
       return expressApi.post('/v1/system/systeminfo', {
-        cmd: 'm'
+        cmd: cmdMem?.cmd
       })
     }
 
