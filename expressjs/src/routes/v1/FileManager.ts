@@ -14,6 +14,7 @@ interface reqBodyData {
   currentPath: string
   currentPathArray: Array<string>
   newFolderName: string
+  selectedPaths: Array<{ path: string }>
 }
 
 const router = express.Router()
@@ -24,6 +25,13 @@ let rootDir = path.join(`${__dirname}/dev-storage/`)
 // If on a Balena device, change local directory to local volume
 if (process.env.ON_DEVICE) {
   rootDir = '/app/storage/'
+}
+
+// Check the storage directory exists
+try {
+  void fse.ensureDir(rootDir)
+} catch (error) {
+  Logger.error(error)
 }
 
 // Prevent Directory Traversal and Null Bytes
@@ -44,9 +52,6 @@ const filterFn = (item: Item) => {
 
 // Fetch files
 function fetchList(currentPathArray: Array<string>) {
-  // Check the storage directory exists
-  fse.ensureDir(rootDir).catch((error) => Logger.error(error))
-
   // Fetch list of files
   const files = klawSync(
     validatePath(path.join(rootDir, currentPathArray.join('/'))),
@@ -84,10 +89,25 @@ function fetchList(currentPathArray: Array<string>) {
 // Routes //
 router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
   const reqBody = req.body as reqBodyData
-  try {
-    await fse.remove(validatePath(path.join(reqBody.currentPath)))
-  } catch (error) {
-    Logger.error(error)
+
+  if (reqBody.currentPath) {
+    // If only one item to delete
+    try {
+      await fse.remove(validatePath(path.join(reqBody.currentPath)))
+    } catch (error) {
+      Logger.error(error)
+    }
+  } else {
+    // If multiple items to delete
+    await Promise.all(
+      reqBody.selectedPaths.map(async (item) => {
+        try {
+          await fse.remove(validatePath(path.join(item.path)))
+        } catch (error) {
+          console.log(error)
+        }
+      })
+    )
   }
   res.json({ message: 'success' })
 }) as RequestHandler)
@@ -116,9 +136,12 @@ router.post('/v1/filemanager/newfolder', (async (
 
   // Awaiting here as immediately after receiving a response, the UI will refresh the page.
   // If it refreshes before this completes, it could end up showing without the new folder
-  await fse.ensureDir(newFolder).catch((error) => Logger.error(error))
-
-  res.json({ message: 'success' })
+  try {
+    await fse.ensureDir(newFolder)
+    res.json({ message: 'success' })
+  } catch (error) {
+    Logger.error(error)
+  }
 }) as RequestHandler)
 
 router.post('/v1/filemanager/upload', (req: Request, res: Response) => {
