@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh Lpr lFf">
-    <q-header v-bind="qHeaderStyle.header">
+  <q-layout view="hHh LpR fFf">
+    <q-header bordered reveal v-bind="qHeaderStyle.header">
       <q-toolbar>
         <q-btn
           class="q-mr-sm"

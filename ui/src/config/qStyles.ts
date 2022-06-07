@@ -12,7 +12,7 @@ export const qHeaderStyle = {
     elevated: true
   },
   logo: '/logo.svg', // Remove this line to have no logo
-  title: { class: 'text-h6 text-weight-bold' }
+  title: { class: 'text-subtitle1' }
 }
 
 export const qAvatarStyle = {
