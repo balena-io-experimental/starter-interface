@@ -11,7 +11,7 @@ assets:
   logo:
     type: blob.asset
     data:
-      url: "https://raw.githubusercontent.com/maggie0002/balena-device-ui/main/logo.png"
+      url: "https://github.com/maggie0002/balena-apps-logo/raw/main/logo.png"
 data:
   defaultDeviceType: raspberrypi4-64
   supportedDeviceTypes:
