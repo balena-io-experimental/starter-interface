@@ -8,7 +8,7 @@ A community-built device interface for using Balena devices. It can be used to i
 
 <b>Vue user interface with prebuilt features:</b>
 
-<img width="1436" alt="ui-example" src="https://user-images.githubusercontent.com/64841595/174449399-36d317f6-bacd-44d2-bbcf-e71f8f173950.png">
+![ui_demo](https://user-images.githubusercontent.com/64841595/178042890-bcddc685-54bf-4749-95b2-d9a03fe28260.png)
 
 <b>Connect to nearby Wi-Fi networks:</b>
 
