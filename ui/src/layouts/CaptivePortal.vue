@@ -20,7 +20,7 @@
   <div v-if="tab == 'welcome'" class="q-pa-lg text-center">
     <!-- Logo -->
     <div class="q-mb-md">
-      <q-img :src="qHeaderStyle.logo" style="max-width: 175px" />
+      <q-img :src="qHeaderStyle.logo_coloured" style="max-width: 175px" />
     </div>
     <!-- Title -->
     <div class="text-h4 q-mb-md">
