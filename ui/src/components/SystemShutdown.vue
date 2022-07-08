@@ -58,7 +58,7 @@ export default defineComponent({
 
     function shutdown() {
       // This does not wait for return of promise as connection is lost too quickly
-      void supervisor.shutdown(isCheckBox.value)
+      void supervisor.v1.shutdown(isCheckBox.value)
 
       setTimeout(() => {
         $q.notify({

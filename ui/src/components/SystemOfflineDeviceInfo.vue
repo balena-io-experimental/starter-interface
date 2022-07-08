@@ -160,7 +160,7 @@ export default defineComponent({
 
     // Axios Functions
     function deviceInfo() {
-      return supervisor.device()
+      return supervisor.v1.device()
     }
 
     function fsSize() {

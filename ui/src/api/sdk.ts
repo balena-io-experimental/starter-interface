@@ -11,6 +11,7 @@ export const sdk = {
   device() {
     return expressApi.get(`${apiPathV1}/device`)
   },
+
   uuid() {
     return expressApi.get(`${apiPathV1}/uuid`)
   },
