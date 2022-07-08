@@ -13,9 +13,9 @@
           @click="isLeftDrawerOpen = !isLeftDrawerOpen"
         />
 
-        <router-link v-if="qHeaderStyle.logo" to="/">
-          <q-avatar>
-            <img :src="qHeaderStyle.logo" />
+        <router-link v-if="qHeaderStyle.logo_white" to="/">
+          <q-avatar square size="sm">
+            <q-img :src="qHeaderStyle.logo_white" />
           </q-avatar>
         </router-link>
 
