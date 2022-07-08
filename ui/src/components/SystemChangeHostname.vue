@@ -32,7 +32,7 @@ export default defineComponent({
     const $q = useQuasar()
 
     async function changeHostname(newHostname: string) {
-      response.value = await supervisor.device_host_config_patch({
+      response.value = await supervisor.v1.device_host_config_patch({
         network: { hostname: newHostname }
       })
       $q.notify({

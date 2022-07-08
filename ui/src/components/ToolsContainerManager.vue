@@ -126,7 +126,7 @@ export default defineComponent({
       isLoading.value = true
 
       try {
-        const res = (await supervisor.state_status()) as AxiosResponse<{
+        const res = (await supervisor.v2.state_status()) as AxiosResponse<{
           containers: containers[]
         }>
         rows.value = res.data.containers
@@ -141,7 +141,7 @@ export default defineComponent({
     async function restartContainer(serviceName: string) {
       isLoading.value = true
       try {
-        const res = await supervisor.restart_service(serviceName)
+        const res = await supervisor.v2.restart_service(serviceName)
 
         await getContainer()
         $q.notify({
@@ -158,7 +158,7 @@ export default defineComponent({
     async function startContainer(serviceName: string) {
       isLoading.value = true
       try {
-        const res = await supervisor.start_service(serviceName)
+        const res = await supervisor.v2.start_service(serviceName)
 
         await getContainer()
         $q.notify({
@@ -175,7 +175,7 @@ export default defineComponent({
     async function stopContainer(serviceName: string) {
       isLoading.value = true
       try {
-        const res = await supervisor.stop_service(serviceName)
+        const res = await supervisor.v2.stop_service(serviceName)
 
         await getContainer()
         $q.notify({

@@ -84,7 +84,7 @@ export default defineComponent({
     onMounted(async () => {
       try {
         const response =
-          (await supervisor.device_host_config_get()) as AxiosResponse<hostConfig>
+          (await supervisor.v1.device_host_config_get()) as AxiosResponse<hostConfig>
         hostname.value = response.data.network.hostname
       } catch (error) {
         console.error(error)

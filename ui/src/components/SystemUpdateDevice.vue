@@ -28,7 +28,7 @@ export default defineComponent({
     const $q = useQuasar()
 
     async function update() {
-      response.value = await supervisor.update(isCheckBox.value)
+      response.value = await supervisor.v1.update(isCheckBox.value)
       $q.notify({
         type: 'positive',
         message: response.value.data as string

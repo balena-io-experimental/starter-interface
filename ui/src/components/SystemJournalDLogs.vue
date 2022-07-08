@@ -24,7 +24,7 @@ export default defineComponent({
 
     async function fetchLogs() {
       isLoading.value = true
-      response.value = await supervisor.journald_logs()
+      response.value = await supervisor.v2.journald_logs()
       isLoading.value = false
 
       exportFile('journald-logs.txt', response.value.data as string)
