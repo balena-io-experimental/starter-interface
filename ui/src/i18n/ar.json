@@ -1,1 +1,163 @@
-{}
+{
+    "general": {
+        "are_you_sure": "",
+        "close": "",
+        "ok": "",
+        "start": "",
+        "restart": "",
+        "status": "",
+        "cancel": "",
+        "submit": "",
+        "stop": "",
+        "error": "",
+        "name": "",
+        "password": ""
+    },
+    "components": {
+        "wifi": {
+            "forget_all_wifi": {
+                "disconnect_request_sent": "",
+                "forget_all_wifi": ""
+            },
+            "connect": {
+                "no_networks": "",
+                "refresh_not_compatible": "",
+                "network_forget_fail": "",
+                "network_connect_fail": "",
+                "connection_request": "",
+                "configure_hotspot": "",
+                "network_fetch_fail": "",
+                "invalid_password_length": "",
+                "disconnect": "",
+                "disconnect_request_sent": "",
+                "select_ssid": "",
+                "searching_networks": "",
+                "connect": ""
+            },
+            "configure_password": {
+                "password_set": "",
+                "set_new_hotspot_password": "",
+                "invalid_name": "",
+                "invalid_password_length": ""
+            },
+            "configure_ssid": {
+                "invalid_name": "",
+                "ssid_set": "",
+                "set_new_hotspot_ssid": ""
+            }
+        },
+        "system": {
+            "env_config": {
+                "response_details": "",
+                "env_var_warning_message": "",
+                "delete_selected_records": "",
+                "raw_json": "",
+                "add_change_env_var": ""
+            },
+            "update_device": {
+                "update_device": "",
+                "force_update": ""
+            },
+            "device_info": {
+                "mac_address": "",
+                "storage": "",
+                "internet_required": "",
+                "public_ip": "",
+                "not_undervolted": "",
+                "ip_address": "",
+                "response_details": "",
+                "os_version": "",
+                "online": "",
+                "environment_variables": "",
+                "memory": "",
+                "sdk_unavailable": "",
+                "raw_json": "",
+                "undervolted": "",
+                "offline": "",
+                "location": "",
+                "supervisor_version": ""
+            },
+            "shutdown": {
+                "force_shutdown": "",
+                "shutting_down": ""
+            },
+            "reboot": {
+                "restarting": "",
+                "force_restart": ""
+            },
+            "journal_d_logs": {
+                "fetch_journald": ""
+            }
+        },
+        "tools": {
+            "file_manager": {
+                "filter": "",
+                "upload_files_exist": "",
+                "upload": "",
+                "name": "",
+                "full_screen": "",
+                "empty_folder": "",
+                "size_colon": "",
+                "mb_001": "",
+                "delete": "",
+                "enter_name": "",
+                "new_folder": "",
+                "invalid_upload_string": "",
+                "invalid_filemanager_string": "",
+                "mb": "",
+                "item_already_exists": "",
+                "no_results_found": ""
+            },
+            "container_manager": {
+                "containers": ""
+            },
+            "system_info": {
+                "select_request": ""
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "visit_to_begin": "",
+                "welcome": "",
+                "copy_to_clipboard": "",
+                "connect_to_wifi": "",
+                "url_copied": ""
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": ""
+            }
+        },
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": ""
+            }
+        }
+    },
+    "system": {
+        "menu_items": {
+            "file_manager": "",
+            "device_info": "",
+            "system_info": "",
+            "container_manager": "",
+            "networking": "",
+            "configuration": ""
+        },
+        "network": {
+            "network_connection_down": "",
+            "network_connection_restored": "",
+            "no_wifi_api": ""
+        },
+        "titles": {
+            "supervisor_config": "",
+            "services": ""
+        },
+        "errors": {
+            "wrong_way": "",
+            "request_error": ""
+        }
+    },
+    "cloudlink": "",
+    "title": ""
+}

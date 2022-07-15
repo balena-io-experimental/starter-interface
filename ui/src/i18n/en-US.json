@@ -1,162 +1,163 @@
 {
-  "title": "Balena Device Interface",
-  "general": {
-    "are_you_sure": "Are you sure?",
-    "close": "Close",
-    "cancel": "Cancel",
-    "error": "Error",
-    "name": "Name",
-    "ok": "Ok",
-    "password": "Password",
-    "restart": "Restart",
-    "status": "Status",
-    "start": "Start",
-    "stop": "Stop",
-    "submit": "Submit"
-  },
-  "components": {
-    "charts": {
-      "cpu_stats": {
-        "cpu_status": "CPU Status"
-      }
+    "title": "Balena Device Interface",
+    "general": {
+        "are_you_sure": "Are you sure?",
+        "close": "Close",
+        "cancel": "Cancel",
+        "error": "Error",
+        "name": "Name",
+        "ok": "Ok",
+        "password": "Password",
+        "restart": "Restart",
+        "status": "Status",
+        "start": "Start",
+        "stop": "Stop",
+        "submit": "Submit"
     },
-    "layouts": {
-      "captive_portal": {
-        "connect_to_wifi": "Connect to WiFi",
-        "copy_to_clipboard": "Copy to clipboard",
-        "url_copied": "Copied to clipboard",
-        "visit_to_begin": "Visit the following URL in your browser to begin:",
-        "welcome": "Welcome"
-      }
-    },
-    "network": {
-      "change_hostname": {
-        "change_hostname": "Change hostname"
-      }
+    "components": {
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": "CPU Status"
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "connect_to_wifi": "Connect to WiFi",
+                "copy_to_clipboard": "Copy to clipboard",
+                "url_copied": "Copied to clipboard",
+                "visit_to_begin": "Visit the following URL in your browser to begin:",
+                "welcome": "Welcome"
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "Change hostname"
+            }
+        },
+        "system": {
+            "device_info": {
+                "environment_variables": "Environment Variables",
+                "internet_required": "Internet connectivity is required to use this feature.",
+                "ip_address": "IP Address",
+                "location": "Location",
+                "mac_address": "MAC Address",
+                "memory": "Memory",
+                "not_undervolted": "Normal Power",
+                "os_version": "OS Version",
+                "public_ip": "Public IP",
+                "raw_json": "Raw JSON",
+                "response_details": "Response Details",
+                "sdk_unavailable": "Unable to reach Balena servers.",
+                "storage": "Storage",
+                "supervisor_version": "Supervisor Version",
+                "undervolted": "Undervolted",
+                "offline": "Offline",
+                "online": "Online"
+            },
+            "env_config": {
+                "add_change_env_var": "Add/Change Environment Variable",
+                "raw_json": "Raw JSON",
+                "response_details": "Response Details",
+                "delete_selected_records": "Delete Selected Records",
+                "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "Fetch Journald Logs"
+            },
+            "reboot": {
+                "restarting": "Your device is restarting…",
+                "force_restart": "Force restart?"
+            },
+            "shutdown": {
+                "force_shutdown": "Force shutdown?",
+                "shutting_down": "Shutting device down…"
+            },
+            "update_device": {
+                "force_update": "Force update?",
+                "update_device": "Update device"
+            }
+        },
+        "tools": {
+            "container_manager": {
+                "containers": "Containers"
+            },
+            "file_manager": {
+                "mb_001": "0.01 Mb",
+                "delete": "Delete",
+                "empty_folder": "Empty Folder",
+                "enter_name": "Enter a name",
+                "filter": "Filter",
+                "full_screen": "Full Screen",
+                "invalid_upload_string": "Entries contain an invalid name and will not be uploaded. The following characters are not compatible: '/', '\\0'",
+                "invalid_filemanager_string": "You entered an invalid name. The following characters are not compatible: '/', '\\0'",
+                "item_already_exists": "Item already exists",
+                "mb": "Mb",
+                "name": "Name",
+                "new_folder": "New Folder",
+                "no_results_found": "No results found",
+                "size_colon": "Size:",
+                "upload": "Upload",
+                "upload_files_exist": "Some of the files you added already exist. These files will be overwritten."
+            },
+            "system_info": {
+                "select_request": "Select a request"
+            }
+        },
+        "wifi": {
+            "configure_password": {
+                "invalid_name": "Invalid name",
+                "invalid_password_length": "Password must be 8 characters or more.",
+                "set_new_hotspot_password": "Set a new hotspot password",
+                "password_set": "Password set. If you are running a hotspot, it will restart."
+            },
+            "configure_ssid": {
+                "invalid_name": "Invalid name",
+                "set_new_hotspot_ssid": "Set a new hotspot SSID",
+                "ssid_set": "SSID set. If you are running a hotspot, it will restart."
+            },
+            "connect": {
+                "connect": "Connect",
+                "connection_request": "Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.",
+                "configure_hotspot": "Configure hotspot",
+                "disconnect": "Disconnect",
+                "disconnect_request_sent": "Disconnect request sent.",
+                "invalid_password_length": "Password must be 8 characters or more.",
+                "network_connect_fail": "Failed to execute the connect request.",
+                "network_fetch_fail": "Failed to fetch the available networks.",
+                "network_forget_fail": "Failed to execute the forget request.",
+                "no_networks": "No available networks",
+                "refresh_not_compatible": "Your device requires a restart to refresh the list.",
+                "searching_networks": "Searching for networks",
+                "select_ssid": "Select an SSID"
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "Disconnect request sent.",
+                "forget_all_wifi": "Forget All WiFi Connections"
+            }
+        }
     },
     "system": {
-      "device_info": {
-        "environment_variables": "Environment Variables",
-        "internet_required": "Internet connectivity is required to use this feature.",
-        "ip_address": "IP Address",
-        "location": "Location",
-        "mac_address": "MAC Address",
-        "memory": "Memory",
-        "not_undervolted": "Normal Power",
-        "os_version": "OS Version",
-        "public_ip": "Public IP",
-        "raw_json": "Raw JSON",
-        "response_details": "Response Details",
-        "sdk_unavailable": "Unable to reach Balena servers.",
-        "storage": "Storage",
-        "supervisor_version": "Supervisor Version",
-        "undervolted": "Undervolted",
-        "offline": "Offline",
-        "online": "Online"
-      },
-      "env_config": {
-        "add_change_env_var": "Add/Change Environment Variable",
-        "raw_json": "Raw JSON",
-        "response_details": "Response Details",
-        "delete_selected_records": "Delete Selected Records",
-        "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!"
-      },
-      "journal_d_logs": {
-        "fetch_journald": "Fetch Journald Logs"
-      },
-      "reboot": {
-        "restarting": "Your device is restarting…",
-        "force_restart": "Force restart?"
-      },
-      "shutdown": {
-        "force_shutdown": "Force shutdown?",
-        "shutting_down": "Shutting device down…"
-      },
-      "update_device": {
-        "force_update": "Force update?",
-        "update_device": "Update device"
-      }
+        "errors": {
+            "request_error": "Request error",
+            "wrong_way": "Wrong way…"
+        },
+        "menu_items": {
+            "configuration": "Configuration",
+            "container_manager": "Container Manager",
+            "device_info": "Device Info",
+            "networking": "Networking",
+            "system_info": "System Info",
+            "file_manager": "File Manager"
+        },
+        "network": {
+            "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
+            "network_connection_restored": "Network connection restored.",
+            "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
+        },
+        "titles": {
+            "services": "Services",
+            "supervisor_config": "Supervisor Config"
+        }
     },
-    "tools": {
-      "container_manager": {
-        "containers": "Containers"
-      },
-      "file_manager": {
-        "mb_001": "0.01 Mb",
-        "delete": "Delete",
-        "empty_folder": "Empty Folder",
-        "enter_name": "Enter a name",
-        "filter": "Filter",
-        "full_screen": "Full Screen",
-        "invalid_upload_string": "Entries contain an invalid name and will not be uploaded. The following characters are not compatible: '/', '\\0'",
-        "invalid_filemanager_string": "You entered an invalid name. The following characters are not compatible: '/', '\\0'",
-        "item_already_exists": "Item already exists",
-        "mb": "Mb",
-        "name": "Name",
-        "new_folder": "New Folder",
-        "no_results_found": "No results found",
-        "size_colon": "Size:",
-        "upload": "Upload",
-        "upload_files_exist": "Some of the files you added already exist. These files will be overwritten."
-      },
-      "system_info": {
-        "select_request": "Select a request"
-      }
-    },
-    "wifi": {
-      "configure_password": {
-        "invalid_name": "Invalid name",
-        "invalid_password_length": "Password must be 8 characters or more.",
-        "set_new_hotspot_password": "Set a new hotspot password",
-        "password_set": "Password set. If you are running a hotspot, it will restart."
-      },
-      "configure_ssid": {
-        "invalid_name": "Invalid name",
-        "set_new_hotspot_ssid": "Set a new hotspot SSID",
-        "ssid_set": "SSID set. If you are running a hotspot, it will restart."
-      },
-      "connect": {
-        "connect": "Connect",
-        "connection_request": "Your device will now try to connect to the network. If it is not available in a minute, reconnect to the device and check your password is correct.",
-        "configure_hotspot": "Configure hotspot",
-        "disconnect": "Disconnect",
-        "disconnect_request_sent": "Disconnect request sent.",
-        "invalid_password_length": "Password must be 8 characters or more.",
-        "network_connect_fail": "Failed to execute the connect request.",
-        "network_fetch_fail": "Failed to fetch the available networks.",
-        "network_forget_fail": "Failed to execute the forget request.",
-        "no_networks": "No available networks",
-        "refresh_not_compatible": "Your device requires a restart to refresh the list.",
-        "searching_networks": "Searching for networks",
-        "select_ssid": "Select an SSID"
-      },
-      "forget_all_wifi": {
-        "disconnect_request_sent": "Disconnect request sent.",
-        "forget_all_wifi": "Forget All WiFi Connections"
-      }
-    }
-  },
-  "system": {
-    "errors": {
-      "request_error": "Request error",
-      "wrong_way": "Wrong way…"
-    },
-    "menu_items": {
-      "configuration": "Configuration",
-      "container_manager": "Container Manager",
-      "device_info": "Device Info",
-      "networking": "Networking",
-      "system_info": "System Info",
-      "file_manager": "File Manager"
-    },
-    "network": {
-      "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
-      "network_connection_restored": "Network connection restored.",
-      "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
-    },
-    "titles": {
-      "services": "Services",
-      "supervisor_config": "Supervisor Config"
-    }
-  }
+    "cloudlink": "Cloudlink"
 }

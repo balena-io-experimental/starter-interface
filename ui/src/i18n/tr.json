@@ -1,1 +1,163 @@
-{}
+{
+    "general": {
+        "are_you_sure": "",
+        "name": "",
+        "error": "",
+        "stop": "",
+        "restart": "",
+        "status": "",
+        "start": "",
+        "submit": "",
+        "ok": "",
+        "close": "",
+        "password": "",
+        "cancel": ""
+    },
+    "cloudlink": "",
+    "components": {
+        "tools": {
+            "file_manager": {
+                "invalid_filemanager_string": "",
+                "full_screen": "",
+                "delete": "",
+                "enter_name": "",
+                "mb": "",
+                "empty_folder": "",
+                "size_colon": "",
+                "name": "",
+                "mb_001": "",
+                "filter": "",
+                "invalid_upload_string": "",
+                "item_already_exists": "",
+                "new_folder": "",
+                "no_results_found": "",
+                "upload": "",
+                "upload_files_exist": ""
+            },
+            "system_info": {
+                "select_request": ""
+            },
+            "container_manager": {
+                "containers": ""
+            }
+        },
+        "wifi": {
+            "configure_ssid": {
+                "ssid_set": "",
+                "set_new_hotspot_ssid": "",
+                "invalid_name": ""
+            },
+            "forget_all_wifi": {
+                "forget_all_wifi": "",
+                "disconnect_request_sent": ""
+            },
+            "connect": {
+                "invalid_password_length": "",
+                "no_networks": "",
+                "disconnect_request_sent": "",
+                "connection_request": "",
+                "network_connect_fail": "",
+                "select_ssid": "",
+                "refresh_not_compatible": "",
+                "network_fetch_fail": "",
+                "configure_hotspot": "",
+                "connect": "",
+                "network_forget_fail": "",
+                "disconnect": "",
+                "searching_networks": ""
+            },
+            "configure_password": {
+                "password_set": "",
+                "invalid_name": "",
+                "invalid_password_length": "",
+                "set_new_hotspot_password": ""
+            }
+        },
+        "system": {
+            "device_info": {
+                "mac_address": "",
+                "internet_required": "",
+                "online": "",
+                "ip_address": "",
+                "public_ip": "",
+                "response_details": "",
+                "os_version": "",
+                "environment_variables": "",
+                "location": "",
+                "memory": "",
+                "not_undervolted": "",
+                "raw_json": "",
+                "sdk_unavailable": "",
+                "storage": "",
+                "supervisor_version": "",
+                "undervolted": "",
+                "offline": ""
+            },
+            "update_device": {
+                "update_device": "",
+                "force_update": ""
+            },
+            "env_config": {
+                "response_details": "",
+                "add_change_env_var": "",
+                "raw_json": "",
+                "delete_selected_records": "",
+                "env_var_warning_message": ""
+            },
+            "journal_d_logs": {
+                "fetch_journald": ""
+            },
+            "reboot": {
+                "restarting": "",
+                "force_restart": ""
+            },
+            "shutdown": {
+                "force_shutdown": "",
+                "shutting_down": ""
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "welcome": "",
+                "visit_to_begin": "",
+                "connect_to_wifi": "",
+                "copy_to_clipboard": "",
+                "url_copied": ""
+            }
+        },
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": ""
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": ""
+            }
+        }
+    },
+    "title": "",
+    "system": {
+        "menu_items": {
+            "container_manager": "",
+            "configuration": "",
+            "device_info": "",
+            "networking": "",
+            "system_info": "",
+            "file_manager": ""
+        },
+        "errors": {
+            "request_error": "",
+            "wrong_way": ""
+        },
+        "network": {
+            "network_connection_down": "",
+            "network_connection_restored": "",
+            "no_wifi_api": ""
+        },
+        "titles": {
+            "services": "",
+            "supervisor_config": ""
+        }
+    }
+}

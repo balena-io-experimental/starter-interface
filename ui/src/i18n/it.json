@@ -4,6 +4,160 @@
         "close": "Chiudi",
         "ok": "OK",
         "password": "Password",
-        "are_you_sure": "Sei sicuro/a?"
-    }
+        "are_you_sure": "Sei sicuro/a?",
+        "error": "",
+        "name": "",
+        "restart": "",
+        "status": "",
+        "start": "",
+        "stop": "",
+        "submit": ""
+    },
+    "cloudlink": "",
+    "components": {
+        "tools": {
+            "container_manager": {
+                "containers": ""
+            },
+            "file_manager": {
+                "full_screen": "",
+                "filter": "",
+                "upload_files_exist": "",
+                "size_colon": "",
+                "name": "",
+                "mb_001": "",
+                "mb": "",
+                "no_results_found": "",
+                "new_folder": "",
+                "enter_name": "",
+                "invalid_filemanager_string": "",
+                "delete": "",
+                "empty_folder": "",
+                "invalid_upload_string": "",
+                "item_already_exists": "",
+                "upload": ""
+            },
+            "system_info": {
+                "select_request": ""
+            }
+        },
+        "system": {
+            "device_info": {
+                "location": "",
+                "ip_address": "",
+                "internet_required": "",
+                "environment_variables": "",
+                "online": "",
+                "mac_address": "",
+                "public_ip": "",
+                "storage": "",
+                "undervolted": "",
+                "os_version": "",
+                "memory": "",
+                "response_details": "",
+                "raw_json": "",
+                "sdk_unavailable": "",
+                "supervisor_version": "",
+                "not_undervolted": "",
+                "offline": ""
+            },
+            "shutdown": {
+                "force_shutdown": "",
+                "shutting_down": ""
+            },
+            "env_config": {
+                "response_details": "",
+                "raw_json": "",
+                "add_change_env_var": "",
+                "delete_selected_records": "",
+                "env_var_warning_message": ""
+            },
+            "journal_d_logs": {
+                "fetch_journald": ""
+            },
+            "update_device": {
+                "force_update": "",
+                "update_device": ""
+            },
+            "reboot": {
+                "restarting": "",
+                "force_restart": ""
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "copy_to_clipboard": "",
+                "connect_to_wifi": "",
+                "url_copied": "",
+                "visit_to_begin": "",
+                "welcome": ""
+            }
+        },
+        "wifi": {
+            "configure_ssid": {
+                "invalid_name": "",
+                "ssid_set": "",
+                "set_new_hotspot_ssid": ""
+            },
+            "connect": {
+                "disconnect": "",
+                "configure_hotspot": "",
+                "connect": "",
+                "connection_request": "",
+                "disconnect_request_sent": "",
+                "invalid_password_length": "",
+                "network_connect_fail": "",
+                "network_fetch_fail": "",
+                "network_forget_fail": "",
+                "no_networks": "",
+                "refresh_not_compatible": "",
+                "searching_networks": "",
+                "select_ssid": ""
+            },
+            "configure_password": {
+                "password_set": "",
+                "invalid_name": "",
+                "invalid_password_length": "",
+                "set_new_hotspot_password": ""
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "",
+                "forget_all_wifi": ""
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": ""
+            }
+        },
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": ""
+            }
+        }
+    },
+    "system": {
+        "menu_items": {
+            "file_manager": "",
+            "system_info": "",
+            "configuration": "",
+            "container_manager": "",
+            "device_info": "",
+            "networking": ""
+        },
+        "network": {
+            "no_wifi_api": "",
+            "network_connection_down": "",
+            "network_connection_restored": ""
+        },
+        "errors": {
+            "request_error": "",
+            "wrong_way": ""
+        },
+        "titles": {
+            "services": "",
+            "supervisor_config": ""
+        }
+    },
+    "title": ""
 }
