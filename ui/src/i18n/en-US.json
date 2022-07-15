@@ -158,6 +158,5 @@
             "services": "Services",
             "supervisor_config": "Supervisor Config"
         }
-    },
-    "cloudlink": "Cloudlink"
+    }
 }
