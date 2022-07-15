@@ -158,6 +158,5 @@
             "supervisor_config": "Configuración del supervisor"
         }
     },
-    "title": "Interfaz de dispositivo Balena",
-    "cloudlink": ""
+    "title": "Interfaz de dispositivo Balena"
 }

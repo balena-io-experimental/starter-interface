@@ -158,6 +158,5 @@
             "supervisor_config": "Configuration du superviseur"
         }
     },
-    "title": "Interface du dispositif Balena",
-    "cloudlink": ""
+    "title": "Interface du dispositif Balena"
 }
