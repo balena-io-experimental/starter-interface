@@ -4,12 +4,9 @@
       v-bind="qBtnStyle"
       icon="wifi_password"
       :loading="isSubmitting"
+      :label="$t('components.wifi.configure_password.set_new_hotspot_password')"
       @click="passwordDialog = true"
-    >
-      <q-tooltip>
-        {{ $t('components.wifi.configure_password.set_new_hotspot_password') }}
-      </q-tooltip>
-    </q-btn>
+    />
 
     <q-dialog v-model="passwordDialog" persistent>
       <q-card>

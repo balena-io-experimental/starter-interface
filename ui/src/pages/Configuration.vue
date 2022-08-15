@@ -8,9 +8,7 @@
     <div class="text-h5 q-mb-md q-mt-md">
       {{ $t('system.titles.services') }}
     </div>
-    <component-frame
-      :components="[{ component: UpdateDevice }, { component: ForgetAllWifi }]"
-    />
+    <component-frame :components="[{ component: UpdateDevice }]" />
 
     <div
       v-if="systemStore.internetConnectivity"
@@ -28,7 +26,6 @@
 <script lang="ts">
 import ComponentFrame from 'layouts/ComponentFrame.vue'
 import ChangeHostname from 'components/SystemChangeHostname.vue'
-import ForgetAllWifi from 'components/WifiForgetAllWifi.vue'
 import UpdateDevice from 'components/SystemUpdateDevice.vue'
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { useSystemStore } from 'stores/system'
@@ -45,7 +42,6 @@ export default defineComponent({
       EnvConfig: defineAsyncComponent(
         () => import('src/components/SystemEnvConfig.vue')
       ),
-      ForgetAllWifi,
       systemStore,
       UpdateDevice
     }
