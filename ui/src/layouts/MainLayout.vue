@@ -15,7 +15,7 @@
 
         <router-link v-if="qHeaderStyle.logo_white" to="/">
           <q-avatar square size="sm">
-            <q-img :src="qHeaderStyle.logo_white" />
+            <img :src="qHeaderStyle.logo_white" />
           </q-avatar>
         </router-link>
 
