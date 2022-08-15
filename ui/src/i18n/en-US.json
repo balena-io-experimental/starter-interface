@@ -52,7 +52,6 @@
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
         "offline": "Offline",
-        "online": "Online",
         "cloudlink": "Cloudlink"
       },
       "env_config": {

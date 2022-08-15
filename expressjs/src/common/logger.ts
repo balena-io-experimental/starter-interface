@@ -48,6 +48,7 @@ const format = winston.format.combine(
   // Define the format of the message showing the timestamp, the level and the message
   winston.format.printf(
     (info) =>
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `ExpressJS: ${info.timestamp as string} ${info.level}: ${info.message}`
   )
 )

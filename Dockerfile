@@ -1,9 +1,6 @@
 ## Build ExpressJS and UI
 FROM node:16.13.2-alpine3.15 AS build
 
-# Tell the UI that this is being deployed to a Balena device
-ENV ON_DEVICE=true
-
 # Specify that this is being built for production
 ENV NODE_ENV=production
 

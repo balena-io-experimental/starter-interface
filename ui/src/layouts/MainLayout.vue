@@ -168,12 +168,10 @@ export default defineComponent({
     }
 
     async function getDeviceName() {
-      if (process.env.ON_DEVICE) {
-        const response = (await supervisor.v2.device_name()) as AxiosResponse<{
-          deviceName: string
-        }>
-        deviceName.value = response.data.deviceName
-      }
+      const response = (await supervisor.v2.device_name()) as AxiosResponse<{
+        deviceName: string
+      }>
+      deviceName.value = response.data.deviceName
     }
 
     // Listeners for network status
