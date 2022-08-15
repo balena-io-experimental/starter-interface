@@ -40,10 +40,8 @@ export default route((/* { store, ssrContext } */) => {
     Loading.hide()
   })
 
-  if (process.env.BACKEND_PORT) {
-    expressApi.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${process.env.BACKEND_PORT}`
-  } else if (!process.env.ON_DEVICE) {
-    expressApi.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}`
+  if (process.env.HOSTNAME) {
+    expressApi.defaults.baseURL = `http://${process.env.HOSTNAME}`
   }
 
   // Axios request interceptor

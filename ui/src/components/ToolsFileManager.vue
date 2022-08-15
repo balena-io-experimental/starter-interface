@@ -255,14 +255,11 @@ export default defineComponent({
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
     // By default, for production, use relative paths to filemanager
-    const uploaderAPIRoute = ref<string>('v1/filemanager/upload')
+    const uploaderAPIRoute = ref<string>('/v1/filemanager/upload')
 
-    // Change uploader path based on environment
-    if (process.env.BACKEND_PORT) {
-      uploaderAPIRoute.value = `${window.location.protocol}//${window.location.hostname}:${process.env.BACKEND_PORT}/v1/filemanager/upload`
-    } else if (!process.env.ON_DEVICE) {
-      // ExpressJS listens to port 80 by default. This allows it to be accesible when in a dev env.
-      uploaderAPIRoute.value = `${window.location.protocol}//${window.location.hostname}/v1/filemanager/upload`
+    // Change uploader path for dev env
+    if (process.env.HOSTNAME) {
+      uploaderAPIRoute.value = `http://${process.env.HOSTNAME}/v1/filemanager/upload`
     }
 
     const checkRowExistence = (nameParam: string) =>

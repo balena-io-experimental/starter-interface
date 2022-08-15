@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
-      ON_DEVICE: true # Specify that this is being deployed to hardware with Balena OS
+      # ON_DEVICE: true # Specify that this is being deployed to hardware with Balena OS
       SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
     restart: always
     ports:

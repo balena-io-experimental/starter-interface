@@ -3,7 +3,6 @@ import formidable from 'formidable'
 import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
-import process from 'process'
 import Logger from '@/common/logger'
 
 interface extendKlawItem extends klawSync.Item {
@@ -22,10 +21,8 @@ const router = express.Router()
 // Root directory for files
 let rootDir = path.join(`${__dirname}/dev-storage/`)
 
-// If on a Balena device, change local directory to local volume
-if (process.env.ON_DEVICE) {
-  rootDir = '/app/storage/'
-}
+// Set local directory for file storage
+rootDir = '/app/storage/'
 
 // Check the storage directory exists
 try {
@@ -104,7 +101,7 @@ router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
         try {
           await fse.remove(validatePath(path.join(item.path)))
         } catch (error) {
-          console.log(error)
+          Logger.error(error)
         }
       })
     )

@@ -47,35 +47,32 @@ router.get('/v1/sdk/envVars', (async (_req, res) => {
 }) as RequestHandler)
 
 router.delete('/v1/sdk/envVars', (async (req, res) => {
-  if (process.env.ON_DEVICE) {
-    await lock()
+  await lock()
 
-    await Promise.all(
-      Object.entries(req.body as Request).map(async ([key]) => {
-        await sdk.models.device.envVar.remove(uuid, key)
-      })
-    )
+  await Promise.all(
+    Object.entries(req.body as Request).map(async ([key]) => {
+      await sdk.models.device.envVar.remove(uuid, key)
+    })
+  )
 
-    await unlock()
-  }
+  await unlock()
 
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
 router.post('/v1/sdk/envVars', (async (req, res) => {
-  if (process.env.ON_DEVICE) {
-    await lock()
+  await lock()
 
-    await Promise.all(
-      Object.entries(req.body as Request).map(async ([key, val]) => {
-        if (val) {
-          await sdk.models.device.envVar.set(uuid, key, val as string)
-        }
-      })
-    )
+  await Promise.all(
+    Object.entries(req.body as Request).map(async ([key, val]) => {
+      if (val) {
+        await sdk.models.device.envVar.set(uuid, key, val as string)
+      }
+    })
+  )
 
-    await unlock()
-  }
+  await unlock()
+
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
