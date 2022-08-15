@@ -3,6 +3,7 @@
     <div>
       <q-table
         v-model:selected="selectedRows"
+        selection="multiple"
         class="q-mb-md"
         flat
         dense
@@ -10,28 +11,61 @@
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
-        selection="multiple"
         :rows-per-page-options="[0]"
       >
+        <template #body-cell-edit="props">
+          <q-td auto-width>
+            <q-space />
+            <q-btn
+              icon="edit"
+              flat
+              :disable="isLoading"
+              size="xs"
+              round
+              @click="editVar(props.row)"
+            />
+          </q-td>
+        </template>
         <template #bottom>
-          <q-btn
-            :label="$t('components.system.env_config.add_change_env_var')"
-            padding="0"
-            no-caps
-            dense
-            icon="add"
-            size="md"
-            flat
-            @click="isNewVarDialogOpen = true"
-          />
+          <div>
+            <q-btn
+              :label="$t('components.system.env_config.add_env_var')"
+              padding="0"
+              no-caps
+              dense
+              icon="add"
+              size="md"
+              flat
+              @click="isNewVarDialogOpen = true"
+            />
+          </div>
+          <div>
+            <q-btn
+              :label="
+                $t('components.system.env_config.delete_selected_records')
+              "
+              class="q-ml-md"
+              icon="delete"
+              padding="0"
+              no-caps
+              dense
+              size="md"
+              flat
+              :disable="selectedRows.length < 1"
+              @click="deleteEnv()"
+            />
+          </div>
         </template>
       </q-table>
-
-      <q-dialog v-model="isNewVarDialogOpen" persistent>
+      <q-dialog
+        v-model="isNewVarDialogOpen"
+        persistent
+        @hide=";(newVarKey = ''), (newVarValue = '')"
+      >
         <q-card style="min-width: 250px">
           <q-card-section>
             <div class="text-h6">
-              {{ $t('components.system.env_config.add_change_env_var') }}
+              {{ $t('components.system.env_config.add_env_var') }}
             </div>
             <div class="text-caption text-grey">
               <q-icon class="q-mr-sm q-mb-xs" name="warning" color="warning" />
@@ -41,12 +75,17 @@
           <q-card-section class="q-pt-none">
             <q-input
               v-model="newVarKey"
-              label="Key"
+              :label="$t('components.system.env_config.key')"
               stack-label
               dense
               autofocus
             />
-            <q-input v-model="newVarValue" label="Value" stack-label dense />
+            <q-input
+              v-model="newVarValue"
+              :label="$t('components.system.env_config.value')"
+              stack-label
+              dense
+            />
           </q-card-section>
 
           <q-card-actions align="right" class="text-primary">
@@ -84,32 +123,46 @@ import { sdk } from 'src/api/sdk'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps } from 'quasar'
 import { defineComponent, ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { qBtnStyle, qSpinnerStyle } from 'src/config/qStyles'
 
 interface Env {
   [key: string]: string
 }
 
+interface Rows extends QTableProps {
+  name: string
+  value: string
+}
+
 export default defineComponent({
   name: 'SystemEnvConfig',
 
   setup() {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { t } = useI18n()
+
     const selectedRows = ref([])
     const columns: QTableProps['columns'] = [
       {
         name: 'name',
         style: 'width: 200px',
         align: 'left',
-        label: 'Name',
+        label: t('components.system.env_config.key'),
         field: 'name',
         sortable: true
       },
       {
         name: 'value',
         align: 'left',
-        label: 'Value',
+        label: t('components.system.env_config.value'),
         field: 'value',
         sortable: true
+      },
+      {
+        name: 'edit',
+        label: t('components.system.env_config.edit'),
+        field: 'edit'
       }
     ]
 
@@ -123,6 +176,12 @@ export default defineComponent({
 
     async function getEnv() {
       getEnvResponse.value = await sdk.getEnv()
+    }
+
+    function editVar(row: Rows) {
+      newVarKey.value = row.name
+      newVarValue.value = row.value
+      isNewVarDialogOpen.value = true
     }
 
     function deleteEnv() {
@@ -172,6 +231,7 @@ export default defineComponent({
     return {
       columns,
       deleteEnv,
+      editVar,
       getEnvResponse,
       isLoading,
       isNewVarDialogOpen,
