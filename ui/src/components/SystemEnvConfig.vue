@@ -1,76 +1,71 @@
 <template>
   <div v-if="getEnvResponse">
-    <div class="row items-center q-mb-md">
-      <q-icon class="q-mr-sm" name="warning" color="warning" size="1rem" />
-      <span>{{
-        $t('components.system.env_config.env_var_warning_message')
-      }}</span>
-    </div>
-    <div class="q-mt-none q-mb-lg">
+    <div>
       <q-table
         v-model:selected="selectedRows"
+        class="q-mb-md"
         flat
-        :dense="$q.screen.gt.sm"
+        dense
         separator="cell"
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
         selection="multiple"
         :rows-per-page-options="[0]"
-      />
-      <div class="q-pa-md q-gutter-y-md column items-start">
-        <div v-if="selectedRows.length > 0">
-          <q-btn
-            :label="$t('components.system.env_config.delete_selected_records')"
-            icon="delete"
-            v-bind="qBtnStyle"
-            @click="deleteEnv()"
-          />
-        </div>
-        <div>
+      >
+        <template #bottom>
           <q-btn
             :label="$t('components.system.env_config.add_change_env_var')"
+            padding="0"
+            no-caps
+            dense
             icon="add"
-            v-bind="qBtnStyle"
+            size="md"
+            flat
             @click="isNewVarDialogOpen = true"
           />
-        </div>
-        <q-dialog v-model="isNewVarDialogOpen" persistent>
-          <q-card style="min-width: 250px">
-            <q-card-section>
-              <div class="text-h6">
-                {{ $t('components.system.env_config.add_change_env_var') }}
-              </div>
-            </q-card-section>
+        </template>
+      </q-table>
 
-            <q-card-section class="q-pt-none">
-              <q-input
-                v-model="newVarKey"
-                label="Key"
-                stack-label
-                dense
-                autofocus
-              />
-              <q-input v-model="newVarValue" label="Value" stack-label dense />
-            </q-card-section>
+      <q-dialog v-model="isNewVarDialogOpen" persistent>
+        <q-card style="min-width: 250px">
+          <q-card-section>
+            <div class="text-h6">
+              {{ $t('components.system.env_config.add_change_env_var') }}
+            </div>
+            <div class="text-caption text-grey">
+              <q-icon class="q-mr-sm q-mb-xs" name="warning" color="warning" />
+              {{ $t('components.system.env_config.env_var_warning_message') }}
+            </div>
+          </q-card-section>
+          <q-card-section class="q-pt-none">
+            <q-input
+              v-model="newVarKey"
+              label="Key"
+              stack-label
+              dense
+              autofocus
+            />
+            <q-input v-model="newVarValue" label="Value" stack-label dense />
+          </q-card-section>
 
-            <q-card-actions align="right" class="text-primary">
-              <q-btn
-                v-close-popup
-                v-bind="qBtnStyle"
-                :label="$t('general.cancel')"
-              />
-              <q-btn
-                :label="$t('general.submit')"
-                v-bind="qBtnStyle"
-                @click="setEnv()"
-              />
-            </q-card-actions>
-          </q-card>
-        </q-dialog>
-      </div>
+          <q-card-actions align="right" class="text-primary">
+            <q-btn
+              v-close-popup
+              v-bind="qBtnStyle"
+              :label="$t('general.cancel')"
+            />
+            <q-btn
+              :label="$t('general.submit')"
+              v-bind="qBtnStyle"
+              @click="setEnv()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
     <q-expansion-item
+      class="q-mt-md"
       expand-separator
       icon="code"
       :label="$t('components.system.env_config.response_details')"
