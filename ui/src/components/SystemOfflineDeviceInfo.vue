@@ -7,7 +7,7 @@
     >
       {{
         systemStore.internetConnectivity
-          ? $t('components.system.device_info.online')
+          ? $t('components.system.device_info.cloudlink')
           : $t('components.system.device_info.offline')
       }}
     </q-chip>
