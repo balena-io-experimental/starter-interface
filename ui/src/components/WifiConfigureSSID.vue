@@ -4,12 +4,9 @@
       v-bind="qBtnStyle"
       icon="drive_file_rename_outline"
       :loading="isSubmitting"
+      :label="$t('components.wifi.configure_ssid.set_new_hotspot_ssid')"
       @click="ssidDialog = true"
-    >
-      <q-tooltip>
-        {{ $t('components.wifi.configure_ssid.set_new_hotspot_ssid') }}
-      </q-tooltip>
-    </q-btn>
+    />
 
     <q-dialog v-model="ssidDialog" persistent>
       <q-card>

@@ -1,5 +1,8 @@
 <template>
-  <q-card flat bordered class="q-mb-md">
+  <q-card flat bordered class="q-mb-md" :class="props.class">
+    <q-item-label v-if="props.title" class="q-mt-sm" overline>
+      {{ props.title }}
+    </q-item-label>
     <q-card-section :class="rowClass">
       <template v-for="(child, index) in props.components" :key="child.name">
         <!-- If the first item passed, do not apply margins to top or sides -->
@@ -21,9 +24,17 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'LayoutsComponentFrame',
   props: {
+    class: {
+      type: String,
+      default: ''
+    },
     components: {
       type: Object,
       default: () => ({})
+    },
+    title: {
+      type: String,
+      default: ''
     },
     rows: {
       type: Boolean,
@@ -31,7 +42,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const componentSpacing = ref<string>('q-mt-md')
+    const componentSpacing = ref<string>('q-mt-sm')
     const rowClass = ref<string>('')
 
     if (props.rows) {
