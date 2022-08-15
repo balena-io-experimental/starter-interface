@@ -2,6 +2,7 @@
   <div>
     <q-input
       v-model="newHostname"
+      dense
       bottom-slots
       :label="$t('components.network.change_hostname.change_hostname')"
       counter

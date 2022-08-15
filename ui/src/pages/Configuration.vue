@@ -1,14 +1,9 @@
 <template>
   <q-page class="q-pa-lg">
     <div class="text-h5 q-mb-md">
-      {{ $t('system.titles.supervisor_config') }}
+      {{ $t('system.titles.host_config') }}
     </div>
     <component-frame :components="[{ component: ChangeHostname }]" />
-
-    <div class="text-h5 q-mb-md q-mt-md">
-      {{ $t('system.titles.services') }}
-    </div>
-    <component-frame :components="[{ component: UpdateDevice }]" />
 
     <div
       v-if="systemStore.internetConnectivity"

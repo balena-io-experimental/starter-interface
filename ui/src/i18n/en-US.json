@@ -55,7 +55,10 @@
         "cloudlink": "Cloudlink"
       },
       "env_config": {
-        "add_change_env_var": "Add/Change Environment Variable",
+        "add_env_var": "Add Environment Variable",
+        "edit": "Edit",
+        "key": "Key",
+        "value": "Value",
         "raw_json": "Raw JSON",
         "response_details": "Response Details",
         "delete_selected_records": "Delete Selected Records",
@@ -156,7 +159,7 @@
     },
     "titles": {
       "services": "Services",
-      "supervisor_config": "Supervisor Config"
+      "host_config": "Host Configuration"
     }
   }
 }
