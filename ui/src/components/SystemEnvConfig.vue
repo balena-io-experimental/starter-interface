@@ -171,16 +171,6 @@ export default defineComponent({
       isLoading.value = false
     })
 
-    async function getEnv() {
-      getEnvResponse.value = await sdk.getEnv()
-    }
-
-    function editVar(row: Rows) {
-      newVarKey.value = row.name
-      newVarValue.value = row.value
-      isNewVarDialogOpen.value = true
-    }
-
     function deleteEnv() {
       const toDelete: Env = {}
       selectedRows.value.forEach((item: Env) => {
@@ -197,6 +187,16 @@ export default defineComponent({
           selectedRows.value = []
         })
       isLoading.value = false
+    }
+
+    function editVar(row: Rows) {
+      newVarKey.value = row.name
+      newVarValue.value = row.value
+      isNewVarDialogOpen.value = true
+    }
+
+    async function getEnv() {
+      getEnvResponse.value = await sdk.getEnv()
     }
 
     function setEnv() {
