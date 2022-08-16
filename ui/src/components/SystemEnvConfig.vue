@@ -27,33 +27,35 @@
           </q-td>
         </template>
         <template #bottom>
-          <div>
-            <q-btn
-              :label="$t('components.system.env_config.add_env_var')"
-              padding="0"
-              no-caps
-              dense
-              icon="add"
-              size="md"
-              flat
-              @click="isNewVarDialogOpen = true"
-            />
-          </div>
-          <div>
-            <q-btn
-              :label="
-                $t('components.system.env_config.delete_selected_records')
-              "
-              class="q-ml-md"
-              icon="delete"
-              padding="0"
-              no-caps
-              dense
-              size="md"
-              flat
-              :disable="selectedRows.length < 1"
-              @click="deleteEnv()"
-            />
+          <div class="row q-mt-sm">
+            <div>
+              <q-btn
+                :label="$t('components.system.env_config.add_env_var')"
+                padding="0"
+                no-caps
+                dense
+                icon="add"
+                size="md"
+                flat
+                @click="isNewVarDialogOpen = true"
+              />
+            </div>
+            <div>
+              <q-btn
+                :label="
+                  $t('components.system.env_config.delete_selected_records')
+                "
+                class="q-ml-md"
+                icon="delete"
+                padding="0"
+                no-caps
+                dense
+                size="md"
+                flat
+                :disable="selectedRows.length < 1"
+                @click="deleteEnv()"
+              />
+            </div>
           </div>
         </template>
       </q-table>
