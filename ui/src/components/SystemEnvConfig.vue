@@ -1,4 +1,7 @@
 <template>
+  <div v-if="isLoading" class="text-center">
+    <q-spinner v-bind="qSpinnerStyle" size="3em" />
+  </div>
   <div v-if="getEnvResponse">
     <div>
       <q-table
@@ -28,7 +31,6 @@
           </q-td>
         </template>
       </q-table>
-
       <q-btn
         :label="$t('components.system.env_config.add_env_var')"
         padding="0"
@@ -39,7 +41,6 @@
         flat
         @click="isNewVarDialogOpen = true"
       />
-
       <q-btn
         :label="$t('components.system.env_config.delete_selected_records')"
         class="q-ml-md"
@@ -52,7 +53,6 @@
         :disable="selectedRows.length < 1"
         @click="deleteEnv()"
       />
-
       <q-dialog
         v-model="isNewVarDialogOpen"
         persistent
@@ -109,9 +109,6 @@
       <pre style="white-space: pre-wrap">{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
   </div>
-  <div v-if="isLoading" class="text-center">
-    <q-spinner v-bind="qSpinnerStyle" size="3em" />
-  </div>
 </template>
 
 <script lang="ts">
@@ -138,7 +135,6 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    const selectedRows = ref([])
     const columns: QTableProps['columns'] = [
       {
         name: 'name',
@@ -161,14 +157,19 @@ export default defineComponent({
         field: 'edit'
       }
     ]
-
+    const getEnvResponse = ref<AxiosResponse>()
+    const isNewVarDialogOpen = ref<boolean>(false)
+    const isLoading = ref<boolean>(true)
     const newVarKey = ref<string>('')
     const newVarValue = ref<string>('')
-    const isNewVarDialogOpen = ref<boolean>(false)
+    const selectedRows = ref([])
 
-    const isLoading = ref<boolean>(true)
-
-    const getEnvResponse = ref<AxiosResponse>()
+    onMounted(async () => {
+      await getEnv().catch((error: Error | AxiosError) => {
+        console.error('getEnv', error)
+      })
+      isLoading.value = false
+    })
 
     async function getEnv() {
       getEnvResponse.value = await sdk.getEnv()
@@ -190,13 +191,12 @@ export default defineComponent({
         .then(async () => {
           await getEnv()
           selectedRows.value = []
-          isLoading.value = false
         })
         .catch((error: Error | AxiosError) => {
           console.error('deleteEnv', error)
           selectedRows.value = []
-          isLoading.value = false
         })
+      isLoading.value = false
     }
 
     function setEnv() {
@@ -207,22 +207,14 @@ export default defineComponent({
         .setEnv(newVarKey.value, newVarValue.value)
         .then(async () => {
           await getEnv()
-          isLoading.value = false
         })
         .catch((error: Error | AxiosError) => {
           console.error('setEnv', error)
-          isLoading.value = false
         })
+      isLoading.value = false
       newVarKey.value = ''
       newVarValue.value = ''
     }
-
-    onMounted(async () => {
-      await getEnv().catch((error: Error | AxiosError) => {
-        console.error('getEnv', error)
-      })
-      isLoading.value = false
-    })
 
     return {
       columns,
