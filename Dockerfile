@@ -1,5 +1,5 @@
 ## Build ExpressJS and UI
-FROM node:16.13.2-alpine3.15 AS build
+FROM node:18.7.0-alpine3.16 AS build
 
 # Specify that this is being built for production
 ENV NODE_ENV=production
@@ -32,7 +32,7 @@ RUN yarn workspaces focus expressjs --production
 
 
 ## Compile container
-FROM node:16.13.2-alpine3.15
+FROM node:18.7.0-alpine3.16
 
 # Install USB mount requirements
 RUN apk add --no-cache \
