@@ -431,10 +431,10 @@ export default defineComponent({
         const response = await expressApi.post<Rows[]>('/v1/filemanager/list', {
           currentPathArray: objPath.value
         })
-
         rows.value = response.data
-      } catch {
-        $q.notify({ type: 'negative', message: t('general.error') })
+      } catch (error) {
+        $q.notify({ type: 'negative' })
+        console.error(error)
       }
       isLoading.value = false
     }
