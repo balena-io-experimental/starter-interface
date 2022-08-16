@@ -254,13 +254,9 @@ export default defineComponent({
     const objPath = ref<Array<string>>([])
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
-    // By default, for production, use relative paths to filemanager
-    const uploaderAPIRoute = ref<string>('/v1/filemanager/upload')
-
-    // Change uploader path for dev env
-    if (process.env.HOSTNAME) {
-      uploaderAPIRoute.value = `http://${process.env.HOSTNAME}/v1/filemanager/upload`
-    }
+    const uploaderAPIRoute = ref<string>(
+      `${expressApi.defaults.baseURL as string}/v1/filemanager/upload`
+    )
 
     const checkRowExistence = (nameParam: string) =>
       rows.value?.some(({ path }) => path.split('/').pop() === nameParam)

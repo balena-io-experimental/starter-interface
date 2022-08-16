@@ -158,7 +158,6 @@
       "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
     },
     "titles": {
-      "services": "Services",
       "host_config": "Host Configuration"
     }
   }
