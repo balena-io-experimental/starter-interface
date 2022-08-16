@@ -76,8 +76,9 @@ export default route((/* { store, ssrContext } */) => {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         Notify.create({
           type: 'negative',
-          message: `${t('general.error')}: ${error.response.status}`
+          message: `${t('general.error')}: ${t('system.errors.no_backend')}`
         })
+        console.error(`Axios error. Status code: ${error.response.status}`)
       }
       // Reject with UI Axios error
       return Promise.reject(error)

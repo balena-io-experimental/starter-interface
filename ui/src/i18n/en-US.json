@@ -57,12 +57,14 @@
       "env_config": {
         "add_env_var": "Add Environment Variable",
         "edit": "Edit",
+        "env_rules": "Environment variable keys should start with a letter and only contain letters, digits and underscores",
+        "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!",
         "key": "Key",
         "value": "Value",
         "raw_json": "Raw JSON",
         "response_details": "Response Details",
         "delete_selected_records": "Delete Selected Records",
-        "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!"
+        "restarting_containers": "Your containers need to restart. The user interface will be unavailable until they come back online."
       },
       "journal_d_logs": {
         "fetch_journald": "Fetch Journald Logs"
@@ -142,7 +144,8 @@
   "system": {
     "errors": {
       "request_error": "Request error",
-      "wrong_way": "Wrong way…"
+      "wrong_way": "Wrong way…",
+      "no_backend": "Unable to communicate with the backend service"
     },
     "menu_items": {
       "configuration": "Configuration",

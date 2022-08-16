@@ -131,7 +131,6 @@ export default defineComponent({
         }>
         rows.value = res.data.containers
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
 
