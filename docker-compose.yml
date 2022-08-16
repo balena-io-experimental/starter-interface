@@ -15,6 +15,7 @@ services:
     volumes:
       - "bdu_db:/app/db" # Stores UI database files
       - "bdu_storage:/app/storage" # Storage for the Volume Manager. See docs for more info.
+    privileged: true # This can be removed if not using the USB mounting feature
 
     # If using the Volume Manager to access volumes on other containers, ensure this container `depends_on` your
     # other container using the below:

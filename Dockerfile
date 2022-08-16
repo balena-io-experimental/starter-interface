@@ -34,9 +34,24 @@ RUN yarn workspaces focus expressjs --production
 ## Compile container
 FROM node:16.13.2-alpine3.15
 
+# Install USB mount requirements
+RUN apk add --no-cache \
+    findmnt \
+    grep \
+    udev \
+    util-linux
+
 ENV NODE_ENV=production
 
 WORKDIR /app
+
+# Enable USB support on device
+ENV UDEV=on
+COPY expressjs/src/usb/udev/usb.rules /etc/udev/rules.d/usb.rules
+COPY expressjs/src/usb/scripts /usr/src/scripts
+COPY expressjs/src/usb//entrypoint.sh .
+RUN chmod +x entrypoint.sh
+RUN chmod +x /usr/src/scripts/*
 
 # Copy app to container
 COPY --from=build /build-context/ui/dist/spa public
@@ -45,6 +60,9 @@ COPY --from=build /build-context/node_modules node_modules
 
 # Copy startup scripts
 COPY scripts .
+
+# Setup UDEV for USB support
+ENTRYPOINT ["./entrypoint.sh"]
 
 # Run the start script
 CMD ["sh", "start.sh"]
