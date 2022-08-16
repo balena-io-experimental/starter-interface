@@ -112,12 +112,12 @@
       "configure_password": {
         "invalid_name": "Invalid name",
         "invalid_password_length": "Password must be 8 characters or more.",
-        "set_new_hotspot_password": "Set a new hotspot password",
+        "set_new_hotspot_password": "Set the hotspot password",
         "password_set": "Password set. If you are running a hotspot, it will restart."
       },
       "configure_ssid": {
         "invalid_name": "Invalid name",
-        "set_new_hotspot_ssid": "Set a new hotspot SSID",
+        "set_new_hotspot_ssid": "Set the hotspot SSID",
         "ssid_set": "SSID set. If you are running a hotspot, it will restart."
       },
       "connect": {
