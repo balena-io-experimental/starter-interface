@@ -40,8 +40,14 @@ export default route((/* { store, ssrContext } */) => {
     Loading.hide()
   })
 
-  if (process.env.HOSTNAME) {
-    expressApi.defaults.baseURL = `http://${process.env.HOSTNAME}`
+  // Handle the start up state to ensure the backend is always reachable when on a different port or hostname
+  if (process.env.BACKEND_HOSTNAME) {
+    expressApi.defaults.baseURL = `http://${process.env.BACKEND_HOSTNAME}`
+  } else {
+    // Generate URL from self
+    const currentURL = new URL(window.location.href)
+    // Set backend URL to URL currently in browser (including port where applicable)
+    expressApi.defaults.baseURL = currentURL.origin
   }
 
   // Axios request interceptor
