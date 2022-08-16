@@ -11,6 +11,7 @@
         :rows="getEnvResponse.data"
         :columns="columns"
         row-key="name"
+        hide-bottom
         :rows-per-page-options="[0]"
       >
         <template #body-cell-edit="props">
@@ -26,39 +27,32 @@
             />
           </q-td>
         </template>
-        <template #bottom>
-          <div class="row q-mt-sm">
-            <div>
-              <q-btn
-                :label="$t('components.system.env_config.add_env_var')"
-                padding="0"
-                no-caps
-                dense
-                icon="add"
-                size="md"
-                flat
-                @click="isNewVarDialogOpen = true"
-              />
-            </div>
-            <div>
-              <q-btn
-                :label="
-                  $t('components.system.env_config.delete_selected_records')
-                "
-                class="q-ml-md"
-                icon="delete"
-                padding="0"
-                no-caps
-                dense
-                size="md"
-                flat
-                :disable="selectedRows.length < 1"
-                @click="deleteEnv()"
-              />
-            </div>
-          </div>
-        </template>
       </q-table>
+
+      <q-btn
+        :label="$t('components.system.env_config.add_env_var')"
+        padding="0"
+        no-caps
+        dense
+        icon="add"
+        size="md"
+        flat
+        @click="isNewVarDialogOpen = true"
+      />
+
+      <q-btn
+        :label="$t('components.system.env_config.delete_selected_records')"
+        class="q-ml-md"
+        icon="delete"
+        padding="0"
+        no-caps
+        dense
+        size="md"
+        flat
+        :disable="selectedRows.length < 1"
+        @click="deleteEnv()"
+      />
+
       <q-dialog
         v-model="isNewVarDialogOpen"
         persistent
