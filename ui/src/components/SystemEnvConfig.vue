@@ -112,7 +112,7 @@
       :label="$t('components.system.env_config.response_details')"
       :caption="$t('components.system.env_config.raw_json')"
     >
-      <pre>{{ getEnvResponse.data }}</pre>
+      <pre style="white-space: pre-wrap">{{ getEnvResponse.data }}</pre>
     </q-expansion-item>
   </div>
   <div v-if="isLoading" class="text-center">
