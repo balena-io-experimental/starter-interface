@@ -17,7 +17,7 @@ import Wifi from '@/routes/v1/Wifi'
 boot()
 
 // Set backend port number
-const port = 80
+const port = process.env.BACKEND_PORT || 80
 
 // Speed limit API requests. Useful for FileManager that can require large number of requests for
 // uploads and deletes, and prevents abuse of the API.

@@ -51,7 +51,8 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       env: {
-        BACKEND_HOSTNAME: process.env.BACKEND_HOSTNAME
+        BACKEND_HOSTNAME: process.env.BACKEND_HOSTNAME,
+        BACKEND_PORT: process.env.BACKEND_PORT
       },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],

@@ -197,9 +197,23 @@ export default defineComponent({
           console.error('deleteEnv', error)
           selectedRows.value = []
         })
+
       // Delay to allow the container to restart and avoid navigation away too early
       setTimeout(() => {
         isLoading.value = false
+        $q.notify({
+          type: 'warning',
+          message: t('components.system.env_config.restarting_containers'),
+          timeout: 0,
+          actions: [
+            {
+              label: t('general.close'),
+              handler: () => {
+                /* ... */
+              }
+            }
+          ]
+        })
       }, 4000)
     }
 
