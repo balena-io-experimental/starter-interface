@@ -99,7 +99,7 @@
             <q-btn
               :label="$t('general.submit')"
               v-bind="qBtnStyle"
-              :disable="!newVarValue || !newVarKey || refNewVarKey.hasError"
+              :disable="!newVarValue || !newVarKey || refNewVarKey?.hasError"
               @click="setEnv()"
             />
           </q-card-actions>
