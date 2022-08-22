@@ -49,7 +49,7 @@ WORKDIR /app
 ENV UDEV=on
 COPY expressjs/src/usb/udev/usb.rules /etc/udev/rules.d/usb.rules
 COPY expressjs/src/usb/scripts /usr/src/scripts
-COPY expressjs/src/usb//entrypoint.sh .
+COPY expressjs/src/usb/entrypoint.sh .
 RUN chmod +x entrypoint.sh
 RUN chmod +x /usr/src/scripts/*
 
