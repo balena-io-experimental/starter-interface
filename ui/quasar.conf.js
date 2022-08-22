@@ -51,7 +51,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       env: {
-        BACKEND_HOSTNAME: process.env.BACKEND_HOSTNAME,
+        DEVICE_HOSTNAME: process.env.DEVICE_HOSTNAME,
         BACKEND_PORT: process.env.BACKEND_PORT
       },
       target: {
