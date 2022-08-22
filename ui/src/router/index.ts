@@ -41,8 +41,8 @@ export default route((/* { store, ssrContext } */) => {
   })
 
   // Handle the start up state to ensure the backend is always reachable when on a different port or hostname
-  if (process.env.BACKEND_HOSTNAME) {
-    expressApi.defaults.baseURL = `http://${process.env.BACKEND_HOSTNAME}`
+  if (process.env.DEVICE_HOSTNAME) {
+    expressApi.defaults.baseURL = `http://${process.env.DEVICE_HOSTNAME}`
   } else {
     // Generate URL from self
     const currentURL = new URL(window.location.href)
