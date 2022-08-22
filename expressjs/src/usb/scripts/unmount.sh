@@ -8,11 +8,17 @@
 # - ID_FS_UUID_ENC: Partition's UUID (i.e: 498E-12EF)
 # - ID_FS_LABEL_ENC: Partition's label (i.e: YOURDEVICENAME)
 
-# Make sure we have a valid device name
+# Make sure we have a device name
 DEVNAME=${DEVNAME:=$1}
 if [ -z "$DEVNAME" ]; then
   echo "usb-mount: Invalid device name: $DEVNAME" > /proc/1/fd/2
   exit 1
+fi
+
+# Check if DEVNAME starts with /dev/sd
+if [ "${DEVNAME:0:7}" != "/dev/sd" ]; then
+  # Device is not a USB drive, skipping
+  exit 0
 fi
 
 # Get required device information
