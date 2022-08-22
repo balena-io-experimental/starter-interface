@@ -110,9 +110,9 @@ import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
+import { qSpinnerStyle } from 'src/config/qStyles'
 import { useSystemStore } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
-import { qSpinnerStyle } from 'src/config/qStyles'
 
 interface device {
   current_release: string

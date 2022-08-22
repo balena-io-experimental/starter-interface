@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios'
 import Logger from '@/common/logger'
+import axios, { AxiosError } from 'axios'
 
 // Axios instance generator. It allows Axios instances to share interceptors and
 // allows instances to be created in the file using it. This means when someone deletes

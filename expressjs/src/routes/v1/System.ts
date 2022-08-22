@@ -1,7 +1,7 @@
+import Logger from '@/common/logger'
 import * as dns from 'dns'
 import express, { Request, RequestHandler, Response } from 'express'
 import si from 'systeminformation'
-import Logger from '@/common/logger'
 
 interface reqBodyData {
   id: string

@@ -19,11 +19,11 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'layouts/ComponentFrame.vue'
 import ChangeHostname from 'components/SystemChangeHostname.vue'
 import UpdateDevice from 'components/SystemUpdateDevice.vue'
-import { defineAsyncComponent, defineComponent } from 'vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
 import { useSystemStore } from 'stores/system'
+import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ConfigurationPage',

@@ -25,12 +25,12 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'layouts/ComponentFrame.vue'
-import Connect from 'components/WifiConnect.vue'
 import ConfigurePassword from 'components/WifiConfigurePassword.vue'
 import ConfigureSSID from 'components/WifiConfigureSSID.vue'
-import { defineComponent } from 'vue'
+import Connect from 'components/WifiConnect.vue'
 import ForgetAllWifi from 'components/WifiForgetAllWifi.vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'NetworkingPage',

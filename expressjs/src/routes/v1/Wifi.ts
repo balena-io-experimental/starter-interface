@@ -1,8 +1,8 @@
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
 import request, { AxiosRequestConfig } from 'axios'
 import express, { Request, RequestHandler, Response } from 'express'
 import process from 'process'
-import createAxiosInstance from '@/common/axios'
-import Logger from '@/common/logger'
 
 interface reqBodyData {
   params: Array<string>

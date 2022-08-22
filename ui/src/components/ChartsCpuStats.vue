@@ -7,13 +7,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { LineChart } from 'vue-chart-3'
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
-import { colors, getCssVar, LoadingBar } from 'quasar'
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
+import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
+import { colors, getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { LineChart } from 'vue-chart-3'
 import { useI18n } from 'vue-i18n'
 
 interface cpuStat {

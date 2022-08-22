@@ -153,14 +153,14 @@
 </template>
 
 <script lang="ts">
-import { sdk } from 'src/api/sdk'
 import { AxiosResponse } from 'axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import { useQuasar } from 'quasar'
-import { useSystemStore } from 'stores/system'
-import { defineComponent, ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { sdk } from 'src/api/sdk'
 import { qSpinnerStyle } from 'src/config/qStyles'
+import { useSystemStore } from 'stores/system'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'SystemDeviceInfo',

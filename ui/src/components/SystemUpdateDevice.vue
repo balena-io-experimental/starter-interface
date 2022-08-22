@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { supervisor } from 'src/api/supervisor'
 import { AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
+import { supervisor } from 'src/api/supervisor'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 

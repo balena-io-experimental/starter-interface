@@ -1,8 +1,8 @@
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
 import { AxiosResponse } from 'axios'
 import fse from 'fs-extra'
 import process from 'process'
-import createAxiosInstance from '@/common/axios'
-import Logger from '@/common/logger'
 
 interface hostConfigHostname {
   network: { hostname: string }
