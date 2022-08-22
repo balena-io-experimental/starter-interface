@@ -1,8 +1,8 @@
+import logger from '@/common/logger'
 import { getSdk } from 'balena-sdk'
 import express, { Request, RequestHandler } from 'express'
-import process from 'process'
 import lockFile from 'lockfile'
-import logger from '@/common/logger'
+import process from 'process'
 
 interface lockfileError {
   code: string

@@ -1,8 +1,3 @@
-import compression from 'compression'
-import cors from 'cors'
-import express from 'express'
-import process from 'process'
-import slowDown from 'express-slow-down'
 import boot from '@/boot'
 import BalenaSDK from '@/routes/v1/BalenaSDK'
 import CaptivePortal from '@/routes/v1/CaptivePortal'
@@ -12,6 +7,11 @@ import Supervisor from '@/routes/v1/Supervisor'
 import System from '@/routes/v1/System'
 import Tests from '@/routes/v1/Tests'
 import Wifi from '@/routes/v1/Wifi'
+import compression from 'compression'
+import cors from 'cors'
+import express from 'express'
+import slowDown from 'express-slow-down'
+import process from 'process'
 
 // Run custom boot processes
 boot()

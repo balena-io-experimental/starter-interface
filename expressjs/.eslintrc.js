@@ -17,6 +17,9 @@ module.exports = {
   ],
 
   rules: {
+    // ESLint
+    'import/order': 'off',
+
     // AirBnB
     'no-shadow': 'off',
     'no-use-before-define': 'off',

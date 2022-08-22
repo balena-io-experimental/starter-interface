@@ -60,8 +60,8 @@
 import { AxiosResponse } from 'axios'
 import WifiConnect from 'components/WifiConnect.vue'
 import { copyToClipboard, useQuasar } from 'quasar'
-import { qHeaderStyle } from 'src/config/qStyles'
 import { supervisor } from 'src/api/supervisor'
+import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

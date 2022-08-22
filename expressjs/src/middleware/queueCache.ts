@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express'
 import Logger from '@/common/logger'
+import { NextFunction, Request, Response } from 'express'
 
 interface sendResponse extends Response {
   sendResponse: Response['json']

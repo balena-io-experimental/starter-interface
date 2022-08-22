@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'layouts/ComponentFrame.vue'
 import JournalDLogs from 'components/SystemJournalDLogs.vue'
 import SystemInfo from 'components/ToolsSystemInfo.vue'
+import ComponentFrame from 'layouts/ComponentFrame.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

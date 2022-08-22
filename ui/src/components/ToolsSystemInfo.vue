@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { expressApi } from 'boot/axios'
 import { AxiosResponse } from 'axios'
+import { expressApi } from 'boot/axios'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { defineComponent, ref } from 'vue'
 

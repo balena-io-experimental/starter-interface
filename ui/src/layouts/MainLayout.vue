@@ -128,16 +128,16 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { loadLanguageAsync } from 'boot/i18n'
-import localeOptions from 'src/config/localeOptions'
-import MenuItems from 'layouts/MenuItems.vue'
-import menuList from 'src/config/menuList'
-import { qHeaderStyle } from 'src/config/qStyles'
 import Reboot from 'components/SystemReboot.vue'
 import Shutdown from 'components/SystemShutdown.vue'
+import MenuItems from 'layouts/MenuItems.vue'
 import { supervisor } from 'src/api/supervisor'
+import localeOptions from 'src/config/localeOptions'
+import menuList from 'src/config/menuList'
+import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'LayoutsMainLayout',
