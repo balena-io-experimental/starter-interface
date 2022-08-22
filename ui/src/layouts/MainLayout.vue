@@ -25,7 +25,11 @@
           </div>
           <q-slide-transition v-else :duration="1000">
             <div v-if="deviceName" class="text-subtitle1">
-              <q-icon class="q-mr-xs" name="local_offer" />{{ deviceName }}
+              <q-icon
+                v-if="$q.screen.gt.xs"
+                class="q-mr-xs"
+                name="local_offer"
+              />{{ deviceName }}
             </div>
           </q-slide-transition>
         </q-toolbar-title>
