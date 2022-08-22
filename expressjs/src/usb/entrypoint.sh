@@ -47,8 +47,10 @@ start_udev()
   if [ "$UDEV" = "on" ]; then
     if $PRIVILEGED; then
       mount_dev
+      # Start udev
       unshare --net udevd --daemon > /dev/null 2>&1
-      udevadm trigger > /dev/null 2>&1
+      # Check for existing devices connected to the host and mount them
+      udevadm trigger --action add --subsystem-match=block --type=devices --property=DEVTYPE=partition > /dev/null 2>&1
     else
       echo "Unable to enable USB mounting support, container must be run in privileged mode."
     fi
@@ -78,4 +80,4 @@ case "$UDEV" in
 esac
 
 start_udev
-init "$@"
+exec "$@"
