@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env sh
 
 # Import env variables
 . .env_vars
