@@ -119,12 +119,12 @@
 </template>
 
 <script lang="ts">
-import { sdk } from 'src/api/sdk'
 import { AxiosError, AxiosResponse } from 'axios'
 import { QTableProps, useQuasar } from 'quasar'
-import { defineComponent, ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { sdk } from 'src/api/sdk'
 import { qBtnStyle, qSpinnerStyle } from 'src/config/qStyles'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Env {
   [key: string]: string
@@ -181,22 +181,20 @@ export default defineComponent({
       isLoading.value = false
     })
 
-    function deleteEnv() {
+    async function deleteEnv() {
       isLoading.value = true
       const toDelete: Env = {}
       selectedRows.value.forEach((item: Env) => {
         toDelete[item.name] = ''
       })
-      sdk
-        .deleteEnv(toDelete)
-        .then(async () => {
-          await getEnv()
-          selectedRows.value = []
-        })
-        .catch((error: Error | AxiosError) => {
-          console.error('deleteEnv', error)
-          selectedRows.value = []
-        })
+      try {
+        await sdk.deleteEnv(toDelete)
+        await getEnv()
+        selectedRows.value = []
+      } catch (error) {
+        console.error('deleteEnv', error)
+        selectedRows.value = []
+      }
 
       // Delay to allow the container to restart and avoid navigation away too early
       setTimeout(() => {
@@ -227,18 +225,16 @@ export default defineComponent({
       getEnvResponse.value = await sdk.getEnv()
     }
 
-    function setEnv() {
+    async function setEnv() {
       isNewVarDialogOpen.value = false
       isLoading.value = true
 
-      sdk
-        .setEnv(newVarKey.value, newVarValue.value)
-        .then(async () => {
-          await getEnv()
-        })
-        .catch((error: Error | AxiosError) => {
-          console.error('setEnv', error)
-        })
+      try {
+        await sdk.setEnv(newVarKey.value, newVarValue.value)
+        await getEnv()
+      } catch (error) {
+        console.error('setEnv', error)
+      }
 
       // Delay to allow the container to restart and avoid navigation away too early
       setTimeout(() => {
