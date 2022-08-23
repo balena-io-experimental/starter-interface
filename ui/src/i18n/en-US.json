@@ -43,11 +43,9 @@
     "system": {
       "device_info": {
         "environment_variables": "Environment Variables",
-        "internet_required": "Internet connectivity is required to use this feature.",
         "ip_address": "IP Address",
         "location": "Location",
         "mac_address": "MAC Address",
-        "memory": "Memory",
         "not_undervolted": "Normal Power",
         "os_version": "OS Version",
         "public_ip": "Public IP",
@@ -57,7 +55,6 @@
         "storage": "Storage",
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
-        "offline": "Offline",
         "cloudlink": "Cloudlink",
         "temperature": "Temperature"
       },
