@@ -1,151 +1,165 @@
-<!-- eslint-disable @intlify/vue-i18n/no-raw-text */ -->
 <template>
-  <div v-if="response && systemStore.internetConnectivity">
-    <h4 class="row items-end q-mt-none q-mb-md">
-      <span class="q-mr-sm">{{ response.data.device_name }}</span>
-      <q-chip
-        :color="response.data.is_online ? 'positive' : 'negative'"
-        text-color="white"
-      >
-        {{
-          response.data.is_online
-            ? $t('components.system.device_info.cloudlink')
-            : $t('components.system.device_info.offline')
-        }}
-      </q-chip>
-      <q-chip
-        :color="response.data.is_undervolted ? 'negative' : 'positive'"
-        text-color="white"
-      >
-        {{
-          response.data.is_undervolted
-            ? $t('components.system.device_info.undervolted')
-            : $t('components.system.device_info.not_undervolted')
-        }}
-      </q-chip>
-    </h4>
-    <div class="q-mb-sm">
-      <cpu-stats />
+  <div v-if="!isLoading" class="row items-end q-mt-none q-mb-md text-h4">
+    <span v-if="sdkResponse" class="q-mr-sm">{{
+      sdkResponse.data.device_name
+    }}</span>
+    <q-space />
+    <q-chip
+      v-if="$q.screen.gt.sm"
+      :icon="
+        systemStore.internetConnectivity && sdkResponse?.data.is_online
+          ? 'arrow_circle_up'
+          : 'arrow_circle_down'
+      "
+      :color="
+        sdkResponse?.data.is_online && systemStore.internetConnectivity
+          ? 'positive'
+          : 'negative'
+      "
+      text-color="white"
+      :label="$t('components.system.device_info.cloudlink')"
+    />
+    <q-icon
+      v-else
+      :name="
+        systemStore.internetConnectivity && sdkResponse?.data.is_online
+          ? 'arrow_circle_up'
+          : 'arrow_circle_down'
+      "
+      :color="
+        sdkResponse?.data.is_online && systemStore.internetConnectivity
+          ? 'positive'
+          : 'negative'
+      "
+    />
+    <q-chip
+      v-if="$q.screen.gt.sm && sdkResponse"
+      icon="power"
+      :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+      text-color="white"
+    >
+      {{
+        sdkResponse.data.is_undervolted
+          ? $t('components.system.device_info.undervolted')
+          : $t('components.system.device_info.not_undervolted')
+      }}
+    </q-chip>
+    <q-icon
+      v-if="!$q.screen.gt.sm && sdkResponse"
+      name="power"
+      :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+    />
+  </div>
+  <div v-if="m && f && device && !isLoading">
+    <div class="justify-between row q-mb-sm no-wrap">
+      <div class="col"><cpu-stats /></div>
+      <div class="row items-center q-ml-sm">
+        <memory-stats />
+      </div>
     </div>
-    <div class="row items-start">
-      <q-card flat bordered class="">
-        <q-card-section horizontal>
-          <!-- info -->
-          <q-card-section>
-            <q-list>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.location') }}
-                  </q-item-label>
-                  <q-item-label>{{ response.data.location }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.os_version') }}
-                  </q-item-label>
-                  <q-item-label>{{ response.data.os_version }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.supervisor_version') }}
-                  </q-item-label>
-                  <q-item-label>
-                    {{ response.data.supervisor_version }}
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.ip_address') }}
-                  </q-item-label>
-                  <q-item-label>{{ response.data.ip_address }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.mac_address') }}
-                  </q-item-label>
-                  <q-item-label
-                    v-for="mac in response.data.mac_address.split(' ')"
-                    :key="mac"
-                  >
-                    {{ mac }}
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item class="q-mb-sm">
-                <q-item-section>
-                  <q-item-label caption>
-                    {{ $t('components.system.device_info.public_ip') }}
-                  </q-item-label>
-                  <q-item-label>
-                    {{ response.data.public_address }}
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-card-section>
-          <!-- end info -->
-          <q-separator vertical />
-          <!-- bars -->
-          <q-card-section>
-            <q-card-section>
-              <b class="q-mr-xs">{{
-                $t('components.system.device_info.memory')
-              }}</b>
-              <span> - </span>
-              <span
-                >{{ response.data.memory_usage }}MB /
-                {{ response.data.memory_total }}MB</span
-              >
-              <q-linear-progress
-                rounded
-                :value="response.data.memory_usage / response.data.memory_total"
-                class="q-mt-md"
+    <q-separator class="q-ma-sm" />
+    <div class="q-mt-md">
+      <q-card class="q-ma-sm" flat>
+        <q-card-section :horizontal="$q.screen.gt.sm ? true : false">
+          <q-linear-progress
+            v-if="temperature?.data.main"
+            class="q-ml-xs q-mr-xs q-mt-xs"
+            stripe
+            rounded
+            :color="temperature.data.main > 65 ? 'warning' : 'positive'"
+            size="20px"
+            :value="temperature.data.main / 100"
+          >
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="primary"
+                :label="`${$t('components.system.device_info.temperature')}:
+                  ${temperature.data.main}°C`"
               />
-            </q-card-section>
-            <q-card-section>
-              <b class="q-mr-xs">{{
-                $t('components.system.device_info.storage')
-              }}</b>
-              <span>({{ response.data.storage_block_device }})</span>
-              <span> - </span>
-              <span
-                >{{ (response.data.storage_usage / 1000).toFixed(2) }}GB /
-                {{ (response.data.storage_total / 1000).toFixed(2) }}GB</span
-              >
-              <q-linear-progress
-                rounded
-                :value="
-                  response.data.storage_usage / response.data.storage_total
-                "
-                class="q-mt-md"
+            </div>
+          </q-linear-progress>
+          <q-linear-progress
+            class="q-ml-xs q-mr-xs q-mt-xs"
+            stripe
+            rounded
+            size="20px"
+            :value="f.data[0].used / f.data[0].size"
+          >
+            <div class="absolute-full flex flex-center">
+              <q-badge
+                color="white"
+                text-color="primary"
+                :label="`${$t('components.system.device_info.storage')}: ${(
+                  f.data[0].used / 1000000000
+                ).toFixed(2)}GB /
+                ${(f.data[0].size / 1000000000).toFixed(2)}GB`"
               />
-            </q-card-section>
-          </q-card-section>
-          <!-- end bars -->
+            </div>
+          </q-linear-progress>
         </q-card-section>
       </q-card>
     </div>
-    <hr class="q-mt-xl q-mb-lg" />
-    <q-expansion-item
-      expand-separator
-      icon="code"
-      :label="$t('components.system.device_info.response_details')"
-      :caption="$t('components.system.device_info.raw_json')"
-    >
-      <pre style="white-space: pre-wrap">{{ response.data }}</pre>
-    </q-expansion-item>
-  </div>
-  <div v-if="!isLoading && systemStore.internetConnectivity === false">
-    {{ $t('components.system.device_info.internet_required') }}
+    <div class="q-mt-sm">
+      <q-card flat class="text-center">
+        <q-list class="justify-evenly row">
+          <q-item v-if="sdkResponse" class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.location') }}
+              </q-item-label>
+              <q-item-label>{{ sdkResponse.data.location }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.os_version') }}
+              </q-item-label>
+              <q-item-label>
+                {{ device.os_version }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.supervisor_version') }}
+              </q-item-label>
+              <q-item-label>
+                {{ device.supervisor_version }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.ip_address') }}
+              </q-item-label>
+              <q-item-label>{{ device.ip_address }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.mac_address') }}
+              </q-item-label>
+              <q-item-label>{{ device.mac_address }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item v-if="sdkResponse" class="q-mb-sm">
+            <q-item-section>
+              <q-item-label caption>
+                {{ $t('components.system.device_info.public_ip') }}
+              </q-item-label>
+              <q-item-label>
+                {{ sdkResponse.data.public_address }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card>
+    </div>
   </div>
   <div v-if="isLoading" class="window-height row justify-center items-center">
     <q-spinner v-bind="qSpinnerStyle" />
@@ -154,30 +168,129 @@
 
 <script lang="ts">
 import { AxiosResponse } from 'axios'
+import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
+import MemoryStats from 'components/ChartsMemoryStats.vue'
 import { useQuasar } from 'quasar'
 import { sdk } from 'src/api/sdk'
+import { supervisor } from 'src/api/supervisor'
+import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
 import { useSystemStore } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+interface device {
+  current_release: string
+  ip_address: string
+  mac_address: string
+  os_version: string
+  supervisor_version: string
+  target_release: string
+}
+
+interface f {
+  data: {
+    [index: number]: {
+      available: number
+      mount: string
+      size: number
+      total: number
+      used: number
+    }
+  }
+}
+
+interface m {
+  data: {
+    available: number
+    total: number
+  }
+}
+
+interface temperature {
+  data: {
+    main: number
+    cores: [number]
+  }
+}
+
+interface sdkResponses {
+  location: string
+  os_release: string
+  public_address: string
+  cpu_temp: number
+  is_undervolted: boolean
+  is_online: boolean
+  device_name: string
+}
+
 export default defineComponent({
-  name: 'SystemDeviceInfo',
-  components: { CpuStats },
+  name: 'SystemOfflineDeviceInfo',
+  components: { CpuStats, MemoryStats },
   setup() {
     const $q = useQuasar()
     const systemStore = useSystemStore()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
+    // Tools
     const isLoading = ref<boolean>(true)
-    const response = ref<AxiosResponse>()
+
+    // Constants
+    const cmdFsSize = sysInfoCmds.find((cmd) => cmd.id === 'f')
+    const cmdMem = sysInfoCmds.find((cmd) => cmd.id === 'm')
+    const cmdTemp = sysInfoCmds.find((cmd) => cmd.id === 'T')
+    const device = ref<device>()
+    const f = ref<f>()
+    const m = ref<m>()
+    const temperature = ref<temperature>()
+    const sdkResponse = ref<AxiosResponse<sdkResponses>>()
+
+    onMounted(async () => {
+      await getDeviceInfo()
+      await getSdkDeviceInfo()
+      isLoading.value = false
+    })
+
+    // Axios Functions
+    function deviceInfo() {
+      return supervisor.v1.device()
+    }
+
+    function fsSize() {
+      return expressApi.post('/v1/system/systeminfo', {
+        id: cmdFsSize?.id
+      })
+    }
 
     async function getDeviceInfo() {
       try {
-        const res = await sdk.device()
-        response.value = res
+        const results = await Promise.all([
+          deviceInfo(),
+          fsSize(),
+          mem(),
+          temperat()
+        ])
+
+        device.value = results[0].data as device
+        f.value = results[1].data as f
+        m.value = results[2].data as m
+        temperature.value = results[3].data as temperature
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    function mem() {
+      return expressApi.post('/v1/system/systeminfo', {
+        id: cmdMem?.id
+      })
+    }
+
+    async function getSdkDeviceInfo() {
+      try {
+        sdkResponse.value = await sdk.device()
       } catch (error) {
         console.error(error)
         $q.notify({
@@ -187,16 +300,21 @@ export default defineComponent({
       }
     }
 
-    onMounted(async () => {
-      await getDeviceInfo()
-      isLoading.value = false
-    })
+    function temperat() {
+      return expressApi.post('/v1/system/systeminfo', {
+        id: cmdTemp?.id
+      })
+    }
 
     return {
+      device,
+      f,
       isLoading,
+      m,
       qSpinnerStyle,
-      response,
-      systemStore
+      sdkResponse,
+      systemStore,
+      temperature
     }
   }
 })

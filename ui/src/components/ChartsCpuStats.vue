@@ -2,7 +2,7 @@
   <LineChart
     :chart-data="chartData"
     :options="options"
-    :height="props.height"
+    :height="$q.screen.gt.xs ? 150 : 400"
   />
 </template>
 
@@ -29,10 +29,6 @@ export default defineComponent({
   name: 'ChartsCpuStats',
   components: { LineChart },
   props: {
-    height: {
-      type: Number,
-      default: 150
-    },
     maxDataPoints: {
       type: Number,
       default: 20
@@ -48,7 +44,6 @@ export default defineComponent({
     const { t } = useI18n()
 
     const cmdCurrentLoad = sysInfoCmds.find((cmd) => cmd.id === 'l')
-    const chartHeight = 150
     const chartBackgroundOpacity = 70
     const isUnMounted = ref<boolean>(false)
 
@@ -101,6 +96,7 @@ export default defineComponent({
         }
       },
       responsive: true,
+      maintainAspectRatio: false,
       scales: {
         yAxis: {
           min: 0,
@@ -201,7 +197,6 @@ export default defineComponent({
 
     return {
       chartData,
-      chartHeight,
       options,
       props
     }
