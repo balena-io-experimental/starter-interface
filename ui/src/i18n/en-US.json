@@ -18,8 +18,14 @@
     "charts": {
       "cpu_stats": {
         "cpu_status": "CPU Status"
+      },
+      "mem_stats": {
+        "used": "Used",
+        "available": "Available",
+        "memory": "Memory"
       }
     },
+
     "layouts": {
       "captive_portal": {
         "connect_to_wifi": "Connect to WiFi",
@@ -52,7 +58,8 @@
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
         "offline": "Offline",
-        "cloudlink": "Cloudlink"
+        "cloudlink": "Cloudlink",
+        "temperature": "Temperature"
       },
       "env_config": {
         "add_env_var": "Add Environment Variable",
