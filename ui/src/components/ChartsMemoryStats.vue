@@ -17,7 +17,13 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
+import {
+  ArcElement,
+  Chart,
+  ChartData,
+  ChartOptions,
+  DoughnutController
+} from 'chart.js'
 import { getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
@@ -31,7 +37,7 @@ interface memStat {
   }
 }
 
-Chart.register(...registerables)
+Chart.register(ArcElement, DoughnutController)
 
 export default defineComponent({
   name: 'ChartsMemStats',

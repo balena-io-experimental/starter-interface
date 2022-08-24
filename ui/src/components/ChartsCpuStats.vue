@@ -9,7 +9,16 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
+import {
+  CategoryScale,
+  Chart,
+  ChartData,
+  ChartOptions,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement
+} from 'chart.js'
 import { colors, getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
@@ -23,7 +32,13 @@ interface cpuStat {
   }
 }
 
-Chart.register(...registerables)
+Chart.register(
+  CategoryScale,
+  LineController,
+  LineElement,
+  LinearScale,
+  PointElement
+)
 
 export default defineComponent({
   name: 'ChartsCpuStats',
