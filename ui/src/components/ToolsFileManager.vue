@@ -227,7 +227,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'

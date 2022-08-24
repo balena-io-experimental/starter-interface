@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import { QForm, useQuasar } from 'quasar'
 import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
