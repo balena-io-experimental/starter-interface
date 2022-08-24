@@ -1,5 +1,5 @@
 // Balena Supervisor API Documentation: https://www.balena.io/docs/reference/supervisor/supervisor-api/
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 
 interface hostConfigHostname {
   network: { hostname: string; proxy?: never }
