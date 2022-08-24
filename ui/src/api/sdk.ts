@@ -1,5 +1,5 @@
 // Balena SDK Documentation: https://www.balena.io/docs/reference/sdk/node-sdk/
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 
 const apiPathV1 = '/v1/sdk' as string
 

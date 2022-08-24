@@ -1,5 +1,5 @@
+import { expressApi } from 'boot/axios'
 import { defineStore } from 'pinia'
-import expressApi from 'axios'
 
 interface internetConnection {
   internet: boolean
@@ -27,6 +27,15 @@ export const useSystemStore = defineStore('system', {
         this.internetConnectivity = false
         return Promise.reject(error)
       }
+    }
+  }
+})
+
+export const axiosUrl = defineStore('axiosUrl', {
+  state: () => ({ axiosBaseUrl: '' }),
+  actions: {
+    setUrl(newUrl: string) {
+      this.axiosBaseUrl = newUrl
     }
   }
 })

@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'

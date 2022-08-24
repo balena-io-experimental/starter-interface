@@ -1,5 +1,8 @@
 <template>
-  <div v-if="currentPage == '#/captiveportal'">
+  <div v-if="$q.platform.is.electron">
+    <electron-portal />
+  </div>
+  <div v-else-if="currentPage == '#/captiveportal'">
     <captive-portal />
   </div>
   <router-view v-else />
@@ -14,6 +17,9 @@ export default defineComponent({
   components: {
     CaptivePortal: defineAsyncComponent(
       () => import('layouts/CaptivePortal.vue')
+    ),
+    ElectronPortal: defineAsyncComponent(
+      () => import('layouts/ElectronPortal.vue')
     )
   },
   setup() {
