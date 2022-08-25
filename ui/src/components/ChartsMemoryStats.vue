@@ -22,7 +22,9 @@ import {
   Chart,
   ChartData,
   ChartOptions,
-  DoughnutController
+  DoughnutController,
+  Title,
+  Tooltip
 } from 'chart.js'
 import { getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
@@ -37,7 +39,7 @@ interface memStat {
   }
 }
 
-Chart.register(ArcElement, DoughnutController)
+Chart.register(ArcElement, DoughnutController, Title, Tooltip)
 
 export default defineComponent({
   name: 'ChartsMemStats',
