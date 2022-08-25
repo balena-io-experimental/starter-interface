@@ -1,8 +1,8 @@
-const { resolve } = require('path');
+const { resolve } = require('path')
 
 module.exports = {
   parserOptions: {
-    project: resolve(__dirname, './tsconfig.json'),
+    project: resolve(__dirname, './tsconfig.json')
   },
 
   overrides: [
@@ -10,8 +10,8 @@ module.exports = {
       files: ['custom-service-worker.ts'],
 
       env: {
-        serviceworker: true,
-      },
-    },
-  ],
-};
+        serviceworker: true
+      }
+    }
+  ]
+}
