@@ -35,7 +35,7 @@
     <q-tab-panel class="q-pa-lg text-center" name="welcome">
       <!-- Logo -->
       <div class="q-mb-md">
-        <q-img :src="qHeaderStyle.logo_coloured" style="max-width: 175px" />
+        <img :src="qHeaderStyle.logo_coloured" style="max-width: 175px" />
       </div>
       <!-- Title -->
       <div class="text-h4 q-mb-md">
