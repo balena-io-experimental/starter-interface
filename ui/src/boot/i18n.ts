@@ -2,7 +2,7 @@ import enUS from 'src/i18n/en-US.json'
 import { qLangList } from 'src/config/localeOptions'
 import { LocalStorage, Quasar, QuasarLanguage } from 'quasar'
 import { boot } from 'quasar/wrappers'
-import { createI18n, LocaleMessageDictionary, VueMessageType } from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 
 // Set default language
 const defaultLang = 'en-US'
@@ -30,7 +30,7 @@ if (LocalStorage.getItem('lang')) {
 
 async function setLanguage(isoName: string) {
   // Set the UI language
-  i18n.global.locale.value = isoName
+  i18n.global.locale.value = isoName as 'en-US'
   // Load and set the selected Quasar language pack
   try {
     const lang = await qLangList[
@@ -55,10 +55,7 @@ export async function loadLanguageAsync(isoName: string) {
   // If the language hasn't been loaded yet
   try {
     const messages = await langGlob[`../i18n/${isoName}.json`]()
-    i18n.global.setLocaleMessage(
-      isoName,
-      messages.default as LocaleMessageDictionary<VueMessageType>
-    )
+    i18n.global.setLocaleMessage(isoName, messages.default)
     loadedLanguages.push(isoName)
 
     return Promise.resolve(setLanguage(isoName))

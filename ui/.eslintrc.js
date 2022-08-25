@@ -7,7 +7,8 @@ module.exports = {
     '.eslintrc.js',
     '.eslintrc-treeshake.js',
     'quasar.conf.js',
-    'src-electron/*'
+    'src-electron/*',
+    'src-pwa/*'
   ],
 
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
