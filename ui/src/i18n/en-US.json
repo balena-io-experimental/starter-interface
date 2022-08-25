@@ -165,6 +165,10 @@
       "network_connection_restored": "Network connection restored.",
       "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
     },
+    "pwa": {
+      "install": "Install",
+      "install_notification": "Did you know you can install this page as an app and use it offline?"
+    },
     "titles": {
       "host_config": "Host Configuration"
     }
