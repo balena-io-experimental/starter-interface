@@ -45,7 +45,6 @@
       >
         <template #after>
           <q-btn
-            v-bind="qBtnStyle"
             flat
             icon="send"
             @click="setHostname(reqHostname)"
@@ -68,7 +67,7 @@ import { axiosUrl } from 'stores/system'
 import { defineComponent, ref } from 'vue'
 
 interface tabIndex {
-  title?: string
+  title: string
 }
 
 export default defineComponent({
