@@ -82,11 +82,34 @@
         <template #after>
           <q-btn
             flat
+            dense
+            padding="0"
             icon="send"
             :disable="!reqHostname"
             @click="setHostname(reqHostname)"
-          /> </template
-      ></q-input>
+          />
+        </template>
+      </q-input>
+      <div class="row text-center q-mt-sm text-grey-8 justify-center">
+        <div
+          v-if="quasarMode === 'pwa'"
+          :style="$q.screen.gt.xs ? 'max-width: 80%' : ''"
+        >
+          <q-expansion-item
+            expand-separator
+            dense
+            dense-toggle
+            :label="$t('system.pwa.install_notification')"
+          >
+            <q-card>
+              <q-separator class="q-ma-sm" />
+              <div>{{ $t('system.pwa.install_instructions_safari') }}</div>
+              <div>{{ $t('system.pwa.install_instructions_chrome') }}</div>
+              <div>{{ $t('system.pwa.install_instructions_browsers') }}</div>
+            </q-card>
+          </q-expansion-item>
+        </div>
+      </div>
     </q-tab-panel>
 
     <q-tab-panel v-for="tab in tabs" :key="tab.title" :name="tab.title">
@@ -132,6 +155,7 @@ export default defineComponent({
     const axiosBaseUrl = axiosUrl()
     const currentTab = ref('welcome')
     const showInstallBanner = ref(false)
+    const quasarMode = ref(process.env.MODE)
     const reqHostname = ref('')
     const $q = useQuasar()
     const tabs = ref<tabIndex[]>([])
@@ -192,6 +216,7 @@ export default defineComponent({
       currentTab,
       installApp,
       qHeaderStyle,
+      quasarMode,
       reqHostname,
       setAxios,
       setHostname,
