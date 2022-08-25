@@ -12,7 +12,7 @@
     "dev": "quasar dev",
     "oddev": "quasar dev -p 80",
     "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build",
-    "deploytest": "push-dir --dir=dist/pwa --remote=ghp-test --branch=test"
+    "deploytest": "push-dir --dir=dist/pwa --remote=ghp-test --branch=test --cleanup"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.1",
