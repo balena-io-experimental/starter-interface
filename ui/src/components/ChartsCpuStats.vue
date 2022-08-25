@@ -17,7 +17,8 @@ import {
   LinearScale,
   LineController,
   LineElement,
-  PointElement
+  PointElement,
+  Title
 } from 'chart.js'
 import { colors, getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
@@ -37,7 +38,8 @@ Chart.register(
   LineController,
   LineElement,
   LinearScale,
-  PointElement
+  PointElement,
+  Title
 )
 
 export default defineComponent({
