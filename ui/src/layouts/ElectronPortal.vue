@@ -13,15 +13,23 @@
     <q-tab
       v-for="(tab, index) in tabs"
       :key="tab"
-      :label="tab.title"
       :name="tab.title"
       @click="setAxios(tab.title)"
     >
-      <q-badge color="accent" floating transparent>
-        <q-icon name="close" color="black" @click.stop="closeTab(index)" />
-      </q-badge>
+      <div>
+        <span class="q-mr-sm">{{ tab.title }}</span>
+        <q-btn
+          color="blue-grey-6"
+          icon="cancel"
+          size="xs"
+          dense
+          flat
+          @click.stop="closeTab(index)"
+        />
+      </div>
     </q-tab>
   </q-tabs>
+  <q-separator />
 
   <q-tab-panels v-model="currentTab" animated swipeable>
     <q-tab-panel class="q-pa-lg text-center" name="welcome">
