@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$q.platform.is.electron">
+  <div v-if="$q.platform.is.electron || quasarMode == 'pwa'">
     <electron-portal />
   </div>
   <div v-else-if="currentPage == '#/captiveportal'">
@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { useQuasar } from 'quasar'
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'App',
@@ -24,6 +24,9 @@ export default defineComponent({
   },
   setup() {
     const $q = useQuasar()
+    const quasarMode = ref(process.env.MODE)
+
+    console.log(quasarMode.value)
 
     // Show loading indicator as early as possible in loading process.
     // Is disabled by the router afterEach function in router/index.ts
@@ -32,7 +35,7 @@ export default defineComponent({
     // Get the current page path to check if this is a captive portal
     const currentPage = window.location.hash
 
-    return { currentPage }
+    return { currentPage, quasarMode }
   }
 })
 </script>

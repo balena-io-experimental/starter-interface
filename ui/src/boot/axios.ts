@@ -31,7 +31,7 @@ expressApi.interceptors.request.use(
   (config) => {
     // Override the default baseURL based on stored path from electron app
     const axiosBaseUrl = axiosUrl()
-    if (Platform.is.electron) {
+    if (Platform.is.electron || process.env.MODE === 'pwa') {
       config.baseURL = axiosBaseUrl.$state.axiosBaseUrl
     }
     return config

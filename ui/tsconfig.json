@@ -17,6 +17,8 @@
   "include": [
     "src-electron/**/*.ts",
     "src-electron/**/*.d.ts",
+    "src-pwa/**/*.ts",
+    "src-pwa/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.json",
