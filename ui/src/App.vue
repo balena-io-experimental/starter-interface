@@ -26,8 +26,6 @@ export default defineComponent({
     const $q = useQuasar()
     const quasarMode = ref(process.env.MODE)
 
-    console.log(quasarMode.value)
-
     // Show loading indicator as early as possible in loading process.
     // Is disabled by the router afterEach function in router/index.ts
     $q.loading.show()
