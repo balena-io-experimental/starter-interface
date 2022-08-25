@@ -67,6 +67,11 @@
       <q-input
         v-model="reqHostname"
         clearable
+        :rules="[
+          (value: string) =>
+            !value.includes(' ') ||
+            $t('components.wifi.configure_password.invalid_name')
+        ]"
         placeholder="balena.local"
         class="q-mt-md"
         filled
