@@ -16,15 +16,9 @@
     <q-icon
       v-else
       :name="
-        systemStore.internetConnectivity && sdkResponse?.data.is_online
-          ? 'arrow_circle_up'
-          : 'arrow_circle_down'
+        sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
       "
-      :color="
-        sdkResponse?.data.is_online && systemStore.internetConnectivity
-          ? 'positive'
-          : 'negative'
-      "
+      :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
     />
     <q-chip
       v-if="$q.screen.gt.sm && sdkResponse"
