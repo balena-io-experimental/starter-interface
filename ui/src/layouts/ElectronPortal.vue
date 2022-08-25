@@ -23,36 +23,39 @@
       </template>
     </q-banner>
   </q-slide-transition>
-  <q-tabs
-    v-model="currentTab"
-    no-caps
-    outside-arrows
-    mobile-arrows
-    class="bg-accent shadow-2"
-  >
-    <q-tab
-      name="welcome"
-      :label="$t('components.layouts.captive_portal.welcome')"
-    />
-    <q-tab
-      v-for="(tab, index) in tabs"
-      :key="tab"
-      :name="tab.title"
-      @click="setAxios(tab.title)"
-    >
-      <div>
-        <span class="q-mr-sm">{{ tab.title }}</span>
-        <q-btn
-          color="blue-grey-6"
-          icon="cancel"
-          size="xs"
-          dense
-          flat
-          @click.stop="closeTab(index)"
-        />
-      </div>
-    </q-tab>
-  </q-tabs>
+
+  <q-toolbar class="bg-accent">
+    <q-avatar square size="sm">
+      <img :src="qHeaderStyle.logo_coloured" />
+    </q-avatar>
+    <q-space />
+
+    <q-tabs v-model="currentTab" no-caps flat outside-arrows mobile-arrows>
+      <q-tab
+        name="welcome"
+        :label="$t('components.layouts.captive_portal.welcome')"
+      />
+      <q-tab
+        v-for="(tab, index) in tabs"
+        :key="tab"
+        :name="tab.title"
+        @click="setAxios(tab.title)"
+      >
+        <div>
+          <span class="q-mr-sm">{{ tab.title }}</span>
+          <q-btn
+            color="blue-grey-6"
+            icon="cancel"
+            size="xs"
+            dense
+            flat
+            @click.stop="closeTab(index)"
+          />
+        </div>
+      </q-tab>
+    </q-tabs>
+    <q-space class="q-mr-lg" />
+  </q-toolbar>
   <q-separator />
   <q-tab-panels v-model="currentTab" animated swipeable>
     <q-tab-panel class="q-pa-lg text-center" name="welcome">
