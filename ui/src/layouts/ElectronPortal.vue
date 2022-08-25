@@ -55,6 +55,7 @@
           <q-btn
             flat
             icon="send"
+            :disable="!reqHostname"
             @click="setHostname(reqHostname)"
           /> </template
       ></q-input>
