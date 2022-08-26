@@ -116,7 +116,7 @@
     </q-tab-panel>
 
     <q-tab-panel v-for="tab in tabs" :key="tab.title" :name="tab.title">
-      <div class="q-pa-lg">
+      <div class="q-pa-sm q-ml-md q-mr-md">
         <device-info />
       </div>
     </q-tab-panel>
