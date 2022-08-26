@@ -8,6 +8,7 @@
     "name": "Name",
     "hostname": "Hostname",
     "ok": "Ok",
+    "open_control_panel": "Open Control Panel",
     "password": "Password",
     "restart": "Restart",
     "status": "Status",
