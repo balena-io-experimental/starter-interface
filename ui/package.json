@@ -10,9 +10,7 @@
     "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "oddev": "quasar dev -p 80",
-    "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build",
-    "deploytest": "push-dir --dir=dist/pwa --remote=ghp-test --branch=test --cleanup"
+    "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.1",
@@ -41,7 +39,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.7.1",
-    "push-dir": "^0.4.1",
     "typescript": "^4.7.4",
     "workbox-build": "^6.5.0",
     "workbox-cacheable-response": "^6.5.0",
