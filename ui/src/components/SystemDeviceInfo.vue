@@ -1,8 +1,31 @@
 <template>
   <div v-if="!isLoading" class="row items-end q-mt-none q-mb-md text-h4">
-    <span v-if="sdkResponse" class="q-mr-sm">{{
-      sdkResponse.data.device_name
-    }}</span>
+    <span v-if="sdkResponse">
+      {{ sdkResponse.data.device_name }}
+      <q-btn
+        class="q-ml-xs text-grey-9"
+        flat
+        size="md"
+        dense
+        padding="0"
+        icon="launch"
+        :href="baseUrl"
+        target="_blank"
+      >
+        <q-tooltip
+          v-if="
+            $q.screen.gt.xs && ($q.platform.is.electron || quasarMode == 'pwa')
+          "
+          v-model="showToolTip"
+          class="bg-secondary"
+          anchor="bottom right"
+          self="bottom start"
+          :offset="[-5, 20]"
+        >
+          {{ $t('general.open_control_panel') }}</q-tooltip
+        >
+      </q-btn>
+    </span>
     <q-space />
     <q-chip
       v-if="$q.screen.gt.sm"
@@ -164,7 +187,7 @@ import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
-import { useSystemStore } from 'stores/system'
+import { useSystemStore, axiosUrl } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -196,13 +219,6 @@ interface m {
   }
 }
 
-interface temperature {
-  data: {
-    main: number
-    cores: [number]
-  }
-}
-
 interface sdkResponses {
   location: string
   os_release: string
@@ -211,6 +227,13 @@ interface sdkResponses {
   is_undervolted: boolean
   is_online: boolean
   device_name: string
+}
+
+interface temperature {
+  data: {
+    main: number
+    cores: [number]
+  }
 }
 
 export default defineComponent({
@@ -223,6 +246,8 @@ export default defineComponent({
     const { t } = useI18n()
 
     // Tools
+    const axiosUrlStore = axiosUrl()
+    const baseUrl = axiosUrlStore.$state.axiosBaseUrl
     const isLoading = ref<boolean>(true)
 
     // Constants
@@ -232,8 +257,9 @@ export default defineComponent({
     const device = ref<device>()
     const f = ref<f>()
     const m = ref<m>()
-    const temperature = ref<temperature>()
+    const quasarMode = ref(process.env.MODE)
     const sdkResponse = ref<AxiosResponse<sdkResponses>>()
+    const temperature = ref<temperature>()
 
     onMounted(async () => {
       await getDeviceInfo()
@@ -270,12 +296,6 @@ export default defineComponent({
       }
     }
 
-    function mem() {
-      return expressApi.post('/v1/system/systeminfo', {
-        id: cmdMem?.id
-      })
-    }
-
     async function getSdkDeviceInfo() {
       try {
         sdkResponse.value = await sdk.device()
@@ -288,6 +308,12 @@ export default defineComponent({
       }
     }
 
+    function mem() {
+      return expressApi.post('/v1/system/systeminfo', {
+        id: cmdMem?.id
+      })
+    }
+
     function temperat() {
       return expressApi.post('/v1/system/systeminfo', {
         id: cmdTemp?.id
@@ -295,12 +321,15 @@ export default defineComponent({
     }
 
     return {
+      baseUrl,
       device,
       f,
       isLoading,
       m,
+      quasarMode,
       qSpinnerStyle,
       sdkResponse,
+      showToolTip: ref(true),
       systemStore,
       temperature
     }
