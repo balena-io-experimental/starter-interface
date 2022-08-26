@@ -3,6 +3,10 @@
     <span v-if="sdkResponse">
       {{ sdkResponse.data.device_name }}
       <q-btn
+        v-if="
+          ($q.screen.gt.xs && electronCorePage.$state.electronPage) ||
+          quasarMode == 'pwa'
+        "
         class="q-ml-xs text-grey-9"
         flat
         size="md"
@@ -13,9 +17,6 @@
         target="_blank"
       >
         <q-tooltip
-          v-if="
-            $q.screen.gt.xs && ($q.platform.is.electron || quasarMode == 'pwa')
-          "
           v-model="showToolTip"
           class="bg-secondary"
           anchor="bottom right"
@@ -187,7 +188,7 @@ import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
-import { useSystemStore, axiosUrl } from 'stores/system'
+import { axiosSettings, electronSettings } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -241,12 +242,12 @@ export default defineComponent({
   components: { CpuStats, MemoryStats },
   setup() {
     const $q = useQuasar()
-    const systemStore = useSystemStore()
+    const electronCorePage = electronSettings()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     // Tools
-    const axiosUrlStore = axiosUrl()
+    const axiosUrlStore = axiosSettings()
     const baseUrl = axiosUrlStore.$state.axiosBaseUrl
     const isLoading = ref<boolean>(true)
 
@@ -322,6 +323,7 @@ export default defineComponent({
 
     return {
       baseUrl,
+      electronCorePage,
       device,
       f,
       isLoading,
@@ -330,7 +332,7 @@ export default defineComponent({
       qSpinnerStyle,
       sdkResponse,
       showToolTip: ref(true),
-      systemStore,
+
       temperature
     }
   }

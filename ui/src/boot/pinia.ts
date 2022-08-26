@@ -1,10 +1,15 @@
 // Pinia store actions to call on first boot
 import { Platform } from 'quasar'
-import { useSystemStore } from 'stores/system'
+import { networkSettings } from 'stores/system'
 
-const systemStore = useSystemStore()
+const systemStore = networkSettings()
 
 // Get internet status. Error handling is done in the store.
-if (!Platform.is.electron && process.env.MODE !== 'pwa') {
+// Not using store for Electron state to avoid race conditon
+if (
+  (!Platform.is.electron && process.env.MODE !== 'pwa') ||
+  (Platform.is.electron &&
+    new URL(window.location.href).hostname !== 'localhost')
+) {
   void systemStore.checkInternetStatus()
 }
