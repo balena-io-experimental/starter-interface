@@ -126,7 +126,7 @@
 <script lang="ts">
 import DeviceInfo from 'components/SystemDeviceInfo.vue'
 import { qHeaderStyle } from 'src/config/qStyles'
-import { axiosUrl } from 'stores/system'
+import { axiosSettings } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
 
@@ -155,7 +155,7 @@ export default defineComponent({
     DeviceInfo
   },
   setup() {
-    const axiosBaseUrl = axiosUrl()
+    const axiosBaseUrl = axiosSettings()
     const currentTab = ref('welcome')
     const showInstallBanner = ref(false)
     const quasarMode = ref(process.env.MODE)

@@ -22,7 +22,7 @@
 import ChangeHostname from 'components/SystemChangeHostname.vue'
 import UpdateDevice from 'components/SystemUpdateDevice.vue'
 import ComponentFrame from 'layouts/ComponentFrame.vue'
-import { useSystemStore } from 'stores/system'
+import { networkSettings } from 'stores/system'
 import { defineAsyncComponent, defineComponent } from 'vue'
 
 export default defineComponent({
@@ -31,7 +31,7 @@ export default defineComponent({
     ComponentFrame
   },
   setup() {
-    const systemStore = useSystemStore()
+    const systemStore = networkSettings()
     return {
       ChangeHostname,
       EnvConfig: defineAsyncComponent(

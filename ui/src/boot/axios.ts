@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
 import { i18n } from 'boot/i18n'
-import { Notify, Platform } from 'quasar'
-import { axiosUrl } from 'stores/system'
+import { Notify } from 'quasar'
+import { axiosSettings, electronSettings } from 'stores/system'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -30,8 +30,9 @@ if (process.env.DEVICE_HOSTNAME) {
 expressApi.interceptors.request.use(
   (config) => {
     // Override the default baseURL based on stored path from electron app
-    const axiosBaseUrl = axiosUrl()
-    if (Platform.is.electron || process.env.MODE === 'pwa') {
+    const axiosBaseUrl = axiosSettings()
+    const electronCorePage = electronSettings()
+    if (electronCorePage.$state.electronPage || process.env.MODE === 'pwa') {
       config.baseURL = axiosBaseUrl.$state.axiosBaseUrl
     }
     return config
