@@ -1,6 +1,6 @@
 <template>
   <div v-if="$q.platform.is.electron || quasarMode == 'pwa'">
-    <electron-portal />
+    <app-portal />
   </div>
   <div v-else-if="currentPage == '#/captiveportal'">
     <captive-portal />
@@ -15,11 +15,9 @@ import { defineAsyncComponent, defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'App',
   components: {
+    AppPortal: defineAsyncComponent(() => import('layouts/AppPortal.vue')),
     CaptivePortal: defineAsyncComponent(
       () => import('layouts/CaptivePortal.vue')
-    ),
-    ElectronPortal: defineAsyncComponent(
-      () => import('layouts/ElectronPortal.vue')
     )
   },
   setup() {
