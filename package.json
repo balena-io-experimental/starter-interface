@@ -11,7 +11,6 @@
     "format": "yarn -p -i workspaces foreach run format",
     "formatcheck": "yarn -p -i workspaces foreach run formatcheck",
     "dev": "yarn -p -i workspaces foreach run dev",
-    "oddev": "yarn -p -i workspaces foreach run oddev",
     "build": "yarn -p -i workspaces foreach run build"
   }
 }
