@@ -13,8 +13,7 @@
         dense
         padding="0"
         icon="launch"
-        :href="baseUrl"
-        target="_blank"
+        @click="oUrl(baseUrl)"
       >
         <q-tooltip
           v-model="showToolTip"
@@ -183,7 +182,7 @@ import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
 import CpuStats from 'components/ChartsCpuStats.vue'
 import MemoryStats from 'components/ChartsMemoryStats.vue'
-import { useQuasar } from 'quasar'
+import { openURL, useQuasar } from 'quasar'
 import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
@@ -315,6 +314,12 @@ export default defineComponent({
       })
     }
 
+    function oUrl(url: string) {
+      openURL(url, null, {
+        width: '1050'
+      })
+    }
+
     function temperat() {
       return expressApi.post('/v1/system/systeminfo', {
         id: cmdTemp?.id
@@ -328,11 +333,11 @@ export default defineComponent({
       f,
       isLoading,
       m,
+      oUrl,
       quasarMode,
       qSpinnerStyle,
       sdkResponse,
       showToolTip: ref(true),
-
       temperature
     }
   }

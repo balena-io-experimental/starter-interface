@@ -36,10 +36,8 @@
         "system": {
             "device_info": {
                 "environment_variables": "Variáveis do ambiente",
-                "internet_required": "É preciso ter conexão com a internet para utilizar esse recurso.",
                 "ip_address": "Endereço IP",
                 "location": "Localização",
-                "memory": "Memória",
                 "not_undervolted": "Alimentação normal",
                 "os_version": "Versão do SO",
                 "public_ip": "IP Público",
@@ -49,12 +47,9 @@
                 "storage": "Armazenamento",
                 "supervisor_version": "Versão do supervisor",
                 "undervolted": "Abaixo da tensão nominal",
-                "offline": "Desconectado",
-                "online": "Conectado",
                 "mac_address": "Endereço MAC"
             },
             "env_config": {
-                "add_change_env_var": "Adiciona/altera a variável do ambiente",
                 "raw_json": "JSON puro",
                 "response_details": "Detalhes de resposta",
                 "delete_selected_records": "Excluir os registros selecionados",
@@ -154,8 +149,6 @@
             "no_wifi_api": "Houve uma falha ao se comunicar com Balena Py Wi-Fi Connect. Ele está instalado neste aparelho?"
         },
         "titles": {
-            "supervisor_config": "Configuração do supervisor",
-            "services": "Serviços"
         }
     },
     "title": "Interface do dispositivo Balena"
