@@ -58,7 +58,8 @@
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
         "cloudlink": "Cloudlink",
-        "temperature": "Temperature"
+        "temperature": "Temperature",
+        "check_internet_tooltip": "Click to check for internet connectiviy"
       },
       "env_config": {
         "add_env_var": "Add Environment Variable",
