@@ -35,23 +35,44 @@
     </div>
     <q-space />
     <q-chip
-      v-if="$q.screen.gt.sm"
+      v-if="$q.screen.gt.sm && !sdkLoading"
+      clickable
       :icon="
-        sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
+        sdkResponse?.data.is_online && systemStore.internetConnectivity
+          ? 'arrow_circle_up'
+          : 'arrow_circle_down'
       "
-      :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
+      :color="
+        sdkResponse?.data.is_online && systemStore.internetConnectivity
+          ? 'positive'
+          : 'negative'
+      "
       text-color="white"
       :label="$t('components.system.device_info.cloudlink')"
-    />
+      @click="checkInternet()"
+    >
+      <q-tooltip class="bg-secondary" anchor="center middle" self="top middle">
+        {{
+          $t('components.system.device_info.check_internet_tooltip')
+        }}</q-tooltip
+      >
+    </q-chip>
     <q-icon
-      v-else
+      v-else-if="!sdkLoading"
+      class="cursor-pointer"
       :name="
         sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
       "
       :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
+      @click="checkInternet()"
     />
     <q-chip
-      v-if="$q.screen.gt.sm && sdkResponse"
+      v-if="
+        $q.screen.gt.sm &&
+        sdkResponse &&
+        !sdkLoading &&
+        systemStore.internetConnectivity
+      "
       icon="power"
       :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
       text-color="white"
@@ -63,7 +84,12 @@
       }}
     </q-chip>
     <q-icon
-      v-if="!$q.screen.gt.sm && sdkResponse"
+      v-if="
+        !$q.screen.gt.sm &&
+        sdkResponse &&
+        !sdkLoading &&
+        systemStore.internetConnectivity
+      "
       name="power"
       :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
     />
@@ -290,6 +316,10 @@ export default defineComponent({
       }
     )
 
+    function checkInternet() {
+      void systemStore.checkInternetStatus()
+    }
+
     // Axios Functions
     function deviceInfo() {
       return supervisor.v1.device()
@@ -340,7 +370,7 @@ export default defineComponent({
     }
 
     function oUrl(url: string) {
-      openURL(url, null, {
+      openURL(url, undefined, {
         width: '1050'
       })
     }
@@ -353,6 +383,7 @@ export default defineComponent({
 
     return {
       baseUrl,
+      checkInternet,
       electronCorePage,
       device,
       f,
@@ -364,6 +395,7 @@ export default defineComponent({
       sdkLoading,
       sdkResponse,
       showToolTip: ref(true),
+      systemStore,
       temperature
     }
   }
