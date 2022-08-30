@@ -1352,6 +1352,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@electron/remote@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@electron/remote@npm:2.0.8"
+  peerDependencies:
+    electron: ">= 13.0.0"
+  checksum: d0ef11b3f09d789baf4330c2c021cfc1a997fc5ffdb56e8810ed7fe2fd76cda1a168c0589d2a10284a907fd3829bae14002a58b35c4881473cdd0049f07fbd63
+  languageName: node
+  linkType: hard
+
 "@electron/universal@npm:^1.2.1":
   version: 1.3.0
   resolution: "@electron/universal@npm:1.3.0"
@@ -9539,7 +9548,7 @@ __metadata:
 
 "typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -9560,6 +9569,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ui@workspace:ui"
   dependencies:
+    "@electron/remote": ^2.0.8
     "@intlify/eslint-plugin-vue-i18n": ^2.0.0
     "@intlify/vite-plugin-vue-i18n": ^6.0.1
     "@quasar/app-vite": ^1.0.6
