@@ -59,7 +59,7 @@
         "undervolted": "Undervolted",
         "cloudlink": "Cloudlink",
         "temperature": "Temperature",
-        "check_internet_tooltip": "Click to check for internet connectiviy"
+        "check_internet_tooltip": "Click to recheck internet connectiviy"
       },
       "env_config": {
         "add_env_var": "Add Environment Variable",
