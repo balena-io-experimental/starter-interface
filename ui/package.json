@@ -13,6 +13,7 @@
     "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.8",
     "@quasar/extras": "^1.15.1",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",

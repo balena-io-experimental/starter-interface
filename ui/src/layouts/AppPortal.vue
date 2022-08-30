@@ -1,4 +1,48 @@
 <template>
+  <q-bar v-if="$q.platform.is.electron" class="bg-accent q-electron-drag" dense>
+    <div class="row justify-between content-center full-width no-wrap">
+      <div class="col-4 no-wrap">
+        <q-btn
+          dense
+          flat
+          round
+          icon="lens"
+          size="8.5px"
+          color="red"
+          @click="electronCloseApp"
+        />
+        <q-btn
+          dense
+          flat
+          round
+          icon="lens"
+          size="8.5px"
+          color="yellow"
+          @click="electronMinimize"
+        />
+        <q-btn
+          dense
+          flat
+          round
+          icon="lens"
+          size="8.5px"
+          color="green"
+          @click="electronToggleMaximize"
+        />
+      </div>
+      <div class="no-wrap">
+        <q-avatar
+          v-if="$q.platform.is.electron"
+          square
+          size="xs"
+          class="q-mr-sm"
+        >
+          <img :src="qHeaderStyle.logo_coloured" /> </q-avatar
+        >{{ $t('title') }}
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </q-bar>
   <q-slide-transition>
     <q-banner
       v-if="showInstallBanner"
@@ -25,19 +69,26 @@
   </q-slide-transition>
 
   <q-toolbar class="bg-accent">
-    <q-avatar square size="sm">
+    <q-avatar v-if="quasarMode === 'pwa'" square size="sm">
       <img :src="qHeaderStyle.logo_coloured" />
     </q-avatar>
     <q-space />
 
-    <q-tabs v-model="currentTab" no-caps flat outside-arrows mobile-arrows>
+    <q-tabs
+      v-model="currentTab"
+      no-caps
+      flat
+      dense
+      outside-arrows
+      mobile-arrows
+    >
       <q-tab
         name="welcome"
         :label="$t('components.layouts.captive_portal.welcome')"
       />
       <q-tab
         v-for="(tab, index) in tabs"
-        :key="tab"
+        :key="tab.title"
         :name="tab.title"
         @click="setAxios(tab.title)"
       >
@@ -54,7 +105,7 @@
         </div>
       </q-tab>
     </q-tabs>
-    <q-space class="q-mr-lg" />
+    <q-space :class="quasarMode === 'pwa' ? 'q-mr-lg' : ''" />
   </q-toolbar>
   <q-separator />
   <q-tab-panels v-model="currentTab" animated swipeable>
@@ -149,6 +200,15 @@ interface tabIndex {
   title: string
 }
 
+declare const window: Window &
+  typeof globalThis & {
+    myWindowAPI: {
+      close: () => void
+      minimize: () => void
+      toggleMaximize: () => void
+    }
+  }
+
 export default defineComponent({
   name: 'LayoutsCaptivePortal',
   components: {
@@ -179,6 +239,24 @@ export default defineComponent({
       }
     })
 
+    // Electron toolbar controls
+    function closeTab(index: number) {
+      currentTab.value = 'welcome'
+      tabs.value.splice(index, 1)
+    }
+
+    function electronCloseApp() {
+      window.myWindowAPI.close()
+    }
+
+    function electronMinimize() {
+      window.myWindowAPI.minimize()
+    }
+
+    function electronToggleMaximize() {
+      window.myWindowAPI.toggleMaximize()
+    }
+
     function installApp(install: boolean) {
       if (!install) {
         showInstallBanner.value = false
@@ -196,11 +274,6 @@ export default defineComponent({
       }
     }
 
-    function closeTab(index: number) {
-      currentTab.value = 'welcome'
-      tabs.value.splice(index, 1)
-    }
-
     function setAxios(currentTabSetting: string) {
       axiosBaseUrl.setUrl(`http://${currentTabSetting}`)
     }
@@ -216,6 +289,9 @@ export default defineComponent({
 
     return {
       closeTab,
+      electronMinimize,
+      electronToggleMaximize,
+      electronCloseApp,
       currentTab,
       installApp,
       qHeaderStyle,
