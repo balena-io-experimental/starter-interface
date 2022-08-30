@@ -1,7 +1,13 @@
 <template>
   <div v-if="!isLoading" class="row items-end q-mt-none q-mb-md text-h4">
-    <div v-if="sdkResponse" class="row">{{ sdkResponse.data.device_name }}</div>
-    <div v-else>{{ baseUrl.host }}</div>
+    <q-slide-transition :duration="1000">
+      <div v-if="sdkResponse" class="row">
+        {{ sdkResponse.data.device_name }}
+      </div>
+      <div v-else-if="!sdkLoading">
+        {{ baseUrl.host }}
+      </div>
+    </q-slide-transition>
     <div>
       <q-btn
         v-if="
@@ -261,6 +267,7 @@ export default defineComponent({
     const f = ref<f>()
     const m = ref<m>()
     const quasarMode = ref(process.env.MODE)
+    const sdkLoading = ref<boolean>()
     const sdkResponse = ref<AxiosResponse<sdkResponses>>()
     const systemStore = networkSettings()
     const temperature = ref<temperature>()
@@ -314,7 +321,9 @@ export default defineComponent({
 
     async function getSdkDeviceInfo() {
       try {
+        sdkLoading.value = true
         sdkResponse.value = await sdk.device()
+        sdkLoading.value = false
       } catch (error) {
         console.error(error)
         $q.notify({
@@ -352,6 +361,7 @@ export default defineComponent({
       oUrl,
       quasarMode,
       qSpinnerStyle,
+      sdkLoading,
       sdkResponse,
       showToolTip: ref(true),
       temperature
