@@ -1,19 +1,20 @@
 <template>
   <div v-if="!isLoading" class="row items-end q-mt-none q-mb-md text-h4">
-    <span v-if="sdkResponse">
-      {{ sdkResponse.data.device_name }}
+    <div v-if="sdkResponse" class="row">{{ sdkResponse.data.device_name }}</div>
+    <div v-else>{{ baseUrl.host }}</div>
+    <div>
       <q-btn
         v-if="
           ($q.screen.gt.xs && electronCorePage.$state.electronPage) ||
           quasarMode == 'pwa'
         "
-        class="q-ml-xs text-grey-9"
+        class="q-ml-sm text-grey-9"
         flat
         size="md"
         dense
         padding="0"
         icon="launch"
-        @click="oUrl(baseUrl)"
+        @click="oUrl(baseUrl.href)"
       >
         <q-tooltip
           v-model="showToolTip"
@@ -25,7 +26,7 @@
           {{ $t('general.open_control_panel') }}</q-tooltip
         >
       </q-btn>
-    </span>
+    </div>
     <q-space />
     <q-chip
       v-if="$q.screen.gt.sm"
@@ -86,7 +87,7 @@
                 color="white"
                 text-color="primary"
                 :label="`${$t('components.system.device_info.temperature')}:
-                  ${temperature.data.main}°C`"
+                  ${temperature.data.main.toFixed(2)}°C`"
               />
             </div>
           </q-linear-progress>
@@ -187,8 +188,8 @@ import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
-import { axiosSettings, electronSettings } from 'stores/system'
-import { defineComponent, onMounted, ref } from 'vue'
+import { axiosSettings, electronSettings, networkSettings } from 'stores/system'
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 interface device {
@@ -248,6 +249,8 @@ export default defineComponent({
     // Tools
     const axiosUrlStore = axiosSettings()
     const baseUrl = axiosUrlStore.$state.axiosBaseUrl
+      ? new URL(axiosUrlStore.$state.axiosBaseUrl)
+      : new URL(window.location.origin)
     const isLoading = ref<boolean>(true)
 
     // Constants
@@ -259,13 +262,26 @@ export default defineComponent({
     const m = ref<m>()
     const quasarMode = ref(process.env.MODE)
     const sdkResponse = ref<AxiosResponse<sdkResponses>>()
+    const systemStore = networkSettings()
     const temperature = ref<temperature>()
 
     onMounted(async () => {
+      if (systemStore.internetConnectivity) {
+        void getSdkDeviceInfo()
+      }
       await getDeviceInfo()
-      await getSdkDeviceInfo()
       isLoading.value = false
     })
+
+    // Listen for change to internetConnectivity in case first response is slow
+    watch(
+      () => systemStore.internetConnectivity,
+      (val) => {
+        if (val === true) {
+          void getSdkDeviceInfo()
+        }
+      }
+    )
 
     // Axios Functions
     function deviceInfo() {
