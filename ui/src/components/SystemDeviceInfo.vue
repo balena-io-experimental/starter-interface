@@ -12,10 +12,11 @@
       <q-btn
         v-if="
           ($q.screen.gt.xs && electronCorePage.$state.electronPage) ||
-          quasarMode == 'pwa'
+          (!sdkLoading && quasarMode == 'pwa')
         "
         class="q-ml-sm text-grey-9"
         flat
+        :loading="sdkLoading"
         size="md"
         dense
         padding="0"
@@ -23,7 +24,6 @@
         @click="oUrl(baseUrl.href)"
       >
         <q-tooltip
-          v-model="showToolTip"
           class="bg-secondary"
           anchor="bottom right"
           self="bottom start"
@@ -299,9 +299,15 @@ export default defineComponent({
     const temperature = ref<temperature>()
 
     onMounted(async () => {
+      // If Electron app, perform the internet check as boot process has not initiated
+      if ($q.platform.is.electron) {
+        void systemStore.checkInternetStatus()
+      }
+      // If there is internet connectivity then fetch data from the SDK
       if (systemStore.internetConnectivity) {
         void getSdkDeviceInfo()
       }
+      // Fetch local data and wait
       await getDeviceInfo()
       isLoading.value = false
     })
@@ -394,7 +400,6 @@ export default defineComponent({
       qSpinnerStyle,
       sdkLoading,
       sdkResponse,
-      showToolTip: ref(true),
       systemStore,
       temperature
     }
