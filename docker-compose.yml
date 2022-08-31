@@ -1,7 +1,7 @@
-version: "2.1"
+version: "2"
 
 services:
-  balena-device-ui:
+  balena-starter-interface:
     build:
       context: .
       dockerfile: Dockerfile
@@ -34,7 +34,7 @@ services:
       PWC_PORT: 9090
 
       ## Hotspot details ##
-      PWC_HOTSPOT_SSID: "Balena Device UI"
+      PWC_HOTSPOT_SSID: "Balena Starter Interface"
 
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
