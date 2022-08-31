@@ -7,6 +7,8 @@
       <div v-else-if="!sdkLoading">
         {{ baseUrl.host }}
       </div>
+      <!-- Avoid components jumping around screen by adding empty space --->
+      <div v-else><br /></div>
     </q-slide-transition>
     <div>
       <q-btn
@@ -34,65 +36,61 @@
       </q-btn>
     </div>
     <q-space />
-    <q-chip
-      v-if="$q.screen.gt.sm && !sdkLoading"
-      clickable
-      :icon="
-        sdkResponse?.data.is_online && systemStore.internetConnectivity
-          ? 'arrow_circle_up'
-          : 'arrow_circle_down'
-      "
-      :color="
-        sdkResponse?.data.is_online && systemStore.internetConnectivity
-          ? 'positive'
-          : 'negative'
-      "
-      text-color="white"
-      :label="$t('components.system.device_info.cloudlink')"
-      @click="checkInternet()"
-    >
-      <q-tooltip class="bg-secondary" anchor="center middle" self="top middle">
-        {{
-          $t('components.system.device_info.check_internet_tooltip')
-        }}</q-tooltip
+    <div v-if="$q.screen.gt.sm && !sdkLoading">
+      <q-chip
+        clickable
+        :icon="
+          sdkResponse?.data.is_online && systemStore.internetConnectivity
+            ? 'arrow_circle_up'
+            : 'arrow_circle_down'
+        "
+        :color="
+          sdkResponse?.data.is_online && systemStore.internetConnectivity
+            ? 'positive'
+            : 'negative'
+        "
+        text-color="white"
+        :label="$t('components.system.device_info.cloudlink')"
+        @click="checkInternet()"
       >
-    </q-chip>
-    <q-icon
-      v-else-if="!sdkLoading"
-      class="cursor-pointer"
-      :name="
-        sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
-      "
-      :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
-      @click="checkInternet()"
-    />
-    <q-chip
-      v-if="
-        $q.screen.gt.sm &&
-        sdkResponse &&
-        !sdkLoading &&
-        systemStore.internetConnectivity
-      "
-      icon="power"
-      :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
-      text-color="white"
-    >
-      {{
-        sdkResponse.data.is_undervolted
-          ? $t('components.system.device_info.undervolted')
-          : $t('components.system.device_info.not_undervolted')
-      }}
-    </q-chip>
-    <q-icon
-      v-if="
-        !$q.screen.gt.sm &&
-        sdkResponse &&
-        !sdkLoading &&
-        systemStore.internetConnectivity
-      "
-      name="power"
-      :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
-    />
+        <q-tooltip
+          class="bg-secondary"
+          anchor="center middle"
+          self="top middle"
+        >
+          {{
+            $t('components.system.device_info.check_internet_tooltip')
+          }}</q-tooltip
+        >
+      </q-chip>
+      <q-chip
+        v-if="sdkResponse && systemStore.internetConnectivity"
+        icon="power"
+        :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+        text-color="white"
+      >
+        {{
+          sdkResponse.data.is_undervolted
+            ? $t('components.system.device_info.undervolted')
+            : $t('components.system.device_info.not_undervolted')
+        }}
+      </q-chip>
+    </div>
+    <div v-else-if="!sdkLoading">
+      <q-icon
+        class="cursor-pointer"
+        :name="
+          sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
+        "
+        :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
+        @click="checkInternet()"
+      />
+      <q-icon
+        v-if="sdkResponse && systemStore.internetConnectivity"
+        name="power"
+        :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+      />
+    </div>
   </div>
   <div v-if="m && f && device && !isLoading">
     <div class="justify-between row q-mb-sm no-wrap">
@@ -101,7 +99,7 @@
         <memory-stats />
       </div>
     </div>
-    <q-separator class="q-ma-sm" />
+    <q-separator class="q-ma-sm bg-grey-5" />
     <div class="q-mt-md">
       <q-card class="q-ma-sm" flat>
         <q-card-section :horizontal="$q.screen.gt.sm ? true : false">
