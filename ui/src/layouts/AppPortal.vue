@@ -81,6 +81,8 @@
       dense
       outside-arrows
       mobile-arrows
+      shrink
+      stretch
     >
       <q-tab
         name="welcome"
@@ -105,7 +107,7 @@
         </div>
       </q-tab>
     </q-tabs>
-    <q-space :class="quasarMode === 'pwa' ? 'q-mr-lg' : ''" />
+    <q-space />
   </q-toolbar>
   <q-separator />
   <q-tab-panels v-model="currentTab" animated swipeable>
