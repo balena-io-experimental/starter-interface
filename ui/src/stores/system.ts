@@ -30,8 +30,12 @@ export const electronSettings = defineStore('electronSettings', {
       return { electronPage }
     }
 
-    // It's an electron page, is it localhost (i.e. the core page, not a redirect)?
-    if (new URL(window.location.href).hostname === 'localhost') {
+    // It's an electron page, is it localhost or a local file (i.e. the core page, not a redirect)?
+    const currentUrl = new URL(window.location.href)
+    if (
+      currentUrl.hostname === 'localhost' ||
+      currentUrl.protocol === 'file:'
+    ) {
       electronPage = true
       return { electronPage }
     }

@@ -6,10 +6,12 @@ const systemStore = networkSettings()
 
 // Get internet status. Error handling is done in the store.
 // Not using store for Electron state to avoid race conditon
+const currentUrl = new URL(window.location.href)
 if (
   (!Platform.is.electron && process.env.MODE !== 'pwa') ||
   (Platform.is.electron &&
-    new URL(window.location.href).hostname !== 'localhost')
+    currentUrl.hostname !== 'localhost' &&
+    currentUrl.protocol !== 'file:')
 ) {
   void systemStore.checkInternetStatus()
 }
