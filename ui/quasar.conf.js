@@ -11,8 +11,19 @@
 
 const { configure } = require('quasar/wrappers')
 const path = require('path')
+let PUBLIC_PATH
 
 module.exports = configure(function (ctx) {
+  if (ctx.mode.pwa && process.env.PUBLIC_PWA_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_PWA_PATH
+  } else if (ctx.mode.spa && process.env.PUBLIC_SPA_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_SPA_PATH
+  } else if (ctx.mode.electron && process.env.PUBLIC_ELECTRON_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_ELECTRON_PATH
+  } else {
+    PUBLIC_PATH = '/'
+  }
+
   return {
     eslint: {
       // fix: true,
@@ -66,7 +77,7 @@ module.exports = configure(function (ctx) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : '/',
+      publicPath: PUBLIC_PATH,
       // analyze: true,
       // env: {},
       // rawDefine: {}

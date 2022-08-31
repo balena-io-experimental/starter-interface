@@ -54,7 +54,7 @@ export const networkSettings = defineStore('networkSettings', {
       try {
         const response = await expressApi.get<internetConnection>(
           `${apiPathV1}/internet_check`,
-          { timeout: 3000 }
+          { timeout: 15000 }
         )
         this.internetConnectivity = response.data.internet
         return Promise.resolve()
