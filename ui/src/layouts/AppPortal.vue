@@ -121,11 +121,12 @@
         {{ $t('title') }}
       </div>
       <q-input
+        ref="validateHostInput"
         v-model="reqHostname"
         clearable
         :rules="[
           (value: string) =>
-            !value.includes(' ') ||
+            (!value.includes(' ') && value != '') ||
             $t('components.wifi.configure_password.invalid_name')
         ]"
         placeholder="balena.local"
@@ -181,7 +182,7 @@ import DeviceInfo from 'components/SystemDeviceInfo.vue'
 import { qHeaderStyle } from 'src/config/qStyles'
 import { axiosSettings } from 'stores/system'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useQuasar } from 'quasar'
+import { useQuasar, QInput } from 'quasar'
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[]
@@ -224,6 +225,7 @@ export default defineComponent({
     const reqHostname = ref('')
     const $q = useQuasar()
     const tabs = ref<tabIndex[]>([])
+    const validateHostInput = ref<QInput>()
 
     let deferredPrompt: BeforeInstallPromptEvent
 
@@ -281,6 +283,10 @@ export default defineComponent({
     }
 
     function setHostname(reqHost: string) {
+      // If hostname input box is empty then return
+      if (!validateHostInput.value?.validate()) {
+        return
+      }
       tabs.value?.push({
         title: reqHost
       })
@@ -302,7 +308,8 @@ export default defineComponent({
       setAxios,
       setHostname,
       showInstallBanner,
-      tabs
+      tabs,
+      validateHostInput
     }
   }
 })
