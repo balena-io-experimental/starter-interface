@@ -11,6 +11,8 @@
     "format": "yarn -p -i workspaces foreach run format",
     "formatcheck": "yarn -p -i workspaces foreach run formatcheck",
     "dev": "yarn -p -i workspaces foreach run dev",
-    "build": "yarn -p -i workspaces foreach run build"
+    "build": "yarn -p -i workspaces foreach run build",
+    "build-pwa": "yarn workspace ui build-pwa",
+    "build-electron": "yarn workspace ui build-electron"
   }
 }

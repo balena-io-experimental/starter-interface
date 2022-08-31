@@ -4,6 +4,9 @@ FROM node:18.7.0-alpine3.16 AS build
 # Specify that this is being built for production
 ENV NODE_ENV=production
 
+# Public path for PWA
+ARG PUBLIC_PWA_PATH=/app
+
 WORKDIR /build-context
 
 # Copy required files for installs
@@ -26,6 +29,7 @@ RUN yarn lint
 
 # Build ExpressJS and UI
 RUN yarn build
+RUN yarn build-pwa
 
 # Reduce the node_modules folder down to the essentials required for ExpressJS
 RUN yarn workspaces focus expressjs --production
@@ -55,6 +59,7 @@ RUN chmod +x /usr/src/scripts/*
 
 # Copy app to container
 COPY --from=build /build-context/ui/dist/spa public
+COPY --from=build /build-context/ui/dist/pwa public/app
 COPY --from=build /build-context/expressjs/dist .
 COPY --from=build /build-context/node_modules node_modules
 

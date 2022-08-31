@@ -10,7 +10,9 @@
     "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build"
+    "build": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build",
+    "build-pwa": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build -m pwa",
+    "build-electron": "yarn lint -c .eslintrc-treeshake.js --no-eslintrc --fix && quasar build -m electron"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",

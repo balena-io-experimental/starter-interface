@@ -299,8 +299,8 @@ export default defineComponent({
     const temperature = ref<temperature>()
 
     onMounted(async () => {
-      // If Electron app, perform the internet check as boot process has not initiated
-      if ($q.platform.is.electron) {
+      // If Electron or PWA app, perform the internet check as boot process has not initiated
+      if ($q.platform.is.electron || quasarMode.value === 'pwa') {
         void systemStore.checkInternetStatus()
       }
       // If there is internet connectivity then fetch data from the SDK
