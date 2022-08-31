@@ -2,7 +2,9 @@
   <!-- Not drawing on Store for localhost validation to avoid race condition -->
   <div
     v-if="
-      ($q.platform.is.electron && currentURL.hostname == 'localhost') ||
+      ($q.platform.is.electron &&
+        (currentURL.hostname == 'localhost' ||
+          currentURL.protocol == 'file:')) ||
       quasarMode == 'pwa'
     "
   >
