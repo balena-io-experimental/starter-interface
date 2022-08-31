@@ -1,4 +1,4 @@
-# Balena Device UI
+# Balena Starter Interface
 
 This project is still under heavy development and subject to significant changes. Apologies if the documentation is out of date in places, we are moving quickly and will try and keep up as best as possible.
 
