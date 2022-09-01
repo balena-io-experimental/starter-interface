@@ -1,13 +1,13 @@
 <template>
-  <!-- Not drawing on Store for localhost validation to avoid race condition -->
   <div
     v-if="
-      ($q.platform.is.electron &&
-        (currentURL.hostname == 'localhost' ||
-          currentURL.protocol == 'file:')) ||
-      quasarMode == 'pwa'
+      $q.platform.is.electron &&
+      (currentURL.hostname == 'localhost' || currentURL.protocol == 'file:')
     "
   >
+    <app-portal />
+  </div>
+  <div v-else-if="quasarMode == 'pwa'">
     <app-portal />
   </div>
   <div v-else-if="currentURL.hash == '#/captiveportal'">
