@@ -27,9 +27,11 @@ COPY ui ui
 # Run lint to ensure build fails if there are coding issues
 RUN yarn lint
 
-# Build ExpressJS and UI
+# Build ExpressJS and UI.
+# ON_DEVICE=false informs the build that there my not be a backend available, and therefore 
+# not to perform certain function like communicating with the backend on boot 
 RUN yarn build
-RUN yarn build-pwa
+RUN ON_DEVICE=false yarn build-pwa
 
 # Reduce the node_modules folder down to the essentials required for ExpressJS
 RUN yarn workspaces focus expressjs --production

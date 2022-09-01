@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-if="
-      $q.platform.is.electron &&
-      (currentURL.hostname == 'localhost' || currentURL.protocol == 'file:')
-    "
-  >
+  <div v-if="$q.platform.is.electron && !onDevice">
     <electron-layout />
   </div>
   <div v-else-if="currentURL.hash == '#/captiveportal'">
@@ -35,13 +30,14 @@ export default defineComponent({
     const $q = useQuasar()
 
     const currentURL = new URL(window.location.href)
+    const onDevice = ref(process.env.ON_DEVICE?.toLowerCase() === 'true')
     const quasarMode = ref(process.env.MODE)
 
     // Show loading indicator as early as possible in loading process.
     // Is disabled by the router afterEach function in router/index.ts
     $q.loading.show()
 
-    return { currentURL, quasarMode }
+    return { currentURL, onDevice, quasarMode }
   }
 })
 </script>
