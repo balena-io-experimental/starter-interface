@@ -12,10 +12,7 @@
     </q-slide-transition>
     <div>
       <q-btn
-        v-if="
-          ($q.screen.gt.xs && electronCorePage.$state.electronPage) ||
-          (!sdkLoading && quasarMode == 'pwa')
-        "
+        v-if="$q.platform.is.electron || quasarMode == 'pwa'"
         class="q-ml-sm text-grey-9"
         flat
         :loading="sdkLoading"
@@ -218,7 +215,7 @@ import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
-import { axiosSettings, electronSettings, networkSettings } from 'stores/system'
+import { axiosSettings, networkSettings } from 'stores/system'
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -272,7 +269,6 @@ export default defineComponent({
   components: { CpuStats, MemoryStats },
   setup() {
     const $q = useQuasar()
-    const electronCorePage = electronSettings()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
@@ -388,7 +384,6 @@ export default defineComponent({
     return {
       baseUrl,
       checkInternet,
-      electronCorePage,
       device,
       f,
       isLoading,

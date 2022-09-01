@@ -63,7 +63,8 @@ module.exports = configure(function (ctx) {
     build: {
       env: {
         DEVICE_HOSTNAME: process.env.DEVICE_HOSTNAME,
-        BACKEND_PORT: process.env.BACKEND_PORT
+        BACKEND_PORT: process.env.BACKEND_PORT,
+        ON_DEVICE: process.env.ON_DEVICE ? process.env.ON_DEVICE : 'true'
       },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],

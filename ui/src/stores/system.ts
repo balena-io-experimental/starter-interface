@@ -1,6 +1,5 @@
 import { expressApi } from 'boot/axios'
 import { defineStore } from 'pinia'
-import { Platform } from 'quasar'
 
 interface internetConnection {
   internet: boolean
@@ -13,37 +12,6 @@ export const axiosSettings = defineStore('axiosSettings', {
   actions: {
     setUrl(newUrl: string) {
       this.axiosBaseUrl = newUrl
-    }
-  }
-})
-
-// `electronSettings` store:
-// null = not Electron
-// true = Electron main page
-// false = Loaded in Electron but pointing to a page it redirect too away from it's embedded pages
-export const electronSettings = defineStore('electronSettings', {
-  state: () => {
-    let electronPage = null
-
-    // If it's not an electron page return null
-    if (!Platform.is.electron) {
-      return { electronPage }
-    }
-
-    // It's an electron page, is it localhost or a local file (i.e. the core page, not a redirect)?
-    const currentUrl = new URL(window.location.href)
-    if (
-      currentUrl.hostname === 'localhost' ||
-      currentUrl.protocol === 'file:'
-    ) {
-      electronPage = true
-      return { electronPage }
-    }
-
-    // It's electron but not localhost
-    electronPage = false
-    return {
-      electronPage
     }
   }
 })
