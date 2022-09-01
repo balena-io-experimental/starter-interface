@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
 import { i18n } from 'boot/i18n'
 import { Notify } from 'quasar'
-import { axiosSettings, electronSettings } from 'stores/system'
+import { axiosSettings } from 'stores/system'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
