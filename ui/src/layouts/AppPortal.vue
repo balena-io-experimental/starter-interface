@@ -123,6 +123,7 @@
       <q-input
         ref="validateHostInput"
         v-model="reqHostname"
+        type="url"
         clearable
         :rules="[
           (value: string) =>
@@ -243,6 +244,13 @@ export default defineComponent({
       }
     })
 
+    function addHttp(url: string) {
+      if (!/^(?:f|ht)tps?:\/\//.test(url)) {
+        url = `http://${url}`
+      }
+      return url
+    }
+
     // Electron toolbar controls
     function closeTab(index: number) {
       currentTab.value = 'welcome'
@@ -279,7 +287,8 @@ export default defineComponent({
     }
 
     function setAxios(currentTabSetting: string) {
-      axiosBaseUrl.setUrl(`http://${currentTabSetting}`)
+      currentTabSetting = addHttp(currentTabSetting)
+      axiosBaseUrl.setUrl(currentTabSetting)
     }
 
     function setHostname(reqHost: string) {
