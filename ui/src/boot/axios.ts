@@ -12,6 +12,8 @@ declare module '@vue/runtime-core' {
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { t } = i18n.global
 
+const axiosBaseUrl = axiosSettings()
+
 const expressApi = axios.create({
   timeout: 60000 // Sets a high timeout unlikely to be reached. More specifc timeouts are set in the ExpressJS backend.
 })
@@ -26,14 +28,17 @@ if (process.env.DEVICE_HOSTNAME) {
   expressApi.defaults.baseURL = currentURL.origin
 }
 
+// Store the default URL in the Pinia store
+axiosBaseUrl.setUrl(expressApi.defaults.baseURL)
+
 // Axios request interceptor
 expressApi.interceptors.request.use(
   (config) => {
     // Override the default baseURL based on stored path from electron app
-    const axiosBaseUrl = axiosSettings()
-    const electronCorePage = electronSettings()
-    if (electronCorePage.$state.electronPage || process.env.MODE === 'pwa') {
-      config.baseURL = axiosBaseUrl.$state.axiosBaseUrl
+    const currentBaseUrl = axiosBaseUrl.$state.axiosBaseUrl
+
+    if (currentBaseUrl) {
+      config.baseURL = currentBaseUrl
     }
     return config
   },
