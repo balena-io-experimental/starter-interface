@@ -5,13 +5,13 @@
       (currentURL.hostname == 'localhost' || currentURL.protocol == 'file:')
     "
   >
-    <app-portal />
-  </div>
-  <div v-else-if="quasarMode == 'pwa'">
-    <app-portal />
+    <electron-layout />
   </div>
   <div v-else-if="currentURL.hash == '#/captiveportal'">
     <captive-portal />
+  </div>
+  <div v-else-if="quasarMode == 'pwa'">
+    <pwa-layout />
   </div>
   <router-view v-else />
 </template>
@@ -23,10 +23,13 @@ import { defineAsyncComponent, defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'App',
   components: {
-    AppPortal: defineAsyncComponent(() => import('layouts/AppPortal.vue')),
     CaptivePortal: defineAsyncComponent(
       () => import('layouts/CaptivePortal.vue')
-    )
+    ),
+    ElectronLayout: defineAsyncComponent(
+      () => import('layouts/ElectronLayout.vue')
+    ),
+    PwaLayout: defineAsyncComponent(() => import('layouts/PwaLayout.vue'))
   },
   setup() {
     const $q = useQuasar()
