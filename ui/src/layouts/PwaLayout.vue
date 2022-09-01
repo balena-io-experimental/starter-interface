@@ -23,11 +23,11 @@
       </template>
     </q-banner>
   </q-slide-transition>
-  <input-device-hostname />
+  <device-selector-hostname />
 </template>
 
 <script lang="ts">
-import InputDeviceHostname from 'components/InputDeviceHostname.vue'
+import DeviceSelectorHostname from 'components/DeviceSelectorHostname.vue'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
 
@@ -49,7 +49,7 @@ declare global {
 export default defineComponent({
   name: 'LayoutsPwaLayout',
   components: {
-    InputDeviceHostname
+    DeviceSelectorHostname
   },
   setup() {
     const showInstallBanner = ref(false)
