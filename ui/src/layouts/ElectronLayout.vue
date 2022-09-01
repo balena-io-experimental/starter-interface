@@ -38,11 +38,11 @@
       <div class="col-4"></div>
     </div>
   </q-bar>
-  <input-device-hostname />
+  <device-selector-hostname />
 </template>
 
 <script lang="ts">
-import InputDeviceHostname from 'components/InputDeviceHostname.vue'
+import DeviceSelectorHostname from 'components/DeviceSelectorHostname.vue'
 import { defineComponent } from 'vue'
 import { qHeaderStyle } from 'src/config/qStyles'
 
@@ -58,7 +58,7 @@ declare const window: Window &
 export default defineComponent({
   name: 'LayoutsElectronLayout',
   components: {
-    InputDeviceHostname
+    DeviceSelectorHostname
   },
   setup() {
     function electronCloseApp() {
