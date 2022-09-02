@@ -17,7 +17,7 @@ router.get('/v1/system/internet_check', (_req, res) => {
   Logger.debug('Running internet connectivity check.')
 
   const client = http2.connect('https://google.com')
-  client.setTimeout(3000)
+  client.setTimeout(5000)
 
   client.on('connect', () => {
     res.json({ internet: true })
