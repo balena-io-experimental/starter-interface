@@ -71,21 +71,20 @@ export default defineComponent({
     })
 
     function installApp(install: boolean) {
-      if (!install) {
-        showInstallBanner.value = false
+      if (install) {
+        try {
+          void deferredPrompt.prompt()
+          $q.localStorage.set('dismissedInstall', true)
+        } catch (error) {
+          console.error(error)
+          showInstallBanner.value = false
+        }
+      } else {
         $q.localStorage.set('dismissedInstall', true)
-        return
       }
-
-      try {
-        void deferredPrompt.prompt()
-        showInstallBanner.value = false
-        $q.localStorage.set('dismissedInstall', true)
-      } catch (error) {
-        console.error(error)
-        showInstallBanner.value = false
-      }
+      showInstallBanner.value = false
     }
+
     return { installApp, showInstallBanner }
   }
 })
