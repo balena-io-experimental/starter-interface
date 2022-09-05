@@ -1,9 +1,5 @@
 <template>
-  <q-form
-    class="flex flex-col"
-    :style="$q.screen.gt.sm ? 'min-width: 40vw' : 'min-width: 90vw'"
-    @submit="connect()"
-  >
+  <q-form class="flex flex-col" @submit="connect()">
     <div class="col">
       <div class="q-ml-md">
         <q-select
