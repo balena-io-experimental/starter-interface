@@ -1,0 +1,64 @@
+name: "Build Electron Test App"
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  ON_DEVICE: false
+
+jobs:
+  build:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        job_name: ["linux", "mac_amd64", "windows"]
+
+        include:
+          - job_name: linux
+            os: ubuntu-latest
+            filename: bdi_linux_x86_64
+
+          - job_name: mac_amd64
+            os: macos-latest
+            filename: bdi_mac_amd64
+
+          # Disabled as only works when app is notarised with Apple
+          #- job_name: mac_arm64
+          #  os: macos-latest
+          #  filename: bdi_mac_arm64
+          #  build_arch: --arch arm64
+
+          - job_name: windows
+            os: windows-latest
+            filename: bdi_windows
+
+    name: ${{ matrix.job_name }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.8.0"
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Set Yarn version
+        run: yarn set version classic
+
+      - name: Build Electron App
+        run: cd ui && yarn build -m electron ${{ matrix.build_arch }} && cd ..
+      
+      - name: Compress artifacts
+        run: tar -czf ${{ matrix.filename }}.tar.gz -C ui/dist/electron/Packaged/ .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.filename }}
+          path: ./${{ matrix.filename }}.tar.gz
