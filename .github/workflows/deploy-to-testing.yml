@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job_name: ["rpi", "nuc", "fin"]
+        job_name: ["rpi", "nuc"]
 
         include:
           - job_name: rpi
@@ -19,8 +19,8 @@ jobs:
           - job_name: nuc
             fleet: bdi/bdi-nuc
 
-          - job_name: fin
-            fleet: bdi/bdi-fin
+          #- job_name: fin
+          #  fleet: bdi/bdi-fin
 
     name: ${{ matrix.job_name }}
 
