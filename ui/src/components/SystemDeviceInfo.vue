@@ -97,12 +97,12 @@
       </div>
     </div>
     <q-separator class="q-ma-sm bg-grey-5" />
-    <div class="q-mt-md">
+    <div :class="$q.screen.gt.sm ? 'q-mt-md' : ''">
       <q-card class="q-ma-sm" flat>
         <q-card-section :horizontal="$q.screen.gt.sm ? true : false">
           <q-linear-progress
             v-if="temperature?.data.main"
-            class="q-ml-xs q-mr-xs q-mt-xs"
+            class="q-mt-xs"
             stripe
             rounded
             :color="temperature.data.main > 65 ? 'warning' : 'positive'"
@@ -118,8 +118,9 @@
               />
             </div>
           </q-linear-progress>
+          <div v-if="$q.screen.gt.sm" class="q-ma-xs"></div>
           <q-linear-progress
-            class="q-ml-xs q-mr-xs q-mt-xs"
+            class="q-mt-xs"
             stripe
             rounded
             size="20px"
