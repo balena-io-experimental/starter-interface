@@ -4,6 +4,7 @@
       <div class="row justify-end">
         <q-expansion-item
           expand-separator
+          dense
           :label="$t('components.wifi.connect.configure_hotspot')"
         >
           <component-frame
