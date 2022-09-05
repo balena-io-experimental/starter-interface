@@ -1,27 +1,38 @@
 name: "Deploy to development devices"
 on:
   pull_request:
-    types: [opened, synchronize, closed]
     branches:
       - main
 
 jobs:
-  deploy-to-testing:
+  build:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        job_name: ["rpi", "nuc", "fin"]
+
+        include:
+          - job_name: rpi
+            fleet: bdi/bdi-rpi
+
+          - job_name: nuc
+            fleet: bdi/bdi-nuc
+
+          - job_name: fin
+            fleet: bdi/bdi-fin
+
+    name: ${{ matrix.job_name }}
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Turnstyle
-        uses: softprops/turnstyle@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy to Balena
-        uses: balena-io/deploy-to-balena-action@master
-        id: build
+      - name: balena CLI Action
+        uses: balena-community/community-cli-action@1.0.0
         with:
-          balena_token: ${{ secrets.BALENA_TOKEN }}
-          fleet: balena_device_ui/balena-device-ui-testing
-
-      - name: Log release ID built
-        run: echo "Built release ID ${{ steps.build.outputs.release_id }}"
+          balena_token: ${{secrets.BALENA_TOKEN}}
+          balena_cli_commands: >
+            push ${{ matrix.fleet }};
+          balena_cli_version: 13.7.1
