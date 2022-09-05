@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
 jobs:
   build:
     timeout-minutes: 60
@@ -34,5 +37,5 @@ jobs:
         with:
           balena_token: ${{secrets.BALENA_TOKEN}}
           balena_cli_commands: >
-            push ${{ matrix.fleet }};
+            push ${{ matrix.fleet }} --release-tag PR "${{ env.PR_NUMBER }}" commit-sha "${{ github.event.pull_request.head.sha }}";
           balena_cli_version: 13.7.1
