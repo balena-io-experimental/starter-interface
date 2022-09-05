@@ -1,5 +1,5 @@
-import express from 'express'
 import Logger from '@/common/logger'
+import express from 'express'
 
 const router = express.Router()
 

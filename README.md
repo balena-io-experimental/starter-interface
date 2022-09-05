@@ -1,6 +1,6 @@
-# Balena Device UI
+# Balena Starter Interface
 
-This project is still under heavy development and subject to significant changes. Apologies if the documentation is out of date in places, we are moving quickly and will try and keep up as best as possible. 
+This project is still under heavy development and subject to significant changes. Apologies if the documentation is out of date in places, we are moving quickly and will try and keep up as best as possible.
 
 ---
 
@@ -26,7 +26,7 @@ Some of the features include:
 - Pre-built endpoints for interacting with the Balena SDK or Supervisor
 - Connect the device to nearby Wi-Fi networks
 - Container manager (list, stop, start, restart)
-- Volume manager (create folders, upload, delete, etc...)
+- File manager (create folders, upload, delete, etc...)
 - Captive portal
 - System info and stats
 - I18n language translations

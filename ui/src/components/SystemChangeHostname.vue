@@ -2,6 +2,7 @@
   <div>
     <q-input
       v-model="newHostname"
+      dense
       bottom-slots
       :label="$t('components.network.change_hostname.change_hostname')"
       counter
@@ -19,9 +20,9 @@
 </template>
 
 <script lang="ts">
-import { supervisor } from 'src/api/supervisor'
 import { AxiosResponse } from 'axios'
 import { useQuasar } from 'quasar'
+import { supervisor } from 'src/api/supervisor'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 

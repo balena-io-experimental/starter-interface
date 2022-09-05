@@ -1,22 +1,22 @@
-version: "2.1"
+version: "2"
 
 services:
-  balena-device-ui:
+  balena-starter-interface:
     build:
       context: .
       dockerfile: Dockerfile
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
-      ON_DEVICE: true # Specify that this is being deployed to hardware with Balena OS
       SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
     restart: always
     ports:
       - "80:80"
     volumes:
       - "bdu_db:/app/db" # Stores UI database files
-      - "bdu_storage:/app/storage" # Storage for the Volume Manager. See docs for more info.
+      - "bdu_storage:/app/storage" # Storage for the File Manager. See docs for more info.
+    privileged: true # This can be removed if not using the USB mounting feature
 
-    # If using the Volume Manager to access volumes on other containers, ensure this container `depends_on` your
+    # If using the File Manager to access volumes on other containers, ensure this container `depends_on` your
     # other container using the below:
     # depends_on:
     #  - "your-other-container-name"
@@ -34,7 +34,7 @@ services:
       PWC_PORT: 9090
 
       ## Hotspot details ##
-      PWC_HOTSPOT_SSID: "Balena Device UI"
+      PWC_HOTSPOT_SSID: "Balena Starter Interface"
 
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"

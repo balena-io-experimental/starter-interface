@@ -1,10 +1,10 @@
+import createAxiosInstance from '@/common/axios'
+import Logger from '@/common/logger'
+import queueCache from '@/middleware/queueCache'
 import request, { AxiosRequestConfig } from 'axios'
 import express, { Request, Response } from 'express'
 import path from 'path'
 import process from 'process'
-import createAxiosInstance from '@/common/axios'
-import Logger from '@/common/logger'
-import queueCache from '@/middleware/queueCache'
 
 interface reqBodyData {
   params: Array<string>

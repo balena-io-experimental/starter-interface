@@ -3,7 +3,13 @@ const { resolve } = require('path')
 
 module.exports = {
   // Tell VS Code which files not to consider for linting
-  ignorePatterns: ['.eslintrc.js', '.eslintrc-treeshake.js', 'quasar.conf.js'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    '.eslintrc-treeshake.js',
+    'quasar.conf.js',
+    'src-electron/*',
+    'src-pwa/*'
+  ],
 
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file

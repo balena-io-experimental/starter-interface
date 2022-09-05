@@ -1,6 +1,6 @@
 {
   "name": "balena-device-ui",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.2",
   "private": true,
   "workspaces": [
     "expressjs",
@@ -11,7 +11,8 @@
     "format": "yarn -p -i workspaces foreach run format",
     "formatcheck": "yarn -p -i workspaces foreach run formatcheck",
     "dev": "yarn -p -i workspaces foreach run dev",
-    "oddev": "yarn -p -i workspaces foreach run oddev",
-    "build": "yarn -p -i workspaces foreach run build"
+    "build": "yarn -p -i workspaces foreach run build",
+    "build-pwa": "yarn workspace ui build-pwa",
+    "build-electron": "yarn workspace ui build-electron"
   }
 }

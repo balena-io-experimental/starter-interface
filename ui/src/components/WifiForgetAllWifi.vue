@@ -2,6 +2,7 @@
   <q-btn
     v-bind="qBtnStyle"
     :loading="isSubmitting"
+    icon="wifi_off"
     :label="$t('components.wifi.forget_all_wifi.forget_all_wifi')"
     @click="confirm = true"
   />
@@ -28,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import { useQuasar } from 'quasar'
 import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'

@@ -15,7 +15,7 @@
 
         <router-link v-if="qHeaderStyle.logo_white" to="/">
           <q-avatar square size="sm">
-            <q-img :src="qHeaderStyle.logo_white" />
+            <img :src="qHeaderStyle.logo_white" />
           </q-avatar>
         </router-link>
 
@@ -25,7 +25,11 @@
           </div>
           <q-slide-transition v-else :duration="1000">
             <div v-if="deviceName" class="text-subtitle1">
-              <q-icon class="q-mr-xs" name="local_offer" />{{ deviceName }}
+              <q-icon
+                v-if="$q.screen.gt.xs"
+                class="q-mr-xs"
+                name="local_offer"
+              />{{ deviceName }}
             </div>
           </q-slide-transition>
         </q-toolbar-title>
@@ -124,16 +128,16 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { loadLanguageAsync } from 'boot/i18n'
-import localeOptions from 'src/config/localeOptions'
-import MenuItems from 'layouts/MenuItems.vue'
-import menuList from 'src/config/menuList'
-import { qHeaderStyle } from 'src/config/qStyles'
 import Reboot from 'components/SystemReboot.vue'
 import Shutdown from 'components/SystemShutdown.vue'
+import MenuItems from 'components/MainLayoutMenuItems.vue'
 import { supervisor } from 'src/api/supervisor'
+import localeOptions from 'src/config/localeOptions'
+import menuList from 'src/config/menuList'
+import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'LayoutsMainLayout',
@@ -168,12 +172,10 @@ export default defineComponent({
     }
 
     async function getDeviceName() {
-      if (process.env.ON_DEVICE) {
-        const response = (await supervisor.v2.device_name()) as AxiosResponse<{
-          deviceName: string
-        }>
-        deviceName.value = response.data.deviceName
-      }
+      const response = (await supervisor.v2.device_name()) as AxiosResponse<{
+        deviceName: string
+      }>
+      deviceName.value = response.data.deviceName
     }
 
     // Listeners for network status

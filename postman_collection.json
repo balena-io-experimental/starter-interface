@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "8963d1ec-1c7f-49f2-a926-86c66e556b9b",
-    "name": "Balena Device UI",
+    "name": "Balena Starter Interface",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [

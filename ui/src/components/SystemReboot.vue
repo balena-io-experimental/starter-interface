@@ -41,8 +41,8 @@
 </template>
 
 <script lang="ts">
-import { supervisor } from 'src/api/supervisor'
 import { useQuasar } from 'quasar'
+import { supervisor } from 'src/api/supervisor'
 import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

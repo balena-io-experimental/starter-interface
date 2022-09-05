@@ -1,0 +1,185 @@
+<template>
+  <div class="col">
+    <div>
+      <DoughnutChart
+        :chart-data="chartData"
+        :options="options"
+        :height="props.dimensions"
+        :width="props.dimensions"
+      />
+    </div>
+    <div class="text-center">
+      {{ memOfTotal }}
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { AxiosResponse } from 'axios'
+import { expressApi } from 'boot/axios'
+import {
+  ArcElement,
+  Chart,
+  ChartData,
+  ChartOptions,
+  DoughnutController,
+  Title,
+  Tooltip
+} from 'chart.js'
+import { getCssVar, LoadingBar } from 'quasar'
+import sysInfoCmds from 'src/api/sysInfoCmds'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { DoughnutChart } from 'vue-chart-3'
+import { useI18n } from 'vue-i18n'
+
+interface memStat {
+  data: {
+    available: number
+    total: number
+  }
+}
+
+Chart.register(ArcElement, DoughnutController, Title, Tooltip)
+
+export default defineComponent({
+  name: 'ChartsMemStats',
+  components: { DoughnutChart },
+  props: {
+    dimensions: {
+      type: Number,
+      default: 125
+    },
+    pollInterval: {
+      type: Number,
+      default: 8000
+    }
+  },
+
+  setup(props) {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { t } = useI18n()
+
+    const cmdMem = sysInfoCmds.find((cmd) => cmd.id === 'm')
+    const isUnMounted = ref<boolean>(false)
+    const memOfTotal = ref<string>()
+
+    onMounted(() => {
+      // Disables the AJAX loading bar at the bottom of the page for polled system info requests
+      LoadingBar.setDefaults({
+        hijackFilter(url: string) {
+          return !url.includes('systeminfo')
+        }
+      })
+
+      // Start the polling
+      void fetchMemStats()
+    })
+
+    onUnmounted(() => {
+      // Re-enables the AJAX loading bar at the bottom of the page for system info requests
+      LoadingBar.setDefaults({
+        hijackFilter() {
+          return true
+        }
+      })
+
+      // Instructs to exit the running poll loop, because this component is no longer visible
+      isUnMounted.value = true
+    })
+
+    const chartData = ref<ChartData<'doughnut'>>({
+      labels: [
+        t('components.charts.mem_stats.used'),
+        t('components.charts.mem_stats.available')
+      ],
+      datasets: [
+        {
+          data: [0, 100],
+          backgroundColor: [getCssVar('accent') as string, '#DDE1F0']
+        }
+      ]
+    })
+
+    const options = ref<ChartOptions<'doughnut'>>({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          align: 'center',
+          text: t('components.charts.mem_stats.memory')
+        },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: (data) =>
+              ` ${data.label}: ${data.dataset.data[data.dataIndex]}%`
+          }
+        },
+        legend: {
+          display: false
+        }
+      }
+    })
+
+    // Functions
+    function delay(ms: number) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms)
+      })
+    }
+
+    async function fetchMemStats(): Promise<void> {
+      try {
+        const memStat: AxiosResponse<memStat> = await expressApi.post(
+          '/v1/system/systeminfo',
+          { id: cmdMem?.id }
+        )
+
+        const currentMemStat = (
+          ((memStat.data.data.total - memStat.data.data.available) /
+            memStat.data.data.total) *
+          100
+        ).toFixed(1) as unknown as number
+
+        memOfTotal.value = getTotalMem(memStat)
+
+        chartData.value.datasets[0].data = [
+          currentMemStat,
+          100 - currentMemStat
+        ]
+      } catch (error) {
+        // Continuing as may have just been due to a temporary connection issue
+        console.error('Error fetching memory stats')
+        console.error(error)
+      }
+
+      if (!isUnMounted.value) {
+        // Delay before calling next fetch
+        await delay(props.pollInterval)
+        void fetchMemStats()
+      }
+    }
+
+    function getTotalMem(memStat: AxiosResponse<memStat>) {
+      const used = (
+        (memStat.data.data.total - memStat.data.data.available) /
+        1024 /
+        1024 /
+        1024
+      ).toFixed(2)
+
+      const total = (memStat.data.data.total / 1024 / 1024 / 1024).toFixed(1)
+
+      return `${used} GB / ${total} GB`
+    }
+
+    return {
+      chartData,
+      memOfTotal,
+      options,
+      props
+    }
+  }
+})
+</script>

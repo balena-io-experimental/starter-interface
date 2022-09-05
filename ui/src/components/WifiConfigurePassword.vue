@@ -4,12 +4,9 @@
       v-bind="qBtnStyle"
       icon="wifi_password"
       :loading="isSubmitting"
+      :label="$t('components.wifi.configure_password.set_new_hotspot_password')"
       @click="passwordDialog = true"
-    >
-      <q-tooltip>
-        {{ $t('components.wifi.configure_password.set_new_hotspot_password') }}
-      </q-tooltip>
-    </q-btn>
+    />
 
     <q-dialog v-model="passwordDialog" persistent>
       <q-card>
@@ -71,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import { QForm, useQuasar } from 'quasar'
 import { qAvatarStyle, qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'

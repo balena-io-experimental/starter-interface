@@ -227,7 +227,7 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
+import { expressApi } from 'boot/axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
@@ -254,16 +254,9 @@ export default defineComponent({
     const objPath = ref<Array<string>>([])
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
-    // By default, for production, use relative paths to filemanager
-    const uploaderAPIRoute = ref<string>('v1/filemanager/upload')
-
-    // Change uploader path based on environment
-    if (process.env.BACKEND_PORT) {
-      uploaderAPIRoute.value = `${window.location.protocol}//${window.location.hostname}:${process.env.BACKEND_PORT}/v1/filemanager/upload`
-    } else if (!process.env.ON_DEVICE) {
-      // ExpressJS listens to port 80 by default. This allows it to be accesible when in a dev env.
-      uploaderAPIRoute.value = `${window.location.protocol}//${window.location.hostname}/v1/filemanager/upload`
-    }
+    const uploaderAPIRoute = ref<string>(
+      `${expressApi.defaults.baseURL as string}/v1/filemanager/upload`
+    )
 
     const checkRowExistence = (nameParam: string) =>
       rows.value?.some(({ path }) => path.split('/').pop() === nameParam)
@@ -438,10 +431,10 @@ export default defineComponent({
         const response = await expressApi.post<Rows[]>('/v1/filemanager/list', {
           currentPathArray: objPath.value
         })
-
         rows.value = response.data
-      } catch {
-        $q.notify({ type: 'negative', message: t('general.error') })
+      } catch (error) {
+        $q.notify({ type: 'negative' })
+        console.error(error)
       }
       isLoading.value = false
     }

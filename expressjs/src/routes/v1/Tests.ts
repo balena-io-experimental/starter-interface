@@ -1,6 +1,6 @@
-import express from 'express'
 import Logger from '@/common/logger'
 import queueCache from '@/middleware/queueCache'
+import express from 'express'
 
 const router = express.Router()
 

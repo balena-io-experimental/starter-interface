@@ -1,12 +1,14 @@
 {
-  "title": "Balena Device Interface",
+  "title": "Balena Starter Interface",
   "general": {
     "are_you_sure": "Are you sure?",
     "close": "Close",
     "cancel": "Cancel",
     "error": "Error",
     "name": "Name",
+    "hostname": "Hostname",
     "ok": "Ok",
+    "open_control_panel": "Open Control Panel",
     "password": "Password",
     "restart": "Restart",
     "status": "Status",
@@ -18,8 +20,14 @@
     "charts": {
       "cpu_stats": {
         "cpu_status": "CPU Status"
+      },
+      "mem_stats": {
+        "used": "Used",
+        "available": "Available",
+        "memory": "Memory"
       }
     },
+
     "layouts": {
       "captive_portal": {
         "connect_to_wifi": "Connect to WiFi",
@@ -37,11 +45,9 @@
     "system": {
       "device_info": {
         "environment_variables": "Environment Variables",
-        "internet_required": "Internet connectivity is required to use this feature.",
         "ip_address": "IP Address",
         "location": "Location",
         "mac_address": "MAC Address",
-        "memory": "Memory",
         "not_undervolted": "Normal Power",
         "os_version": "OS Version",
         "public_ip": "Public IP",
@@ -51,15 +57,21 @@
         "storage": "Storage",
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
-        "offline": "Offline",
-        "online": "Online"
+        "cloudlink": "Cloudlink",
+        "temperature": "Temperature",
+        "check_internet_tooltip": "Click to recheck internet connectiviy"
       },
       "env_config": {
-        "add_change_env_var": "Add/Change Environment Variable",
+        "add_env_var": "Add Environment Variable",
+        "edit": "Edit",
+        "env_rules": "Environment variable keys should start with a letter and only contain letters, digits and underscores",
+        "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!",
+        "key": "Key",
+        "value": "Value",
         "raw_json": "Raw JSON",
         "response_details": "Response Details",
         "delete_selected_records": "Delete Selected Records",
-        "env_var_warning_message": "Adding or removing environment variables will restart the services on this device!"
+        "restarting_containers": "Your containers need to restart. The user interface will be unavailable until they come back online."
       },
       "journal_d_logs": {
         "fetch_journald": "Fetch Journald Logs"
@@ -107,12 +119,12 @@
       "configure_password": {
         "invalid_name": "Invalid name",
         "invalid_password_length": "Password must be 8 characters or more.",
-        "set_new_hotspot_password": "Set a new hotspot password",
+        "set_new_hotspot_password": "Set the hotspot password",
         "password_set": "Password set. If you are running a hotspot, it will restart."
       },
       "configure_ssid": {
         "invalid_name": "Invalid name",
-        "set_new_hotspot_ssid": "Set a new hotspot SSID",
+        "set_new_hotspot_ssid": "Set the hotspot SSID",
         "ssid_set": "SSID set. If you are running a hotspot, it will restart."
       },
       "connect": {
@@ -139,7 +151,8 @@
   "system": {
     "errors": {
       "request_error": "Request error",
-      "wrong_way": "Wrong way…"
+      "wrong_way": "Wrong way…",
+      "no_backend": "Unable to communicate with the backend service"
     },
     "menu_items": {
       "configuration": "Configuration",
@@ -154,9 +167,15 @@
       "network_connection_restored": "Network connection restored.",
       "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
     },
+    "pwa": {
+      "install": "Install",
+      "install_notification": "Did you know you can install this page as an app and use it offline?",
+      "install_instructions_safari": "- Safari: Press the 'Share' button and select 'Add to Home Screen'",
+      "install_instructions_chrome": "- Chrome Android: Press the 'three dot' icon in the upper right to open the menu. Select 'Add to Home screen'.",
+      "install_instructions_browsers": "- Google Chrome and Microsoft Edge: Click the icon on the right side of the URL bar then click the 'Install' button, or install from the 'three dot' menu."
+    },
     "titles": {
-      "services": "Services",
-      "supervisor_config": "Supervisor Config"
+      "host_config": "Host Configuration"
     }
   }
 }

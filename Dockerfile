@@ -1,11 +1,11 @@
 ## Build ExpressJS and UI
-FROM node:16.13.2-alpine3.15 AS build
-
-# Tell the UI that this is being deployed to a Balena device
-ENV ON_DEVICE=true
+FROM node:18.7.0-alpine3.16 AS build
 
 # Specify that this is being built for production
 ENV NODE_ENV=production
+
+# Public path for PWA
+ARG PUBLIC_PWA_PATH=/app
 
 WORKDIR /build-context
 
@@ -27,27 +27,49 @@ COPY ui ui
 # Run lint to ensure build fails if there are coding issues
 RUN yarn lint
 
-# Build ExpressJS and UI
+# Build ExpressJS and UI.
+# ON_DEVICE=false informs the build that there my not be a backend available, and therefore 
+# not to perform certain function like communicating with the backend on boot 
 RUN yarn build
+RUN ON_DEVICE=false yarn build-pwa
 
 # Reduce the node_modules folder down to the essentials required for ExpressJS
 RUN yarn workspaces focus expressjs --production
 
 
 ## Compile container
-FROM node:16.13.2-alpine3.15
+FROM node:18.7.0-alpine3.16
+
+# Install USB mount requirements
+RUN apk add --no-cache \
+    findmnt \
+    grep \
+    udev \
+    util-linux
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
+# Enable USB support on device
+ENV UDEV=on
+COPY expressjs/src/usb/udev/usb.rules /etc/udev/rules.d/usb.rules
+COPY expressjs/src/usb/scripts /usr/src/scripts
+COPY expressjs/src/usb/entrypoint.sh .
+RUN chmod +x entrypoint.sh
+RUN chmod +x /usr/src/scripts/*
+
 # Copy app to container
 COPY --from=build /build-context/ui/dist/spa public
+COPY --from=build /build-context/ui/dist/pwa public/app
 COPY --from=build /build-context/expressjs/dist .
 COPY --from=build /build-context/node_modules node_modules
 
 # Copy startup scripts
 COPY scripts .
+
+# Setup UDEV for USB support
+ENTRYPOINT ["./entrypoint.sh"]
 
 # Run the start script
 CMD ["sh", "start.sh"]

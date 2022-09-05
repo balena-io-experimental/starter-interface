@@ -103,9 +103,9 @@
 </template>
 
 <script lang="ts">
-import expressApi from 'axios'
-import { qBtnStyle } from 'src/config/qStyles'
+import { expressApi } from 'boot/axios'
 import { useQuasar } from 'quasar'
+import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

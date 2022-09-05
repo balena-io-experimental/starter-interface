@@ -2,18 +2,28 @@
   <LineChart
     :chart-data="chartData"
     :options="options"
-    :height="props.height"
+    :height="$q.screen.gt.xs ? 150 : 400"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { LineChart } from 'vue-chart-3'
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
-import { colors, getCssVar, LoadingBar } from 'quasar'
 import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
+import {
+  CategoryScale,
+  Chart,
+  ChartData,
+  ChartOptions,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  Title
+} from 'chart.js'
+import { colors, getCssVar, LoadingBar } from 'quasar'
 import sysInfoCmds from 'src/api/sysInfoCmds'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { LineChart } from 'vue-chart-3'
 import { useI18n } from 'vue-i18n'
 
 interface cpuStat {
@@ -23,16 +33,19 @@ interface cpuStat {
   }
 }
 
-Chart.register(...registerables)
+Chart.register(
+  CategoryScale,
+  LineController,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title
+)
 
 export default defineComponent({
   name: 'ChartsCpuStats',
   components: { LineChart },
   props: {
-    height: {
-      type: Number,
-      default: 150
-    },
     maxDataPoints: {
       type: Number,
       default: 20
@@ -48,7 +61,6 @@ export default defineComponent({
     const { t } = useI18n()
 
     const cmdCurrentLoad = sysInfoCmds.find((cmd) => cmd.id === 'l')
-    const chartHeight = 150
     const chartBackgroundOpacity = 70
     const isUnMounted = ref<boolean>(false)
 
@@ -101,6 +113,7 @@ export default defineComponent({
         }
       },
       responsive: true,
+      maintainAspectRatio: false,
       scales: {
         yAxis: {
           min: 0,
@@ -201,7 +214,6 @@ export default defineComponent({
 
     return {
       chartData,
-      chartHeight,
       options,
       props
     }

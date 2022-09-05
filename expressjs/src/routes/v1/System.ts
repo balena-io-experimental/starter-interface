@@ -1,7 +1,7 @@
-import * as dns from 'dns'
+import Logger from '@/common/logger'
+import http2 from 'http2'
 import express, { Request, RequestHandler, Response } from 'express'
 import si from 'systeminformation'
-import Logger from '@/common/logger'
 
 interface reqBodyData {
   id: string
@@ -12,14 +12,24 @@ const router = express.Router()
 // -- Routes -- //
 
 // Internet connectivity check
+// DNS resolution tended to use cached DNS responses which resulted in false positives
 router.get('/v1/system/internet_check', (_req, res) => {
   Logger.debug('Running internet connectivity check.')
-  dns.lookup('google.com', (error) => {
-    if (error && error.code === 'ENOTFOUND') {
-      res.json({ internet: false })
-    } else {
-      res.json({ internet: true })
-    }
+
+  const client = http2.connect('https://google.com')
+  client.setTimeout(5000)
+
+  client.on('connect', () => {
+    res.json({ internet: true })
+    client.destroy()
+  })
+  client.on('error', () => {
+    res.json({ internet: false })
+    client.destroy()
+  })
+  client.on('timeout', () => {
+    res.json({ internet: false })
+    client.destroy()
   })
 })
 

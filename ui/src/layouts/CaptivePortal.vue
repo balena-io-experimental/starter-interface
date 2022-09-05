@@ -20,7 +20,7 @@
   <div v-if="tab == 'welcome'" class="q-pa-lg text-center">
     <!-- Logo -->
     <div class="q-mb-md">
-      <q-img :src="qHeaderStyle.logo_coloured" style="max-width: 175px" />
+      <img :src="qHeaderStyle.logo_coloured" style="max-width: 175px" />
     </div>
     <!-- Title -->
     <div class="text-h4 q-mb-md">
@@ -60,8 +60,8 @@
 import { AxiosResponse } from 'axios'
 import WifiConnect from 'components/WifiConnect.vue'
 import { copyToClipboard, useQuasar } from 'quasar'
-import { qHeaderStyle } from 'src/config/qStyles'
 import { supervisor } from 'src/api/supervisor'
+import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

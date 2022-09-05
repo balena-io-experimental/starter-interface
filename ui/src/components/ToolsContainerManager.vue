@@ -62,12 +62,12 @@
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios'
+import { QTableProps, useQuasar } from 'quasar'
 import { supervisor } from 'src/api/supervisor'
 import { qBtnStyle } from 'src/config/qStyles'
-import { QTableProps, useQuasar } from 'quasar'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { AxiosResponse } from 'axios'
 
 interface containers extends QTableProps {
   serviceName: string
@@ -131,7 +131,6 @@ export default defineComponent({
         }>
         rows.value = res.data.containers
       } catch (error) {
-        $q.notify({ type: 'negative', message: t('general.error') })
         console.error(error)
       }
 

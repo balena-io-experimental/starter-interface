@@ -19,13 +19,13 @@
     :label="$t('components.system.device_info.response_details')"
     :caption="$t('components.system.device_info.raw_json')"
   >
-    <pre v-if="response">{{ response.data }}</pre>
+    <pre v-if="response" style="white-space: pre-wrap">{{ response.data }}</pre>
   </q-expansion-item>
 </template>
 
 <script lang="ts">
-import { expressApi } from 'boot/axios'
 import { AxiosResponse } from 'axios'
+import { expressApi } from 'boot/axios'
 import sysInfoCmds from 'src/api/sysInfoCmds'
 import { defineComponent, ref } from 'vue'
 

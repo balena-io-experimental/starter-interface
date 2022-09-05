@@ -11,8 +11,19 @@
 
 const { configure } = require('quasar/wrappers')
 const path = require('path')
+let PUBLIC_PATH
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function (ctx) {
+  if (ctx.mode.pwa && process.env.PUBLIC_PWA_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_PWA_PATH
+  } else if (ctx.mode.spa && process.env.PUBLIC_SPA_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_SPA_PATH
+  } else if (ctx.mode.electron && process.env.PUBLIC_ELECTRON_PATH) {
+    PUBLIC_PATH = process.env.PUBLIC_ELECTRON_PATH
+  } else {
+    PUBLIC_PATH = '/'
+  }
+
   return {
     eslint: {
       // fix: true,
@@ -51,13 +62,13 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       env: {
-        // Set env variables to be available in compiled app.
+        DEVICE_HOSTNAME: process.env.DEVICE_HOSTNAME,
         BACKEND_PORT: process.env.BACKEND_PORT,
-        ON_DEVICE: process.env.ON_DEVICE
+        ON_DEVICE: process.env.ON_DEVICE ? process.env.ON_DEVICE : 'true'
       },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-        node: 'node16'
+        node: 'node18'
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
@@ -67,7 +78,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: PUBLIC_PATH,
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -96,8 +107,7 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       https: false,
-      host: '0.0.0.0',
-      open: process.env.ON_DEVICE ? false : true
+      host: '0.0.0.0'
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
@@ -207,7 +217,7 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'ui'
+        appId: 'balena Starter Interface'
       }
     },
 
