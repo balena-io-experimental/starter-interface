@@ -52,7 +52,6 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Enable USB support on device
-ENV UDEV=on
 COPY expressjs/src/usb/udev/usb.rules /etc/udev/rules.d/usb.rules
 COPY expressjs/src/usb/scripts /usr/src/scripts
 COPY expressjs/src/usb/entrypoint.sh .
