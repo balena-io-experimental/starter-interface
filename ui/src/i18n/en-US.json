@@ -137,10 +137,11 @@
         "network_connect_fail": "Failed to execute the connect request.",
         "network_fetch_fail": "Failed to fetch the available networks.",
         "network_forget_fail": "Failed to execute the forget request.",
-        "no_networks": "No available networks",
+        "no_networks": "No WiFi networks found",
         "refresh_not_compatible": "Your device requires a restart to refresh the list.",
         "searching_networks": "Searching for networks",
-        "select_ssid": "Select an SSID"
+        "select_ssid": "Select an SSID",
+        "already_connected": "You are already connected to WiFi."
       },
       "forget_all_wifi": {
         "disconnect_request_sent": "Disconnect request sent.",
