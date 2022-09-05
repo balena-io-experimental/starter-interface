@@ -1,95 +1,99 @@
 <template>
   <q-form class="flex flex-col" @submit="connect()">
     <div class="col">
-      <div class="q-ml-md">
-        <q-select
-          v-model="wifiSsid"
-          :label="$t('components.wifi.connect.select_ssid')"
-          :options="ssids"
-          option-label="ssid"
-          :disable="isWifiStatus"
-        >
-          <template #option="scope">
-            <q-item v-bind="scope.itemProps">
-              <q-item-section>
-                <q-item-label>{{ scope.opt.ssid }}</q-item-label>
-              </q-item-section>
-              <q-item-section
-                v-if="scope.opt.strength && scope.opt.ssid"
-                avatar
-              >
-                <q-knob
-                  v-model="scope.opt.strength"
-                  show-value
-                  font-size="11px"
-                  :class="
-                    scope.opt.strength > 60 ? 'text-positive' : 'text-warning'
-                  "
-                  size="40px"
-                  :thickness="0.13"
-                  :color="scope.opt.strength > 60 ? 'positive' : 'warning'"
-                  track-color="grey-3"
+      <div v-if="!isWifiStatus && !isLoading">
+        <div>
+          <q-select
+            v-model="wifiSsid"
+            :label="$t('components.wifi.connect.select_ssid')"
+            :options="ssids"
+            option-label="ssid"
+            :disable="isWifiStatus"
+          >
+            <template #option="scope">
+              <q-item v-bind="scope.itemProps">
+                <q-item-section>
+                  <q-item-label>{{ scope.opt.ssid }}</q-item-label>
+                </q-item-section>
+                <q-item-section
+                  v-if="scope.opt.strength && scope.opt.ssid"
+                  avatar
                 >
-                  <div class="text-center">
-                    <q-icon name="signal_cellular_alt" />
-                    {{ scope.opt.strength }}
-                  </div>
-                </q-knob>
-              </q-item-section>
-            </q-item>
-          </template>
-          <template #after>
-            <q-btn
-              round
-              dense
-              flat
-              color="primary"
-              icon="refresh"
-              :disable="!isRefreshCompatible || isWifiStatus"
-              @click="fetchNetworks()"
-            />
-            <q-tooltip
-              v-if="!isRefreshCompatible"
-              class="text-caption text-center"
-              anchor="top middle"
-              self="center middle"
-              :offset="[20, 20]"
-              :disable="!isRefreshCompatible"
-            >
-              {{ $t('components.wifi.connect.refresh_not_compatible') }}
-            </q-tooltip>
-          </template>
-        </q-select>
-      </div>
-      <div>
-        <q-input
-          v-model="password"
-          class="q-mt-md"
-          filled
-          hide-bottom-space
-          :rules="[(val: string) =>
+                  <q-knob
+                    v-model="scope.opt.strength"
+                    show-value
+                    font-size="11px"
+                    :class="
+                      scope.opt.strength > 60 ? 'text-positive' : 'text-warning'
+                    "
+                    size="40px"
+                    :thickness="0.13"
+                    :color="scope.opt.strength > 60 ? 'positive' : 'warning'"
+                    track-color="grey-3"
+                  >
+                    <div class="text-center">
+                      <q-icon name="signal_cellular_alt" />
+                      {{ scope.opt.strength }}
+                    </div>
+                  </q-knob>
+                </q-item-section>
+              </q-item>
+            </template>
+            <template #after>
+              <q-btn
+                round
+                dense
+                flat
+                color="primary"
+                icon="refresh"
+                :disable="!isRefreshCompatible || isWifiStatus"
+                @click="fetchNetworks()"
+              />
+              <q-tooltip
+                v-if="!isRefreshCompatible"
+                class="text-caption text-center"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+                :disable="!isRefreshCompatible"
+              >
+                {{ $t('components.wifi.connect.refresh_not_compatible') }}
+              </q-tooltip>
+            </template>
+          </q-select>
+        </div>
+        <div>
+          <q-input
+            v-model="password"
+            class="q-mt-md"
+            filled
+            hide-bottom-space
+            :rules="[(val: string) =>
             val.length > 7
             || $t('components.wifi.connect.invalid_password_length')]"
-          :label="$t('general.password')"
-          type="password"
-          :disable="isWifiStatus"
-        />
+            :label="$t('general.password')"
+            type="password"
+            :disable="isWifiStatus"
+          />
+        </div>
+        <div class="q-mt-md text-center">
+          <q-btn
+            v-bind="qBtnStyle"
+            :label="$t('components.wifi.connect.connect')"
+            :loading="isSubmitting"
+            type="submit"
+          />
+        </div>
       </div>
-      <div class="q-mt-md text-center">
+      <div v-else-if="!isLoading" class="text-center">
+        <div>
+          {{ $t('components.wifi.connect.already_connected') }}
+        </div>
         <q-btn
-          v-if="!isWifiStatus"
-          v-bind="qBtnStyle"
-          :label="$t('components.wifi.connect.connect')"
-          class="q-ml-md"
-          :loading="isSubmitting"
-          type="submit"
-        />
-        <q-btn
-          v-else
+          class="q-mt-md"
           v-bind="qBtnStyle"
           :disable="isNoWifiConnect"
           :label="$t('components.wifi.connect.disconnect')"
-          class="q-ml-md"
           :loading="isSubmitting"
           @click="forget()"
         />
@@ -129,15 +133,18 @@ export default defineComponent({
 
     // Env vars
     const isNoWifiConnect = ref<boolean>(false)
-    const password = ref<string>('')
     const isRefreshCompatible = ref<boolean>(true)
-    const ssids = ref<Array<string>>()
     const isSubmitting = ref<boolean>(false)
+    const isLoading = ref<boolean>(true)
+    const password = ref<string>('')
+    const ssids = ref<Array<string>>()
+
     const wifiSsid = ref<connectionData>()
     const isWifiStatus = ref<boolean>(true)
 
     onMounted(async () => {
       await checkWifiStatus()
+      isLoading.value = false
     })
 
     async function checkWifiStatus() {
@@ -256,6 +263,7 @@ export default defineComponent({
       connect,
       fetchNetworks,
       forget,
+      isLoading,
       isNoWifiConnect,
       isRefreshCompatible,
       isSubmitting,
