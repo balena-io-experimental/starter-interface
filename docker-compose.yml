@@ -35,6 +35,7 @@ services:
 
       ## Hotspot details ##
       PWC_HOTSPOT_SSID: "Balena Starter Interface"
+      PWC_HOTSPOT_PASSWORD: "balena01" # Optional. Must be 8 characters or more.
 
       ## Required system variables ##
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
