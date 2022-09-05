@@ -8,6 +8,7 @@ services:
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
       SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
+      UDEV: on # Enables ability to mount USB drives in to the container
     restart: always
     ports:
       - "80:80"
