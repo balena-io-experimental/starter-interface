@@ -35,10 +35,10 @@ mount_dev()
 
   # When using io.balena.features.sysfs the mount point will already exist
   # https://jel.ly.fish/issue-i-kwdoajiuos5nmrnq
-  SYSKERNEL_DIR='/sys/kernel/debug'
+  sysfs_dir='/sys/kernel/debug'
 
-  if ! mountpoint -q "${SYSKERNEL_DIR}"; then
-    mount -t debugfs nodev "$SYSKERNEL_DIR"
+  if ! mountpoint -q "$sysfs_dir"; then
+    mount -t debugfs nodev "$sysfs_dir"
   fi
 }
 

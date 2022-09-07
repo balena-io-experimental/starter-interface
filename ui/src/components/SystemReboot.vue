@@ -22,7 +22,7 @@
       <q-card-actions align="right">
         <div class="q-mr-md">
           <q-checkbox
-            v-model="checkBox"
+            v-model="isCheckBox"
             class="q-ml-md text-caption"
             size="xs"
             :label="$t('components.system.reboot.force_restart')"
@@ -54,11 +54,11 @@ export default defineComponent({
     const { t } = useI18n()
     const $q = useQuasar()
 
-    const checkBox = ref<boolean>(false)
+    const isCheckBox = ref<boolean>(false)
 
     function reboot() {
       // This does not wait for return of promise as connection is lost too quickly
-      void supervisor.v1.reboot(checkBox.value)
+      void supervisor.v1.reboot(isCheckBox.value)
 
       setTimeout(() => {
         $q.notify({
@@ -70,7 +70,7 @@ export default defineComponent({
     }
     return {
       qAvatarStyle,
-      checkBox,
+      isCheckBox,
       confirm: ref(false),
       qBtnStyle,
       reboot
