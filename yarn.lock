@@ -2917,12 +2917,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"balena-device-ui@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "balena-device-ui@workspace:."
-  languageName: unknown
-  linkType: soft
-
 "balena-errors@npm:^4.7.1":
   version: 4.7.1
   resolution: "balena-errors@npm:4.7.1"
@@ -3037,6 +3031,12 @@ __metadata:
   checksum: 120373a1364f6c1f1aed114c7d84cd2b3ed7cacf8f80c81fd6c59f5b3fba499bbae48f092e55ca305bbc062ccb56a90e1cb768b3d92790ecf2c06e9e8d41f7ed
   languageName: node
   linkType: hard
+
+"balena-starter-interface@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "balena-starter-interface@workspace:."
+  languageName: unknown
+  linkType: soft
 
 "base64-js@npm:^1.3.1, base64-js@npm:^1.5.1":
   version: 1.5.1

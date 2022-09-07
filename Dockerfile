@@ -4,9 +4,6 @@ FROM node:18.8.0-alpine3.16 AS build
 # Specify that this is being built for production
 ENV NODE_ENV=production
 
-# Public path for PWA
-ARG PUBLIC_PWA_PATH=/app
-
 WORKDIR /build-context
 
 # Copy required files for installs

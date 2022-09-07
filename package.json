@@ -1,5 +1,5 @@
 {
-  "name": "balena-device-ui",
+  "name": "balena-starter-interface",
   "packageManager": "yarn@3.2.2",
   "private": true,
   "workspaces": [
