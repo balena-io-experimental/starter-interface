@@ -4,17 +4,12 @@
       {{ $t('system.titles.host_config') }}
     </div>
     <component-frame :components="[{ component: ChangeHostname }]" />
-
-    <div
-      v-if="systemStore.internetConnectivity"
-      class="text-h5 q-mb-md q-mt-md"
-    >
-      {{ $t('components.system.device_info.environment_variables') }}
+    <div v-if="networkStore.isCloudlink">
+      <div class="text-h5 q-mb-md q-mt-md">
+        {{ $t('components.system.device_info.environment_variables') }}
+      </div>
+      <component-frame :components="[{ component: EnvConfig }]" />
     </div>
-    <component-frame
-      v-if="systemStore.internetConnectivity"
-      :components="[{ component: EnvConfig }]"
-    />
   </q-page>
 </template>
 
@@ -31,13 +26,13 @@ export default defineComponent({
     ComponentFrame
   },
   setup() {
-    const systemStore = networkSettings()
+    const networkStore = networkSettings()
     return {
       ChangeHostname,
       EnvConfig: defineAsyncComponent(
         () => import('src/components/SystemEnvConfig.vue')
       ),
-      systemStore,
+      networkStore,
       UpdateDevice
     }
   }

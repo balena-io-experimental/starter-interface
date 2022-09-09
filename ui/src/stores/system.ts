@@ -1,11 +1,9 @@
 import { expressApi } from 'boot/axios'
 import { defineStore } from 'pinia'
 
-interface internetConnection {
-  internet: boolean
+interface cloudlinkConnection {
+  loggedIn: boolean
 }
-
-const apiPathV1 = 'v1/system' as string
 
 export const axiosSettings = defineStore('axiosSettings', {
   state: () => ({ axiosBaseUrl: '' }),
@@ -18,22 +16,22 @@ export const axiosSettings = defineStore('axiosSettings', {
 
 export const networkSettings = defineStore('networkSettings', {
   state: () => ({
-    internetConnectivity: undefined as boolean | undefined
+    isCloudlink: undefined as boolean | undefined
   }),
 
   actions: {
-    async checkInternetStatus() {
+    async checkCloudlink() {
       try {
-        const response = await expressApi.get<internetConnection>(
-          `${apiPathV1}/internet_check`,
+        const response = await expressApi.get<cloudlinkConnection>(
+          '/v1/sdk/loggedIn',
           { timeout: 15000 }
         )
-        this.internetConnectivity = response.data.internet
+        this.isCloudlink = response.data.loggedIn
         return Promise.resolve()
       } catch (error) {
-        console.error('Failed fetching internet status.')
+        console.error('Failed fetching Cloudlink status.')
         console.error(error)
-        this.internetConnectivity = false
+        this.isCloudlink = false
         return Promise.reject(error)
       }
     }

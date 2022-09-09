@@ -1,10 +1,10 @@
 <template>
   <div v-if="!isLoading" class="row items-end q-mt-none q-mb-md text-h4">
     <q-slide-transition :duration="1000">
-      <div v-if="sdkResponse" class="row">
-        {{ sdkResponse.data.device_name }}
+      <div v-if="sdkDevice" class="row">
+        {{ sdkDevice.data.device_name }}
       </div>
-      <div v-else-if="!sdkLoading">
+      <div v-else-if="!isSdkLoading">
         {{ baseUrl.host }}
       </div>
       <!-- Avoid components jumping around screen by adding empty space --->
@@ -15,7 +15,7 @@
         v-if="$q.platform.is.electron || quasarMode == 'pwa'"
         class="q-ml-sm text-grey-9"
         flat
-        :loading="sdkLoading"
+        :loading="isSdkLoading"
         size="md"
         dense
         padding="0"
@@ -33,22 +33,16 @@
       </q-btn>
     </div>
     <q-space />
-    <div v-if="$q.screen.gt.sm && !sdkLoading">
+    <div v-if="$q.screen.gt.sm && !isSdkLoading">
       <q-chip
         clickable
         :icon="
-          sdkResponse?.data.is_online && systemStore.internetConnectivity
-            ? 'arrow_circle_up'
-            : 'arrow_circle_down'
+          networkStore.isCloudlink ? 'arrow_circle_up' : 'arrow_circle_down'
         "
-        :color="
-          sdkResponse?.data.is_online && systemStore.internetConnectivity
-            ? 'positive'
-            : 'negative'
-        "
+        :color="networkStore.isCloudlink ? 'positive' : 'negative'"
         text-color="white"
         :label="$t('components.system.device_info.cloudlink')"
-        @click="checkInternet()"
+        @click="checkCloudlink()"
       >
         <q-tooltip
           class="bg-secondary"
@@ -56,40 +50,40 @@
           self="top middle"
         >
           {{
-            $t('components.system.device_info.check_internet_tooltip')
+            $t('components.system.device_info.check_cloudlink_tooltip')
           }}</q-tooltip
         >
       </q-chip>
       <q-chip
-        v-if="sdkResponse && systemStore.internetConnectivity"
+        v-if="sdkDevice && networkStore.isCloudlink"
         icon="power"
-        :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+        :color="sdkDevice.data.is_undervolted ? 'negative' : 'positive'"
         text-color="white"
       >
         {{
-          sdkResponse.data.is_undervolted
+          sdkDevice.data.is_undervolted
             ? $t('components.system.device_info.undervolted')
             : $t('components.system.device_info.not_undervolted')
         }}
       </q-chip>
     </div>
-    <div v-else-if="!sdkLoading">
+    <div v-else-if="!isSdkLoading">
       <q-icon
         class="cursor-pointer"
         :name="
-          sdkResponse?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
+          sdkDevice?.data.is_online ? 'arrow_circle_up' : 'arrow_circle_down'
         "
-        :color="sdkResponse?.data.is_online ? 'positive' : 'negative'"
-        @click="checkInternet()"
+        :color="sdkDevice?.data.is_online ? 'positive' : 'negative'"
+        @click="checkCloudlink()"
       />
       <q-icon
-        v-if="sdkResponse && systemStore.internetConnectivity"
+        v-if="sdkDevice && networkStore.isCloudlink"
         name="power"
-        :color="sdkResponse.data.is_undervolted ? 'negative' : 'positive'"
+        :color="sdkDevice.data.is_undervolted ? 'negative' : 'positive'"
       />
     </div>
   </div>
-  <div v-if="m && f && device && !isLoading">
+  <div v-if="m && f && supervisorDevice && !isLoading">
     <div class="justify-between row q-mb-sm no-wrap">
       <div class="col"><cpu-stats /></div>
       <div class="row items-center q-ml-sm">
@@ -143,12 +137,12 @@
     <div class="q-mt-sm">
       <q-card flat class="text-center">
         <q-list class="justify-evenly row">
-          <q-item v-if="sdkResponse" class="q-mb-sm">
+          <q-item v-if="sdkDevice" class="q-mb-sm">
             <q-item-section>
               <q-item-label caption>
                 {{ $t('components.system.device_info.location') }}
               </q-item-label>
-              <q-item-label>{{ sdkResponse.data.location }}</q-item-label>
+              <q-item-label>{{ sdkDevice.data.location }}</q-item-label>
             </q-item-section>
           </q-item>
           <q-item class="q-mb-sm">
@@ -157,7 +151,7 @@
                 {{ $t('components.system.device_info.os_version') }}
               </q-item-label>
               <q-item-label>
-                {{ device.os_version }}
+                {{ supervisorDevice.os_version }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -167,7 +161,7 @@
                 {{ $t('components.system.device_info.supervisor_version') }}
               </q-item-label>
               <q-item-label>
-                {{ device.supervisor_version }}
+                {{ supervisorDevice.supervisor_version }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -176,7 +170,7 @@
               <q-item-label caption>
                 {{ $t('components.system.device_info.ip_address') }}
               </q-item-label>
-              <q-item-label>{{ device.ip_address }}</q-item-label>
+              <q-item-label>{{ supervisorDevice.ip_address }}</q-item-label>
             </q-item-section>
           </q-item>
           <q-item class="q-mb-sm">
@@ -184,16 +178,16 @@
               <q-item-label caption>
                 {{ $t('components.system.device_info.mac_address') }}
               </q-item-label>
-              <q-item-label>{{ device.mac_address }}</q-item-label>
+              <q-item-label>{{ supervisorDevice.mac_address }}</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="sdkResponse" class="q-mb-sm">
+          <q-item v-if="sdkDevice" class="q-mb-sm">
             <q-item-section>
               <q-item-label caption>
                 {{ $t('components.system.device_info.public_ip') }}
               </q-item-label>
               <q-item-label>
-                {{ sdkResponse.data.public_address }}
+                {{ sdkDevice.data.public_address }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -220,15 +214,6 @@ import { axiosSettings, networkSettings } from 'stores/system'
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface device {
-  current_release: string
-  ip_address: string
-  mac_address: string
-  os_version: string
-  supervisor_version: string
-  target_release: string
-}
-
 interface f {
   data: {
     [index: number]: {
@@ -248,7 +233,7 @@ interface m {
   }
 }
 
-interface sdkResponses {
+interface sdkDeviceRes {
   location: string
   os_release: string
   public_address: string
@@ -256,6 +241,15 @@ interface sdkResponses {
   is_undervolted: boolean
   is_online: boolean
   device_name: string
+}
+
+interface supervisorDeviceRes {
+  current_release: string
+  ip_address: string
+  mac_address: string
+  os_version: string
+  supervisor_version: string
+  target_release: string
 }
 
 interface temperature {
@@ -284,32 +278,34 @@ export default defineComponent({
     const cmdFsSize = sysInfoCmds.find((cmd) => cmd.id === 'f')
     const cmdMem = sysInfoCmds.find((cmd) => cmd.id === 'm')
     const cmdTemp = sysInfoCmds.find((cmd) => cmd.id === 'T')
-    const device = ref<device>()
     const f = ref<f>()
+    const isSdkLoading = ref<boolean>()
     const m = ref<m>()
     const quasarMode = ref(process.env.MODE)
-    const sdkLoading = ref<boolean>()
-    const sdkResponse = ref<AxiosResponse<sdkResponses>>()
-    const systemStore = networkSettings()
+    const sdkDevice = ref<AxiosResponse<sdkDeviceRes>>()
+    const supervisorDevice = ref<supervisorDeviceRes>()
+    const networkStore = networkSettings()
     const temperature = ref<temperature>()
 
     onMounted(async () => {
-      // If Electron or PWA app, perform the internet check as boot process has not initiated
+      // If Electron or PWA app, perform the Cloudlink check as boot process has not initiated
       if ($q.platform.is.electron || quasarMode.value === 'pwa') {
-        void systemStore.checkInternetStatus()
+        void checkCloudlink()
       }
-      // If there is internet connectivity then fetch data from the SDK
-      if (systemStore.internetConnectivity) {
+
+      // If on a fleet then fetch data from the SDK
+      if (networkStore.isCloudlink) {
         void getSdkDeviceInfo()
       }
-      // Fetch local data and wait
-      await getDeviceInfo()
+
+      // Fetch local data from system
+      await getLocalDeviceInfo()
       isLoading.value = false
     })
 
-    // Listen for change to internetConnectivity in case first response is slow
+    // Listen for change to isCloudlink in case first response is slow or recheck is triggered
     watch(
-      () => systemStore.internetConnectivity,
+      () => networkStore.isCloudlink,
       (val) => {
         if (val === true) {
           void getSdkDeviceInfo()
@@ -317,13 +313,8 @@ export default defineComponent({
       }
     )
 
-    function checkInternet() {
-      void systemStore.checkInternetStatus()
-    }
-
-    // Axios Functions
-    function deviceInfo() {
-      return supervisor.v1.device()
+    function checkCloudlink() {
+      void networkStore.checkCloudlink()
     }
 
     function fsSize() {
@@ -332,36 +323,40 @@ export default defineComponent({
       })
     }
 
-    async function getDeviceInfo() {
+    async function getLocalDeviceInfo() {
       try {
         const results = await Promise.all([
-          deviceInfo(),
           fsSize(),
           mem(),
-          temperat()
+          temperat(),
+          getSupervisorInfo()
         ])
-
-        device.value = results[0].data as device
-        f.value = results[1].data as f
-        m.value = results[2].data as m
-        temperature.value = results[3].data as temperature
+        f.value = results[0].data as f
+        m.value = results[1].data as m
+        temperature.value = results[2].data as temperature
+        supervisorDevice.value = results[3].data as supervisorDeviceRes
       } catch (error) {
         console.error(error)
       }
     }
 
     async function getSdkDeviceInfo() {
+      isSdkLoading.value = true
       try {
-        sdkLoading.value = true
-        sdkResponse.value = await sdk.device()
-        sdkLoading.value = false
+        sdkDevice.value = await sdk.device()
       } catch (error) {
         console.error(error)
         $q.notify({
           type: 'negative',
           message: t('components.system.device_info.sdk_unavailable')
         })
+        isSdkLoading.value = false
       }
+      isSdkLoading.value = false
+    }
+
+    async function getSupervisorInfo() {
+      return supervisor.v1.device()
     }
 
     function mem() {
@@ -384,17 +379,17 @@ export default defineComponent({
 
     return {
       baseUrl,
-      checkInternet,
-      device,
+      checkCloudlink,
       f,
       isLoading,
       m,
       oUrl,
       quasarMode,
       qSpinnerStyle,
-      sdkLoading,
-      sdkResponse,
-      systemStore,
+      isSdkLoading,
+      sdkDevice,
+      supervisorDevice,
+      networkStore,
       temperature
     }
   }

@@ -1,9 +1,9 @@
 // Pinia store actions to call on first boot
 import { networkSettings } from 'stores/system'
 
-const systemStore = networkSettings()
+const networkStore = networkSettings()
 
-// Get internet status. Error handling is done in the store.
+// Get Cloudlink status
 if (process.env.ON_DEVICE?.toLowerCase() === 'true') {
-  void systemStore.checkInternetStatus()
+  void networkStore.checkCloudlink()
 }
