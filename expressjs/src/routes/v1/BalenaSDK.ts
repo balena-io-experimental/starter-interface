@@ -15,7 +15,9 @@ const balenaLockfilePath = '/tmp/balena/updates.lock'
 const apiKey = process.env.BALENA_API_KEY || ''
 const uuid = process.env.BALENA_DEVICE_UUID || ''
 
-async function init() {
+void logIn()
+
+async function logIn() {
   try {
     await sdk.auth.logout()
     await sdk.auth.loginWithToken(apiKey)
@@ -76,6 +78,14 @@ router.post('/v1/sdk/envVars', (async (req, res) => {
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
+router.get('/v1/sdk/loggedIn', (async (_req, res) => {
+  try {
+    return res.json({ loggedIn: !!(await sdk.auth.getToken()) })
+  } catch {
+    return res.json({ loggedIn: false })
+  }
+}) as RequestHandler)
+
 function lock() {
   try {
     return lockFile.lockSync(balenaLockfilePath)
@@ -99,7 +109,5 @@ function unlock() {
     return Promise.reject(error)
   }
 }
-
-void init()
 
 export default router
