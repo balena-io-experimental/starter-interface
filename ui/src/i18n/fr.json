@@ -11,7 +11,9 @@
         "submit": "Soumettre",
         "error": "Erreur",
         "name": "Nom",
-        "restart": "Redémarrer"
+        "restart": "Redémarrer",
+        "open_control_panel": "Ouvrir le panneau de contrôle",
+        "hostname": "Nom d'hôte"
     },
     "components": {
         "layouts": {
@@ -37,13 +39,22 @@
                 "environment_variables": "Variables d'environnement",
                 "location": "Emplacement",
                 "not_undervolted": "Puissance normale",
-                "os_version": "Version du système d'exploitation"
+                "os_version": "Version du système d'exploitation",
+                "cloudlink": "Lien vers le nuage",
+                "temperature": "Température",
+                "check_internet_tooltip": "Cliquez pour revérifier la connectivité internet"
             },
             "env_config": {
                 "raw_json": "JSON brut",
                 "response_details": "Détails de la réponse",
                 "env_var_warning_message": "L'ajout ou la suppression de variables d'environnement redémarre les services sur cet appareil !",
-                "delete_selected_records": "Supprimer les enregistrements sélectionnés"
+                "delete_selected_records": "Supprimer les enregistrements sélectionnés",
+                "key": "Clé",
+                "value": "Valeur",
+                "edit": "Modifier",
+                "restarting_containers": "Vos conteneurs doivent redémarrer. L'interface utilisateur sera indisponible jusqu'à leur remise en ligne.",
+                "add_env_var": "Ajouter une variable d'environnement",
+                "env_rules": "Les clés des variables d'environnement doivent commencer par une lettre et ne contenir que des lettres, des chiffres et des caractères de soulignement"
             },
             "reboot": {
                 "restarting": "Votre appareil est en train de redémarrer…",
@@ -91,12 +102,12 @@
             "configure_password": {
                 "invalid_name": "Nom invalide",
                 "invalid_password_length": "Le mot de passe doit comporter 8 caractères ou plus.",
-                "set_new_hotspot_password": "Définir un nouveau mot de passe pour le point d'accès",
+                "set_new_hotspot_password": "Définir le mot de passe du point d'accès",
                 "password_set": "Mot de passe défini. Si vous utilisez un point d'accès, il va redémarrer."
             },
             "configure_ssid": {
                 "invalid_name": "Nom invalide",
-                "set_new_hotspot_ssid": "Définir un nouveau SSID pour le point d'accès",
+                "set_new_hotspot_ssid": "Définir le SSID pour le point d'accès",
                 "ssid_set": "SSID défini. Si vous utilisez un point d'accès, il va redémarrer."
             },
             "connect": {
@@ -122,6 +133,11 @@
         "charts": {
             "cpu_stats": {
                 "cpu_status": "État du processeur"
+            },
+            "mem_stats": {
+                "used": "Utilisé",
+                "memory": "Mémoire",
+                "available": "Disponible"
             }
         },
         "network": {
@@ -133,7 +149,8 @@
     "system": {
         "errors": {
             "request_error": "Erreur de demande",
-            "wrong_way": "Fausse route…"
+            "wrong_way": "Fausse route…",
+            "no_backend": "Impossible de communiquer avec le service backend"
         },
         "menu_items": {
             "configuration": "Configuration",
@@ -148,8 +165,16 @@
             "network_connection_restored": "Connexion réseau restaurée.",
             "no_wifi_api": "Échec de la communication avec Balena Py Wi-Fi Connect. Est-il installé sur cet appareil ?"
         },
+        "pwa": {
+            "install": "Installer",
+            "install_notification": "Saviez-vous que vous pouvez installer cette page comme une application et l'utiliser hors ligne ?",
+            "install_instructions_safari": "- Safari : Appuyez sur le bouton « Partager » et sélectionnez « Ajouter à l'écran d'accueil »",
+            "install_instructions_chrome": "- Chrome Android : Appuyez sur l'icône des « trois points » en haut à droite pour ouvrir le menu. Sélectionnez « Ajouter à l'écran d'accueil ».",
+            "install_instructions_browsers": "- Google Chrome et Microsoft Edge : cliquez sur l'icône située à droite de la barre d'URL, puis sur le bouton « Installer », ou effectuez l'installation à partir du menu « trois points »."
+        },
         "titles": {
+            "host_config": "Configuration de l'hôte"
         }
     },
-    "title": "Interface du dispositif Balena"
+    "title": "Interface de démarrage Balena"
 }
