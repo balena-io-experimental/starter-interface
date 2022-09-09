@@ -41,8 +41,7 @@
                 "not_undervolted": "Puissance normale",
                 "os_version": "Version du système d'exploitation",
                 "cloudlink": "Lien vers le nuage",
-                "temperature": "Température",
-                "check_internet_tooltip": "Cliquez pour revérifier la connectivité internet"
+                "temperature": "Température"
             },
             "env_config": {
                 "raw_json": "JSON brut",

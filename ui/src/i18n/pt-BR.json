@@ -56,8 +56,7 @@
                 "undervolted": "Abaixo da tensão nominal",
                 "mac_address": "Endereço MAC",
                 "cloudlink": "Cloudlink",
-                "temperature": "Temperatura",
-                "check_internet_tooltip": "Clique novamente para verificar a conexão com a internet"
+                "temperature": "Temperatura"
             },
             "env_config": {
                 "raw_json": "JSON puro",
