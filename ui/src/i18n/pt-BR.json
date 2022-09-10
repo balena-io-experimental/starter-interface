@@ -56,7 +56,8 @@
                 "undervolted": "Abaixo da tensão nominal",
                 "mac_address": "Endereço MAC",
                 "cloudlink": "Cloudlink",
-                "temperature": "Temperatura"
+                "temperature": "Temperatura",
+                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente"
             },
             "env_config": {
                 "raw_json": "JSON puro",
@@ -130,14 +131,15 @@
                 "disconnect": "Desconectar",
                 "disconnect_request_sent": "O pedido de desconexão foi enviado.",
                 "network_forget_fail": "Houve uma falha ao executar a solicitação de esquecimento.",
-                "no_networks": "Sem redes disponíveis",
+                "no_networks": "Nenhuma rede WiFi foi encontrada",
                 "refresh_not_compatible": "O seu dispositivo precisa ser reinicializado para que a lista seja atualizada.",
                 "searching_networks": "Fazendo a busca pelas redes",
                 "network_connect_fail": "Houve uma falha ao executar a solicitação de conexão.",
                 "select_ssid": "Selecione um SSID",
                 "connect": "Conectar",
                 "invalid_password_length": "A senha deve ter 8 caracteres ou mais.",
-                "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis."
+                "network_fetch_fail": "Houve uma falha ao buscar as redes disponíveis.",
+                "already_connected": "Você já está conectado ao Wi-Fi."
             },
             "forget_all_wifi": {
                 "forget_all_wifi": "Esqueça todas as conexões de WiFi",
