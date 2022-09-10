@@ -41,7 +41,8 @@
                 "not_undervolted": "Puissance normale",
                 "os_version": "Version du système d'exploitation",
                 "cloudlink": "Lien vers le nuage",
-                "temperature": "Température"
+                "temperature": "Température",
+                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink"
             },
             "env_config": {
                 "raw_json": "JSON brut",
@@ -121,8 +122,9 @@
                 "searching_networks": "Recherche de réseaux",
                 "connect": "Connecter",
                 "network_forget_fail": "Échec de l'exécution de la demande d'oubli.",
-                "no_networks": "Aucun réseau disponible",
-                "refresh_not_compatible": "Votre appareil doit être redémarré pour que la liste soit actualisée."
+                "no_networks": "Aucun réseau Wi-Fi trouvé",
+                "refresh_not_compatible": "Votre appareil doit être redémarré pour que la liste soit actualisée.",
+                "already_connected": "Vous êtes déjà connecté·e au Wi-Fi."
             },
             "forget_all_wifi": {
                 "forget_all_wifi": "Oubliez toutes les connexions Wi-Fi",
