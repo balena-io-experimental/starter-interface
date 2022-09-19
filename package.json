@@ -10,7 +10,9 @@
     "lint": "yarn -p -i workspaces foreach run lint",
     "format": "yarn -p -i workspaces foreach run format",
     "formatcheck": "yarn -p -i workspaces foreach run formatcheck",
-    "dev": "yarn -p -i workspaces foreach run dev",
+    "dev": "yarn workspace ui dev",
+    "dev-electron": "ON_DEVICE=false yarn workspace ui dev -m electron",
+    "dev-pwa": "ON_DEVICE=false yarn workspace ui dev -m pwa",
     "build": "yarn -p -i workspaces foreach run build",
     "build-pwa": "yarn workspace ui build-pwa",
     "build-electron": "yarn workspace ui build-electron"
