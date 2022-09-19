@@ -6,13 +6,7 @@ This project is still under heavy development and subject to significant changes
 
 A community-built device interface for using Balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
-<b>Vue user interface with prebuilt features:</b>
-
-![ui_demo](https://user-images.githubusercontent.com/64841595/178042890-bcddc685-54bf-4749-95b2-d9a03fe28260.png)
-
-<b>Connect to nearby Wi-Fi networks:</b>
-
-<img width="569" alt="141763447-534ddcd6-5939-4f14-970e-ccf8b7a106c6" src="https://user-images.githubusercontent.com/64841595/157092424-561961e5-6914-4e42-955f-fe8a02e9c370.png">
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/maggie0002/balena-device-ui)
 
 # Description
 
@@ -22,14 +16,27 @@ It is modular allowing contributions from the community and ease of tracking of 
 
 Some of the features include:
 
-- Offline and/or online device info
+- Online and offline use
 - Pre-built endpoints for interacting with the Balena SDK or Supervisor
 - Connect the device to nearby Wi-Fi networks
 - Container manager (list, stop, start, restart)
 - File manager (create folders, upload, delete, etc...)
+- Set, edit and remove environment variables on the device
+- Configure the device hostname
+- Configure the device SSID and password
 - Captive portal
 - System info and stats
 - I18n language translations
+
+# Screenshots
+
+<b>User friendly dashboard:</b>
+
+![demo](https://user-images.githubusercontent.com/64841595/191008762-ea97f42c-a7bb-4ecb-abe8-5d57874da9b3.png)
+
+<b>Connect to nearby Wi-Fi networks:</b>
+
+<img width="569" alt="141763447-534ddcd6-5939-4f14-970e-ccf8b7a106c6" src="https://user-images.githubusercontent.com/64841595/157092424-561961e5-6914-4e42-955f-fe8a02e9c370.png">
 
 # Documentation
 
