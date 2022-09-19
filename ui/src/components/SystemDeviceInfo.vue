@@ -367,7 +367,7 @@ export default defineComponent({
 
     function oUrl(url: string) {
       openURL(url, undefined, {
-        width: '1050'
+        width: 1050
       })
     }
 
