@@ -1,9 +1,181 @@
 {
     "general": {
-        "cancel": "annulla",
+        "cancel": "Annulla",
         "close": "Chiudi",
         "ok": "OK",
         "password": "Password",
-        "are_you_sure": "Sei sicuro/a?"
-    }
+        "are_you_sure": "Sei sicuro/a?",
+        "open_control_panel": "Apri Pannello di Controllo",
+        "submit": "Invia",
+        "name": "Nome",
+        "error": "Errore",
+        "restart": "Riavvia",
+        "status": "Stato",
+        "start": "Inizio",
+        "stop": "Ferma",
+        "hostname": "Nome dell'Host"
+    },
+    "components": {
+        "charts": {
+            "mem_stats": {
+                "available": "Disponibile",
+                "memory": "Memoria",
+                "used": "Usato"
+            },
+            "cpu_stats": {
+                "cpu_status": "Stato CPU"
+            }
+        },
+        "system": {
+            "device_info": {
+                "sdk_unavailable": "Impossibile raggiungere i server Balena.",
+                "raw_json": "Raw JSON",
+                "temperature": "Temperatura",
+                "supervisor_version": "Versione del Supervisore",
+                "cloudlink": "Cloudlink",
+                "ip_address": "Indirizzo IP",
+                "environment_variables": "Variabili d'Ambiente",
+                "mac_address": "Indirizzo MAC",
+                "public_ip": "IP Pubblico",
+                "os_version": "Versione OS",
+                "response_details": "Dettagli della Risposta",
+                "check_cloudlink_tooltip": "Clicca per controllare la connettività del Cloudlink",
+                "location": "Posizione",
+                "storage": "Memoria",
+                "undervolted": "Sottotensione",
+                "not_undervolted": "Alimentazione normale"
+            },
+            "env_config": {
+                "edit": "Modifica",
+                "key": "Tasto",
+                "value": "Valore",
+                "add_env_var": "Aggiungi Variabile d'Ambiente",
+                "env_var_warning_message": "Aggiungere o rimuovere variabili d'ambiente farà riavviare i servizi in questo dispositivi!",
+                "env_rules": "I tasti delle variabili d'ambiente dovrebbero iniziare con una lettera e contenere solo lettere, numeri e sottolinea",
+                "delete_selected_records": "Eliminare i Registri Selezionati",
+                "restarting_containers": "I tuoi contenitori devono essere riavviati. L'interfaccia dell'utente non sarà disponibile fino a quando non torneranno online.",
+                "response_details": "Dettagli della Risposta",
+                "raw_json": "JSON Grezzo"
+            },
+            "reboot": {
+                "force_restart": "Forzare riavvio?",
+                "restarting": "Il tuo dispositivo si sta riavviando…"
+            },
+            "shutdown": {
+                "force_shutdown": "Forzare arresto?",
+                "shutting_down": "Arrestando il dispositivo…"
+            },
+            "update_device": {
+                "force_update": "Forzare l'aggiornamento?",
+                "update_device": "Aggiornare il dispositivo"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "Recupera i registri"
+            }
+        },
+        "tools": {
+            "file_manager": {
+                "delete": "Elimina",
+                "empty_folder": "Cartella Vuota",
+                "filter": "Filtro",
+                "invalid_filemanager_string": "Hai inserito un nome non valido. I seguenti caratteri non sono compatibili: '/', '\\0'",
+                "item_already_exists": "L'elemento già esiste",
+                "new_folder": "Nuova cartella",
+                "no_results_found": "Nessun risultato trovato",
+                "full_screen": "Schermo Intero",
+                "mb_001": "0.01 Mb",
+                "name": "Nome",
+                "mb": "Mb",
+                "enter_name": "Inserisci un nome",
+                "invalid_upload_string": "Le Voci contengono un nome non valido e non verranno aggiornate. I caratteri seguenti non sono compatibili: '/','\\0'",
+                "size_colon": "Dimensione:",
+                "upload": "Carica",
+                "upload_files_exist": "Alcuni dei file che hai aggiunto già esistono. Questi file saranno sovrascritti."
+            },
+            "system_info": {
+                "select_request": "Seleziona una richiesta"
+            },
+            "container_manager": {
+                "containers": "Contenitori"
+            }
+        },
+        "wifi": {
+            "configure_password": {
+                "invalid_name": "Nome non valido",
+                "invalid_password_length": "Password deve contenere almeno 8 caratteri.",
+                "set_new_hotspot_password": "Imposta la password dell'hotspot",
+                "password_set": "Password impostata. Se stai gestendo un hotspot, verrà riavviato."
+            },
+            "configure_ssid": {
+                "invalid_name": "Nome non valido",
+                "ssid_set": "SSID impostato. Se stai gestendo un hotspot, verrà riavviato.",
+                "set_new_hotspot_ssid": "Imposta l'SSID dell'hotspot"
+            },
+            "connect": {
+                "connect": "Connetti",
+                "disconnect": "Disconnetti",
+                "invalid_password_length": "Password deve contenere almeno 8 caratteri.",
+                "searching_networks": "Cercando reti",
+                "no_networks": "Nessuna rete WiFi trovato",
+                "disconnect_request_sent": "Richiesta di disconnessione inviata.",
+                "already_connected": "Sei già connesso al WiFi.",
+                "connection_request": "Il tuo dispositivo proverà a connettersi alla rete. Se non è disponibile in un minuto, riconnetti il dispositivo e controlla che la tua password sia corretta.",
+                "configure_hotspot": "Configura l'hotspot",
+                "network_fetch_fail": "Impossibile recuperare le reti disponibili.",
+                "network_forget_fail": "Impossibile eseguire la richiesta di dimenticanza.",
+                "network_connect_fail": "Impossibile eseguire la richiesta di connessione.",
+                "select_ssid": "Seleziona un SSID",
+                "refresh_not_compatible": "Il tuo dispositivo richiede un riavvio per aggiornare la lista."
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "Richiesta di disconnessione mandata.",
+                "forget_all_wifi": "Dimentica Tutte le Connessioni WiFi"
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "copy_to_clipboard": "Copia negli appunti",
+                "connect_to_wifi": "Connetti al WiFi",
+                "visit_to_begin": "Visita il seguente URL nel tuo browser per iniziare:",
+                "url_copied": "Copiato negli appunti",
+                "welcome": "Benvenuto"
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "Cambiare l'hostname"
+            }
+        }
+    },
+    "system": {
+        "menu_items": {
+            "configuration": "Configurazione",
+            "system_info": "Informazioni sul Sistema",
+            "device_info": "Informazioni Dispositivo",
+            "networking": "Rete",
+            "file_manager": "Gestore di File",
+            "container_manager": "Gestione dei Contenitori"
+        },
+        "network": {
+            "network_connection_down": "Non sei più connesso ad una rete. Prova a riconnetterti al tuo dispositivo.",
+            "network_connection_restored": "Connessione alla rete ripristinata.",
+            "no_wifi_api": "Impossibile comunicare con Balena Py Wi-Fi Connect. É installata in questo dispositivo?"
+        },
+        "pwa": {
+            "install": "Installa",
+            "install_notification": "Lo sapevi che puoi installare questa pagina come app e usarla offline?",
+            "install_instructions_chrome": "- Chrome Android: Clicca l'icona dei 'tre pulsanti' in alto a destra per aprire il menu. Seleziona 'Aggiungi alla schermata iniziale'.",
+            "install_instructions_browsers": "- Google Chrome e Microsoft Edge: Clicca l'icona a destra della barra degli indirizzi e clicca il pulsante 'Installa', o installa dal menu nei 'tre pulsanti'.",
+            "install_instructions_safari": "- Safari: Clicca il pulsante 'Condividi' e seleziona 'Aggiungi alla schermata iniziale'"
+        },
+        "errors": {
+            "no_backend": "Impossibile comunicare con il servizio backend",
+            "request_error": "Richiesta d'errore",
+            "wrong_way": "Via sbagliata…"
+        },
+        "titles": {
+            "host_config": "Configurazione dell'Host"
+        }
+    },
+    "title": "Interfaccia d'avvio Balena"
 }
