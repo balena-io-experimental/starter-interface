@@ -1,8 +1,8 @@
 name: balena Starter Interface
 description: >-
-  A UI for interacting with the Balena OS and a starter project for creating your own.
+  A UI for interacting with balena devices and a starter project for creating your own UI.
 joinable: false
-type: sw.block
+type: sw.application
 assets:
   repository:
     type: blob.asset
