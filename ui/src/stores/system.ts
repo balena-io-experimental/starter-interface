@@ -1,10 +1,11 @@
 import { expressApi } from 'boot/axios'
 import { defineStore } from 'pinia'
 
-interface cloudlinkConnection {
+interface CloudlinkConnectionRes {
   loggedIn: boolean
 }
 
+// Store Axios settings in Pinia store as they are not reactive within the Axios instance.
 export const axiosSettings = defineStore('axiosSettings', {
   state: () => ({ axiosBaseUrl: '' }),
   actions: {
@@ -14,6 +15,7 @@ export const axiosSettings = defineStore('axiosSettings', {
   }
 })
 
+// Store Cloudlink status and allow retesting
 export const networkSettings = defineStore('networkSettings', {
   state: () => ({
     isCloudlink: undefined as boolean | undefined
@@ -22,7 +24,7 @@ export const networkSettings = defineStore('networkSettings', {
   actions: {
     async checkCloudlink() {
       try {
-        const response = await expressApi.get<cloudlinkConnection>(
+        const response = await expressApi.get<CloudlinkConnectionRes>(
           '/v1/sdk/loggedIn',
           { timeout: 15000 }
         )

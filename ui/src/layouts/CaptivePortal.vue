@@ -65,12 +65,12 @@ import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface hostConfig {
+interface HostConfigRes {
   network: { hostname: string }
 }
 
 export default defineComponent({
-  name: 'LayoutsCaptivePortal',
+  name: 'CaptivePortal',
   components: {
     WifiConnect
   },
@@ -82,15 +82,20 @@ export default defineComponent({
     const hostname = ref<string>()
 
     onMounted(async () => {
+      // Use local Supervisor to get device hostname for displaying the local URL to use
+      // to start using the device. Hostnames in containers are variable when running a
+      // container in the bridge network mode, and therefore we use the Supervisor to get
+      // an accurate hostname instead
       try {
         const response =
-          (await supervisor.v1.device_host_config_get()) as AxiosResponse<hostConfig>
+          (await supervisor.v1.device_host_config_get()) as AxiosResponse<HostConfigRes>
         hostname.value = response.data.network.hostname
       } catch (error) {
         console.error(error)
       }
     })
 
+    // Copy the URL to clipboard when button is clicked
     const copyUrl = async () => {
       if (hostname.value) {
         await copyToClipboard(`http://${hostname.value}.local`)

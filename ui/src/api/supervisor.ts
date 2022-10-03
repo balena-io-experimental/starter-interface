@@ -1,18 +1,27 @@
-// Balena Supervisor API Documentation: https://www.balena.io/docs/reference/supervisor/supervisor-api/
+// Functions for communication from the users browser, to the ExpressJS backend, and
+// then from the backend to the local Supervisor API. This is more secure than having
+// to expose the Supervisor on the device.
+//
+// `cacheTimeout` tells the backend to return a cached response rather than get a new
+// response if the last request was < cacheTimeout.
+//
+// Balena Supervisor API Documentation for reference:
+// https://www.balena.io/docs/reference/supervisor/supervisor-api/
+
 import { expressApi } from 'boot/axios'
 
-interface hostConfigHostname {
+interface HostConfigHostnameReq {
   network: { hostname: string; proxy?: never }
 }
 
-interface hostConfigProxy {
+interface HostConfigProxyReq {
   network: { hostname?: never; proxy: string }
 }
 
 // Default API path
 const apiPath = '/v1'
+const defaultCacheTimeout = 0 // Sets the default cache to be used on the backend
 const supervisorPath = '/supervisor'
-const defaultCacheTimeout = 0
 
 // Supervisor v1 endpoints
 const v1 = {
@@ -40,7 +49,7 @@ const v1 = {
       cacheTimeout: defaultCacheTimeout
     })
   },
-  device_host_config_patch(data: hostConfigHostname | hostConfigProxy) {
+  device_host_config_patch(data: HostConfigHostnameReq | HostConfigProxyReq) {
     return expressApi.post(apiPath + supervisorPath, {
       type: 'PATCH',
       path: 'v1/device/host-config',

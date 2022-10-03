@@ -23,7 +23,7 @@
         v-for="(tab, index) in tabs"
         :key="tab.title"
         :name="tab.title"
-        @click="setAxios(tab.title)"
+        @click="setAxiosBaseUrl(tab.title)"
       >
         <div>
           <span class="q-mr-sm">{{ tab.title }}</span>
@@ -116,12 +116,12 @@ import { axiosSettings } from 'stores/system'
 import { defineComponent, ref } from 'vue'
 import { QInput } from 'quasar'
 
-interface tabIndex {
+interface TabIndex {
   title: string
 }
 
 export default defineComponent({
-  name: 'LayoutsCaptivePortal',
+  name: 'DeviceTabSelector',
   components: {
     DeviceInfo
   },
@@ -130,9 +130,10 @@ export default defineComponent({
     const currentTab = ref('welcome')
     const quasarMode = ref(process.env.MODE)
     const reqHostname = ref('')
-    const tabs = ref<tabIndex[]>([])
+    const tabs = ref<TabIndex[]>([])
     const validateHostInput = ref<QInput>()
 
+    // Add http:// to URL string if it a protocol is missing
     function addHttp(url: string) {
       if (!/^(?:f|ht)tps?:\/\//.test(url)) {
         url = `http://${url}`
@@ -145,7 +146,7 @@ export default defineComponent({
       tabs.value.splice(index, 1)
     }
 
-    function setAxios(currentTabSetting: string) {
+    function setAxiosBaseUrl(currentTabSetting: string) {
       currentTabSetting = addHttp(currentTabSetting)
       axiosBaseUrl.setUrl(currentTabSetting)
     }
@@ -158,7 +159,7 @@ export default defineComponent({
       tabs.value?.push({
         title: reqHost
       })
-      setAxios(reqHost)
+      setAxiosBaseUrl(reqHost)
       currentTab.value = reqHost
       reqHostname.value = ''
     }
@@ -169,7 +170,7 @@ export default defineComponent({
       qHeaderStyle,
       quasarMode,
       reqHostname,
-      setAxios,
+      setAxiosBaseUrl,
       setHostname,
       tabs,
       validateHostInput

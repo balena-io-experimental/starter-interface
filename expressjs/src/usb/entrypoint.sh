@@ -3,7 +3,7 @@
 tmp_mount='/tmp/_balena'
 mkdir -p "$tmp_mount"
 
-# This script only works in a privileged container
+# This script only works in a privileged container and is checked here
 if mount -t devtmpfs none "$tmp_mount" > /dev/null 2>&1; then
   PRIVILEGED=true
   umount "$tmp_mount"
@@ -33,10 +33,9 @@ mount_dev()
   # ref: https://www.kernel.org/doc/Documentation/filesystems/devpts.txt
   ln -sf /dev/pts/ptmx /dev/ptmx
 
-  # When using io.balena.features.sysfs the mount point will already exist
-  # https://jel.ly.fish/issue-i-kwdoajiuos5nmrnq
   sysfs_dir='/sys/kernel/debug'
 
+  # When using io.balena.features.sysfs the mount point will already exist. We check it here. 
   if ! mountpoint -q "$sysfs_dir"; then
     mount -t debugfs nodev "$sysfs_dir"
   fi
@@ -44,29 +43,16 @@ mount_dev()
 
 start_udev()
 {
+  # Check that the UDEV env is set in the compose file.
   if [ "$UDEV" = "on" ]; then
     if $PRIVILEGED; then
       mount_dev
-      # Start udev
+      # Start udev to listen for USB devices
       unshare --net udevd --daemon > /dev/null 2>&1
-      # Check for existing devices connected to the host and mount them
+      # Check for devices connected to the host before the container started and mount them
       udevadm trigger --action add --subsystem-match=block --type=devices --property=DEVTYPE=partition > /dev/null 2>&1
     else
       echo "Unable to enable USB mounting support, container must be run in privileged mode."
-    fi
-  fi
-}
-
-init()
-{
-  # echo error message when executable file doesn't exist.
-  if [ -n "$1" ]; then
-    if CMD=$(command -v "$1" 2>/dev/null); then
-      shift
-      exec "$CMD" "$@"
-    else
-      echo "Command not found: $1"
-      exit 1
     fi
   fi
 }

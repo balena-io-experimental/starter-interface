@@ -1,3 +1,7 @@
+//
+// Winston logger configuration to allow setting different debug levels
+//
+
 import process from 'process'
 import winston from 'winston'
 

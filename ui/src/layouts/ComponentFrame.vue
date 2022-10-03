@@ -1,3 +1,9 @@
+<!--
+ComponentFrame.vue provides the white box from which other components are rendered within. It
+allows for standardisation of components and for interactive/auto configuring of visual
+components. See the Wiki on Github for more details.
+ -->
+
 <template>
   <q-card flat bordered class="q-mb-md" :class="props.class">
     <q-item-label v-if="props.title" class="q-mt-sm" overline>
@@ -22,7 +28,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'LayoutsComponentFrame',
+  name: 'ComponentFrame',
   props: {
     class: {
       type: String,

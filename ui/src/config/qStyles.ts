@@ -1,3 +1,8 @@
+//
+// Configuration file for various visual effects, headers and colours
+//
+
+// Global button configuration
 export const qBtnStyle = {
   color: 'secondary',
   outline: false,
@@ -7,6 +12,7 @@ export const qBtnStyle = {
   'no-caps': true
 }
 
+// Header configuration
 export const qHeaderStyle = {
   header: {
     elevated: true
@@ -17,12 +23,14 @@ export const qHeaderStyle = {
   title: { class: 'text-subtitle1' }
 }
 
+// Global avatar configuration, for small icons or buttons used throughout the interface
 export const qAvatarStyle = {
   size: 'lg',
   color: 'accent',
   'text-color': 'primary'
 }
 
+// Global spinner configuration, used for things like loading indicators
 export const qSpinnerStyle = {
   class: 'text-accent',
   size: '6em'

@@ -1,28 +1,44 @@
+//
+// A cache and queue used to handle API requests that are synchronous and need to be
+// asynchronous.
+//
+// If two users are using the UI at the same time, or a user hits a button twice/refreshes
+// a page, requests could be sent simultaneously and one or more could return errors. The
+// queue helps mitigate this effect by queueing all requests and sending the asynchronous.
+//
+// Some endpoints that return data such as device info that doesn't change doesn't require a
+// new request to the Supervisor or Cloud and in these instances a local cache can be used
+// instead to reduce the number of requests and to speed up responses.
+//
+// This cache and queue can be used to handle these instances, and is configured through the
+// UI Axios configuration. See the Wiki on Github for more info.
+//
+
 import Logger from '@/common/logger'
 import { NextFunction, Request, Response } from 'express'
 
-interface sendResponse extends Response {
+interface SendResponseRes extends Response {
   sendResponse: Response['json']
 }
 
-interface reqBodyData {
+interface BodyDataReq {
   cacheTimeout: number
   path: string
   type: string
 }
 
-interface requestData {
+interface DataReq {
   queueName?: string
   cachedData?: JSON
   runtime?: number
 }
 
-interface requestObject {
-  [key: string]: requestData
+interface RequestObject {
+  [key: string]: DataReq
 }
 
 const queue = [] as Array<QueueUnique>
-const requestCache = {} as requestObject
+const requestCache = {} as RequestObject
 
 // Class to queue items and cache results
 class QueueUnique {
@@ -33,7 +49,7 @@ class QueueUnique {
   constructor(
     func: (
       req: Request,
-      res: sendResponse,
+      res: SendResponseRes,
       next: NextFunction
     ) => Promise<unknown>
   ) {
@@ -41,7 +57,7 @@ class QueueUnique {
     this.returnedQueue = Promise.resolve()
   }
 
-  add(req: Request, res: sendResponse, next: NextFunction) {
+  add(req: Request, res: SendResponseRes, next: NextFunction) {
     // Check if the item is already cached
     if (checkCache(req, res) === undefined) {
       return
@@ -52,7 +68,7 @@ class QueueUnique {
     void queuedFunc()
   }
 
-  queue(req: Request, res: sendResponse, next: NextFunction) {
+  queue(req: Request, res: SendResponseRes, next: NextFunction) {
     return () => {
       this.returnedQueue = this.returnedQueue
         .then(() => this.func(req, res, next))
@@ -64,10 +80,10 @@ class QueueUnique {
   }
 }
 
-const response = (req: Request, res: sendResponse, next: NextFunction) =>
+const response = (req: Request, res: SendResponseRes, next: NextFunction) =>
   new Promise((resolve) => {
     const qName = compileQueueName(req)
-    const reqBody = req.body as reqBodyData
+    const reqBody = req.body as BodyDataReq
 
     // Do another check to see if the request that just finished has created a useful cache
     const cachedItemList = checkCache(req, res)
@@ -122,10 +138,10 @@ const response = (req: Request, res: sendResponse, next: NextFunction) =>
     resolve(true)
   })
 
-function checkCache(req: Request, res: sendResponse) {
-  const reqBody = req.body as reqBodyData
+function checkCache(req: Request, res: SendResponseRes) {
+  const reqBody = req.body as BodyDataReq
   // Fetch all cached items related to the current endpoint queue, which is named after the endpoint url
-  let cachedItemList = {} as requestData
+  let cachedItemList = {} as DataReq
 
   if (requestCache[compileQueueName(req)]) {
     cachedItemList = requestCache[compileQueueName(req)]
@@ -157,7 +173,7 @@ function checkCache(req: Request, res: sendResponse) {
 }
 
 function compileQueueName(req: Request) {
-  const reqBody = req.body as reqBodyData
+  const reqBody = req.body as BodyDataReq
   const reqRoute = req.route as Request
   // If a url path is passed then use it to set a custom queue name
   if (reqBody.path) {
@@ -173,7 +189,7 @@ function sortQueues(req: Request, res: Response, next: NextFunction) {
   if (!queue[qName]) {
     queue[qName] = new QueueUnique(response)
   }
-  queue[qName].add(req, res as sendResponse, next)
+  queue[qName].add(req, res as SendResponseRes, next)
 }
 
 export default sortQueues

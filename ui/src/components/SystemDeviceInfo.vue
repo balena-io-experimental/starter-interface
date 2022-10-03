@@ -83,7 +83,7 @@
       />
     </div>
   </div>
-  <div v-if="m && f && supervisorDevice && !isLoading">
+  <div v-if="mem && fs && supervisorDevice && !isLoading">
     <div class="justify-between row q-mb-sm no-wrap">
       <div class="col"><cpu-stats /></div>
       <div class="row items-center q-ml-sm">
@@ -118,16 +118,16 @@
             stripe
             rounded
             size="20px"
-            :value="f.data[0].used / f.data[0].size"
+            :value="fs.data[0].used / fs.data[0].size"
           >
             <div class="absolute-full flex flex-center">
               <q-badge
                 color="white"
                 text-color="primary"
                 :label="`${$t('components.system.device_info.storage')}: ${(
-                  f.data[0].used / 1000000000
+                  fs.data[0].used / 1000000000
                 ).toFixed(2)}GB /
-                ${(f.data[0].size / 1000000000).toFixed(2)}GB`"
+                ${(fs.data[0].size / 1000000000).toFixed(2)}GB`"
               />
             </div>
           </q-linear-progress>
@@ -208,13 +208,12 @@ import MemoryStats from 'components/ChartsMemoryStats.vue'
 import { openURL, useQuasar } from 'quasar'
 import { sdk } from 'src/api/sdk'
 import { supervisor } from 'src/api/supervisor'
-import sysInfoCmds from 'src/api/sysInfoCmds'
 import { qSpinnerStyle } from 'src/config/qStyles'
 import { axiosSettings, networkSettings } from 'stores/system'
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface f {
+interface FsReq {
   data: {
     [index: number]: {
       available: number
@@ -226,14 +225,14 @@ interface f {
   }
 }
 
-interface m {
+interface MemoryReq {
   data: {
     available: number
     total: number
   }
 }
 
-interface sdkDeviceRes {
+interface SdkDeviceRes {
   location: string
   os_release: string
   public_address: string
@@ -243,7 +242,7 @@ interface sdkDeviceRes {
   device_name: string
 }
 
-interface supervisorDeviceRes {
+interface SupervisorDeviceRes {
   current_release: string
   ip_address: string
   mac_address: string
@@ -252,7 +251,7 @@ interface supervisorDeviceRes {
   target_release: string
 }
 
-interface temperature {
+interface TemperatureRes {
   data: {
     main: number
     cores: [number]
@@ -260,32 +259,31 @@ interface temperature {
 }
 
 export default defineComponent({
-  name: 'SystemOfflineDeviceInfo',
+  name: 'SystemDeviceInfo',
   components: { CpuStats, MemoryStats },
   setup() {
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    // Tools
-    const axiosUrlStore = axiosSettings()
-    const baseUrl = axiosUrlStore.$state.axiosBaseUrl
-      ? new URL(axiosUrlStore.$state.axiosBaseUrl)
+    const axiosSettingsStore = axiosSettings()
+    const baseUrl = axiosSettingsStore.$state.axiosBaseUrl
+      ? new URL(axiosSettingsStore.$state.axiosBaseUrl)
       : new URL(window.location.origin)
+    const fs = ref<FsReq>()
     const isLoading = ref<boolean>(true)
-
-    // Constants
-    const cmdFsSize = sysInfoCmds.find((cmd) => cmd.id === 'f')
-    const cmdMem = sysInfoCmds.find((cmd) => cmd.id === 'm')
-    const cmdTemp = sysInfoCmds.find((cmd) => cmd.id === 'T')
-    const f = ref<f>()
     const isSdkLoading = ref<boolean>()
-    const m = ref<m>()
+    const mem = ref<MemoryReq>()
     const quasarMode = ref(process.env.MODE)
-    const sdkDevice = ref<AxiosResponse<sdkDeviceRes>>()
-    const supervisorDevice = ref<supervisorDeviceRes>()
+    const sdkDevice = ref<AxiosResponse<SdkDeviceRes>>()
+    const supervisorDevice = ref<SupervisorDeviceRes>()
     const networkStore = networkSettings()
-    const temperature = ref<temperature>()
+    const temperature = ref<TemperatureRes>()
+
+    // Set IDs of the systeminfo services required
+    const systeminfoCmdFsSize = 'f'
+    const systeminfoCmdMem = 'm'
+    const systeminfoCmdTemp = 'T'
 
     onMounted(async () => {
       // If Electron or PWA app, perform the Cloudlink check as boot process has not initiated
@@ -317,29 +315,32 @@ export default defineComponent({
       void networkStore.checkCloudlink()
     }
 
+    // Get info on amount of storage available on device
     function fsSize() {
       return expressApi.post('/v1/system/systeminfo', {
-        id: cmdFsSize?.id
+        id: systeminfoCmdFsSize
       })
     }
 
+    // Get various local info such as temperature, memory...
     async function getLocalDeviceInfo() {
       try {
         const results = await Promise.all([
           fsSize(),
-          mem(),
-          temperat(),
+          memStats(),
+          temperatureStats(),
           getSupervisorInfo()
         ])
-        f.value = results[0].data as f
-        m.value = results[1].data as m
-        temperature.value = results[2].data as temperature
-        supervisorDevice.value = results[3].data as supervisorDeviceRes
+        fs.value = results[0].data as FsReq
+        mem.value = results[1].data as MemoryReq
+        temperature.value = results[2].data as TemperatureRes
+        supervisorDevice.value = results[3].data as SupervisorDeviceRes
       } catch (error) {
         console.error(error)
       }
     }
 
+    // Use Cloudlink to get info about the device. Includes things like IP address and location
     async function getSdkDeviceInfo() {
       isSdkLoading.value = true
       try {
@@ -355,41 +356,45 @@ export default defineComponent({
       isSdkLoading.value = false
     }
 
+    // Get info from the Supervisor running locally
     async function getSupervisorInfo() {
       return supervisor.v1.device()
     }
 
-    function mem() {
+    // Get memory information from systeminfo
+    function memStats() {
       return expressApi.post('/v1/system/systeminfo', {
-        id: cmdMem?.id
+        id: systeminfoCmdMem
       })
     }
 
+    // Open a URL, using openURL for compatibility between Electron and SPA
     function oUrl(url: string) {
       openURL(url, undefined, {
         width: 1050
       })
     }
 
-    function temperat() {
+    // Get info about temperature of device
+    function temperatureStats() {
       return expressApi.post('/v1/system/systeminfo', {
-        id: cmdTemp?.id
+        id: systeminfoCmdTemp
       })
     }
 
     return {
       baseUrl,
       checkCloudlink,
-      f,
+      fs,
       isLoading,
-      m,
+      isSdkLoading,
+      networkStore,
+      mem,
       oUrl,
       quasarMode,
       qSpinnerStyle,
-      isSdkLoading,
       sdkDevice,
       supervisorDevice,
-      networkStore,
       temperature
     }
   }

@@ -8,7 +8,8 @@ import { createI18n } from 'vue-i18n'
 const defaultLang = 'en-US'
 const loadedLanguages = [defaultLang]
 
-// Store all the i18n files in glob
+// Store all the i18n files in glob. This allows language files to be deleted and
+// added without the need for changes to the code.
 const langGlob = import.meta.glob('src/i18n/*.json')
 
 // Create i18n instance
@@ -21,7 +22,8 @@ const i18n = createI18n({
   }
 })
 
-// Set language to previously chosen according to local storage, otherwise use browser default
+// Set language to previously chosen according to local storage cookie, otherwise
+// use browser default
 if (LocalStorage.getItem('lang')) {
   void loadLanguageAsync(LocalStorage.getItem('lang') as string)
 } else if (langGlob[`../i18n/${Quasar.lang.getLocale() as string}.json`]) {
@@ -43,6 +45,9 @@ async function setLanguage(isoName: string) {
   }
 }
 
+// i18n languages are lazy loaded to improve inital load time, and therefore
+// when changing language we need to check if it has already been loaded and
+// load it if it isn't.
 export async function loadLanguageAsync(isoName: string) {
   // Store the chosen language in local storage
   LocalStorage.set('lang', isoName)

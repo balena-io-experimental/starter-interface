@@ -1,3 +1,7 @@
+//
+// Upload, edit, delete, list etc. for the UI file manager
+//
+
 import Logger from '@/common/logger'
 import express, { Request, RequestHandler, Response } from 'express'
 import formidable from 'formidable'
@@ -5,26 +9,27 @@ import fse from 'fs-extra'
 import klawSync, { Item } from 'klaw-sync'
 import path from 'path'
 
-interface extendKlawItem extends klawSync.Item {
+// Extend the klaw types to allow for a custom string added
+// in to store whether the item is a file or folder
+interface ExtendKlawItem extends klawSync.Item {
   type: string
 }
 
-interface reqBodyData {
+// Interface for the payload
+interface BodyDataReq {
   currentPath: string
   currentPathArray: Array<string>
   newFolderName: string
   selectedPaths: Array<{ path: string }>
 }
 
+// Get the ExpressJS main router process
 const router = express.Router()
 
-// Root directory for files
-let rootDir = path.join(`${__dirname}/dev-storage/`)
+// Set local directory for file and folder storage
+const rootDir = '/app/storage/'
 
-// Set local directory for file storage
-rootDir = '/app/storage/'
-
-// Check the storage directory exists
+// Check the storage directory exists and if not create it
 try {
   void fse.ensureDir(rootDir)
 } catch (error) {
@@ -41,13 +46,13 @@ function validatePath(checkPath: string) {
   return checkPath
 }
 
-// Ignore hidden directories and files
+// Ignore hidden directories and files by filtering the results
 const filterFn = (item: Item) => {
   const basename = path.basename(item.path)
   return basename === '.' || basename[0] !== '.'
 }
 
-// Fetch files
+// Fetch files and folders
 function fetchList(currentPathArray: Array<string>) {
   // Fetch list of files
   const files = klawSync(
@@ -57,9 +62,9 @@ function fetchList(currentPathArray: Array<string>) {
       nodir: true,
       filter: filterFn
     }
-  ) as extendKlawItem[]
+  ) as ExtendKlawItem[]
 
-  // Add 'file' tag to all files
+  // Add 'file' tag to all files in our custom 'type' interface extended from klaw
   files.forEach((file) => {
     file.type = 'file'
   })
@@ -72,9 +77,9 @@ function fetchList(currentPathArray: Array<string>) {
       nofile: true,
       filter: filterFn
     }
-  ) as extendKlawItem[]
+  ) as ExtendKlawItem[]
 
-  // Add 'folder' tag to all folders
+  // Add 'folder' tag to all files in our custom 'type' interface extended from klaw
   folders.forEach((folder) => {
     folder.type = 'folder'
   })
@@ -85,7 +90,7 @@ function fetchList(currentPathArray: Array<string>) {
 
 // Routes //
 router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
-  const reqBody = req.body as reqBodyData
+  const reqBody = req.body as BodyDataReq
 
   if (reqBody.currentPath) {
     // If only one item to delete
@@ -109,20 +114,23 @@ router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
   res.json({ message: 'success' })
 }) as RequestHandler)
 
+// Send a requested file to the user
 router.get('/v1/filemanager/download', (req: Request, res: Response) => {
   res.download(validatePath(path.join(req.query.currentPath as string)))
 })
 
+// List the contents of a directory
 router.post('/v1/filemanager/list', (req: Request, res: Response) => {
-  const reqBody = req.body as reqBodyData
+  const reqBody = req.body as BodyDataReq
   res.json(fetchList(reqBody.currentPathArray))
 })
 
+// Create a new folder
 router.post('/v1/filemanager/newfolder', (async (
   req: Request,
   res: Response
 ) => {
-  const reqBody = req.body as reqBodyData
+  const reqBody = req.body as BodyDataReq
   const newFolder = validatePath(
     path.join(
       rootDir,
@@ -131,9 +139,11 @@ router.post('/v1/filemanager/newfolder', (async (
     )
   )
 
-  // Awaiting here as immediately after receiving a response, the UI will refresh the page.
-  // If it refreshes before this completes, it could end up showing without the new folder
+  // Using `await` here when creating the direcotry as immediately after receiving a response,
+  // the UI will refresh the page. If it refreshes before this completes, it could end up showing
+  // without the new folder
   try {
+    // Create the requested directory
     await fse.ensureDir(newFolder)
     res.json({ message: 'success' })
   } catch (error) {
@@ -141,6 +151,7 @@ router.post('/v1/filemanager/newfolder', (async (
   }
 }) as RequestHandler)
 
+// Save file uploaded through the UI in to the specified folder
 router.post('/v1/filemanager/upload', (req: Request, res: Response) => {
   const form = new formidable.IncomingForm({
     maxFileSize: 5000 * 1024 * 1024
@@ -154,7 +165,7 @@ router.post('/v1/filemanager/upload', (req: Request, res: Response) => {
     file.filepath = validatePath(
       path.join(
         rootDir,
-        // Uploader headers must be lowercase, not CamelCase
+        // Uploader headers passed from the UI must be lowercase, not CamelCase
         req.headers.currentpath as string,
         file.originalFilename || file.newFilename
       )

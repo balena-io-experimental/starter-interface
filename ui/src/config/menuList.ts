@@ -4,6 +4,7 @@ import { computed } from 'vue'
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { t } = i18n.global
 
+// List of menu items to display in left hand navigation bar
 export default computed(() => [
   {
     icon: 'visibility',

@@ -15,7 +15,7 @@ import ComponentFrame from 'layouts/ComponentFrame.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'SystemInfoPage',
+  name: 'SystemInfo',
   components: { ComponentFrame },
   setup() {
     return { JournalDLogs, SystemInfo }

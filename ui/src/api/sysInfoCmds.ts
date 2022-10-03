@@ -1,4 +1,7 @@
-// If changing the ids, ensure they are then changed in the areas they are used within the code too.
+// This file acts as a single source of truth for `systeminformation` commands used by
+// the menu selector on the System Info page. Changes to labels can be done here, but
+// cmd and id require changes on the backend and throughout the UI where ids are used.
+
 export default [
   { id: '/', cmd: 'getAllData', label: 'All Data' },
   { id: 'a', cmd: 'audio', label: 'Audio' },
@@ -9,7 +12,7 @@ export default [
   { id: 'h', cmd: 'bluetoothDevices', label: 'Bluetooth Devices' },
   { id: 'C', cmd: 'chassis', label: 'Chassis' },
   { id: 'c', cmd: 'cpu', label: 'CPU' },
-  { id: 'j', cmd: 'cpuCurrentSpeed', label: 'CPU CurrentSpeed' },
+  { id: 'j', cmd: 'cpuCurrentSpeed', label: 'CPU Current Speed' },
   { id: 'T', cmd: 'cpuTemperature', label: 'CPU Temperature' },
   { id: 'l', cmd: 'currentLoad', label: 'Current Load' },
   { id: 'd', cmd: 'diskLayout', label: 'Disk Layout' },

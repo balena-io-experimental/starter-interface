@@ -77,7 +77,6 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'WifiConfigurePassword',
   setup() {
-    // Import required features
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
@@ -103,7 +102,6 @@ export default defineComponent({
       })
     }
 
-    // Set password
     async function setHotspotPassword() {
       if (!passwordInput.value?.validate()) {
         return

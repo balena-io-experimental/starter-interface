@@ -13,7 +13,7 @@
         class="q-mt-xl"
         unelevated
         to="/"
-        label="Go Home"
+        :label="$t('general.go_home')"
         no-caps
       />
     </div>
@@ -25,7 +25,7 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'ErrorNotFoundPage',
+  name: 'ErrorNotFound',
   setup() {
     return { qBtnStyle }
   }

@@ -1,3 +1,7 @@
+//
+// Functions to call on boot
+//
+
 import checkHostname from '@/boot/setHostname'
 
 export default function boot() {

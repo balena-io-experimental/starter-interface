@@ -69,7 +69,7 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface containers extends QTableProps {
+interface ContainersRes extends QTableProps {
   serviceName: string
   status: string
 }
@@ -77,12 +77,13 @@ interface containers extends QTableProps {
 export default defineComponent({
   name: 'ToolsContainerManager',
   setup() {
+    const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
-    const $q = useQuasar()
 
     const isLoading = ref<boolean>(true)
-    const rows = ref<containers[]>()
+    const rows = ref<ContainersRes[]>()
+
     const columns = computed<QTableProps['columns']>(() => [
       {
         name: 'name',
@@ -90,7 +91,7 @@ export default defineComponent({
         align: 'left',
         sortOrder: 'ad',
         label: t('general.name'),
-        field: (row: containers) => row.serviceName,
+        field: (row: ContainersRes) => row.serviceName,
         format: (val: string) => `${val}`,
         sortable: true
       },
@@ -127,7 +128,7 @@ export default defineComponent({
 
       try {
         const res = (await supervisor.v2.state_status()) as AxiosResponse<{
-          containers: containers[]
+          containers: ContainersRes[]
         }>
         rows.value = res.data.containers
       } catch (error) {

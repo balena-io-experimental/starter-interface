@@ -27,7 +27,7 @@
               :disable="isLoading"
               size="xs"
               round
-              @click="editVar(props.row)"
+              @click="editEnv(props.row)"
             />
           </q-td>
         </template>
@@ -40,7 +40,7 @@
         icon="add"
         size="md"
         flat
-        @click="isNewVarDialogOpen = true"
+        @click="isNewEnvDialog = true"
       />
       <q-btn
         :label="$t('components.system.env_config.delete_selected_records')"
@@ -55,9 +55,9 @@
         @click="deleteEnv()"
       />
       <q-dialog
-        v-model="isNewVarDialogOpen"
+        v-model="isNewEnvDialog"
         persistent
-        @hide=";(newVarKey = ''), (newVarValue = '')"
+        @hide=";(newEnvKey = ''), (newEnvValue = '')"
       >
         <q-card style="min-width: 250px">
           <q-card-section>
@@ -71,8 +71,8 @@
           </q-card-section>
           <q-card-section class="q-pt-none">
             <q-input
-              ref="refNewVarKey"
-              v-model="newVarKey"
+              ref="refNewEnvKey"
+              v-model="newEnvKey"
               :rules="[
                 (val) =>
                   (!val.includes(' ') && regexpAlphaNum.test(val)) ||
@@ -84,7 +84,7 @@
               autofocus
             />
             <q-input
-              v-model="newVarValue"
+              v-model="newEnvValue"
               :label="$t('components.system.env_config.value')"
               stack-label
               dense
@@ -99,7 +99,7 @@
             <q-btn
               :label="$t('general.submit')"
               v-bind="qBtnStyle"
-              :disable="!newVarValue || !newVarKey || refNewVarKey?.hasError"
+              :disable="!newEnvValue || !newEnvKey || refNewEnvKey?.hasError"
               @click="setEnv()"
             />
           </q-card-actions>
@@ -126,7 +126,7 @@ import { qBtnStyle, qSpinnerStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface Env {
+interface EnvVar {
   [key: string]: string
 }
 
@@ -139,7 +139,6 @@ export default defineComponent({
   name: 'SystemEnvConfig',
 
   setup() {
-    // Import required features
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
@@ -167,14 +166,15 @@ export default defineComponent({
       }
     ]
     const getEnvResponse = ref<AxiosResponse>()
-    const isNewVarDialogOpen = ref<boolean>(false)
+    const isNewEnvDialog = ref<boolean>(false)
     const isLoading = ref<boolean>(true)
-    const newVarKey = ref<string>('')
-    const newVarValue = ref<string>('')
+    const newEnvKey = ref<string>('')
+    const newEnvValue = ref<string>('')
     const regexpAlphaNum = ref(/^[A-Za-z][A-Za-z0-9_]*$/)
     const selectedRows = ref([])
 
     onMounted(async () => {
+      // Fetch current environment variables
       await getEnv().catch((error: Error | AxiosError) => {
         console.error('getEnv', error)
       })
@@ -183,8 +183,8 @@ export default defineComponent({
 
     async function deleteEnv() {
       isLoading.value = true
-      const toDelete: Env = {}
-      selectedRows.value.forEach((item: Env) => {
+      const toDelete: EnvVar = {}
+      selectedRows.value.forEach((item: EnvVar) => {
         toDelete[item.name] = ''
       })
       try {
@@ -192,7 +192,7 @@ export default defineComponent({
         await getEnv()
         selectedRows.value = []
       } catch (error) {
-        console.error('deleteEnv', error)
+        console.error(error)
         selectedRows.value = []
       }
 
@@ -215,10 +215,10 @@ export default defineComponent({
       }, 4000)
     }
 
-    function editVar(row: Rows) {
-      newVarKey.value = row.name
-      newVarValue.value = row.value
-      isNewVarDialogOpen.value = true
+    function editEnv(row: Rows) {
+      newEnvKey.value = row.name
+      newEnvValue.value = row.value
+      isNewEnvDialog.value = true
     }
 
     async function getEnv() {
@@ -226,11 +226,11 @@ export default defineComponent({
     }
 
     async function setEnv() {
-      isNewVarDialogOpen.value = false
+      isNewEnvDialog.value = false
       isLoading.value = true
 
       try {
-        await sdk.setEnv(newVarKey.value, newVarValue.value)
+        await sdk.setEnv(newEnvKey.value, newEnvValue.value)
         await getEnv()
       } catch (error) {
         console.error('setEnv', error)
@@ -239,8 +239,8 @@ export default defineComponent({
       // Delay to allow the container to restart and avoid navigation away too early
       setTimeout(() => {
         isLoading.value = false
-        newVarKey.value = ''
-        newVarValue.value = ''
+        newEnvKey.value = ''
+        newEnvValue.value = ''
         $q.notify({
           type: 'warning',
           message: t('components.system.env_config.restarting_containers'),
@@ -260,16 +260,16 @@ export default defineComponent({
     return {
       columns,
       deleteEnv,
-      editVar,
+      editEnv,
       getEnvResponse,
       isLoading,
-      isNewVarDialogOpen,
-      newVarKey,
-      newVarValue,
+      isNewEnvDialog,
+      newEnvKey,
+      newEnvValue,
       qBtnStyle,
       qSpinnerStyle,
       regexpAlphaNum,
-      refNewVarKey: ref(),
+      refNewEnvKey: ref(),
       selectedRows,
       setEnv
     }

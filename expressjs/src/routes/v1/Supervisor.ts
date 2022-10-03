@@ -1,3 +1,7 @@
+//
+// Interact with the balena Supervisor on the local device
+//
+
 import createAxiosInstance from '@/common/axios'
 import Logger from '@/common/logger'
 import queueCache from '@/middleware/queueCache'
@@ -6,13 +10,15 @@ import express, { Request, Response } from 'express'
 import path from 'path'
 import process from 'process'
 
-interface reqBodyData {
+// Interface for the payload
+interface BodyDataReq {
   params: Array<string>
   path: string
   path2: string
   type: string
 }
 
+// Get the ExpressJS main router process
 const router = express.Router()
 
 // Create Axios instance and set defaults
@@ -24,15 +30,17 @@ supervisorAxios.defaults.headers.common.Authorization = `Bearer ${
 }`
 
 // -- Routes -- //
-// Note that this route uses the queueCache middleware. Be aware of its implications
-// when doing development.
+// Note that this route uses the queueCache middleware set by `queueCache`.
+// Be aware of its implications when doing development.
 router.post(
   '/v1/supervisor',
   queueCache,
   async (req: Request, res: Response) => {
-    const reqBody = req.body as reqBodyData
+    const reqBody = req.body as BodyDataReq
 
-    // If Balena App ID is required
+    //  Unfortunately the Supervisor URLs are not currently standardised
+    // and this provides a workaround. If Balena App ID is required as
+    // part of the Supervisor URL then add it to the payload.
     let url
     if (reqBody.path2) {
       url = path.join(
@@ -55,9 +63,9 @@ router.post(
     try {
       const response = await supervisorAxios(payload as AxiosRequestConfig)
 
-      // Return the same http code as Axios request
+      // Return the same http code as the one Supervisor returned
       res.status(response.status)
-      // Return only the data received from Axios (no headers)
+      // Return the Supervisor response to the UI
       res.json(response.data)
       Logger.debug('Returned Supervisor data.')
     } catch (error) {

@@ -8,7 +8,7 @@ services:
     environment:
       NETWORK_MODE: bridge # Tell the app if running in `bridge` or `host` network mode
       SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
-      UDEV: on # Enables ability to mount USB drives in to the container
+      UDEV: on # Enables ability to auto mount USB drives in to the container
     restart: always
     ports:
       - "80:80"
@@ -26,21 +26,21 @@ services:
       io.balena.features.supervisor-api: 1
       io.balena.features.balena-api: 1
 
-  ## Optional Wi-Fi controller:
-  ## https://github.com/maggie0002/balena-py-wifi-connect
+  # Optional Wi-Fi controller:
+  # https://github.com/maggie0002/balena-py-wifi-connect
   py-wifi-connect:
+    image: ghcr.io/maggie0002/py-wifi-connect:latest
     environment:
-      ## Listening IP and port ##
-      PWC_HOST: bridge
+      # Listening IP and port
+      PWC_HOST: bridge # `bridge` specifies that this is on the bridge network and to use container name
       PWC_PORT: 9090
 
-      ## Hotspot details ##
-      PWC_HOTSPOT_SSID: "Balena Starter Interface"
-      PWC_HOTSPOT_PASSWORD: "balena01" # Optional. Must be 8 characters or more.
+      # Hotspot details
+      PWC_HOTSPOT_SSID: "Balena Starter Interface" # Name as it appears in list of WiFi networks
+      PWC_HOTSPOT_PASSWORD: "balena01" # Optional. Must be 8 characters or more
 
-      ## Required system variables ##
+      # Required system variables
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
-    image: ghcr.io/maggie0002/py-wifi-connect:latest
     network_mode: "host"
     restart: always
     volumes:
@@ -49,7 +49,7 @@ services:
       io.balena.features.dbus: "1"
     cap_add:
       - NET_ADMIN
-    privileged: true # This can be removed if you do not need the LED indicator.
+    privileged: true # This can be removed if you do not need the LED connectivity indicator.
 
 volumes:
   bdu_db:

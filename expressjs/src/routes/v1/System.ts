@@ -1,18 +1,26 @@
+//
+// Various system services, such as internet connectivity checks, or fetching local
+// system info such as CPU usage.
+//
+
 import Logger from '@/common/logger'
 import http2 from 'http2'
 import express, { Request, RequestHandler, Response } from 'express'
 import si from 'systeminformation'
 
-interface reqBodyData {
+// Interface for the payload
+interface BodyDataReq {
   id: string
 }
 
+// Get the ExpressJS main router process
 const router = express.Router()
 
 // -- Routes -- //
 
-// Internet connectivity check
-// DNS resolution tended to use cached DNS responses which resulted in false positives
+// Internet connectivity check. The DNS resolution tended to use cached
+// DNS responses which resulted in false positives so opting instead for a
+// http2 solution
 router.get('/v1/system/internet_check', (_req, res) => {
   Logger.debug('Running internet connectivity check.')
 
@@ -37,8 +45,9 @@ router.get('/v1/system/internet_check', (_req, res) => {
 router.post('/v1/system/systeminfo', (async (req: Request, res: Response) => {
   try {
     let data = {}
-    const reqBody = req.body as reqBodyData
+    const reqBody = req.body as BodyDataReq
 
+    // Identify what info was requested and then fetch it from the systeminformation package
     switch (reqBody.id) {
       case '/':
         data = (await si.getAllData()) as []
@@ -182,6 +191,7 @@ router.post('/v1/system/systeminfo', (async (req: Request, res: Response) => {
         throw new Error(`Method '${reqBody.id}' is not implemented.`)
     }
 
+    // Return the info to the UI
     res.json({ data })
   } catch (error) {
     Logger.error(error)
