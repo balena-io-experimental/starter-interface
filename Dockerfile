@@ -1,5 +1,5 @@
 ## Build ExpressJS backend and UI frontend
-FROM node:18.8.0-alpine3.16 AS build
+FROM node:18.10.0-alpine3.16 AS build
 
 # Specify that this is being built for production
 ENV NODE_ENV=production
@@ -37,7 +37,7 @@ RUN yarn workspaces focus expressjs --production
 
 
 ## Primary container
-FROM node:18.8.0-alpine3.16
+FROM node:18.10.0-alpine3.16
 
 # Install USB mount requirements
 RUN apk add --no-cache \
