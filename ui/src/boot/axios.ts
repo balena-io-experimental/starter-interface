@@ -14,7 +14,8 @@ const expressApi = axios.create({
 export default boot(() => {
   const axiosBaseUrl = axiosSettings()
 
-  // Handle the startup state to ensure the backend is always reachable when on a different port or hostname
+  // Set the device address to use for backend API requests based on available
+  // DEVICE_HOSTNAME environment variable
   if (process.env.DEVICE_HOSTNAME) {
     expressApi.defaults.baseURL = `http://${process.env.DEVICE_HOSTNAME}`
   } else {
@@ -24,7 +25,8 @@ export default boot(() => {
     expressApi.defaults.baseURL = currentURL.origin
   }
 
-  // Store the default URL in the Pinia store
+  // Store the default URL in the Pinia store. The Axios instance is not reactive
+  // so we use a store instea
   axiosBaseUrl.setUrl(expressApi.defaults.baseURL)
 
   // Axios request interceptor

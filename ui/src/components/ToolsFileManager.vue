@@ -107,7 +107,7 @@
                       )
                     })
                   "
-                  @added="checkUploadOverwrite"
+                  @added="checkItemOverwrite"
                 />
               </q-dialog>
               <q-btn
@@ -243,7 +243,6 @@ interface Rows extends QTableProps {
 export default defineComponent({
   name: 'ToolsFileManager',
   setup() {
-    // Import required features
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
@@ -278,7 +277,7 @@ export default defineComponent({
       await updateRows()
     })
 
-    const checkUploadOverwrite: QUploaderProps['onAdded'] = (files) => {
+    const checkItemOverwrite: QUploaderProps['onAdded'] = (files) => {
       const itemCheck = files.filter((obj: QUploaderProps['onAdded']) =>
         rows.value?.some(({ path }) => path.split('/').pop() === obj?.name)
       )
@@ -305,20 +304,18 @@ export default defineComponent({
       }
     }
 
-    async function deleteCall(path: string) {
+    async function deleteItem(row: Rows) {
+      isLoading.value = true
+
       try {
         await expressApi.post('/v1/filemanager/delete', {
-          currentPath: path
+          currentPath: row.path
         })
       } catch (error) {
         $q.notify({ type: 'negative', message: t('general.error') })
+        isLoading.value = false
       }
-      return Promise.resolve()
-    }
 
-    async function deleteItem(row: Rows) {
-      isLoading.value = true
-      await deleteCall(row.path)
       await updateRows()
       isLoading.value = false
     }
@@ -440,7 +437,7 @@ export default defineComponent({
     }
 
     return {
-      checkUploadOverwrite,
+      checkItemOverwrite,
       columns,
       deleteItem,
       deleteSelectedItems,

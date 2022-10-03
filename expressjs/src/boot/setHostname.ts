@@ -1,10 +1,14 @@
+//
+// Set the hostname on boot based on the hostname specified in the docker-compose file
+//
+
 import createAxiosInstance from '@/common/axios'
 import Logger from '@/common/logger'
 import { AxiosResponse } from 'axios'
 import fse from 'fs-extra'
 import process from 'process'
 
-interface hostConfigHostname {
+interface HostConfigHostnameReq {
   network: { hostname: string }
 }
 
@@ -24,7 +28,6 @@ async function setHostnameLockfile() {
   // trying to set the hostname again. This is technically not a lockfile, just
   // an empty file in the db volume that can be queried on boot because it is
   // required forever.
-
   try {
     await fse.ensureFile(hostnameLockFile)
     Logger.debug('Hostname lockfile created.')
@@ -34,6 +37,7 @@ async function setHostnameLockfile() {
   }
 }
 
+// Use the Supervisor endpoint to set the device hostname
 async function setNewHostname() {
   try {
     await hostnameAxios.patch('v1/device/host-config', {
@@ -51,6 +55,8 @@ async function setNewHostname() {
   }
 }
 
+// Check whether the user wants a hostname change, and whether it has been done
+// already (i.e. whether this is the first boot)
 export default async function checkHostname() {
   // If there is an env variable specifying a new hostname and hostname has not already been set
   if (
@@ -60,9 +66,8 @@ export default async function checkHostname() {
   ) {
     // Get the current hostname and check if it needs changing, rather than force a new request
     // unnecessarily which could result in a Balena engine restart.
-
     try {
-      const response: AxiosResponse<hostConfigHostname> =
+      const response: AxiosResponse<HostConfigHostnameReq> =
         await hostnameAxios.get('v1/device/host-config')
 
       // If the current hostname is not the same as the provided var

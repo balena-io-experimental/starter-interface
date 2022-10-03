@@ -3,7 +3,7 @@
     v-ripple:secondary
     clickable
     active-class="bg-grey-3"
-    @click="clickedLink(path)"
+    @click="redirectTo(path)"
   >
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
@@ -15,12 +15,11 @@
 </template>
 
 <script lang="ts">
-import { useQuasar } from 'quasar'
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
-  name: 'LayoutsMenuItems',
+  name: 'MainLayoutMenuItems',
   props: {
     label: {
       type: String,
@@ -36,16 +35,12 @@ export default defineComponent({
     }
   },
   setup() {
-    const $q = useQuasar()
     const $router = useRouter()
 
-    async function clickedLink(path: string) {
-      // Starts the loading indicator here, then stops it in the
-      // router.afterEach function in ui/src/router
-      $q.loading.show()
+    async function redirectTo(path: string) {
       await $router.replace({ name: path })
     }
-    return { clickedLink }
+    return { redirectTo }
   }
 })
 </script>

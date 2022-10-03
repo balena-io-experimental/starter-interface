@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 
-# Import env variables
+# This start script is used to set global environment variables required by the app before 
+# starting it
+
+# Import env variables from the file
 . .env_vars
 
-# Execute node
+# Start the interface
 exec node index.js

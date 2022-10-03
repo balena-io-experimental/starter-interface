@@ -45,5 +45,3 @@ yarn-error.log*
 *.sln
 
 # Development components
-/wifi
-dev-storage

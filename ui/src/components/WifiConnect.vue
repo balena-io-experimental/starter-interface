@@ -4,7 +4,7 @@
       <div v-if="!isWifiStatus && !isLoading">
         <div>
           <q-select
-            v-model="wifiSsid"
+            v-model="wifiConnection"
             :label="$t('components.wifi.connect.select_ssid')"
             :options="ssids"
             option-label="ssid"
@@ -109,38 +109,36 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-interface connectionData {
+interface ConnectionDataReq {
   conn_type: string
   ssid: Array<string>
 }
 
-interface networksData {
+interface NetworksDataRes {
   iw_compatible: boolean
   ssids: Array<string>
 }
 
-interface isWifiStatus {
+interface WifiStatusRes {
   wifi: boolean
 }
 
 export default defineComponent({
   name: 'WifiConnect',
   setup() {
-    // Import required features
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
     // Env vars
+    const isLoading = ref<boolean>(true)
     const isNoWifiConnect = ref<boolean>(false)
     const isRefreshCompatible = ref<boolean>(true)
     const isSubmitting = ref<boolean>(false)
-    const isLoading = ref<boolean>(true)
+    const isWifiStatus = ref<boolean>(true)
     const password = ref<string>('')
     const ssids = ref<Array<string>>()
-
-    const wifiSsid = ref<connectionData>()
-    const isWifiStatus = ref<boolean>(true)
+    const wifiConnection = ref<ConnectionDataReq>()
 
     onMounted(async () => {
       await checkWifiStatus()
@@ -148,10 +146,12 @@ export default defineComponent({
     })
 
     async function checkWifiStatus() {
-      $q.loading.show()
+      // Override default delay to 0 to avoid flashing when moving from router
+      // loading indicator to this one
+      $q.loading.show({ delay: 0 })
 
       try {
-        const response = await expressApi.post<isWifiStatus>('/v1/wifi', {
+        const response = await expressApi.post<WifiStatusRes>('/v1/wifi', {
           type: 'GET',
           path: 'v1/connection_status'
         })
@@ -167,7 +167,6 @@ export default defineComponent({
       $q.loading.hide()
     }
 
-    // Send connect request
     async function connect() {
       isSubmitting.value = true
       try {
@@ -175,8 +174,8 @@ export default defineComponent({
           type: 'POST',
           path: 'v1/connect',
           params: {
-            ssid: wifiSsid?.value?.ssid,
-            conn_type: wifiSsid?.value?.conn_type,
+            ssid: wifiConnection?.value?.ssid,
+            conn_type: wifiConnection?.value?.conn_type,
             password: password.value
           }
         })
@@ -199,7 +198,7 @@ export default defineComponent({
         message: t('components.wifi.connect.searching_networks')
       })
       try {
-        const response = await expressApi.post<networksData>('/v1/wifi', {
+        const response = await expressApi.post<NetworksDataRes>('/v1/wifi', {
           type: 'GET',
           path: 'v1/list_access_points'
         })
@@ -271,7 +270,7 @@ export default defineComponent({
       password,
       qBtnStyle,
       ssids,
-      wifiSsid
+      wifiConnection
     }
   }
 })

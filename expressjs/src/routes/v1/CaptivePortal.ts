@@ -1,6 +1,11 @@
+//
+// Display the captive portal when connected to the devices hotspot
+//
+
 import Logger from '@/common/logger'
 import express from 'express'
 
+// Get the ExpressJS main router process
 const router = express.Router()
 
 // Captive portals on devices work by trying an online path to check to see if it receives

@@ -16,6 +16,7 @@ export default route((/* { store, ssrContext } */) => {
     : createWebHashHistory
 
   const router = createRouter({
+    // Scroll to original position on page when returning back
     scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition
@@ -30,8 +31,13 @@ export default route((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
+  router.beforeEach(() => {
+    // Start the animation of the loading indicator after page change.
+    Loading.show()
+  })
+
   router.afterEach(() => {
-    // Complete the animation of the loading indicator after page change.
+    // Stop the animation of the loading indicator after page change.
     Loading.hide()
   })
 

@@ -21,12 +21,11 @@ import {
   Title
 } from 'chart.js'
 import { colors, getCssVar, LoadingBar } from 'quasar'
-import sysInfoCmds from 'src/api/sysInfoCmds'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { LineChart } from 'vue-chart-3'
 import { useI18n } from 'vue-i18n'
 
-interface cpuStat {
+interface CpuStatReq {
   data: {
     currentLoad: number
     cpus: Array<{ load: string }>
@@ -60,12 +59,15 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    const cmdCurrentLoad = sysInfoCmds.find((cmd) => cmd.id === 'l')
+    // Set IDs of the systeminfo service required
+    const systeminfoCmdCurrentLoad = 'l'
+
     const chartBackgroundOpacity = 70
     const isUnMounted = ref<boolean>(false)
 
     onMounted(() => {
       // Disables the AJAX loading bar at the bottom of the page for polled system info requests
+      // to avoid it flashing on each poll
       LoadingBar.setDefaults({
         hijackFilter(url: string) {
           return !url.includes('systeminfo')
@@ -144,7 +146,6 @@ export default defineComponent({
       }
     })
 
-    // Functions
     function delay(ms: number) {
       return new Promise((resolve) => {
         setTimeout(resolve, ms)
@@ -153,9 +154,9 @@ export default defineComponent({
 
     async function fetchCpuStats(): Promise<void> {
       try {
-        const cpuStat: AxiosResponse<cpuStat> = await expressApi.post(
+        const cpuStat: AxiosResponse<CpuStatReq> = await expressApi.post(
           '/v1/system/systeminfo',
-          { id: cmdCurrentLoad?.id }
+          { id: systeminfoCmdCurrentLoad }
         )
 
         // If there are more than X items in the object, remove one

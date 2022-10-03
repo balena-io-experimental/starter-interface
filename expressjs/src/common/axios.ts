@@ -1,9 +1,13 @@
+//
+// Axios configuration
+//
+
 import Logger from '@/common/logger'
 import axios, { AxiosError } from 'axios'
 
-// Axios instance generator. It allows Axios instances to share interceptors and
-// allows instances to be created in the file using it. This means when someone deletes
-// a component, there are no dangling Axios instances.
+// Axios instance generator. It allows instances to be created in the file using it. By
+// using a generator the different instances can share common interceptors but still have
+// their own independent instance with custom timeouts and other configuration.
 export default function createAxiosInstance() {
   const newInstance = axios.create()
 

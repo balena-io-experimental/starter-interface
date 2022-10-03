@@ -1,10 +1,16 @@
+//
+// Example endpoints for users to create there own. These are not imported by default. Instead
+// the user must specify to import this file from expressjs/src/index.ts
+//
+
 import Logger from '@/common/logger'
 import express from 'express'
 
-interface myData {
+interface MyData {
   mySentData: string
 }
 
+// Get the ExpressJS main router process
 const router = express.Router()
 
 // Define your custom GET route path and actions
@@ -17,7 +23,7 @@ router.get('/v1/example_route_get', (_req, res) => {
 
 // Define your custom POST route
 router.post('/v1/example_route_post', (req, res) => {
-  const reqBody = req.body as myData
+  const reqBody = req.body as MyData
   // Store the value of parameter `mySentData` as `mySentDataVariable`
   const mySentDataVariable = reqBody.mySentData
   // Log the message to the console

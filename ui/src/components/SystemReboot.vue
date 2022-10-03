@@ -50,9 +50,9 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'SystemReboot',
   setup() {
+    const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
-    const $q = useQuasar()
 
     const isCheckBox = ref<boolean>(false)
 
@@ -69,9 +69,9 @@ export default defineComponent({
       }, 1500)
     }
     return {
-      qAvatarStyle,
-      isCheckBox,
       confirm: ref(false),
+      isCheckBox,
+      qAvatarStyle,
       qBtnStyle,
       reboot
     }

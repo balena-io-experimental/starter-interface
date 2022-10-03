@@ -10,7 +10,7 @@ import ComponentFrame from 'layouts/ComponentFrame.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'FileManagerPage',
+  name: 'FileManager',
   components: { ComponentFrame },
   setup() {
     return { FileManager }

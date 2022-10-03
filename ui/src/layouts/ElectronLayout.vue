@@ -38,11 +38,11 @@
       <div class="col-4"></div>
     </div>
   </q-bar>
-  <device-selector-hostname />
+  <device-tab-selector />
 </template>
 
 <script lang="ts">
-import DeviceSelectorHostname from 'components/DeviceSelectorHostname.vue'
+import DeviceTabSelector from 'components/DeviceTabSelector.vue'
 import { defineComponent } from 'vue'
 import { qHeaderStyle } from 'src/config/qStyles'
 
@@ -56,11 +56,14 @@ declare const window: Window &
   }
 
 export default defineComponent({
-  name: 'LayoutsElectronLayout',
+  name: 'ElectronLayout',
   components: {
-    DeviceSelectorHostname
+    DeviceTabSelector
   },
   setup() {
+    // Functions for the custom open, close and minimise options in the header. This
+    // custom header is added to allow the whole app to be displayed in one unified colour
+    // and style.
     function electronCloseApp() {
       window.myWindowAPI.close()
     }

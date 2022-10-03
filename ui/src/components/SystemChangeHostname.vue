@@ -27,7 +27,7 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'NetworkChangeHostname',
+  name: 'SystemChangeHostname',
   setup() {
     const response = ref<AxiosResponse>()
     const $q = useQuasar()

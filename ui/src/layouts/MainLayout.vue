@@ -140,7 +140,7 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
-  name: 'LayoutsMainLayout',
+  name: 'MainLayout',
 
   components: {
     MenuItems,
@@ -161,16 +161,18 @@ export default defineComponent({
       void getDeviceName()
     })
 
-    // Import and activate language
+    // Import and activate language chosen from the selector in the header
     async function changeLang(isoName: string) {
       // Start loading indicator
       isChangingLang.value = true
+
       // Load the language and set it as the current language
       await loadLanguageAsync(isoName)
 
       isChangingLang.value = false
     }
 
+    // Get device name for displaying in header
     async function getDeviceName() {
       const response = (await supervisor.v2.device_name()) as AxiosResponse<{
         deviceName: string
@@ -178,8 +180,8 @@ export default defineComponent({
       deviceName.value = response.data.deviceName
     }
 
-    // Listeners for network status
-    // When network is available again
+    // Listeners for when the system is connected to a Wifi network and remove
+    // banner notification
     window.addEventListener('online', () => {
       isNetworkDown.value = false
       isNetworkUp.value = true
@@ -188,7 +190,8 @@ export default defineComponent({
       }, 3000)
     })
 
-    // When network is down
+    // Listeners for when the system is not connected to a Wifi network and display
+    // banner notification
     window.addEventListener('offline', () => {
       isNetworkDown.value = true
     })

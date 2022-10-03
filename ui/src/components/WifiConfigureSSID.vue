@@ -67,15 +67,13 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'WifiConfigureSSID',
   setup() {
-    // Import required features
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
+    const isSubmitting = ref<boolean>(false)
     const ssidInput = ref<QForm>()
     const ssidText = ref<string>('')
-
-    const isSubmitting = ref<boolean>(false)
 
     function notify(type: string, message: string) {
       $q.notify({
@@ -94,7 +92,6 @@ export default defineComponent({
       })
     }
 
-    // Set SSID
     async function setHotspotSSID() {
       if (!ssidInput.value?.validate()) {
         return

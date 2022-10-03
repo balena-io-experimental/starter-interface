@@ -1,22 +1,33 @@
+//
+// Use the balena SDK to perform functions
+//
+
 import logger from '@/common/logger'
 import { getSdk } from 'balena-sdk'
 import express, { Request, RequestHandler } from 'express'
 import lockFile from 'lockfile'
 import process from 'process'
 
-interface lockfileError {
+interface LockfileError {
   code: string
 }
 
+// Get the ExpressJS main router process
 const router = express.Router()
+
+// Get the balena SDK instance
 const sdk = getSdk()
 
+// Specify the lockfile path used by balena Supervisor/OS
 const balenaLockfilePath = '/tmp/balena/updates.lock'
+
+// Set the required balena info from environment variables inside the running container
+// which are set by the balena Supervisor
 const apiKey = process.env.BALENA_API_KEY || ''
 const uuid = process.env.BALENA_DEVICE_UUID || ''
 
+// Initiate a login to the balena Cloud using the API key stored on the device
 void logIn()
-
 async function logIn() {
   try {
     await sdk.auth.logout()
@@ -27,16 +38,16 @@ async function logIn() {
   }
 }
 
+// Return the device UUID
 router.get('/v1/sdk/uuid', (_req, res) => res.json(uuid))
 
+// Return device info from the SDK
 router.get('/v1/sdk/device', (async (_req, res) => {
   res.json(await sdk.models.device.get(uuid))
 }) as RequestHandler)
 
-//
-// environment variables
-//
-
+// Get all environment variables for the device specified. When using this
+// endpoint the Cloud will trigger a restart of the affected containers
 router.get('/v1/sdk/envVars', (async (_req, res) => {
   const envVars = await sdk.models.device.envVar.getAllByDevice(uuid)
 
@@ -48,6 +59,7 @@ router.get('/v1/sdk/envVars', (async (_req, res) => {
   return res.json(omittedEnvVars)
 }) as RequestHandler)
 
+// Delete an environment variable
 router.delete('/v1/sdk/envVars', (async (req, res) => {
   await lock()
 
@@ -62,6 +74,7 @@ router.delete('/v1/sdk/envVars', (async (req, res) => {
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
+// Set an environment variable, or change it if it exists already
 router.post('/v1/sdk/envVars', (async (req, res) => {
   await lock()
 
@@ -78,6 +91,8 @@ router.post('/v1/sdk/envVars', (async (req, res) => {
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
+// Check whether logged in to the balena Cloud or not. Used on the UI to identify whether
+// it should be fetching content from the balena Cloud or not.
 router.get('/v1/sdk/loggedIn', (async (_req, res) => {
   try {
     return res.json({ loggedIn: !!(await sdk.auth.getToken()) })
@@ -86,11 +101,13 @@ router.get('/v1/sdk/loggedIn', (async (_req, res) => {
   }
 }) as RequestHandler)
 
+// Set the balena lock file to avoid Supervisor making changes on the device when
+// making a change through the SDK.
 function lock() {
   try {
     return lockFile.lockSync(balenaLockfilePath)
   } catch (error) {
-    const err = error as lockfileError
+    const err = error as LockfileError
 
     // Check the error code and if the lockfile already exists then continue. This avoids a
     // permanent lockup that can occur if the lockfile exists and the UI refuses to continue
@@ -102,6 +119,7 @@ function lock() {
   }
 }
 
+// Remove the balena lockfile.
 function unlock() {
   try {
     return lockFile.unlockSync(balenaLockfilePath)
