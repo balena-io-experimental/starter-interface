@@ -13,7 +13,8 @@
         "status": "Condição geral",
         "submit": "Enviar",
         "hostname": "Nome do host",
-        "open_control_panel": "Abrir o painel de controle"
+        "open_control_panel": "Abrir o painel de controle",
+        "go_home": "Retorna para casa"
     },
     "components": {
         "charts": {
