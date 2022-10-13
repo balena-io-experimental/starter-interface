@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Push to BCR
-        uses: balena-community/community-cli-action@1.0.0
+        uses: balena-labs-research/community-cli-action@1.0.0
         with:
           balena_token: ${{secrets.BALENA_TOKEN}}
           balena_cli_commands: >
@@ -107,7 +107,7 @@ jobs:
           mv *.img ${{ matrix.filename }}.img
 
       - name: Preload image
-        uses: balena-community/community-cli-action@1.0.0
+        uses: balena-labs-research/community-cli-action@1.0.0
         with:
           balena_token: ${{secrets.BALENA_TOKEN}}
           balena_cli_commands: >
