@@ -1,5 +1,5 @@
 //
-// Interact with Python WiFi Connect (https://github.com/maggie0002/balena-py-wifi-connect) to
+// Interact with Python WiFi Connect (https://github.com/balena-labs-research/python-wifi-connect) to
 // modify WiFi status of the device.
 //
 

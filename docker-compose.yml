@@ -13,8 +13,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "bdu_db:/app/db" # Stores UI database files
-      - "bdu_storage:/app/storage" # Storage for the File Manager. See docs for more info.
+      - "bdi_db:/app/db" # Stores UI database files
+      - "bdi_storage:/app/storage" # Storage for the File Manager. See docs for more info.
     privileged: true # This can be removed if not using the USB mounting feature
 
     # If using the File Manager to access volumes on other containers, ensure this container `depends_on` your
@@ -27,9 +27,9 @@ services:
       io.balena.features.balena-api: 1
 
   # Optional Wi-Fi controller:
-  # https://github.com/maggie0002/balena-py-wifi-connect
-  py-wifi-connect:
-    image: ghcr.io/maggie0002/py-wifi-connect:latest
+  # https://github.com/balena-labs-research/python-wifi-connect
+  python-wifi-connect:
+    image: ghcr.io/balena-labs-research/python-wifi-connect:latest
     environment:
       # Listening IP and port
       PWC_HOST: bridge # `bridge` specifies that this is on the bridge network and to use container name
@@ -52,6 +52,6 @@ services:
     privileged: true # This can be removed if you do not need the LED connectivity indicator.
 
 volumes:
-  bdu_db:
-  bdu_storage:
+  bdi_db:
+  bdi_storage:
   pwc_db:

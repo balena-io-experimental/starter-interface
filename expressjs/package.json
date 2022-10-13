@@ -2,7 +2,7 @@
   "name": "expressjs",
   "license": "MIT",
   "author": "maggie0002",
-  "repository": "https://github.com/maggie0002/balena-device-ui",
+  "repository": "https://github.com/balena-labs-research/starter-Interface",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore",
