@@ -7,11 +7,11 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: "https://github.com/maggie0002/balena-device-ui"
+      url: "https://github.com/bdi/starter-interface"
   logo:
     type: blob.asset
     data:
-      url: "https://github.com/maggie0002/balena-apps-logo/raw/main/logo.png"
+      url: "https://github.com/balena-labs-research/apps-logo/raw/main/logo.png"
 data:
   defaultDeviceType: raspberrypi4-64
   supportedDeviceTypes:

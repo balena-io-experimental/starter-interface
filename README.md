@@ -6,7 +6,7 @@ This project is still under heavy development and subject to significant changes
 
 A community-built device interface for using Balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
-[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/maggie0002/balena-device-ui)
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/balena-labs-research/starter-Interface)
 
 # Description
 
@@ -40,6 +40,6 @@ Some of the features include:
 
 # Documentation
 
-Use of the UI and technical details can be found on the [wiki](https://github.com/maggie0002/balena-device-ui/wiki).
+Use of the UI and technical details can be found on the [wiki](https://github.com/balena-labs-research/starter-Interface/wiki).
 
-The [Getting Started](https://github.com/maggie0002/balena-device-ui/wiki/Getting-Started) guide is a good place to start.
+The [Getting Started](https://github.com/balena-labs-research/starter-Interface/wiki/Getting-Started) guide is a good place to start.
