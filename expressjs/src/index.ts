@@ -39,7 +39,7 @@ ExpressJS setup. Order of these functions is important.
 ==========================================================
 */
 
-// Default Balena UI middleware cache timeout. 0 is disabled.
+// Default balena UI middleware cache timeout. 0 is disabled.
 app.locals.defaultCacheTimeout = 0
 // Allow CORS
 app.use(cors())

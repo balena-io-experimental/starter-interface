@@ -23,7 +23,9 @@ const levels = {
 const level = () => {
   const env = process.env.NODE_ENV || 'development'
   const isDevelopment =
-    env === 'development' || process.env.BALENA_APP_NAME === 'bdi-nuc'
+    env === 'development' ||
+    process.env.BALENA_APP_NAME === 'bdi-nuc' ||
+    process.env.BALENA_APP_NAME === 'bdi-rpi'
   return isDevelopment ? 'debug' : 'warn'
 }
 

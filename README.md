@@ -1,12 +1,12 @@
-# Balena Starter Interface
+# balena Starter Interface
 
 This project is still under heavy development and subject to significant changes. Apologies if the documentation is out of date in places, we are moving quickly and will try and keep up as best as possible.
 
 ---
 
-A community-built device interface for using Balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
+A community-built device interface for using balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
-[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/balena-labs-research/starter-Interface)
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/balena-labs-research/starter-interface)
 
 # Description
 
@@ -17,7 +17,7 @@ It is modular allowing contributions from the community and ease of tracking of 
 Some of the features include:
 
 - Online and offline use
-- Pre-built endpoints for interacting with the Balena SDK or Supervisor
+- Pre-built endpoints for interacting with the balena SDK or Supervisor
 - Connect the device to nearby Wi-Fi networks
 - Container manager (list, stop, start, restart)
 - File manager (create folders, upload, delete, etc...)
@@ -40,6 +40,6 @@ Some of the features include:
 
 # Documentation
 
-Use of the UI and technical details can be found on the [wiki](https://github.com/balena-labs-research/starter-Interface/wiki).
+Use of the UI and technical details can be found on the [wiki](https://github.com/balena-labs-research/starter-interface/wiki).
 
-The [Getting Started](https://github.com/balena-labs-research/starter-Interface/wiki/Getting-Started) guide is a good place to start.
+The [Getting Started](https://github.com/balena-labs-research/starter-interface/wiki/Getting-Started) guide is a good place to start.

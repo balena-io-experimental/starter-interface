@@ -8,7 +8,7 @@ on:
 env:
   BALENA_CLI_VERSION: 14.3.1
   BALENA_FLEET: bdi/starter-interface
-  GCR_IMAGE_NAME: balena-labs-research/bdi
+  GCR_IMAGE_NAME: balena-labs-research/bsi
 
 jobs:
   deploy-to-bcr:

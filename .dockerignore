@@ -1,4 +1,4 @@
-# Balena reads .dockerignore from the root directory, not 
+# balena reads .dockerignore from the root directory, not 
 # the context directory like Docker does. It also requires
 # the '**/' prefix to ignore throughout all directories (including
 # root) not just the filename like seen in .gitignore files.

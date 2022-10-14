@@ -36,7 +36,7 @@ services:
       PWC_PORT: 9090
 
       # Hotspot details
-      PWC_HOTSPOT_SSID: "Balena Starter Interface" # Name as it appears in list of WiFi networks
+      PWC_HOTSPOT_SSID: "balena Starter Interface" # Name as it appears in list of WiFi networks
       PWC_HOTSPOT_PASSWORD: "balena01" # Optional. Must be 8 characters or more
 
       # Required system variables
