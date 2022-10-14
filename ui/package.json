@@ -1,8 +1,10 @@
 {
   "name": "ui",
   "productName": "balena Starter Interface",
+  "description": "balena Starter Interface",
   "license": "MIT",
   "author": "maggie0002",
+  "version": "0.0.0",
   "repository": "https://github.com/balena-labs-research/starter-Interface",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue,.json ./",
@@ -35,8 +37,8 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "autoprefixer": "^10.4.12",
-    "electron": "^21.0.1",
-    "electron-packager": "^16.0.0",
+    "electron": "21.0.1",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.24.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
