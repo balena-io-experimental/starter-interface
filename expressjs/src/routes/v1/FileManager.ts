@@ -3,6 +3,7 @@
 //
 
 import Logger from '@/common/logger'
+import queueCache from '@/middleware/queueCache'
 import express, { Request, RequestHandler, Response } from 'express'
 import formidable from 'formidable'
 import fse from 'fs-extra'
@@ -89,7 +90,10 @@ function fetchList(currentPathArray: Array<string>) {
 }
 
 // Routes //
-router.post('/v1/filemanager/delete', (async (req: Request, res: Response) => {
+router.post('/v1/filemanager/delete', queueCache, (async (
+  req: Request,
+  res: Response
+) => {
   const reqBody = req.body as BodyDataReq
 
   if (reqBody.currentPath) {
