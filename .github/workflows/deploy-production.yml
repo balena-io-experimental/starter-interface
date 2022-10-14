@@ -16,6 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Update balena.yml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: "balena.yml"
+          propertyPath: "version"
+          value: ${{ github.ref_name }}
+          commitChange: false
+          updateFile: true
+
       - name: Push to BCR
         uses: balena-labs-research/community-cli-action@1.0.0
         with:
