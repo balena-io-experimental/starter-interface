@@ -7,7 +7,7 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: "https://github.com/bdi/starter-interface"
+      url: "https://github.com/balena-labs-research/starter-interface"
   logo:
     type: blob.asset
     data:

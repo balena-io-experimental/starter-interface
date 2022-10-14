@@ -34,7 +34,7 @@ async function logIn() {
     await sdk.auth.loginWithToken(apiKey)
   } catch (error) {
     logger.error(error)
-    logger.error('Error logging in to Balena SDK')
+    logger.error('Error logging in to balena SDK')
   }
 }
 

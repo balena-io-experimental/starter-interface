@@ -217,7 +217,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
         appId: 'balena Starter Interface',
-        electronVersion: '21.0.1', //TODO: remove when quasar updates with fix for --production flag error
+        electronVersion: '21.0.1', // TODO: remove when quasar updates with fix for --production flag error
         artifactName: 'balena Starter Interface ${arch}.${ext}'
       }
     },

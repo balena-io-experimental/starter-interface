@@ -1,5 +1,5 @@
 {
-  "title": "Balena Starter Interface",
+  "title": "balena Starter Interface",
   "general": {
     "are_you_sure": "Are you sure?",
     "close": "Close",
@@ -54,7 +54,7 @@
         "public_ip": "Public IP",
         "raw_json": "Raw JSON",
         "response_details": "Response Details",
-        "sdk_unavailable": "Unable to reach Balena servers.",
+        "sdk_unavailable": "Unable to reach balena servers.",
         "storage": "Storage",
         "supervisor_version": "Supervisor Version",
         "undervolted": "Undervolted",
@@ -167,7 +167,7 @@
     "network": {
       "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
       "network_connection_restored": "Network connection restored.",
-      "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
+      "no_wifi_api": "Failed to communicate with balena Py Wi-Fi Connect. Is it installed on this device?"
     },
     "pwa": {
       "install": "Install",

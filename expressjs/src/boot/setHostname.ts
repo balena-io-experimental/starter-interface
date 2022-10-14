@@ -65,7 +65,7 @@ export default async function checkHostname() {
     !fse.pathExistsSync(hostnameLockFile)
   ) {
     // Get the current hostname and check if it needs changing, rather than force a new request
-    // unnecessarily which could result in a Balena engine restart.
+    // unnecessarily which could result in a balena engine restart.
     try {
       const response: AxiosResponse<HostConfigHostnameReq> =
         await hostnameAxios.get('v1/device/host-config')

@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "maggie0002",
   "version": "0.0.0",
-  "repository": "https://github.com/balena-labs-research/starter-Interface",
+  "repository": "https://github.com/balena-labs-research/starter-interface",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue,.json ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore",
