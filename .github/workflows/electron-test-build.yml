@@ -1,8 +1,7 @@
 name: "Build Electron Test App"
+
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   ON_DEVICE: false
