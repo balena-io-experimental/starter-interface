@@ -15,8 +15,7 @@
 </template>
 
 <script lang="ts">
-import { AxiosResponse } from 'axios'
-import { expressApi } from 'boot/axios'
+import axios, { AxiosResponse } from 'axios'
 import {
   ArcElement,
   Chart,
@@ -27,6 +26,7 @@ import {
   Tooltip
 } from 'chart.js'
 import { getCssVar, LoadingBar } from 'quasar'
+import { axiosSettings } from 'stores/system'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { DoughnutChart } from 'vue-chart-3'
 import { useI18n } from 'vue-i18n'
@@ -58,11 +58,20 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { t } = useI18n()
 
-    // Set IDs of the systeminfo service required
-    const systeminfoCmdMem = 'm'
-
+    const axiosBaseUrl = axiosSettings()
     const isUnMounted = ref<boolean>(false)
     const memOfTotal = ref<string>()
+
+    // Due to unstable connections, particularly on the public device URL, sometimes a poll will fail and the
+    // Axios interceptor will trigger an error notification. This is a little too verbose as for polling
+    // we are not significantly impacted if a poll or two fails, we just want to try again.
+    const pollingApi = axios.create({
+      baseURL: axiosBaseUrl.$state.axiosBaseUrl,
+      timeout: 2000 // Sets a high timeout unlikely to be reached. More specific timeouts are set in the ExpressJS backend.
+    })
+
+    // Set IDs of the systeminfo service required
+    const systeminfoCmdMem = 'm'
 
     onMounted(() => {
       // Disables the AJAX loading bar at the bottom of the page for polled system info requests
@@ -132,7 +141,7 @@ export default defineComponent({
 
     async function fetchMemStats(): Promise<void> {
       try {
-        const memStat: AxiosResponse<MemStatReq> = await expressApi.post(
+        const memStat: AxiosResponse<MemStatReq> = await pollingApi.post(
           '/v1/system/systeminfo',
           { id: systeminfoCmdMem }
         )
