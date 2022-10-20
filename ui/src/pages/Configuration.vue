@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-lg">
     <div class="text-h5 q-mb-md">
-      {{ $t('system.titles.host_config') }}
+      {{ $t('components.system.device_info.network_config') }}
     </div>
     <component-frame :components="[{ component: ChangeHostname }]" />
     <div v-if="networkStore.isCloudlink">

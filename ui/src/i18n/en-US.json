@@ -49,6 +49,7 @@
         "ip_address": "IP Address",
         "location": "Location",
         "mac_address": "MAC Address",
+        "network_config": "Network Configuration",
         "not_undervolted": "Normal Power",
         "os_version": "OS Version",
         "public_ip": "Public IP",
@@ -175,9 +176,6 @@
       "install_instructions_safari": "- Safari: Press the 'Share' button and select 'Add to Home Screen'",
       "install_instructions_chrome": "- Chrome Android: Press the 'three dot' icon in the upper right to open the menu. Select 'Add to Home screen'.",
       "install_instructions_browsers": "- Google Chrome and Microsoft Edge: Click the icon on the right side of the URL bar then click the 'Install' button, or install from the 'three dot' menu."
-    },
-    "titles": {
-      "host_config": "Host Configuration"
     }
   }
 }
