@@ -68,7 +68,7 @@ export default defineComponent({
     // we are not significantly impacted if a poll or two fails, we just want to try again.
     const pollingApi = axios.create({
       baseURL: axiosBaseUrl.$state.axiosBaseUrl,
-      timeout: 2000 // Sets a high timeout unlikely to be reached. More specific timeouts are set in the ExpressJS backend.
+      timeout: 4000 // Sets a high timeout unlikely to be reached. More specific timeouts are set in the ExpressJS backend.
     })
 
     // Set IDs of the systeminfo service required
