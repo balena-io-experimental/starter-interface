@@ -161,7 +161,6 @@ export default defineComponent({
       } catch (error) {
         // Continuing as may have just been due to a temporary connection issue
         console.error('Error fetching memory stats')
-        console.error(error)
       }
 
       if (!isUnMounted.value) {
