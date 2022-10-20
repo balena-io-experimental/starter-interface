@@ -1,6 +1,6 @@
-name: balena Starter Interface
+name: Balena Starter Interface
 description: >-
-  A UI for interacting with balena devices and a starter project for creating your own UI.
+  A UI for interacting with Balena devices and a starter project for creating your own UI.
 joinable: false
 type: sw.application
 assets:
