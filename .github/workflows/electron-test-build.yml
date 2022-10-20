@@ -20,12 +20,12 @@ jobs:
 
           - job_name: mac_amd64
             os: macos-latest
-            sign: true
+            apple_signing: true
 
           - job_name: mac_arm64
             os: macos-latest
             build_arch: --arch arm64
-            sign: true
+            apple_signing: true
 
           - job_name: windows
             os: windows-latest
@@ -42,7 +42,7 @@ jobs:
           node-version: "18.10.0"
 
       - name: Install the Apple certificate and provisioning profile
-        if: ${{ matrix.sign }}
+        if: ${{ matrix.apple_signing }}
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_SIGNING }}
           P12_PASSWORD: ${{ secrets.APPLE_SIGNING_PASSWORD }}
