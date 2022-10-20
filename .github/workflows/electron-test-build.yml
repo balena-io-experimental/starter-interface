@@ -83,4 +83,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.job_name }}
-          path: ui/dist/electron/Packaged/balena Starter Interface*
+          path: ui/dist/electron/Packaged/Balena Starter Interface*

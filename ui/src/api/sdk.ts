@@ -2,7 +2,7 @@
 // then from the backend to the SDK. This is more secure than having to store API keys
 // in the users browser.
 //
-// balena SDK Documentation for reference: https://www.balena.io/docs/reference/sdk/node-sdk/
+// Balena SDK Documentation for reference: https://www.balena.io/docs/reference/sdk/node-sdk/
 
 import { expressApi } from 'boot/axios'
 

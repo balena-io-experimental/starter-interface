@@ -55,49 +55,49 @@ jobs:
           - job_name: cm4-dev
             device: raspberrypicm4-ioboard
             version: "latest"
-            filename: balena-Starter-Interface-rpi-cm4-dev
+            filename: Balena-Starter-Interface-rpi-cm4-dev
             developmentMode: true
 
           - job_name: rpi-3-dev
             device: raspberrypi3-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi3-64-dev
+            filename: Balena-Starter-Interface-rpi3-64-dev
             developmentMode: true
 
           - job_name: rpi-4-dev
             device: raspberrypi4-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi4-64-dev
+            filename: Balena-Starter-Interface-rpi4-64-dev
             developmentMode: true
 
           - job_name: rpi-zero-2-dev
             device: raspberrypi0-2w-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi-zero-2-dev
+            filename: Balena-Starter-Interface-rpi-zero-2-dev
             developmentMode: true
 
           - job_name: cm4-prod
             device: raspberrypicm4-ioboard
             version: "latest"
-            filename: balena-Starter-Interface-rpi-cm4-prod
+            filename: Balena-Starter-Interface-rpi-cm4-prod
             developmentMode: false
 
           - job_name: rpi-3-prod
             device: raspberrypi3-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi3-64-prod
+            filename: Balena-Starter-Interface-rpi3-64-prod
             developmentMode: false
 
           - job_name: rpi-4-prod
             device: raspberrypi4-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi4-64-prod
+            filename: Balena-Starter-Interface-rpi4-64-prod
             developmentMode: false
 
           - job_name: rpi-zero-2-prod
             device: raspberrypi0-2w-64
             version: "latest"
-            filename: balena-Starter-Interface-rpi-zero-2-prod
+            filename: Balena-Starter-Interface-rpi-zero-2-prod
             developmentMode: false
 
     name: preload-${{ matrix.job_name }}

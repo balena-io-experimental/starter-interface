@@ -1,5 +1,5 @@
 //
-// Interact with the balena Supervisor on the local device
+// Interact with the Balena Supervisor on the local device
 //
 
 import createAxiosInstance from '@/common/axios'
@@ -39,7 +39,7 @@ router.post('/v1/supervisor', queueCache, (async (
   const reqBody = req.body as BodyDataReq
 
   //  Unfortunately the Supervisor URLs are not currently standardised
-  // and this provides a workaround. If balena App ID is required as
+  // and this provides a workaround. If Balena App ID is required as
   // part of the Supervisor URL then add it to the payload.
   let url
   if (reqBody.path2) {

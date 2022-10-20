@@ -1,5 +1,5 @@
 //
-// Use the balena SDK to perform functions
+// Use the Balena SDK to perform functions
 //
 
 import logger from '@/common/logger'
@@ -15,18 +15,18 @@ interface LockfileError {
 // Get the ExpressJS main router process
 const router = express.Router()
 
-// Get the balena SDK instance
+// Get the Balena SDK instance
 const sdk = getSdk()
 
-// Specify the lockfile path used by balena Supervisor/OS
+// Specify the lockfile path used by Balena Supervisor/OS
 const balenaLockfilePath = '/tmp/balena/updates.lock'
 
-// Set the required balena info from environment variables inside the running container
-// which are set by the balena Supervisor
+// Set the required Balena info from environment variables inside the running container
+// which are set by the Balena Supervisor
 const apiKey = process.env.BALENA_API_KEY || ''
 const uuid = process.env.BALENA_DEVICE_UUID || ''
 
-// Initiate a login to the balena Cloud using the API key stored on the device
+// Initiate a login to the Balena Cloud using the API key stored on the device
 void logIn()
 async function logIn() {
   try {
@@ -34,7 +34,7 @@ async function logIn() {
     await sdk.auth.loginWithToken(apiKey)
   } catch (error) {
     logger.error(error)
-    logger.error('Error logging in to balena SDK')
+    logger.error('Error logging in to Balena SDK')
   }
 }
 
@@ -91,8 +91,8 @@ router.post('/v1/sdk/envVars', (async (req, res) => {
   return res.json({ message: 'done' })
 }) as RequestHandler)
 
-// Check whether logged in to the balena Cloud or not. Used on the UI to identify whether
-// it should be fetching content from the balena Cloud or not.
+// Check whether logged in to the Balena Cloud or not. Used on the UI to identify whether
+// it should be fetching content from the Balena Cloud or not.
 router.get('/v1/sdk/loggedIn', (async (_req, res) => {
   try {
     return res.json({ loggedIn: !!(await sdk.auth.getToken()) })
@@ -101,7 +101,7 @@ router.get('/v1/sdk/loggedIn', (async (_req, res) => {
   }
 }) as RequestHandler)
 
-// Set the balena lock file to avoid Supervisor making changes on the device when
+// Set the Balena lock file to avoid Supervisor making changes on the device when
 // making a change through the SDK.
 function lock() {
   try {
@@ -119,7 +119,7 @@ function lock() {
   }
 }
 
-// Remove the balena lockfile.
+// Remove the Balena lockfile.
 function unlock() {
   try {
     return lockFile.unlockSync(balenaLockfilePath)

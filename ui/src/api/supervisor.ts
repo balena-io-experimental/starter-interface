@@ -5,7 +5,7 @@
 // `cacheTimeout` tells the backend to return a cached response rather than get a new
 // response if the last request was < cacheTimeout.
 //
-// balena Supervisor API Documentation for reference:
+// Balena Supervisor API Documentation for reference:
 // https://www.balena.io/docs/reference/supervisor/supervisor-api/
 
 import { expressApi } from 'boot/axios'
