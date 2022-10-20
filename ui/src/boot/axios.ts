@@ -26,7 +26,7 @@ export default boot(() => {
   }
 
   // Store the default URL in the Pinia store. The Axios instance is not reactive
-  // so we use a store instea
+  // so we use a store instead
   axiosBaseUrl.setUrl(expressApi.defaults.baseURL)
 
   // Axios request interceptor
