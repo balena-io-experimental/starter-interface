@@ -15,6 +15,6 @@
     "dev-pwa": "ON_DEVICE=false yarn workspace ui dev -m pwa",
     "build": "yarn -p -i workspaces foreach run build",
     "build-pwa": "yarn workspace ui build-pwa",
-    "build-electron": "yarn workspace ui build-electron"
+    "build-electron": "yarn workspace ui build-electron -P never"
   }
 }
