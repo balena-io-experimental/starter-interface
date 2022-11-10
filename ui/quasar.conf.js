@@ -216,7 +216,7 @@ module.exports = configure(function (ctx) {
 
       builder: {
         // https://www.electron.build/configuration/configuration
-        appId: 'Balena Starter Interface',
+        appId: 'io.resin.device-ui',
         electronVersion: '21.0.1', // TODO: remove when quasar updates with fix for --production flag error
         artifactName: 'Balena Starter Interface ${arch}.${ext}'
       }
