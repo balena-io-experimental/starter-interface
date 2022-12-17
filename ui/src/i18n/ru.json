@@ -1,1 +1,182 @@
-{}
+{
+    "components": {
+        "system": {
+            "device_info": {
+                "response_details": "Детали ответа",
+                "sdk_unavailable": "Невозможно связаться с серверами Balena.",
+                "undervolted": "Пониженный",
+                "os_version": "Версия ОС",
+                "cloudlink": "Cloudlink",
+                "temperature": "Температура",
+                "public_ip": "Публичный IP",
+                "environment_variables": "Переменные среды",
+                "check_cloudlink_tooltip": "Нажмите, чтобы повторно проверить подключение Cloudlink",
+                "mac_address": "MAC-адрес",
+                "not_undervolted": "Нормальная мощность",
+                "raw_json": "Необработанный JSON",
+                "supervisor_version": "Версия супервизора",
+                "location": "Местонахождение",
+                "ip_address": "IP-адрес",
+                "storage": "Хранилище"
+            },
+            "env_config": {
+                "delete_selected_records": "Удалить выбранные записи",
+                "restarting_containers": "Ваши контейнеры должны перезагрузиться. Пользовательский интерфейс будет недоступен, пока они не вернутся в сеть.",
+                "add_env_var": "Добавить переменную среды",
+                "edit": "Редактировать",
+                "response_details": "Отзыв Подробности",
+                "env_var_warning_message": "Добавление или удаление переменных окружения приведет к перезапуску служб на этом устройстве!",
+                "raw_json": "Необработанный JSON",
+                "key": "Ключ",
+                "env_rules": "Ключи переменных окружения должны начинаться с буквы и содержать только буквы, цифры и знаки подчеркивания",
+                "value": "Значение"
+            },
+            "reboot": {
+                "restarting": "Ваше устройство перезагружается…",
+                "force_restart": "Принудительная перезагрузка?"
+            },
+            "shutdown": {
+                "shutting_down": "Выключение устройства…",
+                "force_shutdown": "Принудительное отключение?"
+            },
+            "update_device": {
+                "force_update": "Принудительное обновление?",
+                "update_device": "Обновление устройства"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "Получение журналов Journald"
+            }
+        },
+        "tools": {
+            "container_manager": {
+                "containers": "Контейнеры"
+            },
+            "file_manager": {
+                "enter_name": "Введите имя",
+                "mb": "Мб",
+                "new_folder": "Новая папка",
+                "upload": "Загрузить",
+                "item_already_exists": "Артикул уже существует",
+                "size_colon": "Размер:",
+                "mb_001": "0.01 Мб",
+                "empty_folder": "Пустая папка",
+                "no_results_found": "Результаты не найдены",
+                "delete": "Удалить",
+                "name": "Имя",
+                "filter": "Фильтр",
+                "invalid_filemanager_string": "Вы ввели неверное имя. Следующие символы несовместимы: '/', '\\ 0'",
+                "upload_files_exist": "Некоторые из добавленных вами файлов уже существуют. Эти файлы будут перезаписаны.",
+                "full_screen": "Полный экран",
+                "invalid_upload_string": "Записи содержат недопустимое имя и не будут загружены. Следующие символы не совместимы: '/', '\\0'"
+            },
+            "system_info": {
+                "select_request": "Выберите запрос"
+            }
+        },
+        "wifi": {
+            "configure_ssid": {
+                "set_new_hotspot_ssid": "Установите SSID точки доступа",
+                "ssid_set": "SSID установлен. Если вы используете точку доступа, она перезапустится.",
+                "invalid_name": "Недопустимое имя"
+            },
+            "connect": {
+                "connection_request": "Теперь ваше устройство попытается подключиться к сети. Если через минуту оно не будет доступно, повторно подключитесь к устройству и проверьте правильность пароля.",
+                "configure_hotspot": "Настроить точку доступа",
+                "refresh_not_compatible": "Для обновления списка требуется перезагрузка устройства.",
+                "disconnect_request_sent": "Отправлен запрос на отключение.",
+                "invalid_password_length": "Пароль должен состоять из 8 символов или более.",
+                "no_networks": "Сети WiFi не найдены",
+                "network_forget_fail": "Не удалось выполнить запрос на забывание.",
+                "searching_networks": "Поиск сетей",
+                "select_ssid": "Выберите SSID",
+                "network_connect_fail": "Не удалось выполнить запрос на подключение.",
+                "disconnect": "Отключиться",
+                "network_fetch_fail": "Не удалось получить доступные сети.",
+                "connect": "Соединять",
+                "already_connected": "Вы уже подключены к WiFi."
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "Запрос на отключение отправлен.",
+                "forget_all_wifi": "Забудьте обо всех подключениях WiFi"
+            },
+            "configure_password": {
+                "invalid_password_length": "Пароль должен состоять из 8 символов или более.",
+                "set_new_hotspot_password": "Установите пароль точки доступа",
+                "invalid_name": "Недопустимое имя",
+                "password_set": "Установите пароль. Если вы используете точку доступа, она перезапустится."
+            }
+        },
+        "charts": {
+            "mem_stats": {
+                "used": "Используется",
+                "available": "Доступно",
+                "memory": "Память"
+            },
+            "cpu_stats": {
+                "cpu_status": "Состояние процессора"
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "copy_to_clipboard": "Копировать в буфер обмена",
+                "connect_to_wifi": "Подключение к WiFi",
+                "visit_to_begin": "Для начала откройте в браузере следующий URL-адрес:",
+                "url_copied": "Копируется в буфер обмена",
+                "welcome": "Добро пожаловать"
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "Изменить имя хоста"
+            }
+        }
+    },
+    "system": {
+        "menu_items": {
+            "networking": "Сети",
+            "system_info": "Системная информация",
+            "configuration": "Конфигурация",
+            "file_manager": "Файловый менеджер",
+            "container_manager": "Менеджер контейнеров",
+            "device_info": "Информация об устройстве"
+        },
+        "network": {
+            "network_connection_down": "Вы больше не подключены к сети. Попробуйте повторно подключиться к устройству.",
+            "no_wifi_api": "Не удалось установить связь с Balena Py Wi-Fi Connect. Установлен ли он на этом устройстве?",
+            "network_connection_restored": "Сетевое подключение восстановлено."
+        },
+        "pwa": {
+            "install": "Установить",
+            "install_instructions_safari": "- Safari: Нажмите кнопку \"Поделиться\" и выберите \"Добавить на главный экран\"",
+            "install_instructions_browsers": "- Google Chrome и Microsoft Edge: щелкните значок в правой части строки URL, затем нажмите кнопку \"Установить\" или установите из меню \"три точки\".",
+            "install_notification": "Знаете ли вы, что эту страницу можно установить как приложение и пользоваться ею в автономном режиме?",
+            "install_instructions_chrome": "- Chrome Android: Нажмите значок \"три точки\" в правом верхнем углу, чтобы открыть меню. Выберите \"Добавить на главный экран\"."
+        },
+        "errors": {
+            "wrong_way": "Не туда…",
+            "no_backend": "Невозможно установить связь с внутренней службой",
+            "request_error": "Ошибка запроса"
+        },
+        "titles": {
+            "host_config": "Конфигурация хоста"
+        }
+    },
+    "general": {
+        "hostname": "Имя хоста",
+        "open_control_panel": "Открыть панель управления",
+        "start": "Начать",
+        "password": "Пароль",
+        "cancel": "Отмена",
+        "ok": "Хорошо",
+        "are_you_sure": "Вы уверены?",
+        "name": "Имя",
+        "close": "Закрыть",
+        "status": "Статус",
+        "submit": "Отправить",
+        "stop": "Стоп",
+        "restart": "Перезапустить",
+        "error": "Ошибка",
+        "go_home": "Идти домой"
+    },
+    "title": "Стартовый интерфейс Balena"
+}
