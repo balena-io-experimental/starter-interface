@@ -13,7 +13,8 @@
         "status": "Stato",
         "start": "Inizio",
         "stop": "Ferma",
-        "hostname": "Nome dell'Host"
+        "hostname": "Nome dell'Host",
+        "go_home": "Vai alla pagina principale"
     },
     "components": {
         "charts": {
@@ -32,7 +33,7 @@
                 "raw_json": "Raw JSON",
                 "temperature": "Temperatura",
                 "supervisor_version": "Versione del Supervisore",
-                "cloudlink": "Cloudlink",
+                "cloudlink": "Collegamento cloud",
                 "ip_address": "Indirizzo IP",
                 "environment_variables": "Variabili d'Ambiente",
                 "mac_address": "Indirizzo MAC",
@@ -76,13 +77,13 @@
         "tools": {
             "file_manager": {
                 "delete": "Elimina",
-                "empty_folder": "Cartella Vuota",
+                "empty_folder": "Cartella vuota",
                 "filter": "Filtro",
-                "invalid_filemanager_string": "Hai inserito un nome non valido. I seguenti caratteri non sono compatibili: '/', '\\0'",
-                "item_already_exists": "L'elemento già esiste",
+                "invalid_filemanager_string": "Hai inserito un nome non valido. I seguenti caratteri non sono compatibili: /, \\0",
+                "item_already_exists": "L'elemento esiste già",
                 "new_folder": "Nuova cartella",
                 "no_results_found": "Nessun risultato trovato",
-                "full_screen": "Schermo Intero",
+                "full_screen": "Schermo intero",
                 "mb_001": "0.01 Mb",
                 "name": "Nome",
                 "mb": "Mb",
@@ -90,7 +91,7 @@
                 "invalid_upload_string": "Le Voci contengono un nome non valido e non verranno aggiornate. I caratteri seguenti non sono compatibili: '/','\\0'",
                 "size_colon": "Dimensione:",
                 "upload": "Carica",
-                "upload_files_exist": "Alcuni dei file che hai aggiunto già esistono. Questi file saranno sovrascritti."
+                "upload_files_exist": "Alcuni dei file che hai aggiunto esistono già. Questi file saranno sovrascritti."
             },
             "system_info": {
                 "select_request": "Seleziona una richiesta"
@@ -150,10 +151,10 @@
     "system": {
         "menu_items": {
             "configuration": "Configurazione",
-            "system_info": "Informazioni sul Sistema",
+            "system_info": "Informazioni sul sistema",
             "device_info": "Informazioni Dispositivo",
             "networking": "Rete",
-            "file_manager": "Gestore di File",
+            "file_manager": "Gestore di file",
             "container_manager": "Gestione dei Contenitori"
         },
         "network": {
