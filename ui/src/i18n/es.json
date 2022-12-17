@@ -11,7 +11,10 @@
         "start": "Empezar",
         "stop": "Parar",
         "are_you_sure": "Estas seguro?",
-        "ok": "De acuerdo"
+        "ok": "De acuerdo",
+        "go_home": "Ir al comienzo",
+        "hostname": "Nombre del equipo",
+        "open_control_panel": "Abrir el panel de control"
     },
     "components": {
         "wifi": {
@@ -25,18 +28,19 @@
                 "invalid_password_length": "La contraseña debe tener 8 caracteres o más.",
                 "network_fetch_fail": "Error al obtener las redes disponibles.",
                 "network_forget_fail": "Error al ejecutar la solicitud de olvido.",
-                "no_networks": "No hay redes disponibles",
+                "no_networks": "No se encontraron redes WiFi",
                 "refresh_not_compatible": "Su dispositivo requiere un reinicio para actualizar la lista.",
                 "searching_networks": "Buscando redes",
-                "select_ssid": "Seleccione un SSID"
+                "select_ssid": "Seleccione un SSID",
+                "already_connected": "Estás conectado a una WiFi."
             },
             "configure_ssid": {
                 "ssid_set": "Conjunto de SSID. Si está ejecutando un punto de acceso, se reiniciará.",
                 "invalid_name": "Nombre inválido",
-                "set_new_hotspot_ssid": "Establecer un nuevo SSID de punto de acceso"
+                "set_new_hotspot_ssid": "Establecer el SSID del punto de acceso"
             },
             "configure_password": {
-                "set_new_hotspot_password": "Establecer una nueva contraseña de punto de acceso",
+                "set_new_hotspot_password": "Establecer la contraseña del punto de acceso",
                 "invalid_name": "Nombre inválido",
                 "invalid_password_length": "La contraseña debe tener 8 caracteres o más.",
                 "password_set": "Conjunto de contraseñas. Si está ejecutando un punto de acceso, se reiniciará."
@@ -73,13 +77,22 @@
                 "sdk_unavailable": "No se puede conectar con los servidores de Balena.",
                 "storage": "Almacenamiento",
                 "supervisor_version": "Versión del supervisor",
-                "undervolted": "Infravalorado"
+                "undervolted": "Infravalorado",
+                "check_cloudlink_tooltip": "Haga clic para volver a comprobar la conectividad a Cloudlink",
+                "cloudlink": "Enlace en la nube",
+                "temperature": "Temperatura"
             },
             "env_config": {
                 "raw_json": "JSON sin procesar",
                 "response_details": "Detalles de la respuesta",
                 "delete_selected_records": "Eliminar registros seleccionados",
-                "env_var_warning_message": "¡Agregar o eliminar variables de entorno reiniciará los servicios en este dispositivo!"
+                "env_var_warning_message": "¡Agregar o eliminar variables de entorno reiniciará los servicios en este dispositivo!",
+                "env_rules": "Las claves de las variables del entorno deben empezar por una letra y contener sólo letras, cifras y guiones bajos",
+                "restarting_containers": "Sus contenedores deben reiniciarse. La interfaz del usuario no estará disponible hasta que vuelva a estar en línea.",
+                "add_env_var": "Añadir una variable de entorno",
+                "edit": "Editar",
+                "key": "Llave",
+                "value": "Valor"
             },
             "journal_d_logs": {
                 "fetch_journald": "Obtener registros diarios"
@@ -113,7 +126,7 @@
                 "upload": "Cargar"
             },
             "container_manager": {
-                "containers": "Recipientes"
+                "containers": "Contenedores"
             },
             "system_info": {
                 "select_request": "Seleccione una solicitud"
@@ -122,6 +135,11 @@
         "charts": {
             "cpu_stats": {
                 "cpu_status": "Estado de la CPU"
+            },
+            "mem_stats": {
+                "available": "Disponible",
+                "memory": "Memoria",
+                "used": "Usado"
             }
         },
         "network": {
@@ -137,16 +155,27 @@
             "networking": "Redes",
             "system_info": "Información del sistema",
             "file_manager": "Gestor de archivos",
-            "container_manager": "Gestor de contenedores"
+            "container_manager": "Gestor de los contenedores"
         },
         "errors": {
             "request_error": "Solicitud de error",
-            "wrong_way": "Manera incorrecta…"
+            "wrong_way": "Camino equivocado…",
+            "no_backend": "No se puede comunicar con el servicio backend"
         },
         "network": {
             "network_connection_down": "Ya no estás conectado a una red. Intente volver a conectarse a su dispositivo.",
             "network_connection_restored": "Conexión de red restaurada.",
             "no_wifi_api": "No se pudo comunicar con Balena Py Wi-Fi Connect. ¿Está instalado en este dispositivo?"
+        },
+        "pwa": {
+            "install_instructions_safari": "- Safari: presione el botón 'Compartir' y seleccione 'Agregar a la pantalla de inicio'",
+            "install_notification": "¿Sabía que puede instalar esta página como una aplicación y usarla sin conexión?",
+            "install_instructions_browsers": "- Google Chrome y Microsoft Edge: haga clic en el ícono en el lado derecho de la barra de URL y luego haga clic en el botón 'Instalar', o instale desde el menú de 'tres puntos'.",
+            "install": "Instalar",
+            "install_instructions_chrome": "- Chrome Android: Presiona el ícono de los 'tres puntos' en la parte superior derecha para abrir el menú. Seleccione 'Agregar a la pantalla de inicio'."
+        },
+        "titles": {
+            "host_config": "Configuración del host"
         }
     },
     "title": "Interfaz de dispositivo Balena"
