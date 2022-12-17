@@ -1,1 +1,45 @@
-{}
+{
+    "general": {
+        "are_you_sure": "هل أنت متأكد؟",
+        "close": "اغلق",
+        "ok": "موافق",
+        "start": "ابدأ",
+        "status": "الحالة",
+        "cancel": "إلغي",
+        "submit": "أرسل",
+        "restart": "أعد التشغيل",
+        "error": "خطأ",
+        "name": "الاسم",
+        "stop": "توقف",
+        "open_control_panel": "افتح لوحة التحكم",
+        "password": "كلمة السر"
+    },
+    "components": {
+        "layouts": {
+            "captive_portal": {
+                "url_copied": "نسخت للحافظة",
+                "welcome": "أهلا وسهلا",
+                "connect_to_wifi": "اتصل بالواي فاي",
+                "copy_to_clipboard": "انسخ للحافظة"
+            }
+        },
+        "system": {
+            "device_info": {
+                "storage": "المخزن",
+                "location": "الموقع",
+                "response_details": "تفاصيل الرد",
+                "sdk_unavailable": "غير قادر على الوصول إلى خوادم Balena."
+            }
+        },
+        "charts": {
+            "mem_stats": {
+                "used": "المستخدم",
+                "available": "المتاح",
+                "memory": "الذاكرة"
+            },
+            "cpu_stats": {
+                "cpu_status": "حالة المعالج"
+            }
+        }
+    }
+}
