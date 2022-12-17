@@ -12,7 +12,9 @@
         "name": "الاسم",
         "stop": "توقف",
         "open_control_panel": "افتح لوحة التحكم",
-        "password": "كلمة السر"
+        "password": "كلمة السر",
+        "go_home": "اذهب إلى المنزل",
+        "hostname": "اسم المضيف"
     },
     "components": {
         "layouts": {
@@ -20,7 +22,8 @@
                 "url_copied": "نسخت للحافظة",
                 "welcome": "أهلا وسهلا",
                 "connect_to_wifi": "اتصل بالواي فاي",
-                "copy_to_clipboard": "انسخ للحافظة"
+                "copy_to_clipboard": "انسخ للحافظة",
+                "visit_to_begin": "افتح الرابط التالي في متصفحك من أجل أن تبدأ"
             }
         },
         "system": {
@@ -28,7 +31,36 @@
                 "storage": "المخزن",
                 "location": "الموقع",
                 "response_details": "تفاصيل الرد",
-                "sdk_unavailable": "غير قادر على الوصول إلى خوادم Balena."
+                "sdk_unavailable": "غير قادر على الوصول إلى خوادم Balena.",
+                "temperature": "درجة الحرارة",
+                "check_cloudlink_tooltip": "اضغط لإعادة التأكد من اتصال الرابط السحابي",
+                "ip_address": "عنوان ip",
+                "not_undervolted": "القوة العادية",
+                "environment_variables": "مجهولات البيئة",
+                "os_version": "نوع النظام",
+                "public_ip": "ip العلني"
+            },
+            "env_config": {
+                "add_env_var": "اضف مجهول بيئي",
+                "edit": "عدل",
+                "key": "مفتاح",
+                "value": "قيمة",
+                "restarting_containers": "تحتاج حاوياتك إلى إعادة التشغيل , لذلك لن تكون واجهة المستخدم متوفرة.",
+                "delete_selected_records": "احذف التسجيل المختار",
+                "env_rules": "المجهول البيئي لابد أن يبدأ بحرف أو رقم أو علامة أسفل السطر",
+                "env_var_warning_message": "إضافة أو حذف المجهول البيئي سيتسبب بإعادة تشغيل الخدمة على هذا الجهاز !"
+            },
+            "reboot": {
+                "force_restart": "إعادة التشغيل الإجبارية ؟",
+                "restarting": "يقوم جهازك بإعادة التشغيل…"
+            },
+            "shutdown": {
+                "force_shutdown": "الإطفاء الإجباري ؟",
+                "shutting_down": "جاري إطفاء الجهاز…"
+            },
+            "update_device": {
+                "force_update": "إجبار التحديث ؟",
+                "update_device": "تحديث الجهاز"
             }
         },
         "charts": {
@@ -40,6 +72,17 @@
             "cpu_stats": {
                 "cpu_status": "حالة المعالج"
             }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "غير اسم المضيف"
+            }
+        },
+        "tools": {
+            "container_manager": {
+                "containers": "الحاويات"
+            }
         }
-    }
+    },
+    "title": "واجهة بداية بلينا"
 }
