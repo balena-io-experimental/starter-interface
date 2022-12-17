@@ -1,1 +1,158 @@
-{}
+{
+    "general": {
+        "go_home": "Ana ekrana git",
+        "are_you_sure": "Emin misiniz?",
+        "open_control_panel": "Kontrol Arayüzünü Aç",
+        "hostname": "Bağlanılan cihaz adı",
+        "name": "Ad",
+        "stop": "Durdur",
+        "restart": "Yeniden Başlat",
+        "status": "Durum",
+        "start": "Başlat",
+        "submit": "Teslim et",
+        "close": "Kapat",
+        "password": "Şifre",
+        "cancel": "İptal et",
+        "ok": "Tamam",
+        "error": "Hata"
+    },
+    "components": {
+        "charts": {
+            "cpu_stats": {
+                "cpu_status": "CPU durumu"
+            },
+            "mem_stats": {
+                "memory": "Hafıza",
+                "used": "Kullanımda",
+                "available": "Müsait"
+            }
+        },
+        "layouts": {
+            "captive_portal": {
+                "connect_to_wifi": "WİFİ'a bağlan",
+                "copy_to_clipboard": "Panoya kopyala",
+                "url_copied": "Panoya kopyalandı",
+                "visit_to_begin": "Başlamak için belirtilen URL'yi tarayıcınızda ziyaret edin:",
+                "welcome": "Hoş geldiniz"
+            }
+        },
+        "system": {
+            "device_info": {
+                "supervisor_version": "Gözetmen Sürümü",
+                "undervolted": "Düşük Voltajlı",
+                "cloudlink": "Bulut Linki",
+                "temperature": "Sıcaklık",
+                "location": "Konum",
+                "not_undervolted": "Normal Güç",
+                "os_version": "OS sürümü",
+                "raw_json": "raw JSON",
+                "response_details": "Yanıt Detayları",
+                "sdk_unavailable": "Balena sunucularına ulaşılamadı.",
+                "storage": "Depolama",
+                "mac_address": "MAC adresi",
+                "ip_address": "İP adresi",
+                "public_ip": "Halka Açık İP",
+                "check_cloudlink_tooltip": "Bulut Linkinin bağlantısını tekrar kontrol etmek için tıklayınız",
+                "environment_variables": "Çevre Değişkenleri"
+            },
+            "env_config": {
+                "add_env_var": "Çevre Değişkeni Ekle",
+                "edit": "Düzenle",
+                "env_rules": "Çevre değişken anahtarları bir harfle başlayıp sadece harfler, rakamlar ve alt tireler içermelidir",
+                "key": "Anahtar",
+                "value": "Değer",
+                "raw_json": "raw JSON",
+                "delete_selected_records": "Seçilen kayıtları sil",
+                "restarting_containers": "Konteynırlarınız yeniden başlamalı. Başlayana kadar kullanıcı arayüzü çalışmayacaktır.",
+                "response_details": "Yanıt detayları",
+                "env_var_warning_message": "Çevre değişkenleri eklemek veya çıkarmak bu cihazdaki hizmetleri yeniden başlatacak!"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "Journald Kayıtlarını Al"
+            },
+            "reboot": {
+                "force_restart": "Yeniden başlamaya zorla?",
+                "restarting": "Cihazınız yeniden başlatılıyor…"
+            },
+            "update_device": {
+                "update_device": "Cihazı güncelle",
+                "force_update": "Güncellemeye zorla?"
+            },
+            "shutdown": {
+                "shutting_down": "Cihaz kapatılıyor…",
+                "force_shutdown": "Kapanmaya zorla?"
+            }
+        },
+        "tools": {
+            "file_manager": {
+                "mb_001": "0.01 Mb",
+                "name": "Ad",
+                "size_colon": "Boyut:",
+                "full_screen": "Tam Ekran",
+                "invalid_filemanager_string": "Geçersiz bir ad girdiniz. Şu karakterler uyumlu değildir: '<', '>', '%', '{', '}', '|', '\\', '^', '`', '$', '#'",
+                "delete": "Sil",
+                "enter_name": "Bir ad girin",
+                "mb": "Mb",
+                "filter": "Filtrele",
+                "invalid_upload_string": "Girdiler geçersiz bir isim içermekte ve yüklenmeyecekler. Bu karaktarler geçersizdir: '/', '\\0'",
+                "item_already_exists": "Öge zaten var",
+                "new_folder": "Yeni Klasör",
+                "no_results_found": "Sonuç bulunamadı",
+                "upload_files_exist": "Eklediğiniz dosyalardan bazıları zaten var. Bu dosyaların üzerine yazılacaktır.",
+                "empty_folder": "Boş Klasör",
+                "upload": "Karşıya yükle"
+            },
+            "system_info": {
+                "select_request": "Bir istek seçin"
+            },
+            "container_manager": {
+                "containers": "Konteynırlar"
+            }
+        },
+        "wifi": {
+            "configure_password": {
+                "set_new_hotspot_password": "Hotspot şifresini belirleyiniz",
+                "invalid_name": "Geçersiz ad",
+                "invalid_password_length": "Şifre sekiz ya da daha fazla karakterden oluşmalıdır.",
+                "password_set": "Şifre belirlerndi. Eğer bir hotspot çalıştırıyorsanız yeniden başlayacak."
+            },
+            "configure_ssid": {
+                "invalid_name": "Geçersiz Ad",
+                "set_new_hotspot_ssid": "Hotspot SSİD'sini belirleyiniz",
+                "ssid_set": "SSİD belirlendi. Eğer bir hotspot çalıştırıyorsanız yeniden başlayacak."
+            },
+            "connect": {
+                "disconnect": "Bağlantıyı kes",
+                "searching_networks": "Ağ aranıyor...",
+                "connect": "Bağlan",
+                "configure_hotspot": "Hotspotu ayarlayın",
+                "network_fetch_fail": "Müsait ağlara ulaşamadık.",
+                "refresh_not_compatible": "Listeyi yenilemek için cihazınızın yeniden başlaması gerekli.",
+                "select_ssid": "Bir SSİD seçin.",
+                "invalid_password_length": "Şifre sekiz ya da daha fazla karakterli olmalıdır.",
+                "no_networks": "WİFİ ağı bulunmadı.",
+                "disconnect_request_sent": "Bağlantıyı kesme önerisi gönderildi.",
+                "network_connect_fail": "Bağlantı isteğinin gerçekleştiremedik.",
+                "network_forget_fail": "Unut isteğinizi maalesef gerçekleştiremedik.",
+                "already_connected": "Zaten bir WİFİ'a bağlısınız.",
+                "connection_request": "Şimdi cihazınız ağa bağlanmayı deneyecek. Bir dakika içerisinde müsait değilse cihazınızı tekrar bağlayın ve şifrenizi kontrol edin."
+            },
+            "forget_all_wifi": {
+                "forget_all_wifi": "Tüm WİFİ bağlantılarını kes.",
+                "disconnect_request_sent": "Bağlantıyı kesme isteği gönderildi."
+            }
+        },
+        "network": {
+            "change_hostname": {
+                "change_hostname": "Ana bilgisayar adını değiştirin"
+            }
+        }
+    },
+    "system": {
+        "errors": {
+            "request_error": "İstek hatası.",
+            "wrong_way": "Yanlış yön…"
+        }
+    },
+    "title": "Balena Başlangıç Arayüzü"
+}
