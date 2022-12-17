@@ -147,8 +147,6 @@
             "network_connection_down": "Ya no estás conectado a una red. Intente volver a conectarse a su dispositivo.",
             "network_connection_restored": "Conexión de red restaurada.",
             "no_wifi_api": "No se pudo comunicar con Balena Py Wi-Fi Connect. ¿Está instalado en este dispositivo?"
-        },
-        "titles": {
         }
     },
     "title": "Interfaz de dispositivo Balena"
