@@ -27,7 +27,7 @@ jobs:
 
     name: ${{ matrix.job_name }}
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v3
@@ -38,4 +38,4 @@ jobs:
           balena_token: ${{secrets.BALENA_TOKEN}}
           balena_cli_commands: >
             push ${{ matrix.fleet }} --release-tag PR "${{ env.PR_NUMBER }}" commit-sha "${{ github.event.pull_request.head.sha }}";
-          balena_cli_version: 13.7.1
+          balena_cli_version: 14.5.15
