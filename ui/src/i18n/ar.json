@@ -38,7 +38,12 @@
                 "not_undervolted": "القوة العادية",
                 "environment_variables": "مجهولات البيئة",
                 "os_version": "نوع النظام",
-                "public_ip": "ip العلني"
+                "public_ip": "ip العلني",
+                "supervisor_version": "إصدار المشرف",
+                "undervolted": "منخفض الفولتية",
+                "cloudlink": "كلاود لينك",
+                "mac_address": "عنوان الـ MAC",
+                "raw_json": "نص JSON"
             },
             "env_config": {
                 "add_env_var": "اضف مجهول بيئي",
@@ -48,7 +53,9 @@
                 "restarting_containers": "تحتاج حاوياتك إلى إعادة التشغيل , لذلك لن تكون واجهة المستخدم متوفرة.",
                 "delete_selected_records": "احذف التسجيل المختار",
                 "env_rules": "المجهول البيئي لابد أن يبدأ بحرف أو رقم أو علامة أسفل السطر",
-                "env_var_warning_message": "إضافة أو حذف المجهول البيئي سيتسبب بإعادة تشغيل الخدمة على هذا الجهاز !"
+                "env_var_warning_message": "إضافة أو حذف المجهول البيئي سيتسبب بإعادة تشغيل الخدمة على هذا الجهاز !",
+                "raw_json": "نص JSON",
+                "response_details": "تفاصيل الرد"
             },
             "reboot": {
                 "force_restart": "إعادة التشغيل الإجبارية ؟",
@@ -61,6 +68,9 @@
             "update_device": {
                 "force_update": "إجبار التحديث ؟",
                 "update_device": "تحديث الجهاز"
+            },
+            "journal_d_logs": {
+                "fetch_journald": "جلب سجلات دفتر اليومية"
             }
         },
         "charts": {
@@ -81,8 +91,92 @@
         "tools": {
             "container_manager": {
                 "containers": "الحاويات"
+            },
+            "file_manager": {
+                "enter_name": "ادخل اسم",
+                "filter": "فلتر",
+                "upload": "تحميل",
+                "upload_files_exist": "بعض الملفات التي أضفتها موجودة بالفعل. سيتم الكتابة فوق هذه الملفات.",
+                "empty_folder": "مجلد فارغ",
+                "mb_001": "0.01 Mb",
+                "invalid_filemanager_string": "لقد أدخلت اسم غير صالح. الأحرف التالية غير متوافقة: '/', '\\0'",
+                "item_already_exists": "العنصر موجود بالفعل",
+                "mb": "مب",
+                "name": "اسم",
+                "no_results_found": "لم يتم العثور على نتائج",
+                "size_colon": "الحجم:",
+                "new_folder": "مجلد جديد",
+                "delete": "حذف",
+                "full_screen": "ملء الشاشة",
+                "invalid_upload_string": "تحتوي المشاركات على اسم غير صالح ولن يتم تحميلها. الأحرف التالية غير متوافقة: '/', '\\0'"
+            },
+            "system_info": {
+                "select_request": "حدد طلباً"
+            }
+        },
+        "wifi": {
+            "configure_password": {
+                "password_set": "تم تعيين كلمة المرور. إذا كانت نقطة الاتصال تعمل، سيتم اعادة تشغيلها.",
+                "invalid_name": "اسم غير صالح",
+                "set_new_hotspot_password": "تعيين كلمة مرور لنقطة الاتصال",
+                "invalid_password_length": "يجب أن تتكون كلمة المرور من 8 أحرف أو أكثر."
+            },
+            "connect": {
+                "connect": "اتصل",
+                "network_forget_fail": "فشل تنفيذ طلب النسيان.",
+                "no_networks": "لم يتم العثور على شبكات واي فاي",
+                "already_connected": "أنت متصل بالفعل بشبكة واي فاي.",
+                "configure_hotspot": "تكوين نقطة الاتصال",
+                "connection_request": "سيحاول جهازك الآن الاتصال بالشبكة. إذا لم يكن متاحا خلال دقيقة واحدة ، فأعد الاتصال بالجهاز وتحقق من صحة كلمة المرور الخاصة بك.",
+                "disconnect_request_sent": "تم إرسال طلب قطع الاتصال.",
+                "invalid_password_length": "يجب أن تتكون كلمة المرور من 8 أحرف أو أكثر.",
+                "network_connect_fail": "فشل تنفيذ طلب الاتصال.",
+                "network_fetch_fail": "فشل في جلب الشبكات المتاحة.",
+                "disconnect": "افصل",
+                "select_ssid": "حدد SSID",
+                "refresh_not_compatible": "يتطلب جهازك إعادة تشغيل لتحديث القائمة.",
+                "searching_networks": "يبحث عن الشبكات"
+            },
+            "configure_ssid": {
+                "invalid_name": "اسم غير صالح",
+                "set_new_hotspot_ssid": "اسم نقطة الاتصال SSID",
+                "ssid_set": "تم تعيين اسم SSID. إذا كانت نقطة الاتصال تعمل، سيتم اعادة تشغيلها."
+            },
+            "forget_all_wifi": {
+                "disconnect_request_sent": "تم إرسال طلب قطع الاتصال.",
+                "forget_all_wifi": "انسى جميع اتصالات واي فاي"
             }
         }
     },
-    "title": "واجهة بداية بلينا"
+    "title": "واجهة بداية بلينا",
+    "system": {
+        "menu_items": {
+            "configuration": "تكوين",
+            "container_manager": "مدير الحاويات",
+            "system_info": "معلومات النظام",
+            "device_info": "معلومات الجهاز",
+            "networking": "الربط",
+            "file_manager": "مدير الملفات"
+        },
+        "network": {
+            "network_connection_restored": "تمت استعادة اتصال الشبكة.",
+            "network_connection_down": "لم تعد متصلا بشبكة. حاول إعادة الاتصال بجهازك.",
+            "no_wifi_api": "فشل الاتصال مع Balena Py Wi-Fi Connect. هل هو مثبت على هذا الجهاز؟"
+        },
+        "pwa": {
+            "install": "نصّب",
+            "install_notification": "هل تعلم أنه يمكنك تثبيت هذه الصفحة كتطبيق واستخدامها في وضع عدم الاتصال؟",
+            "install_instructions_chrome": "- متصفح كروم للأندرويد: اضغط على أيقونة \"النقاط الثلاث\" في الجزء العلوي الأيمن لفتح القائمة. حدد \"إضافة إلى الشاشة الرئيسية\".",
+            "install_instructions_safari": "- متصفح سفاري: اضغط على زر \"مشاركة\" وحدد \"إضافة إلى الشاشة الرئيسية\"",
+            "install_instructions_browsers": "- متصفح كروم و متصفح ايدج: انقر فوق الرمز الموجود على الجانب الأيمن من شريط العنوان ثم انقر فوق الزر \"تثبيت\"، أو قم بالتثبيت من قائمة \"النقاط الثلاث\"."
+        },
+        "errors": {
+            "wrong_way": "طريقة خاطئة…",
+            "no_backend": "غير قادر على الاتصال بالخدمة الخلفية",
+            "request_error": "خطأ في الطلب"
+        },
+        "titles": {
+            "host_config": "تكوين المضيف"
+        }
+    }
 }
