@@ -131,8 +131,103 @@ jobs:
           name: artifacts
           path: ${{ matrix.filename }}.tar.gz
 
+  build-electron-app:
+    timeout-minutes: 60
+    env:
+      ON_DEVICE: false
+    strategy:
+      fail-fast: true
+      matrix:
+        job_name: ["linux", "mac_amd64", mac_arm64, "windows"]
+
+        include:
+          - job_name: linux
+            os: ubuntu-latest
+
+          - job_name: mac_amd64
+            os: macos-latest
+            apple_signing: true
+
+          - job_name: mac_arm64
+            os: macos-latest
+            build_arch: --arch arm64
+            apple_signing: true
+
+          - job_name: windows
+            os: windows-latest
+
+    name: ${{ matrix.job_name }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.10.0"
+          cache: "yarn"
+
+      - name: Install the Apple certificates
+        if: ${{ matrix.apple_signing }}
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
+
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Install UI packages
+        run: |
+          yarn install --immutable
+
+      - name: Install builder packages
+        run: |
+          yarn install --immutable --cwd builder/
+
+      - name: Set Yarn version
+        run: yarn set version classic
+
+      - name: Build Electron App
+        env:
+          # ELECTRON_SKIP_NOTARIZATION: true
+          XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
+          XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
+        run: yarn build-electron ${{ matrix.build_arch }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.job_name }}
+          path: |
+            ui/dist/electron/Packaged/Balena Starter Interface*.exe
+            ui/dist/electron/Packaged/Balena Starter Interface*.dmg
+            ui/dist/electron/Packaged/Balena Starter Interface*.AppImage
+
   deploy-to-gcr:
-    needs: [deploy-to-bcr, preload]
+    needs: [deploy-to-bcr]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -182,7 +277,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   create-release:
-    needs: [deploy-to-bcr, deploy-to-gcr, preload]
+    needs: [deploy-to-bcr, deploy-to-gcr, preload, build-electron-app]
     runs-on: ubuntu-latest
     steps:
       - name: Download all workflow artifacts
