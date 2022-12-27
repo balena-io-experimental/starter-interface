@@ -1,5 +1,5 @@
 <template>
-  <q-form class="flex flex-col" @submit="connect()">
+  <q-form v-if="!isNoWifiConnect" class="flex flex-col" @submit="connect()">
     <div class="col">
       <div v-if="!isWifiStatus && !isLoading">
         <div>
