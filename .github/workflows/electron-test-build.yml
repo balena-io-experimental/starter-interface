@@ -1,7 +1,7 @@
-name: "Build Electron Test App"
+name: "Build Electron App"
 
 on:
-  push:
+  workflow_dispatch:
 
 env:
   ON_DEVICE: false
@@ -40,16 +40,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.10.0"
+          cache: "yarn"
 
-      - name: Install the Apple certificate
+      - name: Install the Apple certificates
         if: ${{ matrix.apple_signing }}
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
-          XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
-          XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
 
         run: |
           # create variables
@@ -74,17 +73,29 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Install packages
-        run: yarn install
+      - name: Install UI packages
+        run: |
+          yarn install --immutable
+
+      - name: Install builder packages
+        run: |
+          yarn install --immutable --cwd builder/
 
       - name: Set Yarn version
         run: yarn set version classic
 
       - name: Build Electron App
+        env:
+          # ELECTRON_SKIP_NOTARIZATION: true
+          XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
+          XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
         run: yarn build-electron ${{ matrix.build_arch }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.job_name }}
-          path: ui/dist/electron/Packaged/Balena Starter Interface*
+          path: |
+            ui/dist/electron/Packaged/Balena Starter Interface*.exe
+            ui/dist/electron/Packaged/Balena Starter Interface*.dmg
+            ui/dist/electron/Packaged/Balena Starter Interface*.AppImage
