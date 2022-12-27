@@ -1,6 +1,5 @@
 {
   "name": "builder",
-  "packageManager": "yarn@3.2.3",
   "devDependencies": {
     "@electron/notarize": "^1.2.3"
   }

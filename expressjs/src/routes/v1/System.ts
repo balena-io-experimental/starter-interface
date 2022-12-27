@@ -50,7 +50,7 @@ router.post('/v1/system/systeminfo', (async (req: Request, res: Response) => {
     // Identify what info was requested and then fetch it from the systeminformation package
     switch (reqBody.id) {
       case '/':
-        data = (await si.getAllData()) as []
+        data = (await si.getAllData()) as unknown as []
         break
       case 'a':
         data = await si.audio()

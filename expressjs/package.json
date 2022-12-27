@@ -6,8 +6,8 @@
   "repository": "https://github.com/balena-labs-research/starter-interface",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore",
-    "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path .gitignore --check",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path ../.gitignore",
+    "formatcheck": "prettier \"**/*.{js,ts,vue,scss,html,md}\" --ignore-path ../.gitignore --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "nodemon -r tsconfig-paths/register ./src/index.ts",
     "start": "node ./dist/index.js",

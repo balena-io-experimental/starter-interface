@@ -217,7 +217,9 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
         appId: 'io.resin.device-ui',
-        electronVersion: '21.0.1', // TODO: remove when quasar updates with fix for --production flag error
+        // Fix to Electron version to resolve issue in workspaces
+        // https://github.com/electron-userland/electron-builder/issues/4157
+        electronVersion: '21.0.1',
         artifactName: 'Balena Starter Interface.${ext}',
         afterSign: '../builder/afterSignHook.js'
       }

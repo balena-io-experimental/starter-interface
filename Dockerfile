@@ -1,8 +1,5 @@
 ## Build ExpressJS backend and UI frontend
-FROM node:18.10.0-alpine3.16 AS build
-
-# Specify that this is being built for production
-ENV NODE_ENV=production
+FROM node:18.12.1-alpine3.17 AS build
 
 WORKDIR /build-context
 
@@ -11,8 +8,6 @@ COPY package.json .
 COPY yarn.lock .
 COPY expressjs/package.json expressjs/package.json
 COPY ui/package.json ui/package.json
-COPY .yarn .yarn
-COPY .yarnrc.yml .
 
 # Install packages
 RUN yarn install --immutable
@@ -34,11 +29,11 @@ RUN ON_DEVICE=false yarn build-pwa
 
 # UI build is done, so we now reduce the node_modules folder down 
 # to the essentials required for ExpressJS
-RUN yarn workspaces focus expressjs --production
+RUN yarn install --immutable --production
 
 
 ## Primary container
-FROM node:18.10.0-alpine3.16
+FROM node:18.12.1-alpine3.17
 
 # Install USB mount requirements
 RUN apk add --no-cache \
@@ -47,7 +42,7 @@ RUN apk add --no-cache \
     udev \
     util-linux
 
-# Specify that this is being built for production
+# Specify that this is for production
 ENV NODE_ENV=production
 
 WORKDIR /app
