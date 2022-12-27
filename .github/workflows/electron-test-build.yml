@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 env:
+  ELECTRON_SKIP_NOTARIZATION: true
   ON_DEVICE: false
 
 jobs:
@@ -39,7 +40,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "18.10.0"
+          node-version: "18.12.1"
           cache: "yarn"
 
       - name: Install the Apple certificates
@@ -81,12 +82,8 @@ jobs:
         run: |
           yarn install --immutable --cwd builder/
 
-      - name: Set Yarn version
-        run: yarn set version classic
-
       - name: Build Electron App
         env:
-          # ELECTRON_SKIP_NOTARIZATION: true
           XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
           XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
         run: yarn build-electron ${{ matrix.build_arch }}

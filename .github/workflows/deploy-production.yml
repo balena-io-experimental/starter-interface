@@ -8,7 +8,7 @@ on:
 env:
   BALENA_CLI_VERSION: 14.5.15
   BALENA_FLEET: bdi/starter-interface
-  GCR_IMAGE_NAME: balena-labs-research/bsi
+  GHCR_IMAGE_NAME: balena-labs-research/bsi
 
 jobs:
   deploy-to-bcr:
@@ -165,7 +165,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "18.10.0"
+          node-version: "18.12.1"
           cache: "yarn"
 
       - name: Install the Apple certificates
@@ -207,9 +207,6 @@ jobs:
         run: |
           yarn install --immutable --cwd builder/
 
-      - name: Set Yarn version
-        run: yarn set version classic
-
       - name: Build Electron App
         env:
           # ELECTRON_SKIP_NOTARIZATION: true
@@ -226,7 +223,7 @@ jobs:
             ui/dist/electron/Packaged/Balena Starter Interface*.dmg
             ui/dist/electron/Packaged/Balena Starter Interface*.AppImage
 
-  deploy-to-gcr:
+  deploy-to-ghcr:
     needs: [deploy-to-bcr]
     runs-on: ubuntu-latest
     permissions:
@@ -258,7 +255,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ env.GCR_IMAGE_NAME }}
+          images: ghcr.io/${{ env.GHCR_IMAGE_NAME }}
           flavor: |
             latest=true
           tags: |
@@ -277,7 +274,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   create-release:
-    needs: [deploy-to-bcr, deploy-to-gcr, preload, build-electron-app]
+    needs: [deploy-to-bcr, deploy-to-ghcr, preload, build-electron-app]
     runs-on: ubuntu-latest
     steps:
       - name: Download all workflow artifacts
