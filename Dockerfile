@@ -25,10 +25,11 @@ COPY ui ui
 RUN yarn lint
 
 # Build ExpressJS and UI.
-# ON_DEVICE=false informs the build that there my not be a backend available, and therefore 
-# not to perform certain function like communicating with the backend on boot. This is used 
-# for things like the Electron build. 
 RUN yarn build
+
+# ON_DEVICE=false informs the build that there may not be a backend available, and therefore 
+# not to perform certain functions like communicating with the backend on boot. This is used 
+# for things like the Electron build. 
 RUN ON_DEVICE=false yarn build-pwa
 
 # UI build is done, so we now reduce the node_modules folder down 
