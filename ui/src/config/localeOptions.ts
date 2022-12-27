@@ -12,7 +12,9 @@ export default [
   { value: 'es', label: 'Español' },
   { value: 'fr', label: 'Français' },
   { value: 'it', label: 'Italiana' },
-  { value: 'pt-BR', label: 'Português' }
+  { value: 'pt-BR', label: 'Português' },
+  { value: 'ru', label: 'русский' },
+  { value: 'tr', label: 'Türk' }
 ]
 
 // Quasar has its own language packs that are used as generic labels for things like tables. To keep
@@ -24,5 +26,5 @@ export default [
 // '../../../node_modules/quasar/lang/(en-US|fr|it).mjs' <-- imports English, French and Italian
 
 export const qLangList = import.meta.glob(
-  '../../../node_modules/quasar/lang/(en-US|es|fr|it|pt-BR).mjs'
+  '../../../node_modules/quasar/lang/(en-US|es|fr|it|pt-BR|ru|tr).mjs'
 )
