@@ -128,7 +128,7 @@ jobs:
       - name: Upload file
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
+          name: images
           path: ${{ matrix.filename }}.tar.gz
 
   build-electron-app:
@@ -286,4 +286,9 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
-            artifacts/*
+            images/*
+            mac_amd64/*
+            mac_arm64/*
+            linux/*
+            windows/*
+
