@@ -1,3 +1,5 @@
+# Deploy to the fleet and build the Electron apps
+
 name: Deploy to production
 
 on:
@@ -104,7 +106,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download image
+      - name: Download Balena image
         shell: bash
         run: |
           wget -q -O ./${{ matrix.filename }}.zip \
@@ -112,7 +114,7 @@ jobs:
           unzip ${{ matrix.filename }}.zip && \
           mv *.img ${{ matrix.filename }}.img
 
-      - name: Preload image
+      - name: Preload the Balena image with the code
         uses: balena-labs-research/community-cli-action@1.0.0
         with:
           balena_token: ${{secrets.BALENA_TOKEN}}
@@ -120,12 +122,12 @@ jobs:
             preload ${{ matrix.filename }}.img --fleet ${{ env.BALENA_FLEET }} --commit latest;
           balena_cli_version: ${{ env.BALENA_CLI_VERSION }}
 
-      - name: Compress
+      - name: Compress the images
         shell: bash
         run: |
           tar -czf ${{ matrix.filename }}.tar.gz ./${{ matrix.filename }}.img
 
-      - name: Upload file
+      - name: Upload files to temporary GitHub assets storage
         uses: actions/upload-artifact@v3
         with:
           name: images
@@ -134,6 +136,7 @@ jobs:
   build-electron-app:
     timeout-minutes: 60
     env:
+      # Specify that this is being built for use locally and not on a device.
       ON_DEVICE: false
     strategy:
       fail-fast: true
@@ -199,22 +202,21 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Install UI packages
+      - name: Install packages for the UI
         run: |
           yarn install --immutable
 
-      - name: Install builder packages
+      - name: Install Electron Builder packages
         run: |
           yarn install --immutable --cwd builder/
 
       - name: Build Electron App
         env:
-          # ELECTRON_SKIP_NOTARIZATION: true
           XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
           XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
         run: yarn build-electron ${{ matrix.build_arch }}
 
-      - name: Upload artifacts
+      - name: Upload artifacts to GitHub temporary storage
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.job_name }}
@@ -241,7 +243,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Available platforms
+      - name: Display available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Log in to the Container registry
@@ -280,7 +282,7 @@ jobs:
       - name: Download all workflow artifacts
         uses: actions/download-artifact@v3
 
-      - name: Create production changeLog and release
+      - name: Create production changeLog and release with the artifacts
         uses: "balena-io-experimental/automatic-release-action@stable"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
