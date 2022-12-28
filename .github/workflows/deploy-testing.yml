@@ -1,8 +1,10 @@
+# Deploy pull requests to the test fleet automatically
 name: "Deploy to development devices"
 on:
   pull_request:
     branches:
       - main
+    types: [assigned]
 
 env:
   PR_NUMBER: ${{ github.event.number }}

@@ -1,10 +1,15 @@
+# GitHub Workflow to manually build the Electron test app. The built assets are not notarised as they are not for distribution 
+# and they are stored in the workflow as GitHub assets rather than published.
+
 name: "Build Test Electron App"
 
 on:
   workflow_dispatch:
 
 env:
+  # When true, do not send the files to Apple for notarising. 
   ELECTRON_SKIP_NOTARIZATION: true
+  # Specify that this is being built for use locally and not on a device. 
   ON_DEVICE: false
 
 jobs:
@@ -78,17 +83,17 @@ jobs:
         run: |
           yarn install --immutable
 
-      - name: Install builder packages
+      - name: Install Electron Builder packages
         run: |
           yarn install --immutable --cwd builder/
 
-      - name: Build Electron App
+      - name: Build Electron app
         env:
           XCODE_APP_LOADER_EMAIL: ${{ secrets.XCODE_APP_LOADER_EMAIL }}
           XCODE_APP_LOADER_PASSWORD: ${{ secrets.XCODE_APP_LOADER_PASSWORD }}
         run: yarn build-electron ${{ matrix.build_arch }}
 
-      - name: Upload artifacts
+      - name: Upload artifacts to GitHub temporary storage
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.job_name }}
