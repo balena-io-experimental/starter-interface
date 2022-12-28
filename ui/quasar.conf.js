@@ -220,7 +220,7 @@ module.exports = configure(function (ctx) {
         // Fix to Electron version to resolve issue in workspaces
         // https://github.com/electron-userland/electron-builder/issues/4157
         electronVersion: '21.0.1',
-        artifactName: 'Balena Starter Interface.${ext}',
+        artifactName: 'Balena Starter Interface ${arch}.${ext}',
         afterSign: '../builder/afterSignHook.js'
       }
     },
