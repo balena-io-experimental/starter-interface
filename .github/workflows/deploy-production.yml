@@ -10,6 +10,7 @@ on:
 env:
   BALENA_CLI_VERSION: 14.5.15
   BALENA_FLEET: bdi/starter-interface
+  ELECTRON_OUTPUT_PATH: "ui/dist/electron/Packaged"
   GHCR_IMAGE_NAME: balena-labs-research/bsi
 
 jobs:
@@ -141,7 +142,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        job_name: ["linux", "mac_amd64", mac_arm64, "windows"]
+        job_name: ["linux", "mac_amd64", "mac_arm64", "windows"]
 
         include:
           - job_name: linux
@@ -225,9 +226,9 @@ jobs:
         with:
           name: ${{ matrix.job_name }}
           path: |
-            ui/dist/electron/Packaged/Balena Starter Interface*.exe
-            ui/dist/electron/Packaged/Balena Starter Interface*.dmg
-            ui/dist/electron/Packaged/Balena Starter Interface*.AppImage
+            ${{ env.ELECTRON_OUTPUT_PATH }}/*.exe
+            ${{ env.ELECTRON_OUTPUT_PATH }}/*.dmg
+            ${{ env.ELECTRON_OUTPUT_PATH }}/*.AppImage
 
   deploy-to-ghcr:
     needs: [deploy-to-bcr]
