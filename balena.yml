@@ -22,4 +22,4 @@ data:
     - raspberrypi4-64
     - intel-nuc
     - genericx86-64-ext
-version: 0.0.0
+version: 0.0.1

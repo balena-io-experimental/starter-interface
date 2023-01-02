@@ -216,12 +216,16 @@ module.exports = configure(function (ctx) {
 
       builder: {
         // https://www.electron.build/configuration/configuration
-        appId: 'io.resin.device-ui',
+        appId: 'io.balena.device-ui',
         // Fix to Electron version to resolve issue in workspaces
         // https://github.com/electron-userland/electron-builder/issues/4157
         electronVersion: '21.0.1',
-        artifactName: 'Balena Starter Interface ${arch}.${ext}',
-        afterSign: '../builder/afterSignHook.js'
+        afterSign: '../builder/afterSignHook.js',
+        artifactName: 'Balena Starter Interface.${ext}',
+        mac: {
+          target: 'dmg',
+          artifactName: 'Balena Starter Interface ${arch}.${ext}'
+        }
       }
     },
 
