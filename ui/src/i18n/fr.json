@@ -43,7 +43,8 @@
                 "os_version": "Version du système d'exploitation",
                 "cloudlink": "Lien vers le nuage",
                 "temperature": "Température",
-                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink"
+                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink",
+                "network_config": "Configuration du réseau"
             },
             "env_config": {
                 "raw_json": "JSON brut",
