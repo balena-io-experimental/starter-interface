@@ -44,7 +44,8 @@
                 "location": "Posizione",
                 "storage": "Memoria",
                 "undervolted": "Sottotensione",
-                "not_undervolted": "Alimentazione normale"
+                "not_undervolted": "Alimentazione normale",
+                "network_config": "Configurazione della rete"
             },
             "env_config": {
                 "edit": "Modifica",
