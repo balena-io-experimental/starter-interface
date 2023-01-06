@@ -173,9 +173,6 @@
             "no_backend": "Impossibile comunicare con il servizio backend",
             "request_error": "Richiesta d'errore",
             "wrong_way": "Via sbagliata…"
-        },
-        "titles": {
-            "host_config": "Configurazione dell'Host"
         }
     },
     "title": "Interfaccia d'avvio Balena"
