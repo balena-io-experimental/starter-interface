@@ -58,7 +58,8 @@
                 "mac_address": "Endereço MAC",
                 "cloudlink": "Cloudlink",
                 "temperature": "Temperatura",
-                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente"
+                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente",
+                "network_config": "Configuração de rede"
             },
             "env_config": {
                 "raw_json": "JSON puro",
