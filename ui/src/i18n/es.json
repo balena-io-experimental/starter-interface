@@ -80,7 +80,8 @@
                 "undervolted": "Infravalorado",
                 "check_cloudlink_tooltip": "Haga clic para volver a comprobar la conectividad a Cloudlink",
                 "cloudlink": "Enlace en la nube",
-                "temperature": "Temperatura"
+                "temperature": "Temperatura",
+                "network_config": "Configuración de la red"
             },
             "env_config": {
                 "raw_json": "JSON sin procesar",
