@@ -173,9 +173,6 @@
             "install_instructions_safari": "- Safari: pressione o botão 'Compartilhar' e selecione 'Adicionar à tela inicial'",
             "install_instructions_chrome": "- Chrome Android: Pressione o ícone com 'três pontos' no canto superior direito para abrir o menu. Selecione 'Adicionar à tela inicial'.",
             "install_instructions_browsers": "- Google Chrome e Microsoft Edge: Clique no ícone no lado direito da barra de endereço e clique no botão 'Instalar' ou instale a partir do ícone com 'três pontos'."
-        },
-        "titles": {
-            "host_config": "Configuração do host"
         }
     },
     "title": "Interface inicial do Balena"

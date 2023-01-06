@@ -173,9 +173,6 @@
             "install_instructions_browsers": "- Google Chrome y Microsoft Edge: haga clic en el ícono en el lado derecho de la barra de URL y luego haga clic en el botón 'Instalar', o instale desde el menú de 'tres puntos'.",
             "install": "Instalar",
             "install_instructions_chrome": "- Chrome Android: Presiona el ícono de los 'tres puntos' en la parte superior derecha para abrir el menú. Seleccione 'Agregar a la pantalla de inicio'."
-        },
-        "titles": {
-            "host_config": "Configuración del host"
         }
     },
     "title": "Interfaz de dispositivo Balena"

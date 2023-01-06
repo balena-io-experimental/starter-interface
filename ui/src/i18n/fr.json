@@ -173,9 +173,6 @@
             "install_instructions_safari": "- Safari : Appuyez sur le bouton « Partager » et sélectionnez « Ajouter à l'écran d'accueil »",
             "install_instructions_chrome": "- Chrome Android : Appuyez sur l'icône des « trois points » en haut à droite pour ouvrir le menu. Sélectionnez « Ajouter à l'écran d'accueil ».",
             "install_instructions_browsers": "- Google Chrome et Microsoft Edge : cliquez sur l'icône située à droite de la barre d'URL, puis sur le bouton « Installer », ou effectuez l'installation à partir du menu « trois points »."
-        },
-        "titles": {
-            "host_config": "Configuration de l'hôte"
         }
     },
     "title": "Interface de démarrage Balena"
