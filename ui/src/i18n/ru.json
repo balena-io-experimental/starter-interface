@@ -17,7 +17,8 @@
                 "supervisor_version": "Версия супервизора",
                 "location": "Местонахождение",
                 "ip_address": "IP-адрес",
-                "storage": "Хранилище"
+                "storage": "Хранилище",
+                "network_config": "Конфигурация сети"
             },
             "env_config": {
                 "delete_selected_records": "Удалить выбранные записи",
