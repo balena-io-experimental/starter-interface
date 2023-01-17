@@ -42,7 +42,7 @@ services:
       # Required system variables
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
     network_mode: "host"
-    restart: always
+    restart: on-failure
     volumes:
       - "pwc_db:/app/db" # Optional if not setting the hotspot ssid and password via the API
     labels:
