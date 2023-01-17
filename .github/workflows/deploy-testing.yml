@@ -4,7 +4,8 @@ on:
   pull_request:
     branches:
       - main
-    types: [assigned]
+    paths-ignore:
+      - "docs/**"
 
 env:
   PR_NUMBER: ${{ github.event.number }}
@@ -15,21 +16,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job_name: ["rpi", "nuc", "fin", "generic"]
+        job_name: ["fin", "generic", "rpi"]
 
         include:
-          - job_name: rpi
-            fleet: bdi/bdi-rpi
-
-          - job_name: nuc
-            fleet: bdi/bdi-nuc
-
           - job_name: fin
             fleet: bdi/bdi-fin
 
           - job_name: generic
             fleet: bdi/bdi-generic
 
+          - job_name: rpi
+            fleet: bdi/bdi-rpi
 
     name: ${{ matrix.job_name }}
 
