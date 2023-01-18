@@ -161,7 +161,7 @@ const v2 = {
       type: 'GET',
       path: 'v2/device/name',
       params: false,
-      cacheTimeout: 60
+      cacheTimeout: 6000
     })
   },
   device_tags() {

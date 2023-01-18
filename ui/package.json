@@ -54,7 +54,7 @@
     "workbox-strategies": "^6.5.4"
   },
   "engines": {
-    "node": "^18 || ^16",
+    "node": "^18",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   }
