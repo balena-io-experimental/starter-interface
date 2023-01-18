@@ -10,7 +10,7 @@ COPY expressjs/package.json expressjs/package.json
 COPY ui/package.json ui/package.json
 
 # Install packages
-RUN yarn install --immutable --network-timeout 600000
+RUN yarn install --frozen-lockfile --network-timeout 600000
 
 # Copy source files to container
 COPY expressjs expressjs
@@ -28,8 +28,10 @@ RUN yarn build
 RUN ON_DEVICE=false yarn build-pwa
 
 # UI build is done, so we now reduce the node_modules folder down 
-# to the essentials required for ExpressJS
-RUN yarn install --immutable --production --network-timeout 600000
+# to the essentials required for ExpressJS.
+# Requires moving package.json due to a yarn bug: https://github.com/yarnpkg/yarn/issues/6715
+RUN mv expressjs/package.json ./
+RUN yarn install --frozen-lockfile --production --network-timeout 600000
 
 
 ## Primary container
