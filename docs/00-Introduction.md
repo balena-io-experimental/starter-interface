@@ -1,3 +1,9 @@
+---
+slug: /
+breadcrumbs: true
+title: Introduction
+---
+
 # Balena Starter Interface
 
 A community-built device interface for using balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
@@ -33,10 +39,6 @@ Some of the core features include:
 - I18n language translations
 
 These components are optional, and easily removed or edited. The project also includes the ability to add your own components, branding and anything else you desire to get started with building a user interface for your balena devices.
-
-# Documentation
-
-Use of the UI and technical details can be found in the [documentation](https://balena-labs-research.github.io/starter-interface).
 
 # One-click deploy
 

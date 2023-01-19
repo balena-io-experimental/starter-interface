@@ -5,6 +5,8 @@ name: "Build Test Electron App"
 
 on:
   push:
+    paths-ignore:
+      - "docs/**"
 
 env:
   ELECTRON_OUTPUT_PATH: "ui/dist/electron/Packaged"
