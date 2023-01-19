@@ -45,3 +45,4 @@ yarn-error.log*
 *.sln
 
 # Development components
+labs-docs-builder

@@ -53,3 +53,5 @@
 **/*.sw?
 
 # Development components
+labs-docs-builder
+docs
