@@ -113,7 +113,8 @@ jobs:
           wget -q -O ./${{ matrix.filename }}.zip \
           'https://api.balena-cloud.com/download?deviceType=${{ matrix.device }}&version=${{ matrix.version }}&developmentMode=${{ matrix.developmentMode }}&fileType=.zip' && \
           unzip ${{ matrix.filename }}.zip && \
-          mv *.img ${{ matrix.filename }}.img
+          mv *.img ${{ matrix.filename }}.img && \
+          rm ${{ matrix.filename }}.zip
 
       - name: Preload the Balena image with the code
         uses: balena-labs-research/community-cli-action@1.0.0
@@ -126,13 +127,13 @@ jobs:
       - name: Compress the images
         shell: bash
         run: |
-          tar -czf ${{ matrix.filename }}.tar.gz ./${{ matrix.filename }}.img
+          zip ${{ matrix.filename }}.zip ./${{ matrix.filename }}.img
 
       - name: Upload files to temporary GitHub assets storage
         uses: actions/upload-artifact@v3
         with:
           name: images
-          path: ${{ matrix.filename }}.tar.gz
+          path: ${{ matrix.filename }}.zip
 
   build-electron-app:
     timeout-minutes: 60
