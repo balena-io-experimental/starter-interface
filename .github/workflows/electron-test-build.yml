@@ -9,14 +9,15 @@ on:
       - "docs/**"
 
 env:
-  ELECTRON_OUTPUT_PATH: "ui/dist/electron/Packaged"
   ELECTRON_SKIP_NOTARIZATION: true
-  # Specify that this is being built for use locally and not on a device. 
-  ON_DEVICE: false
 
 jobs:
-  build:
-    timeout-minutes: 60
+  build-electron-app:
+    timeout-minutes: 90
+    env:
+      ELECTRON_OUTPUT_PATH: "ui/dist/electron/Packaged"
+      # Specify that this is being built for use locally and not on a device.
+      ON_DEVICE: false
     strategy:
       fail-fast: false
       matrix:

@@ -1,7 +1,11 @@
 "use strict";
 
 const { notarize } = require("@electron/notarize");
-const { ELECTRON_SKIP_NOTARIZATION } = process.env;
+const {
+  ELECTRON_SKIP_NOTARIZATION,
+  XCODE_APP_LOADER_EMAIL,
+  XCODE_APP_LOADER_PASSWORD,
+} = process.env;
 
 async function main(context) {
   const { electronPlatformName, appOutDir } = context;
@@ -9,8 +13,8 @@ async function main(context) {
   if (
     electronPlatformName !== "darwin" ||
     ELECTRON_SKIP_NOTARIZATION === "true" ||
-    !process.env.XCODE_APP_LOADER_PASSWORD ||
-    !process.env.XCODE_APP_LOADER_EMAIL
+    !XCODE_APP_LOADER_EMAIL ||
+    !XCODE_APP_LOADER_PASSWORD
   ) {
     console.log("Skipping Apple notarization.");
     return;
@@ -19,14 +23,12 @@ async function main(context) {
   console.log("Starting Apple notarization.");
 
   const appName = context.packager.appInfo.productFilename;
-  const appleId = process.env.XCODE_APP_LOADER_EMAIL;
-  const appleIdPassword = process.env.XCODE_APP_LOADER_PASSWORD;
 
   await notarize({
     appBundleId: "io.balena.starterinterface",
     appPath: `${appOutDir}/${appName}.app`,
-    appleId,
-    appleIdPassword,
+    appleId: XCODE_APP_LOADER_EMAIL,
+    appleIdPassword: XCODE_APP_LOADER_PASSWORD,
   });
 }
 
