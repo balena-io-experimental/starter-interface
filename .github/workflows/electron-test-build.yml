@@ -52,11 +52,11 @@ jobs:
 
       - name: Install UI packages
         run: |
-          yarn install --immutable
+          yarn install --frozen-lockfile
 
       - name: Install Electron Builder packages
         run: |
-          yarn install --immutable --cwd builder/
+          yarn install --frozen-lockfile --cwd builder/
 
       - name: Build Electron app
         run: yarn build-electron ${{ matrix.build_arch }}

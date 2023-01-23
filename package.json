@@ -9,11 +9,12 @@
     "lint": "yarn -p -i workspaces foreach run lint",
     "format": "yarn -p -i workspaces foreach run format",
     "formatcheck": "yarn -p -i workspaces foreach run formatcheck",
-    "dev": "DEVICE_HOSTNAME=localhost yarn workspace expressjs run dev & DEVICE_HOSTNAME=localhost yarn workspace ui run dev",
+    "dev": "LOCAL_MODE=true yarn workspace expressjs dev & DEVICE_HOSTNAME=localhost:80 yarn workspace ui dev",
+    "dev-remote": "yarn workspace ui dev",
     "dev-electron": "ON_DEVICE=false yarn workspace ui dev -m electron",
     "dev-pwa": "ON_DEVICE=false yarn workspace ui dev -m pwa",
     "build": "yarn -p -i workspaces foreach run build",
     "build-pwa": "yarn workspace ui build-pwa",
-    "build-electron": "yarn install --immutable --cwd builder/ && yarn workspace ui build-electron -P never"
+    "build-electron": "yarn install --frozen-lockfile --cwd builder/ && yarn workspace ui build-electron -P never"
   }
 }

@@ -19,6 +19,9 @@ COPY ui ui
 # Run lint to ensure build fails if there are code issues
 RUN yarn lint
 
+# Copy the yml config file for building
+COPY config*.yml .
+
 # Build ExpressJS and UI.
 RUN yarn build
 

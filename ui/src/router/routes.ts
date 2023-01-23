@@ -1,47 +1,30 @@
+import { configYml } from 'src/boot/ymlImport'
 import { RouteRecordRaw } from 'vue-router'
+
+const vuePages = import.meta.glob('pages/*.vue')
+
+// For each item in configYml.sideDrawer create an object
+const ymlRoutes = Object.entries(configYml.pages).map((ymlArray) => ({
+  name: ymlArray[0],
+  component: vuePages[`../pages/${ymlArray[0]}.vue`],
+  path: ymlArray[1].path
+}))
+
+ymlRoutes.forEach((item, i) => {
+  if (item.name.toLowerCase() === 'indexpage') ymlRoutes[i].path = ''
+})
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('pages/IndexPage.vue'),
-        name: 'indexPage'
-      },
-      {
-        path: 'configuration',
-        component: () => import('pages/Configuration.vue'),
-        name: 'configuration'
-      },
-      {
-        path: 'filemanager',
-        component: () => import('pages/FileManager.vue'),
-        name: 'fileManager'
-      },
-      {
-        path: 'containermanager',
-        component: () => import('pages/ContainerManager.vue'),
-        name: 'containerManager'
-      },
-      {
-        path: 'networking',
-        component: () => import('pages/Networking.vue'),
-        name: 'networking'
-      },
-      {
-        path: 'systeminfo',
-        component: () => import('pages/SystemInfo.vue'),
-        name: 'systemInfo'
-      }
-    ]
+    children: ymlRoutes
   },
 
   // Always leave this as last one, or remove it entirely
   {
     path: '/:catchAll(.*)*',
-    component: () => import('src/pages/ErrorNotFound.vue')
+    component: () => import('src/layouts/ErrorNotFound.vue')
   }
 ]
 

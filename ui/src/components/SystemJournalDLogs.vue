@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <q-space />
     <q-btn
       :loading="isLoading"
       v-bind="qBtnStyle"

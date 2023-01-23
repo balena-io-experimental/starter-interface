@@ -29,8 +29,8 @@ const router = express.Router()
 
 // Set local directory for file and folder storage
 let rootDir = '/app/storage/'
-if (process.env.DEVICE_HOSTNAME === 'localhost') {
-  rootDir = path.join(__dirname, '../../../storage/')
+if (process.env.LOCAL_MODE === 'true') {
+  rootDir = path.resolve(path.join(__dirname, '/storage/'))
 }
 
 // Check the storage directory exists and if not create it

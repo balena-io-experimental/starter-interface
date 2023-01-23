@@ -8,7 +8,9 @@ async function main(context) {
 
   if (
     electronPlatformName !== "darwin" ||
-    ELECTRON_SKIP_NOTARIZATION === "true"
+    ELECTRON_SKIP_NOTARIZATION === "true" ||
+    !process.env.XCODE_APP_LOADER_PASSWORD ||
+    !process.env.XCODE_APP_LOADER_EMAIL
   ) {
     console.log("Skipping Apple notarization.");
     return;

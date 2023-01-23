@@ -1,0 +1,46 @@
+pages:
+  #####
+  # A list of pages from ui/src/pages to load and the ui/src/components to show on each one.
+  #
+  # Example that creates an Environment Variable configuration interface:
+  #
+  # ----------------------------------------------------------------------------------------------------
+  # IndexPage:
+  #   components: [[SystemEnvConfig]]  # Load the SystenEnvConfig component on the index page
+  #   icon: settings   # The label from Google Material Icons to display in the sidebar: https://fonts.google.com/icons
+  #   label: components.system.device_info.environment_variables   # The i18n key from ui/src/i18n/en-US.json to use as sidebar text
+  # ----------------------------------------------------------------------------------------------------
+  #
+  # All the other sections are removed so you only see the environment variable configuration
+  #
+  #####
+  IndexPage: # This page cannot be removed
+    components: [[SystemDeviceInfo]]
+    # Path will always be '/'
+    icon: visibility
+    label: system.menu_items.device_info
+  FileManager:
+    components: [[ToolsFileManager]]
+    path: "filemanager"
+    icon: folder
+    label: system.menu_items.file_manager
+  Configuration: 
+    components: [[SystemChangeHostname], [SystemEnvConfig]]
+    path: 'configuration'
+    icon: settings
+    label: system.menu_items.configuration
+  ContainerManager:
+    components: [[ToolsContainerManager]]
+    path: 'containermanager'
+    icon: all_inbox
+    label: system.menu_items.container_manager
+  Networking:
+    components: [[WifiConnect]]
+    path: 'networking'
+    icon: router
+    label: system.menu_items.networking
+  SystemInfo:
+    components: [[SystemJournalDLogs, ToolsSystemInfo]]
+    path: 'systeminfo'
+    icon: info
+    label: system.menu_items.system_info

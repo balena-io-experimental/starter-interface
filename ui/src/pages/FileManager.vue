@@ -1,19 +1,16 @@
 <template>
-  <q-page>
-    <div><component-frame :components="[{ component: FileManager }]" /></div>
-  </q-page>
+  <yml-import />
 </template>
 
 <script lang="ts">
-import FileManager from 'components/ToolsFileManager.vue'
-import ComponentFrame from 'layouts/ComponentFrame.vue'
+import YmlImport from 'layouts/YmlImport.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'FileManager',
-  components: { ComponentFrame },
+  name: 'SystemInfo',
+  components: { YmlImport },
   setup() {
-    return { FileManager }
+    return {}
   }
 })
 </script>

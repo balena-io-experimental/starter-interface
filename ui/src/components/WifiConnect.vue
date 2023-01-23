@@ -3,6 +3,24 @@
     <div class="col">
       <div v-if="!isWifiStatus && !isLoading">
         <div>
+          <div class="row justify-end text-center">
+            <q-expansion-item
+              class="q-pd-xl"
+              expand-separator
+              dense
+              :label="$t('components.wifi.connect.configure_hotspot')"
+            >
+              <div class="q-pt-xs">
+                <configure-s-s-i-d />
+              </div>
+              <div class="q-pt-xs">
+                <configure-password />
+              </div>
+              <div class="q-pt-xs">
+                <ForgetAllWifi />
+              </div>
+            </q-expansion-item>
+          </div>
           <q-select
             v-model="wifiConnection"
             :label="$t('components.wifi.connect.select_ssid')"
@@ -104,6 +122,9 @@
 
 <script lang="ts">
 import { expressApi } from 'boot/axios'
+import ConfigurePassword from 'components/WifiConfigurePassword.vue'
+import ConfigureSSID from 'components/WifiConfigureSSID.vue'
+import ForgetAllWifi from 'components/WifiForgetAllWifi.vue'
 import { useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -125,6 +146,11 @@ interface WifiStatusRes {
 
 export default defineComponent({
   name: 'WifiConnect',
+  components: {
+    ConfigurePassword,
+    ConfigureSSID,
+    ForgetAllWifi
+  },
   setup() {
     const $q = useQuasar()
     // eslint-disable-next-line @typescript-eslint/unbound-method

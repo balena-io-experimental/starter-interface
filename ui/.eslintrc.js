@@ -143,7 +143,7 @@ module.exports = {
       {
         src: './src',
         extensions: ['.js', '.vue', '.ts'],
-        ignores: [],
+        ignores: ['/system.menu_items/'],
         enableFix: false
       }
     ],

@@ -46,4 +46,4 @@ yarn-error.log*
 
 # Development components
 labs-docs-builder
-expressjs/storage
+expressjs/src/routes/v1/storage

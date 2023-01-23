@@ -1,19 +1,16 @@
 <template>
-  <q-page class="q-pa-lg">
-    <component-frame :components="[{ component: ContainerManager }]" />
-  </q-page>
+  <yml-import />
 </template>
 
 <script lang="ts">
-import ContainerManager from 'components/ToolsContainerManager.vue'
-import ComponentFrame from 'layouts/ComponentFrame.vue'
+import YmlImport from 'layouts/YmlImport.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'ContainerManager',
-  components: { ComponentFrame },
+  name: 'SystemInfo',
+  components: { YmlImport },
   setup() {
-    return { ContainerManager }
+    return {}
   }
 })
 </script>

@@ -4,9 +4,11 @@
 //
 
 import Logger from '@/common/logger'
+import fse from 'fs-extra'
 import http2 from 'http2'
 import express, { Request, RequestHandler, Response } from 'express'
 import si from 'systeminformation'
+import yaml from 'js-yaml'
 
 // Interface for the payload
 interface BodyDataReq {
@@ -17,6 +19,19 @@ interface BodyDataReq {
 const router = express.Router()
 
 // -- Routes -- //
+
+// Provide the local config.yml file to the UI
+router.get('/v1/system/config_yml', (_req, res) => {
+  const ymlPath = '/app/config.yml'
+
+  // Check for and read the config.yml file
+  if (fse.existsSync(ymlPath)) {
+    const ymlConfig = yaml.load(fse.readFileSync(ymlPath, 'utf8'))
+    return res.json(ymlConfig)
+  }
+
+  return res.json({ local_config: false })
+})
 
 // Internet connectivity check. The DNS resolution tended to use cached
 // DNS responses which resulted in false positives so opting instead for a
