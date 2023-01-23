@@ -126,12 +126,12 @@ export default defineComponent({
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        yAxis: {
+        y: {
           min: 0,
           max: 100,
           display: true
         },
-        xAxis: {
+        x: {
           display: false
         }
       },
