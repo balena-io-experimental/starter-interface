@@ -1,4 +1,7 @@
 <template>
+  <div class="text-h5 q-mb-md">
+    {{ $t('components.system.device_info.network_config') }}
+  </div>
   <div>
     <q-input
       v-model="newHostname"

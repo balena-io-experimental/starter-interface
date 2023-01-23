@@ -1,24 +1,16 @@
 <template>
-  <q-page class="q-pa-lg">
-    <div class="row justify-end">
-      <component-frame :components="[{ component: JournalDLogs }]" />
-    </div>
-
-    <div><component-frame :components="[{ component: SystemInfo }]" /></div>
-  </q-page>
+  <yml-import />
 </template>
 
 <script lang="ts">
-import JournalDLogs from 'components/SystemJournalDLogs.vue'
-import SystemInfo from 'components/ToolsSystemInfo.vue'
-import ComponentFrame from 'layouts/ComponentFrame.vue'
+import YmlImport from 'layouts/YmlImport.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'SystemInfo',
-  components: { ComponentFrame },
+  components: { YmlImport },
   setup() {
-    return { JournalDLogs, SystemInfo }
+    return {}
   }
 })
 </script>

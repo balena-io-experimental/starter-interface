@@ -45,6 +45,7 @@
     },
     "system": {
       "device_info": {
+        "are_you_connected_fleet": "Are you connected to a fleet?",
         "environment_variables": "Environment Variables",
         "ip_address": "IP Address",
         "location": "Location",

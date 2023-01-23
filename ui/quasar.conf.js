@@ -11,7 +11,32 @@
 
 const { configure } = require('quasar/wrappers')
 const path = require('path')
+
+// For importing from yml file
+const fs = require('fs')
+const yaml = require('js-yaml')
+
+// Public path for different modes (SPA, PWA, Electron etc.)
 let PUBLIC_PATH
+
+// Default path to config.yml
+let liveConfig = false
+let ymlConfig
+let ymlPath = path.resolve('../config.yml')
+
+// If config.yml doesn't exist, use config_default.yml and enable ability to configure the UI
+// from a config.yml file at the time of rendering the UI
+if (!fs.existsSync(ymlPath)) {
+  liveConfig = true
+  ymlPath = path.resolve('../config_default.yml')
+}
+
+try {
+  ymlConfig = yaml.load(fs.readFileSync(ymlPath, 'utf8'))
+} catch {
+  console.error('Neither config.yml or config_default.yml exist. Exiting...')
+  return
+}
 
 module.exports = configure(function (ctx) {
   if (ctx.mode.pwa && process.env.PUBLIC_PWA_PATH) {
@@ -40,7 +65,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['axios', 'i18n', 'pinia'],
+    boot: ['axios', 'i18n', 'pinia', 'ymlImport'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
@@ -62,8 +87,10 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       env: {
-        DEVICE_HOSTNAME: process.env.DEVICE_HOSTNAME,
+        CONFIG_YML: JSON.stringify(ymlConfig),
         BACKEND_PORT: process.env.BACKEND_PORT,
+        DEVICE_HOSTNAME: process.env.DEVICE_HOSTNAME,
+        LIVE_CONFIG: process.env.LIVE_CONFIG || liveConfig,
         ON_DEVICE: process.env.ON_DEVICE ? process.env.ON_DEVICE : 'true'
       },
       target: {
@@ -219,7 +246,7 @@ module.exports = configure(function (ctx) {
         appId: 'io.balena.device-ui',
         // Fix to Electron version to resolve issue in workspaces
         // https://github.com/electron-userland/electron-builder/issues/4157
-        electronVersion: '21.0.1',
+        electronVersion: '22.0.3',
         afterSign: '../builder/afterSignHook.js',
         artifactName: 'Balena Starter Interface.${ext}',
         mac: {

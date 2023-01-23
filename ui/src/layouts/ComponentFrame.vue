@@ -6,10 +6,10 @@ components. See the Wiki on Github for more details.
 
 <template>
   <q-card flat bordered class="q-mb-md" :class="props.class">
-    <q-item-label v-if="props.title" class="q-mt-sm" overline>
-      {{ props.title }}
-    </q-item-label>
     <q-card-section :class="rowClass">
+      <div v-if="props.title" class="text-h5 q-mb-md">
+        {{ props.title }}
+      </div>
       <template v-for="(child, index) in props.components" :key="child.name">
         <!-- If the first item passed, do not apply margins to top or sides -->
         <div v-if="index.toString() === '0'">

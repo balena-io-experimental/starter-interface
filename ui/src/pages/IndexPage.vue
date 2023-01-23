@@ -1,24 +1,16 @@
 <template>
-  <q-page class="q-pa-lg">
-    <component-frame :components="[{ component: DeviceInfo }]" />
-  </q-page>
+  <yml-import />
 </template>
 
 <script lang="ts">
-import ComponentFrame from 'layouts/ComponentFrame.vue'
-import { defineAsyncComponent, defineComponent } from 'vue'
+import YmlImport from 'layouts/YmlImport.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IndexPage',
-  components: {
-    ComponentFrame
-  },
+  name: 'SystemInfo',
+  components: { YmlImport },
   setup() {
-    return {
-      DeviceInfo: defineAsyncComponent(
-        () => import('src/components/SystemDeviceInfo.vue')
-      )
-    }
+    return {}
   }
 })
 </script>

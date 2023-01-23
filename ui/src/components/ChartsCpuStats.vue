@@ -108,7 +108,6 @@ export default defineComponent({
             chartBackgroundOpacity
           ),
           borderWidth: 2,
-          fill: 'start',
           data: [0]
         }
       ]

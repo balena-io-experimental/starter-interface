@@ -78,10 +78,15 @@
         </div>
       </q-toolbar>
     </q-header>
-
-    <q-drawer v-model="isLeftDrawerOpen" show-if-above :width="210" bordered>
+    <q-drawer
+      v-if="Object.keys(configYml.pages).length > 1"
+      v-model="isLeftDrawerOpen"
+      show-if-above
+      :width="210"
+      bordered
+    >
       <MenuItems
-        v-for="link in menuItems"
+        v-for="link in sideDrawer"
         :key="link.label"
         v-bind="link"
         :active="link.path === currentLink"
@@ -133,8 +138,9 @@ import Shutdown from 'components/SystemShutdown.vue'
 import MenuItems from 'components/MainLayoutMenuItems.vue'
 import { supervisor } from 'src/api/supervisor'
 import localeOptions from 'src/config/localeOptions'
-import menuList from 'src/config/menuList'
+import sideDrawer from 'src/config/sideDrawer'
 import { qHeaderStyle } from 'src/config/qStyles'
+import { configYml } from 'src/boot/ymlImport'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -198,6 +204,7 @@ export default defineComponent({
 
     return {
       changeLang,
+      configYml,
       currentLink: ref($router.currentRoute.value.name),
       deviceName,
       isChangingLang,
@@ -206,7 +213,7 @@ export default defineComponent({
       isLeftDrawerOpen: ref<boolean>(false),
       locale,
       localeOptions,
-      menuItems: menuList,
+      sideDrawer,
       qHeaderStyle
     }
   }

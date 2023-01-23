@@ -1,229 +1,227 @@
 <template>
-  <q-page class="items-center p-3">
-    <q-table
-      v-model:selected="selected"
-      table-style="width: 90vw;"
-      flat
-      :dense="$q.screen.gt.sm"
-      wrap-cells
-      :filter="filter"
-      :loading="isLoading"
-      :rows="rows"
-      :rows-per-page-options="[50, 75, 100, 0]"
-      :columns="columns"
-      :no-data-label="$t('components.tools.file_manager.empty_folder')"
-      :no-results-label="$t('components.tools.file_manager.no_results_found')"
-      :selection="'multiple'"
-      row-key="path"
-      @row-click="onRowClick"
-    >
-      <!-- Toolbar -->
-      <template #top="props">
-        <div
-          class="flex row full-width row reverse-wrap justify-between items-center"
-        >
-          <div class="col-auto q-m-xs q-mt-xs">
-            <q-breadcrumbs v-if="!objPath[0]">
-              <q-breadcrumbs-el
-                v-ripple
-                class="cursor-pointer q-mb-xs"
-                icon="home"
-                clickable
-              />
-            </q-breadcrumbs>
-            <q-breadcrumbs v-else>
-              <q-breadcrumbs-el
-                v-ripple
-                class="cursor-pointer q-mb-xs"
-                icon="home"
-                clickable
-                @click="objPath.splice(0, objPath.length), updateRows()"
-              />
-              <q-breadcrumbs-el
-                v-for="item in objPath"
-                :key="item"
-                v-ripple
-                class="cursor-pointer"
-                clickable
-                :label="item"
-                @click="
-                  ;(objPath.length = objPath.indexOf(item) + 1), updateRows()
-                "
-              />
-            </q-breadcrumbs>
-          </div>
-          <div class="col-auto q-ml-sm q-mb-sm">
-            <div>
-              <q-btn
-                v-bind="qBtnStyle"
-                class="q-mr-sm"
-                icon="create_new_folder"
-                size="sm"
-                @click="newFolder()"
-              >
-                <q-tooltip
-                  class="text-caption text-center"
-                  anchor="top middle"
-                  self="center middle"
-                  :offset="[20, 20]"
-                >
-                  {{ $t('components.tools.file_manager.new_folder') }}
-                </q-tooltip>
-              </q-btn>
-              <q-btn
-                v-bind="qBtnStyle"
-                class="q-mr-sm"
-                icon="upload"
-                size="sm"
-                @click="isUploaderDialog = true"
-              >
-                <q-tooltip
-                  class="text-caption text-center"
-                  anchor="top middle"
-                  self="center middle"
-                  :offset="[20, 20]"
-                >
-                  {{ $t('components.tools.file_manager.upload') }}
-                </q-tooltip>
-              </q-btn>
-              <q-dialog v-model="isUploaderDialog">
-                <!-- Uploader headers must be lowercase, not CamelCase -->
-                <q-uploader
-                  style="max-width: 300px"
-                  :label="$t('components.tools.file_manager.upload')"
-                  multiple
-                  flat
-                  no-thumbnails
-                  :readonly="isDelayUpload"
-                  :url="uploaderAPIRoute"
-                  :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
-                  @uploaded="updateRows()"
-                  @failed="onUploaderFailed"
-                  @rejected="
-                    $q.notify({
-                      type: 'negative',
-                      message: $t(
-                        'components.tools.file_manager.invalid_upload_string'
-                      )
-                    })
-                  "
-                  @added="checkItemOverwrite"
-                />
-              </q-dialog>
-              <q-btn
-                v-bind="qBtnStyle"
-                class="q-mr-sm"
-                size="sm"
-                :disabled="!selected[0]"
-                icon="delete"
-                @click="deleteSelectedItems()"
-              >
-                <q-tooltip
-                  class="text-caption text-center"
-                  anchor="top middle"
-                  self="center middle"
-                  :offset="[20, 20]"
-                >
-                  {{ $t('components.tools.file_manager.delete') }}
-                </q-tooltip>
-              </q-btn>
-              <q-btn
-                v-bind="qBtnStyle"
-                class="q-mr-sm"
-                icon="search"
-                size="sm"
-                @click="isSearchTable = true"
-              >
-                <q-tooltip
-                  class="text-caption text-center"
-                  anchor="top middle"
-                  self="center middle"
-                  :offset="[20, 20]"
-                >
-                  {{ $t('components.tools.file_manager.filter') }}
-                </q-tooltip>
-              </q-btn>
-              <q-btn
-                v-if="$q.screen.gt.sm"
-                v-bind="qBtnStyle"
-                class="q-mr-xs"
-                dense
-                :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-                @click="props.toggleFullscreen()"
-              >
-                <q-tooltip
-                  class="text-caption text-center"
-                  anchor="top middle"
-                  self="center middle"
-                  :offset="[20, 20]"
-                >
-                  {{ $t('components.tools.file_manager.full_screen') }}
-                </q-tooltip>
-              </q-btn>
-              <q-input
-                v-if="isSearchTable"
-                v-model="filter"
-                class="q-ml-md"
-                dense
-                debounce="300"
-                hide-bottom-space
-                :placeholder="$t('components.tools.file_manager.filter')"
-              >
-                <template #append>
-                  <q-icon
-                    name="close"
-                    class="cursor-pointer"
-                    @click="filter = ''"
-                  />
-                </template>
-              </q-input>
-            </div>
-          </div>
+  <q-table
+    v-model:selected="selected"
+    table-style="width: 90vw;"
+    flat
+    :dense="$q.screen.gt.sm"
+    wrap-cells
+    :filter="filter"
+    :loading="isLoading"
+    :rows="rows"
+    :rows-per-page-options="[50, 75, 100, 0]"
+    :columns="columns"
+    :no-data-label="$t('components.tools.file_manager.empty_folder')"
+    :no-results-label="$t('components.tools.file_manager.no_results_found')"
+    :selection="'multiple'"
+    row-key="path"
+    @row-click="onRowClick"
+  >
+    <!-- Toolbar -->
+    <template #top="props">
+      <div
+        class="flex row full-width row reverse-wrap justify-between items-center"
+      >
+        <div class="col-auto q-m-xs q-mt-xs">
+          <q-breadcrumbs v-if="!objPath[0]">
+            <q-breadcrumbs-el
+              v-ripple
+              class="cursor-pointer q-mb-xs"
+              icon="home"
+              clickable
+            />
+          </q-breadcrumbs>
+          <q-breadcrumbs v-else>
+            <q-breadcrumbs-el
+              v-ripple
+              class="cursor-pointer q-mb-xs"
+              icon="home"
+              clickable
+              @click="objPath.splice(0, objPath.length), updateRows()"
+            />
+            <q-breadcrumbs-el
+              v-for="item in objPath"
+              :key="item"
+              v-ripple
+              class="cursor-pointer"
+              clickable
+              :label="item"
+              @click="
+                ;(objPath.length = objPath.indexOf(item) + 1), updateRows()
+              "
+            />
+          </q-breadcrumbs>
         </div>
-      </template>
-      <!-- Row icons -->
-      <template #body-cell-path="props">
-        <q-td :props="props">
-          <q-icon v-if="props.row.type === 'folder'" left name="folder" />
-          <q-icon v-else left name="insert_drive_file" />
-          {{ props.value }}
-        </q-td>
-      </template>
-
-      <!-- Delete file -->
-      <template #body-cell-delete="props">
-        <q-td :props="props" auto-width>
-          <q-icon size="xs" name="delete" @click.stop="deleteItem(props.row)" />
-        </q-td>
-      </template>
-
-      <!-- File size -->
-      <template #body-cell-info="props">
-        <q-td :props="props" auto-width>
-          <div v-if="props.row.type == 'file'">
-            <q-icon size="xs" name="info">
+        <div class="col-auto q-ml-sm q-mb-sm">
+          <div>
+            <q-btn
+              v-bind="qBtnStyle"
+              class="q-mr-sm"
+              icon="create_new_folder"
+              size="sm"
+              @click="newFolder()"
+            >
               <q-tooltip
-                class="text-caption text-center text-no-wrap"
+                class="text-caption text-center"
                 anchor="top middle"
                 self="center middle"
                 :offset="[20, 20]"
               >
-                <div v-if="props.row.stats.size < 10000">
-                  {{ $t('components.tools.file_manager.size_colon')
-                  }}{{ $t('components.tools.file_manager.mb_001') }}
-                </div>
-                <div v-else>
-                  {{ $t('components.tools.file_manager.size_colon') }}
-                  {{ (props.row.stats.size / 1000000).toFixed(2) }}
-                  {{ $t('components.tools.file_manager.mb') }}
-                </div>
+                {{ $t('components.tools.file_manager.new_folder') }}
               </q-tooltip>
-            </q-icon>
+            </q-btn>
+            <q-btn
+              v-bind="qBtnStyle"
+              class="q-mr-sm"
+              icon="upload"
+              size="sm"
+              @click="isUploaderDialog = true"
+            >
+              <q-tooltip
+                class="text-caption text-center"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+              >
+                {{ $t('components.tools.file_manager.upload') }}
+              </q-tooltip>
+            </q-btn>
+            <q-dialog v-model="isUploaderDialog">
+              <!-- Uploader headers must be lowercase, not CamelCase -->
+              <q-uploader
+                style="max-width: 300px"
+                :label="$t('components.tools.file_manager.upload')"
+                multiple
+                flat
+                no-thumbnails
+                :readonly="isDelayUpload"
+                :url="uploaderAPIRoute"
+                :headers="[{ name: 'currentpath', value: objPath.join('/') }]"
+                @uploaded="updateRows()"
+                @failed="onUploaderFailed"
+                @rejected="
+                  $q.notify({
+                    type: 'negative',
+                    message: $t(
+                      'components.tools.file_manager.invalid_upload_string'
+                    )
+                  })
+                "
+                @added="checkItemOverwrite"
+              />
+            </q-dialog>
+            <q-btn
+              v-bind="qBtnStyle"
+              class="q-mr-sm"
+              size="sm"
+              :disabled="!selected[0]"
+              icon="delete"
+              @click="deleteSelectedItems()"
+            >
+              <q-tooltip
+                class="text-caption text-center"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+              >
+                {{ $t('components.tools.file_manager.delete') }}
+              </q-tooltip>
+            </q-btn>
+            <q-btn
+              v-bind="qBtnStyle"
+              class="q-mr-sm"
+              icon="search"
+              size="sm"
+              @click="isSearchTable = true"
+            >
+              <q-tooltip
+                class="text-caption text-center"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+              >
+                {{ $t('components.tools.file_manager.filter') }}
+              </q-tooltip>
+            </q-btn>
+            <q-btn
+              v-if="$q.screen.gt.sm"
+              v-bind="qBtnStyle"
+              class="q-mr-xs"
+              dense
+              :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+              @click="props.toggleFullscreen()"
+            >
+              <q-tooltip
+                class="text-caption text-center"
+                anchor="top middle"
+                self="center middle"
+                :offset="[20, 20]"
+              >
+                {{ $t('components.tools.file_manager.full_screen') }}
+              </q-tooltip>
+            </q-btn>
+            <q-input
+              v-if="isSearchTable"
+              v-model="filter"
+              class="q-ml-md"
+              dense
+              debounce="300"
+              hide-bottom-space
+              :placeholder="$t('components.tools.file_manager.filter')"
+            >
+              <template #append>
+                <q-icon
+                  name="close"
+                  class="cursor-pointer"
+                  @click="filter = ''"
+                />
+              </template>
+            </q-input>
           </div>
-        </q-td>
-      </template>
-    </q-table>
-  </q-page>
+        </div>
+      </div>
+    </template>
+    <!-- Row icons -->
+    <template #body-cell-path="props">
+      <q-td :props="props">
+        <q-icon v-if="props.row.type === 'folder'" left name="folder" />
+        <q-icon v-else left name="insert_drive_file" />
+        {{ props.value }}
+      </q-td>
+    </template>
+
+    <!-- Delete file -->
+    <template #body-cell-delete="props">
+      <q-td :props="props" auto-width>
+        <q-icon size="xs" name="delete" @click.stop="deleteItem(props.row)" />
+      </q-td>
+    </template>
+
+    <!-- File size -->
+    <template #body-cell-info="props">
+      <q-td :props="props" auto-width>
+        <div v-if="props.row.type == 'file'">
+          <q-icon size="xs" name="info">
+            <q-tooltip
+              class="text-caption text-center text-no-wrap"
+              anchor="top middle"
+              self="center middle"
+              :offset="[20, 20]"
+            >
+              <div v-if="props.row.stats.size < 10000">
+                {{ $t('components.tools.file_manager.size_colon')
+                }}{{ $t('components.tools.file_manager.mb_001') }}
+              </div>
+              <div v-else>
+                {{ $t('components.tools.file_manager.size_colon') }}
+                {{ (props.row.stats.size / 1000000).toFixed(2) }}
+                {{ $t('components.tools.file_manager.mb') }}
+              </div>
+            </q-tooltip>
+          </q-icon>
+        </div>
+      </q-td>
+    </template>
+  </q-table>
 </template>
 
 <script lang="ts">
