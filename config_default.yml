@@ -1,3 +1,6 @@
+# This is the default configuration file. It is not meant to be modified. If you would like to use your own configuration, clone 
+# this file in to a `config.yml` file in the root of the project, which will override these defaults. 
+########
 pages:
   #####
   # A list of pages from ui/src/pages to load and the ui/src/components to show on each one.
@@ -44,3 +47,7 @@ pages:
     path: 'systeminfo'
     icon: info
     label: system.menu_items.system_info
+styles:
+  header:
+    visible: true # Whether the header logo should be visible
+    title: # Override the default header title with your own. This is a string, not an i18n entry. For example `title: My Title`
