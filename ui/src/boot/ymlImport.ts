@@ -4,6 +4,7 @@ import { reactive } from 'vue'
 import { boot } from 'quasar/wrappers'
 
 interface ymlConfig {
+  styles: { header: { visible: boolean; title: string } }
   pages: {
     [index: string]: {
       components: Array<Array<string>>

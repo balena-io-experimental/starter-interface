@@ -13,15 +13,21 @@
           @click="isLeftDrawerOpen = !isLeftDrawerOpen"
         />
 
-        <router-link v-if="qHeaderStyle.logo_white" to="/">
+        <router-link
+          v-if="qHeaderStyle.logo_white && configYml.styles.header.visible"
+          to="/"
+        >
           <q-avatar square size="sm">
             <img :src="qHeaderStyle.logo_white" />
           </q-avatar>
         </router-link>
 
         <q-toolbar-title v-bind="qHeaderStyle.title">
-          <div v-if="$q.screen.gt.xs">
+          <div v-if="$q.screen.gt.xs && !configYml.styles.header.title">
             {{ $t('title') }}
+          </div>
+          <div v-else-if="$q.screen.gt.xs">
+            {{ configYml.styles.header.title }}
           </div>
           <q-slide-transition v-else :duration="1000">
             <div v-if="deviceName" class="text-subtitle1">
