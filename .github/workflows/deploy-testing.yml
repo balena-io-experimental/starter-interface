@@ -15,6 +15,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       fail-fast: false
+      # Fleet types to deploy to based on their architecture
       matrix:
         job_name: ["fin", "generic", "rpi"]
 
@@ -35,6 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Used to deploy to balena. See https://github.com/balena-labs-research/community-cli-action for more 
+      # details. 
       - name: Balena CLI Action
         uses: balena-labs-research/community-cli-action@1.0.0
         with:

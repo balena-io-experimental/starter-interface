@@ -1,10 +1,20 @@
-All style configuration can be done from `ui/src/config/qStyles.ts`:
+## Adding assets (such as favicons and header images)
+
+Assets are kept in `ui/src/public`. Replace `favicon.ico` and the logo files according to your needs.
+
+## Changing colour themes
+
+Colour themes can be configured by changing `ui/src/css/quasar.variables.scss`. A background colour is also available in `ui/src/css/app.scss`.
+
+## Changing fonts
+
+Fonts can be configured in `ui/src/css/app.scss`.
+
+## Global Styles
+
+Style configuration of things like buttons and header logos can be done from `ui/src/config/qStyles.ts`:
 
 ```typescript
-//
-// Configuration file for various visual effects, headers and colours
-//
-
 // Global button configuration
 export const qBtnStyle = {
   color: "secondary",
