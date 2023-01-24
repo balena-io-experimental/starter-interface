@@ -25,11 +25,6 @@ COPY config*.yml .
 # Build ExpressJS and UI.
 RUN yarn build
 
-# ON_DEVICE=false informs the build that there may not be a backend available, and therefore 
-# not to perform certain functions like communicating with the backend on boot. This is used 
-# for things like the Electron build. 
-RUN ON_DEVICE=false yarn build-pwa
-
 # UI build is done, so we now reduce the node_modules folder down 
 # to the essentials required for ExpressJS.
 # Requires moving package.json due to a yarn bug: https://github.com/yarnpkg/yarn/issues/6715
@@ -61,7 +56,6 @@ RUN chmod +x /usr/src/scripts/*
 
 # Copy app to container
 COPY --from=build /build-context/ui/dist/spa public
-COPY --from=build /build-context/ui/dist/pwa public/app
 COPY --from=build /build-context/expressjs/dist .
 COPY --from=build /build-context/node_modules node_modules
 
