@@ -50,7 +50,7 @@ They will not be signed, and the Mac ARM app will not work as unsigned apps for 
 2. Deploys the code to the production fleet specified in the file.
 3. Preloads the specified balenaOS images with the application.
 4. Builds and signs the Electron app for Linux, Windows, Mac AMD64 and ARM.
-5. Signs the Mac and Windows apps with the Apple Developer and Microsoft Developer certificates.
+5. Signs the Mac and Windows apps with the Apple Developer and Microsoft Developer certificates. To override signing, you can pass the `ELECTRON_SKIP_NOTARIZATION=true` environment variable to the build. You can skip Electron app build by removing the section from the workflow file.
 6. Deploys the app as Docker images to GitHub container registry.
 7. Creates a release on GitHub with the images and Electron apps attached.
 

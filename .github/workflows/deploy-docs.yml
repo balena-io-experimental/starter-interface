@@ -18,6 +18,8 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v3
 
+      # Used to deploy the ./docs folder to GitHub pages. See https://github.com/balena-io-experimental/labs-docs-builder for more
+      # details on its use. 
       - name: Build and deploy the docs
         uses: "balena-io-experimental/labs-docs-builder@main"
         with:

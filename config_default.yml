@@ -37,11 +37,6 @@ pages:
     path: 'containermanager'
     icon: all_inbox
     label: system.menu_items.container_manager
-  Networking:
-    components: [[WifiConnect]]
-    path: 'networking'
-    icon: router
-    label: system.menu_items.networking
   SystemInfo:
     components: [[SystemJournalDLogs, ToolsSystemInfo]]
     path: 'systeminfo'
@@ -49,5 +44,5 @@ pages:
     label: system.menu_items.system_info
 styles:
   header:
-    visible: true # Whether the header logo should be visible
-    title: # Override the default header title with your own. This is a string, not an i18n entry. For example `title: My Title`
+    visible: false # Whether the header logo should be visible
+    title: test

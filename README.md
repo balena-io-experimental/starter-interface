@@ -1,24 +1,15 @@
 # Balena Starter Interface
 
-A community-built device interface for using balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
-
-_On-device Interface_
-
 <img src="https://user-images.githubusercontent.com/64841595/191008762-ea97f42c-a7bb-4ecb-abe8-5d57874da9b3.png" alt="wifi" width="500"/>
 
-This project contains the ability to build:
+A community-built device interface for using balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
-- An ExpressJS web application framework providing a Quasar (Vue) interface to users
-- An Electron Application for communicating with devices on your network
-- A Progressive Web App alternative.
+See the _Quick Start_ guide in the [documentation](https://balena-labs-research.github.io/starter-interface) for details on how to quickly add this project as an interface to your existing projects, or the [_Developing Locally_](https://balena-labs-research.github.io/starter-interface) guide on how to develop your own interface.
 
-_Electron App_
+Core features include:
 
-<img width="500" alt="electron" src="https://user-images.githubusercontent.com/64841595/213165616-73bc762b-0073-4407-a10d-52c8daa21333.png"/>
-
-Some of the core features include:
-
-- Online and offline use
+- Ability to customise the visible components and add directly to your existing projects
+- Online and offline compatibility
 - Customisable Electron and Progressive Web applications for interaction with your devices
 - Pre-built endpoints for interacting with the Balena SDK or Supervisor
 - Connect your device to nearby Wi-Fi networks
@@ -32,12 +23,16 @@ Some of the core features include:
 - System info and stats
 - I18n language translations
 
-These components are optional, and easily removed or edited. The project also includes the ability to add your own components, branding and anything else you desire to get started with building a user interface for your balena devices.
+_Electron App:_
+
+<img width="500" alt="electron" src="https://user-images.githubusercontent.com/64841595/213165616-73bc762b-0073-4407-a10d-52c8daa21333.png"/>
 
 # Documentation
 
-Use of the UI and technical details can be found in the [documentation](https://balena-labs-research.github.io/starter-interface).
+Configuration instructions and use of the UI can be found in the [documentation](https://balena-labs-research.github.io/starter-interface).
 
-# One-click deploy
+# See for yourself
+
+See the components for yourself with a one-click install:
 
 [![balena deploy button](https://balena.io/deploy.svg)](https://hub.balena.io/organizations/bdi/apps/starter-interface)

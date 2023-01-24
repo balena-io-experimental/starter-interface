@@ -18,12 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Updates the balena.yml file to include the GitHub README on the balena Hub. See 
+      # https://github.com/balena-io-experimental/balena.yml-action for more details
       - name: Update balena.yml
         uses: balena-io-experimental/balena.yml-action@main
         with:
           sync_readme: true
           sync_tag: true
 
+      # Used to deploy to balena, and also to build preloaded images for adding to GitHub 
+      # as release assets. See https://github.com/balena-labs-research/community-cli-action for more 
+      # details. 
       - name: Push to BCR
         uses: balena-labs-research/community-cli-action@1.0.0
         with:
@@ -38,6 +43,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
+        # List of preloaded images to build. Needs to have a corresponding `include` below. 
         job_name:
           [
             "cm4-dev",
@@ -142,6 +148,7 @@ jobs:
       ON_DEVICE: false
     strategy:
       fail-fast: true
+      # Platforms to build the Electron app for. Needs to have a corresponding 'include' below. 
       matrix:
         job_name: ["linux", "mac_amd64", "mac_arm64", "windows"]
 
@@ -173,7 +180,7 @@ jobs:
           node-version: "18.12.1"
           cache: "yarn"
 
-      - name: Install the Apple certificates
+      - name: Install the Apple certificates for signing the App
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
