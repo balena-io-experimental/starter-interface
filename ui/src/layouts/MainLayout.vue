@@ -3,6 +3,7 @@
     <q-header bordered reveal v-bind="qHeaderStyle.header">
       <q-toolbar>
         <q-btn
+          v-if="Object.keys(configYml.pages).length > 1"
           class="q-mr-sm"
           size="12px"
           flat
