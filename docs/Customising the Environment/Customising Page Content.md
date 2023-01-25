@@ -10,7 +10,7 @@ You can add a new component by creating a file in the same folder and naming it 
 
 Component pages can be built using [Quasar](https://quasar.dev) components which has extensive documentation.
 
-## Static vs dynamic rendering and runtime
+## Static vs dynamic rendering at runtime
 
 Content displayed is configured through the `config.yml` file (or `config_default.yml` when `config.yml` is absent). When `config.yml` is present, the UI is fixed to its specified state at build time, and adding in a `config.yml` file to the environment later will not impact the interface. When building from `config_default.yml` the interface can be configured at a later date by adding a `config.yml` file.
 

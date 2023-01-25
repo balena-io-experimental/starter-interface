@@ -55,6 +55,9 @@ services:
       - "bdi_db:/app/db" # Stores UI database files
       - "bdi_storage:/app/storage" # Storage for the File Manager. See docs for more info.
     privileged: true # This can be removed if not using the USB mounting feature
+    labels:
+      io.balena.features.supervisor-api: 1
+      io.balena.features.balena-api: 1
 
   your-original-service:
     image: ...
