@@ -5,6 +5,7 @@
       :key="componentList[0].name"
       :components="componentList"
       :rows="componentList[0].rows"
+      :title="componentList[0].title"
     />
   </q-page>
 </template>
@@ -26,6 +27,7 @@ export default defineComponent({
         component: { [key: string]: unknown }
         name: string
         rows: boolean
+        title: string
       }[]
     }
 
@@ -44,7 +46,8 @@ export default defineComponent({
             componentFiles[`../components/${ymlArray}.vue`]
           ),
           name: ymlArray,
-          rows: configYml.pages[routeName].frames[element].rows
+          rows: configYml.pages[routeName].frames[element].rows,
+          title: configYml.pages[routeName].frames[element].title
         }))
 
         components[element] = component

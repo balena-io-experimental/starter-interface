@@ -138,15 +138,6 @@ module.exports = {
     // i18n rules
     '@intlify/vue-i18n/no-missing-keys': 'error',
     '@intlify/vue-i18n/no-dynamic-keys': 'error',
-    '@intlify/vue-i18n/no-unused-keys': [
-      'error',
-      {
-        src: './src',
-        extensions: ['.js', '.vue', '.ts'],
-        ignores: ['/system.menu_items/'],
-        enableFix: false
-      }
-    ],
     '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',
     '@intlify/vue-i18n/key-format-style': [
       'error',
