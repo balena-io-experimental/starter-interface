@@ -33,8 +33,8 @@ if (!fs.existsSync(ymlPath)) {
 
 try {
   ymlConfig = yaml.load(fs.readFileSync(ymlPath, 'utf8'))
-} catch {
-  console.error('Neither config.yml or config_default.yml exist. Exiting...')
+} catch (err) {
+  console.error(err)
   return
 }
 

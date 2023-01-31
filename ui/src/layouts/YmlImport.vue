@@ -2,8 +2,9 @@
   <q-page class="q-pa-lg">
     <component-frame
       v-for="componentList in components"
-      :key="componentList[0].component.name"
+      :key="componentList[0].name"
       :components="componentList"
+      :rows="componentList[0].rows"
     />
   </q-page>
 </template>
@@ -20,18 +21,34 @@ export default defineComponent({
     ComponentFrame
   },
   setup() {
+    interface Components {
+      [index: string]: {
+        component: { [key: string]: unknown }
+        name: string
+        rows: boolean
+      }[]
+    }
+
     const route = useRoute()
 
+    const components = {} as Components
     const componentFiles = import.meta.glob('src/components/*.vue')
     const routeName = route.name as string
 
-    // For each component item of this page in the yml file, define the async components
-    const components = configYml.pages[routeName].components.map((ymlArray) =>
-      ymlArray.map((component) => ({
-        component: defineAsyncComponent(
-          componentFiles[`../components/${component}.vue`]
-        )
-      }))
+    Object.keys(configYml.pages[routeName].frames).forEach(
+      (element: string) => {
+        const component = configYml.pages[routeName].frames[
+          element
+        ].components.map((ymlArray) => ({
+          component: defineAsyncComponent(
+            componentFiles[`../components/${ymlArray}.vue`]
+          ),
+          name: ymlArray,
+          rows: configYml.pages[routeName].frames[element].rows
+        }))
+
+        components[element] = component
+      }
     )
 
     return { components }

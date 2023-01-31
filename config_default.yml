@@ -9,7 +9,9 @@ pages:
   #
   # ----------------------------------------------------------------------------------------------------
   # IndexPage:
-  #   components: [[SystemEnvConfig]]  # Load the SystenEnvConfig component on the index page
+  #   frames: 
+  #     1: 
+  #       components: [SystemEnvConfig]
   #   icon: settings   # The label from Google Material Icons to display in the sidebar: https://fonts.google.com/icons
   #   label: components.system.device_info.environment_variables   # The i18n key from ui/src/i18n/en-US.json to use as sidebar text
   # ----------------------------------------------------------------------------------------------------
@@ -18,32 +20,46 @@ pages:
   #
   #####
   IndexPage: # This page cannot be removed
-    components: [[SystemDeviceInfo]]
+    frames: 
+      1: 
+        components: [SystemDeviceInfo]
     # Path will always be '/'
     icon: visibility
     label: system.menu_items.device_info
   FileManager:
-    components: [[ToolsFileManager]]
+    frames:
+      1: 
+        components: [ToolsFileManager]
     path: "filemanager"
     icon: folder
     label: system.menu_items.file_manager
   Configuration: 
-    components: [[SystemChangeHostname], [SystemEnvConfig]]
+    frames:
+      1: 
+        components: [SystemChangeHostname]
+      2:
+        components: [SystemEnvConfig]
     path: 'configuration'
     icon: settings
     label: system.menu_items.configuration
   ContainerManager:
-    components: [[ToolsContainerManager]]
+    frames:
+      1:
+        components: [ToolsContainerManager]
     path: 'containermanager'
     icon: all_inbox
     label: system.menu_items.container_manager
   Networking:
-    components: [[WifiConnect]]
+    frames:
+      1:
+        components: [WifiConnect]
     path: 'networking'
     icon: router
     label: system.menu_items.networking
   SystemInfo:
-    components: [[SystemJournalDLogs, ToolsSystemInfo]]
+    frames:
+      1:
+        components: [SystemJournalDLogs, ToolsSystemInfo]
     path: 'systeminfo'
     icon: info
     label: system.menu_items.system_info
