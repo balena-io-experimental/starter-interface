@@ -25,7 +25,7 @@ _Dockerfile.bsi:_
 
 ```bash
 # Dockerfile.bsi
-FROM ghcr.io/balena-labs-research/bsi:0.0.16
+FROM ghcr.io/balena-labs-research/bsi:0.0.17
 
 COPY config.yml .
 

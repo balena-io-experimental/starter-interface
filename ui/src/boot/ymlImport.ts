@@ -7,7 +7,12 @@ interface ymlConfig {
   styles: { header: { visible: boolean; title: string } }
   pages: {
     [index: string]: {
-      components: Array<Array<string>>
+      frames: {
+        [index: string]: {
+          components: Array<string>
+          rows: boolean
+        }
+      }
       icon: string
       label: string
       path: string
