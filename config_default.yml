@@ -37,8 +37,10 @@ pages:
     frames:
       1: 
         components: [SystemChangeHostname]
+        title: components.system.device_info.network_config
       2:
         components: [SystemEnvConfig]
+        title: components.system.device_info.environment_variables
     path: 'configuration'
     icon: settings
     label: system.menu_items.configuration

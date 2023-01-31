@@ -11,6 +11,7 @@ interface ymlConfig {
         [index: string]: {
           components: Array<string>
           rows: boolean
+          title: string
         }
       }
       icon: string

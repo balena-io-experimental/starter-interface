@@ -123,9 +123,6 @@
     </div>
   </div>
   <div v-else>
-    <div class="text-h5 q-mb-md">
-      {{ $t('components.system.device_info.environment_variables') }}
-    </div>
     {{ $t('components.system.device_info.sdk_unavailable') }}
     {{ $t('components.system.device_info.are_you_connected_fleet') }}
   </div>
