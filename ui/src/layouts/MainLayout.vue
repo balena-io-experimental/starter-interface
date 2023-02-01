@@ -75,14 +75,24 @@
               </q-item>
             </q-list>
           </q-menu>
+
+          <q-tooltip class="bg-secondary">
+            {{ $t('general.change_language') }}</q-tooltip
+          >
         </q-btn>
 
         <div v-if="configYml.styles.header.reboot_icon">
           <Reboot />
+          <q-tooltip class="bg-secondary">
+            {{ $t('general.restart') }}</q-tooltip
+          >
         </div>
 
         <div v-if="configYml.styles.header.shutdown_icon">
           <Shutdown />
+          <q-tooltip class="bg-secondary">
+            {{ $t('general.shutdown') }}</q-tooltip
+          >
         </div>
       </q-toolbar>
     </q-header>
