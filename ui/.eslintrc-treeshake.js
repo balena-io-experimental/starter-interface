@@ -32,7 +32,7 @@ module.exports = {
       {
         src: './src',
         extensions: ['.js', '.vue', '.ts'],
-        ignores: ['/system.menu_items/'],
+        ignores: ['/yml_config/'],
         enableFix: true
       }
     ]

@@ -136,6 +136,15 @@ module.exports = {
     'import/prefer-default-export': 'off',
 
     // i18n rules
+    '@intlify/vue-i18n/no-unused-keys': [
+      'error',
+      {
+        src: './src',
+        extensions: ['.js', '.vue', '.ts'],
+        ignores: ['/yml_config/'],
+        enableFix: false
+      }
+    ],
     '@intlify/vue-i18n/no-missing-keys': 'error',
     '@intlify/vue-i18n/no-dynamic-keys': 'error',
     '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'error',
