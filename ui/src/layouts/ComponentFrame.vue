@@ -7,7 +7,7 @@ components. See the Wiki on Github for more details.
 <template>
   <q-card flat bordered class="q-mb-md" :class="props.class">
     <q-card-section :class="rowClass">
-      <div v-if="props.title" class="text-h5 q-mb-sm">
+      <div v-if="props.title" class="text-h5 q-mb-md">
         <!-- eslint-disable-next-line @intlify/vue-i18n/no-dynamic-keys -->
         {{ $t(props.title) }}
       </div>
