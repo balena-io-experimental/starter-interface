@@ -25,7 +25,8 @@
           <q-breadcrumbs v-if="!objPath[0]">
             <q-breadcrumbs-el
               v-ripple
-              class="cursor-pointer q-mb-xs"
+              :label="rootDir"
+              class="cursor-pointer"
               icon="home"
               clickable
             />
@@ -33,7 +34,8 @@
           <q-breadcrumbs v-else>
             <q-breadcrumbs-el
               v-ripple
-              class="cursor-pointer q-mb-xs"
+              :label="rootDir"
+              class="cursor-pointer"
               icon="home"
               clickable
               @click="objPath.splice(0, objPath.length), updateRows()"
@@ -232,6 +234,11 @@ import { qBtnStyle } from 'src/config/qStyles'
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+interface List {
+  list: Rows[]
+  rootDir: string
+}
+
 interface Rows extends QTableProps {
   name: string
   type: string
@@ -249,6 +256,7 @@ export default defineComponent({
     const invalidCharacters = ref<Array<string>>(['/', '\\0'])
     const isLoading = ref<boolean>(true)
     const objPath = ref<Array<string>>([])
+    const rootDir = ref<string>('')
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
     const uploaderAPIRoute = ref<string>(
@@ -423,10 +431,11 @@ export default defineComponent({
     async function updateRows() {
       isLoading.value = true
       try {
-        const response = await expressApi.post<Rows[]>('/v1/filemanager/list', {
+        const response = await expressApi.post<List>('/v1/filemanager/list', {
           currentPathArray: objPath.value
         })
-        rows.value = response.data
+        rows.value = response.data.list
+        rootDir.value = response.data.rootDir
       } catch (error) {
         $q.notify({ type: 'negative' })
         console.error(error)
@@ -449,6 +458,7 @@ export default defineComponent({
       onRowClick,
       onUploaderFailed,
       qBtnStyle,
+      rootDir,
       rows,
       selected,
       updateRows,
