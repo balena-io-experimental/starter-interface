@@ -170,7 +170,8 @@
     "network": {
       "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
       "network_connection_restored": "Network connection restored.",
-      "no_wifi_api": "Failed to communicate with Balena Py Wi-Fi Connect. Is it installed on this device?"
+      "no_wifi_api": "Failed to communicate with Balena Python Wi-Fi Connect. Is it installed on this device?",
+      "wifi_connect_not_installed": "Balena Python Wi-Fi Connect is unavailable. Is it installed on this device?"
     },
     "pwa": {
       "install": "Install",

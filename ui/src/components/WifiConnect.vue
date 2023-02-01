@@ -1,5 +1,8 @@
 <template>
-  <q-form v-if="!isNoWifiConnect" class="flex flex-col" @submit="connect()">
+  <div v-if="isNoWifiConnect" class="text-center">
+    {{ $t('system.network.wifi_connect_not_installed') }}
+  </div>
+  <q-form v-else class="flex flex-col" @submit="connect()">
     <div class="col">
       <div v-if="!isWifiStatus && !isLoading">
         <div>
@@ -187,7 +190,6 @@ export default defineComponent({
           await fetchNetworks()
         }
       } catch {
-        notify('warning', t('system.network.no_wifi_api'))
         isNoWifiConnect.value = true
       }
       $q.loading.hide()
