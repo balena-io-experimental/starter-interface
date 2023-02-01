@@ -1,4 +1,14 @@
 {
+  "yml_config": {
+    "configuration": "Configuration",
+    "container_manager": "Container Manager",
+    "device_info": "Device Info",
+    "environment_variables": "Environment Variables",
+    "file_manager": "File Manager",
+    "network_config": "Network Configuration",
+    "networking": "Networking",
+    "system_info": "System Info"
+  },
   "title": "Balena Starter Interface",
   "general": {
     "are_you_sure": "Are you sure?",
@@ -47,11 +57,9 @@
     "system": {
       "device_info": {
         "are_you_connected_fleet": "Are you connected to a fleet?",
-        "environment_variables": "Environment Variables",
         "ip_address": "IP Address",
         "location": "Location",
         "mac_address": "MAC Address",
-        "network_config": "Network Configuration",
         "not_undervolted": "Normal Power",
         "os_version": "OS Version",
         "public_ip": "Public IP",
@@ -158,14 +166,6 @@
       "request_error": "Request error",
       "wrong_way": "Wrong way…",
       "no_backend": "Unable to communicate with the backend service"
-    },
-    "menu_items": {
-      "configuration": "Configuration",
-      "container_manager": "Container Manager",
-      "device_info": "Device Info",
-      "networking": "Networking",
-      "system_info": "System Info",
-      "file_manager": "File Manager"
     },
     "network": {
       "network_connection_down": "You are no longer connected to a network. Try reconnecting to your device.",
