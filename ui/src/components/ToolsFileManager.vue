@@ -1,4 +1,5 @@
 <template>
+  <q-select v-model="selectorModel" :options="localVolumes" label="Standard" />
   <q-table
     v-model:selected="selected"
     table-style="width: 90vw;"
@@ -225,17 +226,38 @@
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios'
 import { expressApi } from 'boot/axios'
 import FileDownload from 'js-file-download'
 import { QTableProps, QUploaderProps, useQuasar } from 'quasar'
 import { qBtnStyle } from 'src/config/qStyles'
 import { computed, defineComponent, onMounted, ref } from 'vue'
+import { supervisor } from 'src/api/supervisor'
 import { useI18n } from 'vue-i18n'
 
 interface Rows extends QTableProps {
   name: string
   type: string
   path: string
+}
+
+interface LocalState {
+  state: {
+    local: {
+      apps: {
+        [index: number]: {
+          services: [
+            {
+              serviceName: string
+              config: {
+                volumes: Array<string>
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
 }
 
 export default defineComponent({
@@ -248,9 +270,11 @@ export default defineComponent({
     const isDelayUpload = ref<boolean>(false)
     const invalidCharacters = ref<Array<string>>(['/', '\\0'])
     const isLoading = ref<boolean>(true)
+    const localVolumes = ref<Array<string>>([])
     const objPath = ref<Array<string>>([])
     const rows = ref<Rows[]>()
     const selected = ref<Array<{ path: string }>>([])
+    const selectorModel = ref('')
     const uploaderAPIRoute = ref<string>(
       `${expressApi.defaults.baseURL as string}/v1/filemanager/upload`
     )
@@ -272,6 +296,29 @@ export default defineComponent({
     ])
 
     onMounted(async () => {
+      try {
+        const localTargetState =
+          (await supervisor.v2.local_target_state_get()) as AxiosResponse<LocalState>
+
+        localTargetState.data?.state?.local?.apps[1]?.services.forEach(
+          (item) => {
+            if (item.serviceName === 'balena-starter-interface') {
+              // Add item.config.volumes in to localVolumes if the first character is not a '/' which
+              // filters out local bind mounts
+              item.config.volumes.forEach((volume) => {
+                if (volume.charAt(0) !== '/') {
+                  localVolumes.value.push(volume.split(':')[1])
+                }
+              })
+            }
+          }
+        )
+        // eslint-disable-next-line prefer-destructuring
+        selectorModel.value = localVolumes.value[0]
+      } catch (error) {
+        console.error(error)
+      }
+
       await updateRows()
     })
 
@@ -444,6 +491,7 @@ export default defineComponent({
       isLoading,
       isSearchTable: ref<boolean>(false),
       isUploaderDialog: ref<boolean>(false),
+      localVolumes,
       newFolder,
       objPath,
       onRowClick,
@@ -451,6 +499,7 @@ export default defineComponent({
       qBtnStyle,
       rows,
       selected,
+      selectorModel,
       updateRows,
       uploaderAPIRoute
     }
