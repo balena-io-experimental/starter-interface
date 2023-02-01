@@ -4,6 +4,7 @@
     "are_you_sure": "Are you sure?",
     "close": "Close",
     "cancel": "Cancel",
+    "change_language": "Change Language",
     "error": "Error",
     "go_home": "Go Home",
     "name": "Name",
@@ -12,6 +13,7 @@
     "open_control_panel": "Open Control Panel",
     "password": "Password",
     "restart": "Restart",
+    "shutdown": "Shutdown",
     "status": "Status",
     "start": "Start",
     "stop": "Stop",
@@ -28,7 +30,6 @@
         "memory": "Memory"
       }
     },
-
     "layouts": {
       "captive_portal": {
         "connect_to_wifi": "Connect to WiFi",
