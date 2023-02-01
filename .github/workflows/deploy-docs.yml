@@ -2,9 +2,8 @@ name: "Deploy Docs"
 
 on:
   push:
-    branches:
-      - main
-      - master
+    tags:
+      - "*.*.*"
     paths:
       - "docs/**"
 

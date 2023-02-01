@@ -4,7 +4,7 @@
 name: "Build Test Electron App"
 
 on:
-  push:
+  pull_request:
     paths-ignore:
       - "docs/**"
 
