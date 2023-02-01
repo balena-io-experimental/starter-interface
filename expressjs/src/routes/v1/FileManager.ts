@@ -27,10 +27,12 @@ interface BodyDataReq {
 // Get the ExpressJS main router process
 const router = express.Router()
 
-// Set local directory for file and folder storage
-let rootDir = '/app/storage/'
+// Set local directory for file and folder storage. Match the same means of
+// creating directory paths as used in the development environment.
+let rootDir = path.resolve(path.join('/app/storage'))
+
 if (process.env.LOCAL_MODE === 'true') {
-  rootDir = path.resolve(path.join(__dirname, '/storage/'))
+  rootDir = path.resolve(path.join(__dirname, '/storage'))
 }
 
 // Check the storage directory exists and if not create it
@@ -129,7 +131,7 @@ router.get('/v1/filemanager/download', (req: Request, res: Response) => {
 // List the contents of a directory
 router.post('/v1/filemanager/list', (req: Request, res: Response) => {
   const reqBody = req.body as BodyDataReq
-  res.json(fetchList(reqBody.currentPathArray))
+  res.json({ list: fetchList(reqBody.currentPathArray), rootDir })
 })
 
 // Create a new folder
