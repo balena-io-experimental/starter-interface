@@ -30,7 +30,7 @@ pages:
     frames:
       1: 
         components: [ToolsFileManager]
-    path: "filemanager"
+    path: filemanager
     icon: folder
     label: system.menu_items.file_manager
   Configuration: 
@@ -41,28 +41,28 @@ pages:
       2:
         components: [SystemEnvConfig]
         title: components.system.device_info.environment_variables
-    path: 'configuration'
+    path: configuration
     icon: settings
     label: system.menu_items.configuration
   ContainerManager:
     frames:
       1:
         components: [ToolsContainerManager]
-    path: 'containermanager'
+    path: containermanager
     icon: all_inbox
     label: system.menu_items.container_manager
   Networking:
     frames:
       1:
         components: [WifiConnect]
-    path: 'networking'
+    path: networking
     icon: router
     label: system.menu_items.networking
   SystemInfo:
     frames:
       1:
         components: [SystemJournalDLogs, ToolsSystemInfo]
-    path: 'systeminfo'
+    path: systeminfo
     icon: info
     label: system.menu_items.system_info
 styles:
