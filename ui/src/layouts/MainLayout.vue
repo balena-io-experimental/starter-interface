@@ -51,6 +51,7 @@
         </q-slide-transition>
         <q-separator size="2px" class="q-mr-sm" vertical inset />
         <q-btn
+          v-if="configYml.styles.header.language_selector"
           size="12px"
           :loading="isChangingLang"
           icon="translate"
@@ -76,11 +77,11 @@
           </q-menu>
         </q-btn>
 
-        <div>
+        <div v-if="configYml.styles.header.reboot_icon">
           <Reboot />
         </div>
 
-        <div>
+        <div v-if="configYml.styles.header.shutdown_icon">
           <Shutdown />
         </div>
       </q-toolbar>
