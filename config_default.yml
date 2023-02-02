@@ -13,7 +13,7 @@ pages:
   #     1: 
   #       components: [SystemEnvConfig]
   #   icon: settings   # The label from Google Material Icons to display in the sidebar: https://fonts.google.com/icons
-  #   label: yml_config.environment_variables   # The i18n key from ui/src/i18n/en-US.json to use as sidebar text. Only use yml_config. keys!
+  #   label: yml_config.environment_variables   # The i18n key from ui/src/i18n/en-US.json to use as sidebar text. Only use `yml_config` keys!
   # ----------------------------------------------------------------------------------------------------
   #
   # All the other sections are removed so you only see the environment variable configuration
@@ -65,6 +65,8 @@ pages:
     path: systeminfo
     icon: info
     label: yml_config.system_info
+captive_portal: 
+  welcome_page: true
 styles:
   header:
     visible: true # Whether the header logo should be visible

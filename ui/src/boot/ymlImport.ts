@@ -4,15 +4,7 @@ import { reactive } from 'vue'
 import { boot } from 'quasar/wrappers'
 
 interface ymlConfig {
-  styles: {
-    header: {
-      language_selector: boolean
-      reboot_icon: boolean
-      shutdown_icon: boolean
-      title: string
-      visible: boolean
-    }
-  }
+  captive_portal: { welcome_page: boolean }
   pages: {
     [index: string]: {
       frames: {
@@ -25,6 +17,15 @@ interface ymlConfig {
       icon: string
       label: string
       path: string
+    }
+  }
+  styles: {
+    header: {
+      language_selector: boolean
+      reboot_icon: boolean
+      shutdown_icon: boolean
+      title: string
+      visible: boolean
     }
   }
 }
