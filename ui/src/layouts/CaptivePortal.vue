@@ -7,6 +7,7 @@
     class="bg-accent shadow-2"
   >
     <q-tab
+      v-if="configYml.captive_portal.welcome_page"
       name="welcome"
       :label="$t('components.layouts.captive_portal.welcome')"
     />
@@ -63,6 +64,7 @@ import { copyToClipboard, useQuasar } from 'quasar'
 import { supervisor } from 'src/api/supervisor'
 import { qHeaderStyle } from 'src/config/qStyles'
 import { defineComponent, onMounted, ref } from 'vue'
+import { configYml } from 'src/boot/ymlImport'
 import { useI18n } from 'vue-i18n'
 
 interface HostConfigRes {
@@ -80,6 +82,7 @@ export default defineComponent({
     const { t } = useI18n()
 
     const hostname = ref<string>()
+    const tab = configYml.captive_portal.welcome_page ? 'welcome' : 'wifi'
 
     onMounted(async () => {
       // Use local Supervisor to get device hostname for displaying the local URL to use
@@ -104,10 +107,11 @@ export default defineComponent({
     }
 
     return {
+      configYml,
       copyUrl,
       hostname,
       qHeaderStyle,
-      tab: ref('welcome')
+      tab: ref(tab)
     }
   }
 })
