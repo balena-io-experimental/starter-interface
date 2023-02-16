@@ -14,7 +14,9 @@
         "restart": "Redémarrer",
         "open_control_panel": "Ouvrir le panneau de contrôle",
         "hostname": "Nom d'hôte",
-        "go_home": "Retour à l'accueil"
+        "go_home": "Retour à l'accueil",
+        "change_language": "Changer de langue",
+        "shutdown": "Éteindre"
     },
     "components": {
         "layouts": {
@@ -42,7 +44,8 @@
                 "os_version": "Version du système d'exploitation",
                 "cloudlink": "Lien vers le nuage",
                 "temperature": "Température",
-                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink"
+                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink",
+                "are_you_connected_fleet": "Êtes-vous connecté·e à une flotte ?"
             },
             "env_config": {
                 "raw_json": "JSON brut",
@@ -154,14 +157,13 @@
             "no_backend": "Impossible de communiquer avec le service backend"
         },
         "menu_items": {
-            "container_manager": "Gestionnaire de conteneurs",
-            "networking": "Mise en réseau",
-            "file_manager": "Gestionnaire de fichiers"
+            "networking": "Mise en réseau"
         },
         "network": {
             "network_connection_down": "Vous n'êtes plus connecté(e) à un réseau. Essayez de vous reconnecter à votre appareil.",
             "network_connection_restored": "Connexion réseau restaurée.",
-            "no_wifi_api": "Échec de la communication avec Balena Py Wi-Fi Connect. Est-il installé sur cet appareil ?"
+            "no_wifi_api": "Échec de la communication avec Balena Python Wi-Fi Connect. Est-il installé sur cet appareil ?",
+            "wifi_connect_not_installed": "Balena Python Wi-Fi Connect n'est pas disponible. Est-il installé sur cet appareil ?"
         },
         "pwa": {
             "install": "Installer",
@@ -171,5 +173,15 @@
             "install_instructions_browsers": "- Google Chrome et Microsoft Edge : cliquez sur l'icône située à droite de la barre d'URL, puis sur le bouton « Installer », ou effectuez l'installation à partir du menu « trois points »."
         }
     },
-    "title": "Interface de démarrage Balena"
+    "title": "Interface de démarrage Balena",
+    "yml_config": {
+        "configuration": "Configuration",
+        "container_manager": "Gestionnaire de conteneurs",
+        "device_info": "Infos sur l'appareil",
+        "environment_variables": "Variables d'environnement",
+        "file_manager": "Gestionnaire de fichiers",
+        "network_config": "Configuration du réseau",
+        "networking": "Mise en réseau",
+        "system_info": "Infos sur le système"
+    }
 }
