@@ -14,7 +14,9 @@
         "submit": "Enviar",
         "hostname": "Nome do host",
         "open_control_panel": "Abrir o painel de controle",
-        "go_home": "Retorna para casa"
+        "go_home": "Retorna para casa",
+        "change_language": "Alterar o idioma",
+        "shutdown": "Desligar"
     },
     "components": {
         "charts": {
@@ -57,7 +59,8 @@
                 "mac_address": "Endereço MAC",
                 "cloudlink": "Cloudlink",
                 "temperature": "Temperatura",
-                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente"
+                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente",
+                "are_you_connected_fleet": "Você está conectado a uma frota?"
             },
             "env_config": {
                 "raw_json": "JSON puro",
@@ -154,14 +157,13 @@
             "no_backend": "Não foi possível se comunicar com o serviço de back-end"
         },
         "menu_items": {
-            "networking": "Rede",
-            "file_manager": "Gerenciador de arquivos",
-            "device_info": "Informação do dispositivo"
+            "file_manager": "Gerenciador de arquivos"
         },
         "network": {
             "network_connection_down": "Você não está mais conectado a uma rede. Tente se reconectar ao seu dispositivo.",
             "network_connection_restored": "A conexão da rede foi restaurada.",
-            "no_wifi_api": "Houve uma falha ao se comunicar com Balena Py Wi-Fi Connect. Ele está instalado neste aparelho?"
+            "no_wifi_api": "Houve uma falha ao se comunicar com Balena Python Wi-Fi Connect. Ele está instalado neste aparelho?",
+            "wifi_connect_not_installed": "O Balena Python Wi-Fi Connect não está disponível. Ele está instalado neste aparelho?"
         },
         "pwa": {
             "install": "Instalar",
@@ -171,5 +173,15 @@
             "install_instructions_browsers": "- Google Chrome e Microsoft Edge: Clique no ícone no lado direito da barra de endereço e clique no botão 'Instalar' ou instale a partir do ícone com 'três pontos'."
         }
     },
-    "title": "Interface inicial do Balena"
+    "title": "Interface inicial do Balena",
+    "yml_config": {
+        "network_config": "Configuração de rede",
+        "device_info": "Informação do dispositivo",
+        "environment_variables": "Variáveis do ambiente",
+        "file_manager": "Gerenciador de arquivos",
+        "networking": "Rede",
+        "system_info": "Informação do sistema",
+        "configuration": "Configuração",
+        "container_manager": "Gerenciador dos contêineres"
+    }
 }
