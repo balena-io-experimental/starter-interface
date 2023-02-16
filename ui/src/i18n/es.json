@@ -14,7 +14,9 @@
         "ok": "De acuerdo",
         "go_home": "Ir al comienzo",
         "hostname": "Nombre del equipo",
-        "open_control_panel": "Abrir el panel de control"
+        "open_control_panel": "Abrir el panel de control",
+        "change_language": "Cambiar el idioma",
+        "shutdown": "Apagado"
     },
     "components": {
         "wifi": {
@@ -79,7 +81,8 @@
                 "undervolted": "Infravalorado",
                 "check_cloudlink_tooltip": "Haga clic para volver a comprobar la conectividad a Cloudlink",
                 "cloudlink": "Enlace en la nube",
-                "temperature": "Temperatura"
+                "temperature": "Temperatura",
+                "are_you_connected_fleet": "¿Estás conectado a una flota?"
             },
             "env_config": {
                 "raw_json": "JSON sin procesar",
@@ -149,9 +152,7 @@
     },
     "system": {
         "menu_items": {
-            "device_info": "Información del dispositivo",
-            "system_info": "Información del sistema",
-            "container_manager": "Gestor de los contenedores"
+            "system_info": "Información del sistema"
         },
         "errors": {
             "request_error": "Solicitud de error",
@@ -161,7 +162,8 @@
         "network": {
             "network_connection_down": "Ya no estás conectado a una red. Intente volver a conectarse a su dispositivo.",
             "network_connection_restored": "Conexión de red restaurada.",
-            "no_wifi_api": "No se pudo comunicar con Balena Py Wi-Fi Connect. ¿Está instalado en este dispositivo?"
+            "no_wifi_api": "Error de comunicación con Balena Python Wi-Fi Connect. Está instalado en este dispositivo?",
+            "wifi_connect_not_installed": "Balena Python Wi-Fi Connect no está disponible. ¿Está instalado en este dispositivo?"
         },
         "pwa": {
             "install_instructions_safari": "- Safari: presione el botón 'Compartir' y seleccione 'Agregar a la pantalla de inicio'",
@@ -171,5 +173,15 @@
             "install_instructions_chrome": "- Chrome Android: Presiona el ícono de los 'tres puntos' en la parte superior derecha para abrir el menú. Seleccione 'Agregar a la pantalla de inicio'."
         }
     },
-    "title": "Interfaz de dispositivo Balena"
+    "title": "Interfaz de dispositivo Balena",
+    "yml_config": {
+        "device_info": "Información del dispositivo",
+        "network_config": "Configuración de red",
+        "system_info": "Información del sistema",
+        "file_manager": "Gestor de archivos",
+        "configuration": "Configuración",
+        "environment_variables": "Variables del entorno",
+        "container_manager": "Administrador de contenedores",
+        "networking": "Red"
+    }
 }
