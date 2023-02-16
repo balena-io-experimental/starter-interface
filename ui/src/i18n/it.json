@@ -14,7 +14,9 @@
         "start": "Inizio",
         "stop": "Ferma",
         "hostname": "Nome dell'Host",
-        "go_home": "Vai alla pagina principale"
+        "go_home": "Vai alla pagina principale",
+        "change_language": "Cambia lingua",
+        "shutdown": "Spegni"
     },
     "components": {
         "charts": {
@@ -30,7 +32,7 @@
         "system": {
             "device_info": {
                 "sdk_unavailable": "Impossibile raggiungere i server Balena.",
-                "raw_json": "Raw JSON",
+                "raw_json": "JSON non elaborato",
                 "temperature": "Temperatura",
                 "supervisor_version": "Versione del Supervisore",
                 "cloudlink": "Collegamento cloud",
@@ -43,7 +45,8 @@
                 "location": "Posizione",
                 "storage": "Memoria",
                 "undervolted": "Sottotensione",
-                "not_undervolted": "Alimentazione normale"
+                "not_undervolted": "Alimentazione normale",
+                "are_you_connected_fleet": "Sei collegato/a a una flotta?"
             },
             "env_config": {
                 "edit": "Modifica",
@@ -149,14 +152,13 @@
     },
     "system": {
         "menu_items": {
-            "system_info": "Informazioni sul sistema",
-            "networking": "Rete",
-            "container_manager": "Gestione dei Contenitori"
+            "networking": "Rete"
         },
         "network": {
             "network_connection_down": "Non sei più connesso ad una rete. Prova a riconnetterti al tuo dispositivo.",
             "network_connection_restored": "Connessione alla rete ripristinata.",
-            "no_wifi_api": "Impossibile comunicare con Balena Py Wi-Fi Connect. É installata in questo dispositivo?"
+            "no_wifi_api": "Impossibile comunicare con Balena Python Wi-Fi Connect. È installata in questo dispositivo?",
+            "wifi_connect_not_installed": "Balena Python Wi-Fi Connect non è disponibile. È installato su questo dispositivo?"
         },
         "pwa": {
             "install": "Installa",
@@ -171,5 +173,15 @@
             "wrong_way": "Via sbagliata…"
         }
     },
-    "title": "Interfaccia d'avvio Balena"
+    "title": "Interfaccia d'avvio Balena",
+    "yml_config": {
+        "configuration": "Configurazione",
+        "container_manager": "Gestore dei contenitori",
+        "device_info": "Informazioni sul dispositivo",
+        "environment_variables": "Variabili d'ambiente",
+        "file_manager": "Gestore di file",
+        "network_config": "Configurazione di rete",
+        "networking": "Collegamento in rete",
+        "system_info": "Informazioni sul sistema"
+    }
 }
