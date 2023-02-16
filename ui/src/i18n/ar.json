@@ -150,9 +150,7 @@
     "title": "واجهة بداية بلينا",
     "system": {
         "menu_items": {
-            "container_manager": "مدير الحاويات",
-            "device_info": "معلومات الجهاز",
-            "file_manager": "مدير الملفات"
+            "device_info": "معلومات الجهاز"
         },
         "network": {
             "network_connection_restored": "تمت استعادة اتصال الشبكة.",

@@ -151,9 +151,6 @@
         }
     },
     "system": {
-        "menu_items": {
-            "networking": "Rete"
-        },
         "network": {
             "network_connection_down": "Non sei più connesso ad una rete. Prova a riconnetterti al tuo dispositivo.",
             "network_connection_restored": "Connessione alla rete ripristinata.",

@@ -156,9 +156,6 @@
             "wrong_way": "Caminho errado…",
             "no_backend": "Não foi possível se comunicar com o serviço de back-end"
         },
-        "menu_items": {
-            "file_manager": "Gerenciador de arquivos"
-        },
         "network": {
             "network_connection_down": "Você não está mais conectado a uma rede. Tente se reconectar ao seu dispositivo.",
             "network_connection_restored": "A conexão da rede foi restaurada.",
