@@ -156,9 +156,6 @@
             "wrong_way": "Fausse route…",
             "no_backend": "Impossible de communiquer avec le service backend"
         },
-        "menu_items": {
-            "networking": "Mise en réseau"
-        },
         "network": {
             "network_connection_down": "Vous n'êtes plus connecté(e) à un réseau. Essayez de vous reconnecter à votre appareil.",
             "network_connection_restored": "Connexion réseau restaurée.",

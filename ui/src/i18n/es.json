@@ -151,9 +151,6 @@
         }
     },
     "system": {
-        "menu_items": {
-            "system_info": "Información del sistema"
-        },
         "errors": {
             "request_error": "Solicitud de error",
             "wrong_way": "Camino equivocado…",
