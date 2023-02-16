@@ -65,7 +65,6 @@
                 "force_restart": "¿Forzar el reinicio?"
             },
             "device_info": {
-                "environment_variables": "Variables de entorno",
                 "ip_address": "Dirección IP",
                 "location": "Ubicación",
                 "mac_address": "Dirección MAC",
@@ -80,8 +79,7 @@
                 "undervolted": "Infravalorado",
                 "check_cloudlink_tooltip": "Haga clic para volver a comprobar la conectividad a Cloudlink",
                 "cloudlink": "Enlace en la nube",
-                "temperature": "Temperatura",
-                "network_config": "Configuración de la red"
+                "temperature": "Temperatura"
             },
             "env_config": {
                 "raw_json": "JSON sin procesar",
@@ -151,11 +149,8 @@
     },
     "system": {
         "menu_items": {
-            "configuration": "Configuración",
             "device_info": "Información del dispositivo",
-            "networking": "Redes",
             "system_info": "Información del sistema",
-            "file_manager": "Gestor de archivos",
             "container_manager": "Gestor de los contenedores"
         },
         "errors": {

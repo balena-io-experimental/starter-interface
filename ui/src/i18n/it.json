@@ -35,7 +35,6 @@
                 "supervisor_version": "Versione del Supervisore",
                 "cloudlink": "Collegamento cloud",
                 "ip_address": "Indirizzo IP",
-                "environment_variables": "Variabili d'Ambiente",
                 "mac_address": "Indirizzo MAC",
                 "public_ip": "IP Pubblico",
                 "os_version": "Versione OS",
@@ -44,8 +43,7 @@
                 "location": "Posizione",
                 "storage": "Memoria",
                 "undervolted": "Sottotensione",
-                "not_undervolted": "Alimentazione normale",
-                "network_config": "Configurazione della rete"
+                "not_undervolted": "Alimentazione normale"
             },
             "env_config": {
                 "edit": "Modifica",
@@ -151,11 +149,8 @@
     },
     "system": {
         "menu_items": {
-            "configuration": "Configurazione",
             "system_info": "Informazioni sul sistema",
-            "device_info": "Informazioni Dispositivo",
             "networking": "Rete",
-            "file_manager": "Gestore di file",
             "container_manager": "Gestione dei Contenitori"
         },
         "network": {
