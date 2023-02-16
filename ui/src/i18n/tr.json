@@ -52,8 +52,7 @@
                 "mac_address": "MAC adresi",
                 "ip_address": "İP adresi",
                 "public_ip": "Halka Açık İP",
-                "check_cloudlink_tooltip": "Bulut Linkinin bağlantısını tekrar kontrol etmek için tıklayınız",
-                "environment_variables": "Çevre Değişkenleri"
+                "check_cloudlink_tooltip": "Bulut Linkinin bağlantısını tekrar kontrol etmek için tıklayınız"
             },
             "env_config": {
                 "add_env_var": "Çevre Değişkeni Ekle",

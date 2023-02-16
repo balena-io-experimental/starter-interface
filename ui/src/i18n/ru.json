@@ -9,7 +9,6 @@
                 "cloudlink": "Cloudlink",
                 "temperature": "Температура",
                 "public_ip": "Публичный IP",
-                "environment_variables": "Переменные среды",
                 "check_cloudlink_tooltip": "Нажмите, чтобы повторно проверить подключение Cloudlink",
                 "mac_address": "MAC-адрес",
                 "not_undervolted": "Нормальная мощность",
@@ -17,8 +16,7 @@
                 "supervisor_version": "Версия супервизора",
                 "location": "Местонахождение",
                 "ip_address": "IP-адрес",
-                "storage": "Хранилище",
-                "network_config": "Конфигурация сети"
+                "storage": "Хранилище"
             },
             "env_config": {
                 "delete_selected_records": "Удалить выбранные записи",
@@ -134,11 +132,8 @@
     },
     "system": {
         "menu_items": {
-            "networking": "Сети",
             "system_info": "Системная информация",
-            "configuration": "Конфигурация",
             "file_manager": "Файловый менеджер",
-            "container_manager": "Менеджер контейнеров",
             "device_info": "Информация об устройстве"
         },
         "network": {

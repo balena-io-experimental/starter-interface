@@ -43,7 +43,6 @@
         },
         "system": {
             "device_info": {
-                "environment_variables": "Variáveis do ambiente",
                 "ip_address": "Endereço IP",
                 "location": "Localização",
                 "not_undervolted": "Alimentação normal",
@@ -58,8 +57,7 @@
                 "mac_address": "Endereço MAC",
                 "cloudlink": "Cloudlink",
                 "temperature": "Temperatura",
-                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente",
-                "network_config": "Configuração de rede"
+                "check_cloudlink_tooltip": "Clique para verificar a conectividade do Cloudlink novamente"
             },
             "env_config": {
                 "raw_json": "JSON puro",
@@ -156,11 +154,8 @@
             "no_backend": "Não foi possível se comunicar com o serviço de back-end"
         },
         "menu_items": {
-            "configuration": "Configuração",
             "networking": "Rede",
-            "system_info": "Informações do sistema",
             "file_manager": "Gerenciador de arquivos",
-            "container_manager": "Gerenciador dos contêineres",
             "device_info": "Informação do dispositivo"
         },
         "network": {

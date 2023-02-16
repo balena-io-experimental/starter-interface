@@ -37,14 +37,12 @@
                 "storage": "Stockage",
                 "supervisor_version": "Version superviseur",
                 "undervolted": "Sous-sollicité",
-                "environment_variables": "Variables d'environnement",
                 "location": "Emplacement",
                 "not_undervolted": "Puissance normale",
                 "os_version": "Version du système d'exploitation",
                 "cloudlink": "Lien vers le nuage",
                 "temperature": "Température",
-                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink",
-                "network_config": "Configuration du réseau"
+                "check_cloudlink_tooltip": "Cliquez pour revérifier la connectivité de Cloudlink"
             },
             "env_config": {
                 "raw_json": "JSON brut",
@@ -156,11 +154,8 @@
             "no_backend": "Impossible de communiquer avec le service backend"
         },
         "menu_items": {
-            "configuration": "Configuration",
             "container_manager": "Gestionnaire de conteneurs",
-            "device_info": "Infos sur l’appareil",
             "networking": "Mise en réseau",
-            "system_info": "Informations système",
             "file_manager": "Gestionnaire de fichiers"
         },
         "network": {

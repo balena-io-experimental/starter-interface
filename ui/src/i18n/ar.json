@@ -36,7 +36,6 @@
                 "check_cloudlink_tooltip": "اضغط لإعادة التأكد من اتصال الرابط السحابي",
                 "ip_address": "عنوان ip",
                 "not_undervolted": "القوة العادية",
-                "environment_variables": "مجهولات البيئة",
                 "os_version": "نوع النظام",
                 "public_ip": "ip العلني",
                 "supervisor_version": "إصدار المشرف",
@@ -151,11 +150,8 @@
     "title": "واجهة بداية بلينا",
     "system": {
         "menu_items": {
-            "configuration": "تكوين",
             "container_manager": "مدير الحاويات",
-            "system_info": "معلومات النظام",
             "device_info": "معلومات الجهاز",
-            "networking": "الربط",
             "file_manager": "مدير الملفات"
         },
         "network": {
