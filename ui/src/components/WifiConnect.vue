@@ -94,7 +94,7 @@
             || $t('components.wifi.connect.invalid_password_length')]"
             :label="$t('general.password')"
             type="password"
-            :disable="isWifiStatus"
+            :disable="isWifiStatus || wifiConnection?.value?.conn_type === 'NONE'"
           />
         </div>
         <div class="q-mt-md text-center">
