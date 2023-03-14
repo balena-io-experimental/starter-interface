@@ -1,11 +1,11 @@
 <template>
   <q-layout view="hHh LpR fFf">
     <q-header bordered reveal v-bind="qHeaderStyle.header">
-      <q-toolbar>
+      <q-toolbar class="justify-between">
         <q-btn
           v-if="Object.keys(configYml.pages).length > 1"
           class="q-mr-sm"
-          size="12px"
+          size="18px"
           flat
           dense
           round
@@ -18,7 +18,7 @@
           v-if="qHeaderStyle.logo_white && configYml.styles.header.visible"
           to="/"
         >
-          <q-avatar square size="sm">
+          <q-avatar square size="sm" class="q-ml-md">
             <img :src="qHeaderStyle.logo_white" />
           </q-avatar>
         </router-link>
@@ -49,7 +49,7 @@
             <q-icon class="q-mr-xs" name="local_offer" />{{ deviceName }}
           </div>
         </q-slide-transition>
-        <q-separator size="2px" class="q-mr-sm" vertical inset />
+        <q-separator size="2px" class="q-mr-md" vertical inset />
         <q-btn
           v-if="configYml.styles.header.language_selector"
           size="12px"
@@ -59,7 +59,7 @@
           flat
           dense
         >
-          <q-menu>
+          <q-menu class="q-mx-md">
             <q-list style="min-width: 100px">
               <q-item
                 v-for="language in localeOptions"
@@ -81,14 +81,14 @@
           >
         </q-btn>
 
-        <div v-if="configYml.styles.header.reboot_icon">
+        <div v-if="configYml.styles.header.reboot_icon" class="q-mx-md">
           <Reboot />
           <q-tooltip class="bg-secondary">
             {{ $t('general.restart') }}</q-tooltip
           >
         </div>
 
-        <div v-if="configYml.styles.header.shutdown_icon">
+        <div v-if="configYml.styles.header.shutdown_icon" class="q-ml-md">
           <Shutdown />
           <q-tooltip class="bg-secondary">
             {{ $t('general.shutdown') }}</q-tooltip
@@ -100,7 +100,7 @@
       v-if="Object.keys(configYml.pages).length > 1"
       v-model="isLeftDrawerOpen"
       show-if-above
-      :width="210"
+      :width="260"
       bordered
     >
       <MenuItems
