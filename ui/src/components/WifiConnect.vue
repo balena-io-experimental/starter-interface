@@ -147,6 +147,12 @@ interface WifiStatusRes {
   wifi: boolean
 }
 
+interface WifiParams {
+  ssid: string
+  conn_type: string
+  password?: string
+}
+
 export default defineComponent({
   name: 'WifiConnect',
   components: {
@@ -197,6 +203,13 @@ export default defineComponent({
 
     async function connect() {
       isSubmitting.value = true
+      const params:WifiParams = {
+        ssid: wifiConnection?.value?.ssid,
+        conn_type: wifiConnection?.value?.conn_type
+      }
+      if (wifiConnection?.value?.conn_type !== 'NONE') {
+        params.password = password?.value
+      }
       try {
         await expressApi.post('/v1/wifi', {
           type: 'POST',
