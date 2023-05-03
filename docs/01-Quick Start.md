@@ -48,6 +48,7 @@ services:
     environment:
       SET_HOSTNAME: "balena" # Optional. Changes the device hostname. UI will become accesible on `balena.local`.
       UDEV: on # Enables ability to auto mount USB drives in to the container
+      NETWORK_MODE: bridge
     restart: always
     ports:
       - "80:80"
