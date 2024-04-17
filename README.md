@@ -4,7 +4,7 @@
 
 A community-built device interface for using balena devices. It can be used to interact with your device, or as a starter project to create your own interface.
 
-See the _Quick Start_ guide in the [documentation](https://balena-labs-research.github.io/starter-interface) for details on how to quickly add this project as an interface to your existing projects, or the [_Developing Locally_](https://balena-labs-research.github.io/starter-interface) guide on how to develop your own interface.
+See the _Quick Start_ guide in the [documentation](https://balena-io-experimental.github.io/starter-interface/) for details on how to quickly add this project as an interface to your existing projects, or the [Developing Locally](https://balena-io-experimental.github.io/starter-interface/) guide on how to develop your own interface.
 
 Core features include:
 
@@ -29,7 +29,7 @@ _Electron App:_
 
 # Documentation
 
-Configuration instructions and use of the UI can be found in the [documentation](https://balena-labs-research.github.io/starter-interface).
+Configuration instructions and use of the UI can be found in the [documentation](https://balena-io-experimental.github.io/starter-interface/).
 
 # See for yourself
 
