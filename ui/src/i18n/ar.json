@@ -149,9 +149,6 @@
     },
     "title": "واجهة بداية بلينا",
     "system": {
-        "menu_items": {
-            "device_info": "معلومات الجهاز"
-        },
         "network": {
             "network_connection_restored": "تمت استعادة اتصال الشبكة.",
             "network_connection_down": "لم تعد متصلا بشبكة. حاول إعادة الاتصال بجهازك.",
